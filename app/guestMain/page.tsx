@@ -1,5 +1,6 @@
 import Page1 from './_components/Page1';
 import Page2 from './_components/Page2';
+import Page4 from './_components/Page4';
 import Page6 from './_components/Page6';
 export const metadata = {
   title: '게스트 메인 | MyApp',
@@ -11,6 +12,7 @@ export default function GuestMainPage() {
     <main className="scrollbar-hide flex flex-col items-center justify-center min-h-screen overflow-y-auto ">
       <Page1 />
       <Page2 />
+      <Page4 />
       <Page6 />
     </main>
   );
