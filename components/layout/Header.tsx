@@ -12,9 +12,12 @@ const NAV_ITEMS = [
 
 const Header = () => {
   const pathname = usePathname();
+  const isCommunity = pathname === '/community';
 
   return (
-    <header className="fixed top-0 left-0 w-full h-[50px] bg-white border-b border-gray-200 z-50 flex items-center">
+    <header
+      className={`fixed top-0 left-0 w-full h-[50px] z-50 flex items-center ${isCommunity ? 'bg-black' : 'bg-white'}`}
+    >
       <div className="w-[95%] mx-auto flex items-center justify-between px-6">
         {/* 로고 아이콘 */}
         <Link href="/">
@@ -24,6 +27,7 @@ const Header = () => {
             width={70}
             height={30}
             priority
+            className={`${isCommunity ? 'fill invert' : ''}`}
           />
         </Link>
 
@@ -32,7 +36,7 @@ const Header = () => {
           {NAV_ITEMS.map(({label, path}) => (
             <Link key={path} href={path}>
               <span
-                className={`text-black underline-offset-8 ${
+                className={` underline-offset-8 ${isCommunity ? 'text-white' : 'text-black'} ${
                   pathname === path
                     ? 'underline font-semibold'
                     : 'hover:underline'
@@ -51,6 +55,7 @@ const Header = () => {
             alt="user icon"
             width={15}
             height={15}
+            className={`${isCommunity ? 'fill invert' : ''} `}
             priority
           />
         </Link>
