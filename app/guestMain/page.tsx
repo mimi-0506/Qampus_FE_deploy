@@ -1,3 +1,4 @@
+import Page1 from './_components/Page1';
 export const metadata = {
   title: '게스트 메인 | MyApp',
   description: '로그인하지 않은 사용자를 위한 메인 페이지입니다.',
@@ -5,11 +6,8 @@ export const metadata = {
 
 export default function GuestMainPage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl font-bold">로그인 전 메인 페이지</h1>
-      <p className="text-gray-500 mt-2">
-        여기는 로그인하지 않은 사용자를 위한 메인 페이지입니다.
-      </p>
+    <main className="scrollbar-hide flex flex-col items-center justify-center min-h-screen overflow-y-auto ">
+      <Page1 />
     </main>
   );
 }
