@@ -45,7 +45,7 @@ const Header = () => {
         </nav>
 
         {/* 마이페이지 아이콘 */}
-        <Link href="/mypage">
+        <Link href="/mypage" className="ml-16">
           <Image
             src="/icon/user.svg"
             alt="user icon"
