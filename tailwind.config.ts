@@ -29,6 +29,10 @@ export default {
       animation: {
         loop: 'loop 20s linear infinite',
       },
+
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
     },
   },
   plugins: [],
