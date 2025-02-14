@@ -1,5 +1,5 @@
 export default function Footer() {
   return (
-    <footer className="w-screen h-[500px] text-white bg-black">foot</footer>
+    <footer className="h-[500px] w-screen bg-black text-white">foot</footer>
   );
 }

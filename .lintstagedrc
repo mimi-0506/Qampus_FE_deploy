@@ -1,7 +1,7 @@
 {
   "src/**/*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
   "*.json": "prettier --write",
-  "*.md": "prettier --write",
+  "!.md": "prettier --write",
   "!.eslintrc.json": "eslint --fix",
   "!.husky/pre-commit": "eslint --fix",
   "!.prettierrc": "eslint --fix",

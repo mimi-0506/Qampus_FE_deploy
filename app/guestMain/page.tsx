@@ -1,4 +1,3 @@
-
 import Page1 from './_components/Page1';
 import Page2 from './_components/Page2';
 import Page3 from './_components/Page3';
@@ -14,7 +13,7 @@ export const metadata = {
 
 export default function GuestMainPage() {
   return (
-    <main className="scrollbar-hide flex flex-col items-center justify-center min-h-screen overflow-y-auto ">
+    <main className="scrollbar-hide flex min-h-screen flex-col items-center justify-center overflow-y-auto">
       <Page1 />
       <Page2 />
       <Page3 />
@@ -22,7 +21,6 @@ export default function GuestMainPage() {
       <Page5 />
       <Page6 />
       <Page7 />
-
     </main>
   );
 }

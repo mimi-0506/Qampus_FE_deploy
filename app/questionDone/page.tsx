@@ -5,9 +5,9 @@ export const metadata = {
 
 export default function QuestionDonePage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-3xl font-bold">질문 완료 페이지</h1>
-      <p className="text-gray-500 mt-2">질문이 성공적으로 등록되었습니다!</p>
+      <p className="mt-2 text-gray-500">질문이 성공적으로 등록되었습니다!</p>
     </main>
   );
 }

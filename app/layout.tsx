@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${pretendard.variable} font-pretendard`}>
         <Header />
-        <main className="flex-grow pt-[50px] ">{children}</main>
+        <main className="flex-grow pt-[50px]">{children}</main>
         <Footer />
       </body>
     </html>

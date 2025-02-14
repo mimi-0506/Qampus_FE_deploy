@@ -1,15 +1,15 @@
 import Image from 'next/image';
 export default function Page4() {
   return (
-    <div className="rounded-tl-[80px] text-white rounded-tr-[80px] w-scree h-screen relative flex justify-center items-center bg-black">
-      <div className="absolute top-[170px] left-[120px]">
-        <div className="text-transparent bg-clip-text bg-gradient-to-r from-maindark to-mainlight">
+    <div className="w-scree relative flex h-screen items-center justify-center rounded-tl-[80px] rounded-tr-[80px] bg-black text-white">
+      <div className="absolute left-[120px] top-[170px]">
+        <div className="from-maindark to-mainlight bg-gradient-to-r bg-clip-text text-transparent">
           Answer collection
         </div>
         <h2 className="text-[28px">내가 받은 답변</h2>
       </div>
 
-      <div className="w-screen flex justify-around items-center">
+      <div className="flex w-screen items-center justify-around">
         <Image
           src="/images/main/bubbles.png"
           width={275}

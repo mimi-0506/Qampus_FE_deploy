@@ -41,17 +41,17 @@ export default function Page6() {
 
     return (
       <div
-        className="relative w-[1254px] h-[208px] box-border p-[15px] rounded-3xl bg-mainblack flex items-center gap-[44px]"
+        className="bg-mainblack relative box-border flex h-[208px] w-[1254px] items-center gap-[44px] rounded-3xl p-[15px]"
         style={{left: leftValue}} // 동적으로 left 값 적용
       >
-        <div className="w-[97px] h-[107px] relative">
+        <div className="relative h-[107px] w-[97px]">
           <Image src={`/images/main/medal_${medal}.png`} fill alt="medal" />
         </div>
         <div className="flex flex-col gap-[18px]">
-          <div className="w-[107px] h-[41px] text-[20px] bg-maindrakgray text-maingray flex justify-center items-center rounded-[51px]">
+          <div className="bg-maindrakgray text-maingray flex h-[41px] w-[107px] items-center justify-center rounded-[51px] text-[20px]">
             {field}
           </div>
-          <div className="text-white text-[26px]">{question}</div>
+          <div className="text-[26px] text-white">{question}</div>
           <div className="text-mainpage2gary text-[20px]">{info}</div>
         </div>
       </div>
@@ -59,17 +59,17 @@ export default function Page6() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-black to-maindarkblue relative w-screen h-screen flew flew-col justify-center items-center">
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-[18px] text-transparent bg-clip-text bg-gradient-to-r from-maindark to-mainlight">
+    <div className="to-maindarkblue flew flew-col relative h-screen w-screen items-center justify-center bg-gradient-to-b from-black">
+      <div className="flex flex-col items-center justify-center">
+        <div className="from-maindark to-mainlight bg-gradient-to-r bg-clip-text text-[18px] text-transparent">
           Popular Questions
         </div>
-        <div className="text-[28px] text-white font-semibold">
+        <div className="text-[28px] font-semibold text-white">
           금주의 인기 질문
         </div>
       </div>
 
-      <div className="flex flex-col items-center mt-[160px] gap-[36px]">
+      <div className="mt-[160px] flex flex-col items-center gap-[36px]">
         {DATA.map((data, index) => {
           return (
             <Card

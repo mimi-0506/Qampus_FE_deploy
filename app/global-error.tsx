@@ -8,12 +8,12 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-2xl font-bold text-red-500">🚨 오류 발생!</h1>
-      <p className="text-gray-500 mt-2">{error.message}</p>
+      <p className="mt-2 text-gray-500">{error.message}</p>
       <button
         onClick={() => reset()}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+        className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white"
       >
         다시 시도하기
       </button>

@@ -1,25 +1,29 @@
+import Slider from './Slider';
+
 export default function Page5() {
   return (
-    <div className="bg-black relative w-screen h-screen flew flew-col justify-center items-center">
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-[18px] text-transparent bg-clip-text bg-gradient-to-r from-maindark to-mainlight">
+    <div className="flew flew-col relative h-screen w-screen items-center justify-center bg-black">
+      <div className="flex flex-col items-center justify-center">
+        <div className="from-maindark to-mainlight bg-gradient-to-r bg-clip-text text-[18px] text-transparent">
           Ranking
         </div>
         <div className="text-white">학교 별 순위</div>
       </div>
 
-      <div className="mt-[300px] w-screen relative">
-        <div className="flex flex-col gap-[63px] absolute left-[120px]">
-          <div className="flex flex-col gap-3 w-[420px] h-[220px] box-border p-[34px] rounded-3xl border border-white">
-            <h2 className="text-white text-[18px]">팀 대전</h2>
+      <Slider />
+
+      <div className="relative mt-[300px] w-screen">
+        <div className="absolute left-[120px] flex flex-col gap-[63px]">
+          <div className="box-border flex h-[220px] w-[420px] flex-col gap-3 rounded-3xl border border-white p-[34px]">
+            <h2 className="text-[18px] text-white">팀 대전</h2>
             <p className="text-maingray text-[15px]">
               학교별 팀 퀴즈 대전!
               <br />
               지식 대결로 점수를 얻어 랭킹을 올려봐요!
             </p>
           </div>
-          <div className="flex flex-col gap-3 w-[420px] h-[220px] box-border p-[34px] rounded-3xl border border-white">
-            <h2 className="text-white text-[18px]">팀 대전</h2>
+          <div className="box-border flex h-[220px] w-[420px] flex-col gap-3 rounded-3xl border border-white p-[34px]">
+            <h2 className="text-[18px] text-white">팀 대전</h2>
             <p className="text-maingray text-[15px]">
               챌린지 이벤트
               <br />
@@ -29,7 +33,7 @@ export default function Page5() {
           </div>
         </div>
 
-        <div className="w-[330px] h-[444px] right-[170px] aboslute rounded-3xl border border-white-[0.85px] bg-mainblack text-white">
+        <div className="aboslute border-white-[0.85px] bg-mainblack right-[170px] h-[444px] w-[330px] rounded-3xl border text-white">
           <h2>주간 순위</h2>
           <ul>
             <li>1 경희대학교</li>

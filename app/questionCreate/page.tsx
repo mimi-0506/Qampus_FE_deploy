@@ -8,13 +8,13 @@ export const metadata = {
 
 export default function QuestionCreatePage() {
   return (
-    <main className="flex flex-col items-center min-h-screen px-20 py-10 bg-white">
+    <main className="flex min-h-screen flex-col items-center bg-white px-20 py-10">
       <div className="flex w-full gap-6">
         <div className="w-1/5">
           <Stepper />
         </div>
 
-        <div className="w-4/5 flex flex-col gap-4">
+        <div className="flex w-4/5 flex-col gap-4">
           <InfoCard
             name="김하나"
             university="홍익대학교"
