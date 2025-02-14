@@ -9,16 +9,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        mainlight: 'rgba(235, 240, 255, 1)',
-        maindark: 'rgba(79, 125, 238, 1)',
-        maindrakgray: 'rgba(42, 51, 73, 1)',
-        maindarkblue: 'rgba(23, 52, 123, 1)',
-        mainpage2gary: 'rgba(96, 96, 96, 1)',
+        black: '#000000',
         semiBlack: '#1C1C1C',
+        grey1: '#333333',
+        grey2: '#606060',
+        grey3: '#8D8D8D',
         grey4: '#BBBBBB',
         grey5: '#E8E8E8',
+        semiWhite: '#F4F4F4',
+        white: '#FFFFFF',
+        dark1: '#3765D6',
         dark2: '#4F7DEE',
         main: '#7BA1FF',
         light1: '#A7C0FF',
