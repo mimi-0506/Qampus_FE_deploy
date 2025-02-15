@@ -1,7 +1,6 @@
-import {useState} from 'react';
 import LeftArrow from '../../../../public/svg/left_arrow.svg';
 import RightArrow from '../../../../public/svg/right_arrow.svg';
-import {AnimatePresence, motion, wrap} from 'motion/react';
+import {AnimatePresence, motion} from 'motion/react';
 import Image from 'next/image';
 const items = [
   '인기 질문과 답변을 둘러봐요',
@@ -9,17 +8,17 @@ const items = [
   '모르는 내용을 자유롭게 질문하고 답변해요',
 ];
 
-export default function ImageSlider() {
-  const [selectedItem, setSelectedItem] = useState(0);
-  const [direction, setDirection] = useState<1 | -1>(1);
-  function setSlide(newDirection: 1 | -1) {
-    const nextItem = wrap(0, items.length, selectedItem + newDirection);
-    setSelectedItem(nextItem);
-    setDirection(newDirection);
-  }
-
+export default function ImageSlider({
+  direction,
+  selectedItem,
+  setSlide,
+}: {
+  direction: number;
+  selectedItem: number;
+  setSlide: (newDirection: 1 | -1) => void;
+}) {
   return (
-    <div className="flex gap-[3.7vw]">
+    <div className="w-full flex gap-[3.7vw] justify-center">
       <motion.button initial={false} onClick={() => setSlide(-1)}>
         <Image src={LeftArrow} alt="leftBtn" width={35} />
       </motion.button>

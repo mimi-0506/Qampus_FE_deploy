@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Slider from './Sliders';
+import Sliders from './Sliders';
 
 export default function Page3() {
   return (
@@ -15,7 +15,7 @@ export default function Page3() {
       />
 
       <div className="absolute w-full h-full z-10 top-0">
-        <Slider />
+        <Sliders />
       </div>
     </div>
   );
