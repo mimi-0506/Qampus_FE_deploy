@@ -26,6 +26,10 @@ export default {
         light3: '#E3EBFF',
         deepBlue: '#273963',
         page1anibg: '#EBF0FF',
+        page3divbg: '#E5ECFF',
+        page3divborder: '#CBD9FF',
+        page6bg: '#0E1D3E',
+        page6subtitle: '#2A3349',
       },
 
       keyframes: {
