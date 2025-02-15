@@ -8,20 +8,20 @@ const COMMENTS = [
 
 export default function BottomAnimation() {
   return (
-    <div className="text-maindark flex shrink-0 animate-loop items-center justify-start gap-[3%] pr-[5%]">
+    <div className="text-dark2 bg-page1anibg flex shrink-0 animate-loop items-center justify-start gap-[3vw] pr-[5vw]">
       <Img
         src="/images/logo/logo_mini.png"
         alt="logo"
-        className="w-[7%] h-[3%]"
+        className="w-[7vw] h-[3vw]"
       />
       <Img
         src="/images/main/bottom_arrow.png"
         alt="arrow"
-        className="w-[6%] h-[1%]"
+        className="w-[6vw] h-[1vw]"
       />
       {COMMENTS.map((comment, index) => {
         return (
-          <div className="w-fit whitespace-nowrap" key={index}>
+          <div className="w-fit whitespace-nowrap text-[1.45vw]" key={index}>
             {comment}
           </div>
         );

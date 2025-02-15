@@ -25,6 +25,7 @@ export default {
         light2: '#D7E2FF',
         light3: '#E3EBFF',
         deepBlue: '#273963',
+        page1anibg: '#EBF0FF',
       },
 
       keyframes: {

@@ -4,16 +4,16 @@ import BottomAnimation from './BottomAnimation';
 
 export default function Page1() {
   return (
-    <div className="flew flew-col relative h-screen w-screen items-center justify-center overflow-hidden">
+    <div className="flew flew-col relative aspect-[16/9] w-screen items-center justify-center overflow-hidden">
       <Background />
 
       <div className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center overflow-hidden">
         <Img
           src="/images/characters/wink.png"
           alt="character"
-          className="object-contain w-[21%] h-[38%]"
+          className="object-contain w-[21vw] aspect-[402/406]"
         />
-        <button className="bg-dark2 mt-[6%] flex h-[6%] w-[21%] items-center justify-center rounded-[2%]text-[2%] font-semibold text-white ">
+        <button className="bg-dark2 mt-[3vw] flex w-[21vw] aspect-[404/60] items-center justify-center text-[1.25vw] font-semibold rounded-[20px] text-white ">
           질문 시작하기
         </button>
 

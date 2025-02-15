@@ -1,26 +1,35 @@
-import {Img} from '../Img';
+import Image from 'next/image';
 
 export default function Background() {
   return (
     <div className="absolute top-0 z-0 h-screen w-full">
-      <div className="relative left-[6%] top-[20%] h-[50%]">
-        <Img
-          src="/images/main/background_page1_1.png"
+      <div className="w-[110vw] aspect-[2105/400] mt-[11.15vw] ml-[9.52vw]">
+        <Image
+          src="/images/main/bg_logo.png"
           alt="bg text"
-          className="object-contain w-full h-full"
+          width={2105}
+          height={380}
+          layout="responsive"
         />
       </div>
-      <div className="relative right-[6%] top-[20%] h-[50%]">
-        <Img
-          src="/images/main/background_page1_2.png"
+
+      <div className="w-[110vw] aspect-[2105/400] relative top-[2.60vw] right-[15.63vw]">
+        <Image
+          src="/images/main/bg_logo.png"
           alt="bg text"
-          className="object-contain w-full h-full"
+          width={2105}
+          height={380}
+          layout="responsive"
         />
       </div>
-      <Img
+
+      <Image
         src="/images/main/gradient_page1.png"
         alt=""
-        className="absolute bottom-[-28%] left-[5%] w-[89%] h-[69%]"
+        width={1700}
+        height={751}
+        layout="responsive"
+        className="absolute top-[30.15vw]"
       />
     </div>
   );
