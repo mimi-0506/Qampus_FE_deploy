@@ -14,14 +14,14 @@ export default function QuestionCreatePage() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center min-h-screen px-16 py-10 bg-white">
-      <div className="flex w-full gap-6">
+    <main className="flex w-full h-full flex-col items-center min-h-screen px-16 py-10 bg-white">
+      <div className="flex w-full max-w-screen-xl gap-6">
         <div className="w-[200px]">
           {/* 현재 클릭된 Step 전달 */}
           <Stepper selectedStep={selectedStep} />
         </div>
 
-        <div className="w-[1400px] flex flex-col gap-4">
+        <div className="w-full max-w-screen-lg flex flex-col gap-4">
           {/* 클릭 시 Step 1 활성화 */}
           <div onClick={() => setSelectedStep(1)}>
             <FieldSelector

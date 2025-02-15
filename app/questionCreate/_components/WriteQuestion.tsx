@@ -28,17 +28,17 @@ export default function WriteQuestion() {
   return (
     <div>
       <div
-        className="relative w-full px-3 py-6 rounded-2xl"
+        className="relative w-full max-w-[100%] h-full px-3 py-4 rounded-3xl bg-[#D7E3FF]"
         style={{
-          backgroundImage: `url('/images/question/question_bg.png')`,
-
+          backgroundImage: `url('/images/question/write_question_bg.png')`,
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
         }}
       >
         {/* 이미지 업로드 버튼 및 점수 안내 */}
         <div className="flex justify-between items-center">
           <label className="cursor-pointer font-semibold">
-            <div className="w-[120px] h-[40px] bg-white text-[#4F7DEE] flex items-center justify-center gap-2 rounded-lg ">
+            <div className="w-[130px] h-[40px] bg-white text-[#4F7DEE] flex items-center justify-center gap-2 rounded-xl ">
               <FiUpload className="text-md" />
               <span className="font-[600] text-sm">이미지 삽입</span>
             </div>
@@ -62,7 +62,7 @@ export default function WriteQuestion() {
           <input
             type="text"
             placeholder="제목을 입력해주세요."
-            className="w-full text-lg placeholder:text-[#606060] text-[#1C1C1C] font-[600] focus:outline-none border-none"
+            className="w-full  text-lg placeholder:text-[#606060] text-[#1C1C1C] font-[600] focus:outline-none border-none"
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
@@ -72,31 +72,38 @@ export default function WriteQuestion() {
           {/* 내용 입력 */}
           <textarea
             placeholder="내용을 입력해주세요."
-            className="w-full mt-2 h-32 resize-none focus:outline-none placeholder:text-[#BBBBBB] text-[#1C1C1C] font-[400] border-none"
+            className="w-full mt-2 h-20 resize-none focus:outline-none placeholder:text-[#BBBBBB] text-[#1C1C1C] font-[400] border-none"
             value={content}
             onChange={e => setContent(e.target.value)}
           />
-
-          {/* 업로드된 이미지 미리보기 */}
+          {/* 업로드된 이미지 */}
           {images.length > 0 && (
-            <div className="mt-4">
-              <div className="flex gap-2 overflow-x-auto">
+            <div className="relative mt-4 max-h-[300px] overflow-y-auto">
+              <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white via-white to-transparent z-10"></div>
+
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                 {images.map((image, index) => (
-                  <div key={index} className="relative w-24 h-24">
+                  <div
+                    key={index}
+                    className="relative w-[180px] h-[240px] flex-shrink-0 group"
+                  >
                     <Image
-                      width={20}
-                      height={10}
+                      width={180}
+                      height={240}
                       src={image}
                       alt={`업로드된 이미지 ${index + 1}`}
-                      className="w-24 h-24 object-cover rounded-lg border"
+                      className="w-[180px] h-[240px] object-cover rounded-lg border"
                     />
-                    {/* 삭제 버튼 */}
-                    <button
-                      className="absolute top-1 right-1 bg-black bg-opacity-50 text-white rounded-full p-1"
-                      onClick={() => handleRemoveImage(index)}
-                    >
-                      <FiX size={16} />
-                    </button>
+
+                    {/* 이미지 삭제 */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 opacity-0 transition-all duration-300 rounded-lg group-hover:opacity-100 group-hover:bg-opacity-70">
+                      <button
+                        className="w-10 h-10 flex items-center justify-center bg-[#8D8D8D] text-black rounded-full shadow-lg transition-all duration-300 transform scale-75 group-hover:scale-100"
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        <FiX size={24} />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -107,10 +114,14 @@ export default function WriteQuestion() {
       {/* 질문 등록 버튼 */}
       <div className="w-full flex justify-end">
         <button
-          className="mt-10 w-[300px] justify-center ${questionSubmit ? bg-blue-500 : bg-pink-500} text-white py-2 rounded-2xl text-md font-[600] hover:bg-blue-600 transition"
+          className={`mt-10 w-[300px] justify-center py-2 rounded-2xl text-md font-[600] transition ${
+            questionSubmit
+              ? 'bg-[#7BA1FF] text-wthie'
+              : 'bg-[#E8E8E8] text-[#8D8D8D]'
+          }`}
           onClick={() => setQuestionSubmit(true)}
         >
-          {questionSubmit ? '등록 완료' : '질문 등록하기'}
+          질문 등록하기
         </button>
       </div>
     </div>
