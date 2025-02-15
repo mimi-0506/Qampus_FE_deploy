@@ -20,7 +20,6 @@ export default function Page2() {
           src="/images/characters/smile.png"
           width={357}
           height={360}
-          layout="responsive"
           alt=""
         />
       </div>

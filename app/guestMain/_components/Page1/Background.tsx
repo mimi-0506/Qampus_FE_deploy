@@ -9,7 +9,6 @@ export default function Background() {
           alt="bg text"
           width={2105}
           height={380}
-          layout="responsive"
         />
       </div>
 
@@ -19,7 +18,6 @@ export default function Background() {
           alt="bg text"
           width={2105}
           height={380}
-          layout="responsive"
         />
       </div>
 
