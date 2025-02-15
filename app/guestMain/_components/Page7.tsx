@@ -1,7 +1,15 @@
+import Image from 'next/image';
+
 export default function Page7() {
   return (
-    <div className="dark2blue flex h-screen w-screen items-center justify-center">
-      <div className="text-[64px] font-bold text-white">
+    <div className="aspect-[16/9] w-screen relative flex items-center justify-center">
+      <Image
+        src="/images/main/bg_page7.png"
+        alt="bg"
+        fill
+        className="absolute top-0 z-0 "
+      />
+      <div className="text-[3.3vw] font-bold text-white relative z-10">
         Qampus에서 성장하기
       </div>
     </div>
