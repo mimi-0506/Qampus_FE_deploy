@@ -1,26 +1,39 @@
-import InfoCard from './_components/InfoCard';
-import Stepper from './_components/Stepper';
+'use client';
 
-export const metadata = {
-  title: '질문 작성 | MyApp',
-  description: '사용자가 새로운 질문을 작성할 수 있는 페이지입니다.',
-};
+import {useState, useEffect} from 'react';
+import FieldSelector from './_components/FieldSelector';
+import Stepper from './_components/Stepper';
+import WriteQuestion from './_components/WriteQuestion';
 
 export default function QuestionCreatePage() {
+  const [selectedField, setSelectedField] = useState<string | null>(null);
+  const [selectedStep, setSelectedStep] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.title = '질문 작성하기';
+  }, []);
+
   return (
-    <main className="flex flex-col items-center min-h-screen px-20 py-10 bg-white">
+    <main className="flex flex-col items-center min-h-screen px-16 py-10 bg-white">
       <div className="flex w-full gap-6">
-        <div className="w-1/5">
-          <Stepper />
+        <div className="w-[200px]">
+          {/* 현재 클릭된 Step 전달 */}
+          <Stepper selectedStep={selectedStep} />
         </div>
 
-        <div className="w-4/5 flex flex-col gap-4">
-          <InfoCard
-            name="김하나"
-            university="홍익대학교"
-            department="경영학부"
-            // profileImage="https://example.com/image.jpg"
-          />
+        <div className="w-[1400px] flex flex-col gap-4">
+          {/* 클릭 시 Step 1 활성화 */}
+          <div onClick={() => setSelectedStep(1)}>
+            <FieldSelector
+              selectedField={selectedField}
+              setSelectedField={setSelectedField}
+            />
+          </div>
+
+          {/* 클릭 시 Step 2 활성화 */}
+          <div onClick={() => setSelectedStep(2)}>
+            <WriteQuestion />
+          </div>
         </div>
       </div>
     </main>
