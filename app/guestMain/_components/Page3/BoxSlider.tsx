@@ -27,7 +27,7 @@ export default function BoxSlider({
               <h3 className="text-[1.25vw] text-semiBlack font-semibold">
                 {item.title}
               </h3>
-              <p className="test-[0.1vw] whitespace-pre-line text-grey2 ">
+              <p className="text-[1vw] whitespace-pre-line text-grey2 ">
                 {item.image && (
                   <Image
                     src={item.image}
