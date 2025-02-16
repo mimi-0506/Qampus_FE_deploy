@@ -26,7 +26,6 @@ export default function QuestionCreatePage() {
 
     setQuestionSubmit(true);
     console.log('질문 등록하기:', {title, content, images});
-    // API 호출
 
     setTimeout(() => {
       router.push('/questionLoading');
@@ -34,15 +33,14 @@ export default function QuestionCreatePage() {
   };
 
   return (
-    <main className="flex w-full h-full flex-col items-center min-h-screen px-16 py-10 bg-white">
-      <div className="flex w-full max-w-screen-xl gap-6">
-        <div className="w-[200px]">
-          {/* 현재 클릭된 Step 전달 */}
+    <main className="flex w-full min-h-screen flex-col items-center px-[4vw] py-[5vh] bg-white">
+      <div className="flex w-full max-w-[1200px] gap-[3vw] flex-wrap justify-center">
+        <div className="w-[20vw] max-w-[200px] min-w-[150px]">
           <Stepper selectedStep={selectedStep} />
         </div>
 
-        <div className="w-full max-w-screen-lg flex flex-col gap-4">
-          {/* 클릭 시 Step 1 활성화 */}
+        <div className="w-full max-w-[800px] flex flex-col gap-[3vh]">
+          {/* Step 1 */}
           <div onClick={() => setSelectedStep(1)}>
             <FieldSelector
               selectedField={selectedField}
@@ -50,7 +48,7 @@ export default function QuestionCreatePage() {
             />
           </div>
 
-          {/* 클릭 시 Step 2 활성화 */}
+          {/* Step 2 */}
           <div onClick={() => setSelectedStep(2)}>
             <WriteQuestion
               title={title}
@@ -63,15 +61,15 @@ export default function QuestionCreatePage() {
           </div>
 
           {/* 질문 등록 버튼 */}
-          <div className="w-full max-w-[100%] flex justify-end">
+          <div className="w-full flex justify-end">
             <button
-              className={`mt-4 w-[300px] justify-center py-2 rounded-2xl text-md font-[600] 
-      transition-all duration-300 ease-in-out transform
-      ${
-        questionSubmit
-          ? 'bg-[#7BA1FF] text-white shadow-md'
-          : 'bg-[#E8E8E8] text-[#8D8D8D] hover:bg-[#C0C0C0]'
-      }`}
+              className={`mt-4 w-[80vw] max-w-[300px] justify-center py-[1vh] rounded-2xl text-md font-[600] 
+                transition-all duration-300 ease-in-out transform
+                ${
+                  questionSubmit
+                    ? 'bg-[#7BA1FF] text-white shadow-md'
+                    : 'bg-[#E8E8E8] text-[#8D8D8D] hover:bg-[#C0C0C0]'
+                }`}
               onClick={handleSubmit}
             >
               {questionSubmit ? '등록 완료' : '질문 등록하기'}
