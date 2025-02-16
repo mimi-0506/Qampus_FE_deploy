@@ -1,28 +1,38 @@
 'use client';
 
-import {useState} from 'react';
 import {FiUpload, FiX} from 'react-icons/fi';
 import Image from 'next/image';
 
-export default function WriteQuestion() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [images, setImages] = useState<string[]>([]);
-  const [questionSubmit, setQuestionSubmit] = useState(false);
+interface WriteQuestionProps {
+  title: string;
+  setTitle: (title: string) => void;
+  content: string;
+  setContent: (content: string) => void;
+  images: string[];
+  setImages: (images: string[]) => void;
+}
 
+export default function WriteQuestion({
+  title,
+  setTitle,
+  content,
+  setContent,
+  images,
+  setImages,
+}: WriteQuestionProps) {
   // 이미지 업로드 핸들러
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const uploadedImages = Array.from(event.target.files).map(file =>
         URL.createObjectURL(file),
       );
-      setImages(prevImages => [...prevImages, ...uploadedImages]);
+      setImages([...images, ...uploadedImages]);
     }
   };
 
   // 이미지 삭제 핸들러
   const handleRemoveImage = (index: number) => {
-    setImages(prevImages => prevImages.filter((_, i) => i !== index));
+    setImages(images.filter((_, i) => i !== index));
   };
 
   return (
@@ -38,7 +48,7 @@ export default function WriteQuestion() {
         {/* 이미지 업로드 버튼 및 점수 안내 */}
         <div className="flex justify-between items-center">
           <label className="cursor-pointer font-semibold">
-            <div className="w-[130px] h-[40px] bg-white text-[#4F7DEE] flex items-center justify-center gap-2 rounded-xl ">
+            <div className="w-[130px] h-[40px] bg-white text-[#4F7DEE] flex items-center justify-center gap-2 rounded-xl">
               <FiUpload className="text-md" />
               <span className="font-[600] text-sm">이미지 삽입</span>
             </div>
@@ -62,7 +72,7 @@ export default function WriteQuestion() {
           <input
             type="text"
             placeholder="제목을 입력해주세요."
-            className="w-full  text-lg placeholder:text-[#606060] text-[#1C1C1C] font-[600] focus:outline-none border-none"
+            className="w-full text-lg placeholder:text-[#606060] text-[#1C1C1C] font-[600] focus:outline-none border-none"
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
@@ -110,19 +120,6 @@ export default function WriteQuestion() {
             </div>
           )}
         </div>
-      </div>
-      {/* 질문 등록 버튼 */}
-      <div className="w-full flex justify-end">
-        <button
-          className={`mt-10 w-[300px] justify-center py-2 rounded-2xl text-md font-[600] transition ${
-            questionSubmit
-              ? 'bg-[#7BA1FF] text-wthie'
-              : 'bg-[#E8E8E8] text-[#8D8D8D]'
-          }`}
-          onClick={() => setQuestionSubmit(true)}
-        >
-          질문 등록하기
-        </button>
       </div>
     </div>
   );

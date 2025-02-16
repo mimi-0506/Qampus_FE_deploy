@@ -5,7 +5,7 @@ export const metadata = {
 
 export default function QuestionDonePage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex w-full h-[calc(100vh-80px)] flex-col items-center justify-center min-h-screen">
       <h1 className="text-3xl font-bold">질문 완료 페이지</h1>
       <p className="text-gray-500 mt-2">질문이 성공적으로 등록되었습니다!</p>
     </main>

@@ -6,7 +6,7 @@ import ProgressBar from './_components/ProgressBar';
 export default function QuestionLoading() {
   return (
     <main
-      className="h-screen w-screen bg-white flex flex-col items-center justify-center bg-center overflow-y-hidden"
+      className="h-[calc(100vh-80px)] w-screen bg-white flex flex-col items-center justify-center bg-center"
       style={{
         backgroundImage: `url('/images/question/question_loading_bg.png')`,
         backgroundSize: '68%',

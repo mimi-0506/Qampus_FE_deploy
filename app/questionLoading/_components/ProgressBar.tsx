@@ -29,7 +29,7 @@ export default function ProgressBar() {
       <div
         className="h-full bg-[#7BA1FF] rounded-full transition-all duration-30 ease-linear"
         style={{width: `${progress}%`}}
-      ></div>
+      />
     </div>
   );
 }
