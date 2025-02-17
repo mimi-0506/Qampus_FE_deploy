@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {useRouter} from 'next/navigation';
 import {BsQuestionLg} from 'react-icons/bs';
 import {formatDistanceToNow} from 'date-fns';
 import {ko} from 'date-fns/locale';
@@ -33,7 +32,6 @@ interface QuestionData {
 }
 
 export default function ViewQuestion() {
-  const router = useRouter();
   const [data, setData] = useState<QuestionData | null>(null);
   const [isCurious, setIsCurious] = useState(false);
 
@@ -117,15 +115,6 @@ export default function ViewQuestion() {
       </div>
 
       <ViewAnswer answers={data.answers} />
-
-      <div className="mt-10 flex justify-center">
-        <p
-          className="pt-6 md:pt-10 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
-          onClick={() => router.push('/questionCreate')}
-        >
-          추가 질문하기
-        </p>
-      </div>
     </main>
   );
 }
