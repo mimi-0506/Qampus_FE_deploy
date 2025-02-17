@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function UserMainPage() {
   return (
-    <main className="flex flex-col aspect-[1922/2333] w-screen items-center justify-center relative">
+    <main className="flex overflow-hidden flex-col aspect-[1922/3500] w-screen items-center justify-center relative">
       <UserInfo />
       <ActInfo />
     </main>

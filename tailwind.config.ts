@@ -32,6 +32,7 @@ export default {
         page6subtitle: '#2A3349',
         usermainbg: '#A0BBFF4A',
         usermainbg2: '#17347B',
+        usermainoverlay: 'rgba(109, 124, 167, 0.4)',
       },
 
       keyframes: {

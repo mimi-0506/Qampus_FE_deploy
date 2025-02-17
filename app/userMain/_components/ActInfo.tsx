@@ -27,6 +27,19 @@ export default function ActInfo() {
           <Cards />
         </div>
       </div>
+
+      <div className="mt-[10.5vw] box-border w-screen flex justify-between px-[6.3vw]">
+        <div className="w-[14vw]">
+          <h2 className="text-[1.46vw]">금주의 인기 답변</h2>
+          <p className="text-grey2 text-[1.15vw] mt-[1vw]">
+            인기 답변은 각 답변에 달린 좋아요 수로 집계돼요
+          </p>
+        </div>
+
+        <div className="flex gap-[1.5vw]">
+          <Cards />
+        </div>
+      </div>
     </div>
   );
 }
