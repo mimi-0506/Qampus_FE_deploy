@@ -63,7 +63,7 @@ export default function QuestionCreatePage() {
           {/* 질문 등록 버튼 */}
           <div className="w-full flex justify-end">
             <button
-              className={`mt-4 w-[80vw] max-w-[300px] justify-center py-[1vh] rounded-2xl text-md font-[600] 
+              className={`mt-4 w-[80vw] max-w-[300px] justify-center py-[1vh] rounded-2xl text-sm font-[600] 
                 transition-all duration-300 ease-in-out transform
                 ${
                   questionSubmit
