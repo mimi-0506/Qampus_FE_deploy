@@ -38,9 +38,14 @@ export default {
           '0%': {transform: 'translateX(0)'},
           '100%': {transform: 'translateX(-100%)'},
         },
+        fadeIn: {
+          '0%': {opacity: '0', transform: 'translateY(-10vw)'},
+          '100%': {opacity: '1', transform: 'translateY(0)'},
+        },
       },
       animation: {
         loop: 'loop 20s linear infinite',
+        fadeIn: 'fadeIn 1s ease-out forwards',
       },
 
       fontFamily: {

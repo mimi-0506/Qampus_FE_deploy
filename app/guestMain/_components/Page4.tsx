@@ -1,6 +1,11 @@
+'use client';
+
 import Image from 'next/image';
+import useScrollAnimation from './useScrollAnimation';
 
 export default function Page4() {
+  const {ref, isVisible} = useScrollAnimation();
+
   return (
     <div className="relative flex aspect-[16/9] w-screen items-center justify-center rounded-tl-[4.17vw] rounded-tr-[4.17vw] bg-black text-white">
       <div className="absolute left-[6.25vw] top-[8.85vw]">
@@ -19,7 +24,14 @@ export default function Page4() {
             alt="bubble"
           />
         </div>
-        <div className="text-[1.87vw]">
+        <div
+          ref={ref}
+          className={`text-[1.87vw] transition-all duration-700 ease-out transform ${
+            isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 -translate-y-10'
+          }`}
+        >
           Qampus에서는 자신이 질문한 내용에 달린 답변들을 모아서 확인할 수
           있어요
           <br />
