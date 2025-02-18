@@ -1,4 +1,4 @@
-import {Img} from '../Img';
+import Image from 'next/image';
 
 const COMMENTS = [
   '#대학생들을 위한 자유로운 질문과 답변',
@@ -9,16 +9,13 @@ const COMMENTS = [
 export default function BottomAnimation() {
   return (
     <div className="text-dark2 bg-page1anibg flex shrink-0 animate-loop items-center justify-start gap-[3vw] pr-[5vw]">
-      <Img
-        src="/images/logo/logo_mini.png"
-        alt="logo"
-        className="w-[7vw] h-[3vw]"
-      />
-      <Img
-        src="/images/main/bottom_arrow.png"
-        alt="arrow"
-        className="w-[6vw] h-[1vw]"
-      />
+      <div className="w-[7vw] aspect-[269/58] relative">
+        <Image src="/images/logo/logo_mini.png" alt="logo" fill />
+      </div>
+
+      <div className="w-[6vw] h-[1vw] bottom-[0.4vw] relative flex justify-center items-center">
+        <Image src="/images/main/bottom_arrow.png" alt="arrow" fill />
+      </div>
       {COMMENTS.map((comment, index) => {
         return (
           <div className="w-fit whitespace-nowrap text-[1.45vw]" key={index}>

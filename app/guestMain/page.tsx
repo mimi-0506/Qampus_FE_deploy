@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function GuestMainPage() {
   return (
-    <main className="scrollbar-hide flex min-h-screen flex-col items-center justify-center overflow-y-auto">
+    <main className="flex min-h-screen flex-col items-center justify-center ">
       <Page1 />
       <Page2 />
       <Page3 />

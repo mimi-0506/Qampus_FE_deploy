@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Page7() {
   return (
-    <div className="aspect-[16/9] w-screen relative flex items-center justify-center">
+    <div className="aspect-[16/9] w-screen overflow-hidden relative flex items-center justify-center">
       <Image
         src="/images/main/bg_page7.png"
         alt="bg"

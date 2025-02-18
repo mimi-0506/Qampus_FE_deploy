@@ -4,7 +4,7 @@ import BottomAnimation from './BottomAnimation';
 
 export default function Page1() {
   return (
-    <div className="flxw flex-col relative aspect-[16/9] w-screen items-center justify-center overflow-hidden">
+    <div className="flex flex-col relative aspect-[16/9] w-screen items-center justify-center overflow-hidden">
       <Background />
 
       <div className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center overflow-hidden">
