@@ -30,6 +30,7 @@ export default {
         page3divborder: '#CBD9FF',
         page6bg: '#0E1D3E',
         page6subtitle: '#2A3349',
+        page5roundbg: '#4D67A9',
       },
 
       keyframes: {
