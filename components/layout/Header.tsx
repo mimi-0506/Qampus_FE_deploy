@@ -16,9 +16,9 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full h-[50px] z-50 flex items-center ${isCommunity ? 'bg-black' : 'bg-white'}`}
+      className={`fixed top-0 left-0 w-full h-[80px] z-50 flex items-center ${isCommunity ? 'bg-black' : 'bg-white'}`}
     >
-      <div className="w-[95%] mx-auto flex items-center justify-between px-6">
+      <div className="mx-auto flex w-[95%] items-center justify-between px-6">
         {/* 로고 아이콘 */}
         <Link href="/">
           <Image
@@ -32,13 +32,13 @@ const Header = () => {
         </Link>
 
         {/* 내비게이션 메뉴 */}
-        <nav className="hidden md:flex gap-16 text-sm">
+        <nav className="hidden gap-16 text-sm md:flex">
           {NAV_ITEMS.map(({label, path}) => (
             <Link key={path} href={path}>
               <span
-                className={` underline-offset-8 ${isCommunity ? 'text-white' : 'text-black'} ${
+                className={`underline-offset-8 ${isCommunity ? 'text-white' : 'text-black'} ${
                   pathname === path
-                    ? 'underline font-semibold'
+                    ? 'font-semibold underline'
                     : 'hover:underline'
                 }`}
               >
