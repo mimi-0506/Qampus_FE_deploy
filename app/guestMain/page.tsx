@@ -1,4 +1,4 @@
-import Footer from './_components/Footer';
+
 import Page1 from './_components/Page1';
 import Page2 from './_components/Page2';
 import Page3 from './_components/Page3';
@@ -22,7 +22,7 @@ export default function GuestMainPage() {
       <Page5 />
       <Page6 />
       <Page7 />
-      <Footer />
+
     </main>
   );
 }
