@@ -1,13 +1,44 @@
-export const metadata = {
-  title: '로그인 | MyApp',
-  description: '로그인하지 않은 사용자를 위한 메인 페이지입니다.',
-};
+'use client';
+
+import Image from 'next/image';
+import {useRouter} from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  const loginWithKakao = () => {
+    const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`;
+    const tempUrl = '/login/info';
+    router.push(url);
+  };
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl font-bold">로그인 페이지</h1>
-      <p className="text-gray-500 mt-2">여기는 로그인 페이지입니다.</p>
-    </main>
+    <>
+      <div className="mt-[5vw] gap-[0.7vw] flex flex-col text-[0.9vw]">
+        <button
+          onClick={loginWithKakao}
+          className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-yellow flex justify-center items-center box-border p-5"
+        >
+          <Image
+            src="/svg/kakao.svg"
+            width={24}
+            height={22}
+            alt="kakao icon"
+            className="absolute left-[1.1vw]"
+          />
+          카카오로 시작하기
+        </button>
+        <button className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-black text-white  flex justify-center items-center box-border p-5">
+          <Image
+            src="/svg/user.svg"
+            width={24}
+            height={22}
+            alt="user icon"
+            className="absolute left-[1.1vw]"
+          />
+          회원가입
+        </button>
+      </div>
+    </>
   );
 }

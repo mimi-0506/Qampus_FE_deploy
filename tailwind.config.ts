@@ -33,6 +33,7 @@ export default {
         usermainbg: '#A0BBFF4A',
         usermainbg2: '#17347B',
         usermainoverlay: 'rgba(109, 124, 167, 0.4)',
+        yellow: '#FEE500',
       },
 
       keyframes: {
