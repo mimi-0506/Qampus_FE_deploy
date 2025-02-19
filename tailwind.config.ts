@@ -30,6 +30,10 @@ export default {
         page3divborder: '#CBD9FF',
         page6bg: '#0E1D3E',
         page6subtitle: '#2A3349',
+        usermainbg: '#A0BBFF4A',
+        usermainbg2: '#17347B',
+        usermainoverlay: 'rgba(109, 124, 167, 0.4)',
+        yellow: '#FEE500',
         page5roundbg: '#4D67A9',
       },
 
@@ -45,7 +49,6 @@ export default {
       },
       animation: {
         loop: 'loop 20s linear infinite',
-        fadeIn: 'fadeIn 1s ease-out forwards',
       },
 
       fontFamily: {

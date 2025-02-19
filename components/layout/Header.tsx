@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 flex h-[50px] w-full items-center ${isCommunity ? 'bg-black' : 'bg-white'}`}
+      className={`fixed top-0 left-0 w-full h-[80px] z-50 flex items-center ${isCommunity ? 'bg-black' : 'bg-white'}`}
     >
       <div className="mx-auto flex w-[95%] items-center justify-between px-6">
         {/* 로고 아이콘 */}
