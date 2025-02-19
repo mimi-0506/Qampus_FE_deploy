@@ -4,10 +4,9 @@ about: Create a report to help us improve
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
-### ✨ 어떤 버그인가요? 
+### ✨ 어떤 버그인가요?
 
 > 어떤 버그가 어떤 상황에서 발생했는지 자세하게 설명해주세요.
 
