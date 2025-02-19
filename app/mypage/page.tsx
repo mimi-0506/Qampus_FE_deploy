@@ -15,7 +15,7 @@ export default function LoginPage() {
         // profileImage="https://example.com/image.jpg"
       />
       <h1 className="text-3xl font-bold">마이페이지</h1>
-      <p className="text-gray-500 mt-2">여기는 마이페이지입니다.</p>
+      <p className="mt-2 text-gray-500">여기는 마이페이지입니다.</p>
     </main>
   );
 }

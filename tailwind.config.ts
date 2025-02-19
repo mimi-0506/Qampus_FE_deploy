@@ -34,12 +34,17 @@ export default {
         usermainbg2: '#17347B',
         usermainoverlay: 'rgba(109, 124, 167, 0.4)',
         yellow: '#FEE500',
+        page5roundbg: '#4D67A9',
       },
 
       keyframes: {
         loop: {
           '0%': {transform: 'translateX(0)'},
           '100%': {transform: 'translateX(-100%)'},
+        },
+        fadeIn: {
+          '0%': {opacity: '0', transform: 'translateY(-10vw)'},
+          '100%': {opacity: '1', transform: 'translateY(0)'},
         },
       },
       animation: {

@@ -6,5 +6,6 @@
   "!.husky/pre-commit": "eslint --fix",
   "!.prettierrc": "eslint --fix",
   "!.package-lock.json": "eslint --fix",
-  "!.package.json": "eslint --fix"
+  "!.package.json": "eslint --fix",
+  "!.png": "eslint --fix"
 }

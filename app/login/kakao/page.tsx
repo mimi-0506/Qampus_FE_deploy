@@ -1,13 +1,11 @@
 'use client';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useSearchParams} from 'next/navigation';
-import axios from 'axios';
 import {getKakaoUserFromCode} from '@/app/actions';
 
 export default function Kakao() {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (code) kakaoAccess(code);

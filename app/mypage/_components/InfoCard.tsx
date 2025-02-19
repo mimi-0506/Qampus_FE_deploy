@@ -18,14 +18,14 @@ export default function InfoCard({
   const [profileSrc, setProfileSrc] = useState(profileImage);
 
   return (
-    <div className="bg-[#F8F8F8] w-full h-[140px] flex flex-col items-center rounded-2xl justify-center">
+    <div className="flex h-[140px] w-full flex-col items-center justify-center rounded-2xl bg-[#F8F8F8]">
       <div className="w-full px-[30px] py-[30px]">
-        <p className="text-black font-bold">작성자 관련 정보</p>
-        <p className="text-[#8D8D8D] font-normal text-xs">
+        <p className="font-bold text-black">작성자 관련 정보</p>
+        <p className="text-xs font-normal text-[#8D8D8D]">
           해당 정보는 비공개 처리되며, 소속 학교만 보여지게 됩니다.
         </p>
         {/* 사용자 정보 */}
-        <div className=" w-full h-[20px]"></div>
+        <div className="h-[20px] w-full"></div>
         <div className="flex items-center gap-3">
           {/* 프로필 이미지 */}
           <Image
@@ -40,8 +40,8 @@ export default function InfoCard({
             unoptimized
           />
           <div>
-            <p className="font-semibold text-sm text-black">{name}</p>
-            <div className="flex items-center mt-[2px]">
+            <p className="text-sm font-semibold text-black">{name}</p>
+            <div className="mt-[2px] flex items-center">
               <Image
                 src="/images/question/cap.svg"
                 width={15}
@@ -49,7 +49,7 @@ export default function InfoCard({
                 alt="school cap image"
                 className="mr-[4px]"
               />
-              <p className="text-xs font-medium text-black text-sm">
+              <p className="text-sm text-xs font-medium text-black">
                 {university} {department} 소속
               </p>
             </div>
