@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
-import WriteQuestion from './_components/WriteQuestion';
+import WriteQuestion from '@/components/WriteQuestion';
 
 export default function QuestionCreatePage() {
   const [selectedField, setSelectedField] = useState<string | null>(null);

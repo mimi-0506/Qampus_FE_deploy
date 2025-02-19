@@ -13,6 +13,7 @@ interface Answer {
   created_date: string;
   like_count: number;
   is_chosen: boolean;
+  images?: string[];
 }
 
 interface ViewAnswerProps {
@@ -30,7 +31,7 @@ export default function ViewAnswer({answers}: ViewAnswerProps) {
   if (answers.length === 0) return null;
 
   return (
-    <div className="mt-10">
+    <div>
       {answers.map(answer => (
         <div
           key={answer.answer_id}
@@ -50,6 +51,21 @@ export default function ViewAnswer({answers}: ViewAnswerProps) {
               건국대학교
             </span>
           </div>
+
+          {answer.images && answer.images.length > 0 && (
+            <div className="flex gap-2 mt-4">
+              {answer.images.map((image, index) => (
+                <Image
+                  key={index}
+                  src={image}
+                  alt={`답변 이미지 ${index + 1}`}
+                  width={150}
+                  height={150}
+                  className="rounded-lg border"
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <button
