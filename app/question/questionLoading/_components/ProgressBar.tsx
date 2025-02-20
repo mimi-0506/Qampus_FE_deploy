@@ -10,7 +10,7 @@ export default function ProgressBar() {
   useEffect(() => {
     if (progress >= 100) {
       const timeout = setTimeout(() => {
-        router.push('/questionDone');
+        router.push('/question/questionDone');
       }, 300);
 
       return () => clearTimeout(timeout);

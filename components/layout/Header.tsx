@@ -5,8 +5,8 @@ import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
 const NAV_ITEMS = [
-  {label: '질문하기', path: '/questionCreate'},
-  {label: '답변하기', path: '/answer'},
+  {label: '질문하기', path: '/question/questionCreate'},
+  {label: '답변하기', path: '/answer/answerMain'},
   {label: '커뮤니티', path: '/community'},
 ];
 

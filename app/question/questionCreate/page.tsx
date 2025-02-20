@@ -28,7 +28,7 @@ export default function QuestionCreatePage() {
     console.log('질문 등록하기:', {title, content, images});
 
     setTimeout(() => {
-      router.push('/questionLoading');
+      router.push('/question/questionLoading');
     }, 1000);
   };
 
