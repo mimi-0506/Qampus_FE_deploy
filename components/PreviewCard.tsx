@@ -23,7 +23,7 @@ export default function PreviewCard({
   };
 
   return (
-    <div className="w-[70%] bg-white mb-4 rounded-2xl px-6 py-6 border">
+    <div className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border">
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
         {answerCount > 0 && (
