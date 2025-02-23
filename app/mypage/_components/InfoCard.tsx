@@ -20,8 +20,8 @@ export default function InfoCard({
   return (
     <div className="flex h-[140px] w-[70%] mt-10 flex-col items-center justify-center rounded-2xl bg-[#F8F8F8]">
       <div className="w-full px-[30px] py-[30px]">
-        <p className="font-bold text-black">내 정보</p>
-        <p className="text-xs font-normal text-[#8D8D8D]">
+        <p className="font-[600] text-[16px] text-black">내 정보</p>
+        <p className="text-[13px] font-[200] text-[#8D8D8D]">
           로그인시 입력한 나의 학교/학과 정보입니다.
         </p>
         {/* 사용자 정보 */}
@@ -40,7 +40,7 @@ export default function InfoCard({
             unoptimized
           />
           <div>
-            <p className="text-sm font-[600] text-black">{name}</p>
+            <p className="text-[14px] font-[600] text-black">{name}</p>
             <div className="mt-[2px] flex items-center">
               <Image
                 src="/images/question/cap.svg"
@@ -49,7 +49,7 @@ export default function InfoCard({
                 alt="school cap image"
                 className="mr-[4px]"
               />
-              <p className="text-sm text-xs font-[500] text-black">
+              <p className="text-sm font-[300] text-black">
                 {university} {department} 소속
               </p>
             </div>

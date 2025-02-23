@@ -5,6 +5,7 @@ import Pagination from '@/components/Pagination';
 import PreviewCard from '@/components/PreviewCard';
 import {useState} from 'react';
 import {mockQuestions} from '@/constants/mockQuestions';
+import SortSelector from '@/components/SortSelector';
 
 export default function SearchPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -20,9 +21,12 @@ export default function SearchPage() {
     <main className="flex flex-col items-center bg-white min-h-screen">
       <SearchBar />
 
-      <p className="text-black font-[600] w-[70%] py-8">
-        질문 {mockQuestions.length.toLocaleString()}개가 있어요
-      </p>
+      <div className="w-[70%] flex justify-between">
+        <p className="text-black font-[600] py-8">
+          질문 {mockQuestions.length.toLocaleString()}개가 있어요
+        </p>
+        <SortSelector />
+      </div>
 
       <div className="w-[70%] flex flex-col">
         {paginatedQuestions.map(question => (

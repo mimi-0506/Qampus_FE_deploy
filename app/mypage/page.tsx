@@ -7,6 +7,7 @@ import Pagination from '@/components/Pagination';
 import {useState} from 'react';
 import PreviewCard from '@/components/PreviewCard';
 import {mockQuestions} from '@/constants/mockQuestions';
+import SortSelector from '@/components/SortSelector';
 
 export default function MyPage() {
   const [selectedField, setSelectedField] = useState<string>('전체');
@@ -28,10 +29,13 @@ export default function MyPage() {
         setSelectedField={setSelectedField}
       />
 
-      <p className="w-[70%] text-black font-[600] py-8">
-        지금까지 총 {mockQuestions.length.toLocaleString()}개의 질문을
-        작성했어요
-      </p>
+      <div className="flex w-[70%] justify-between">
+        <p className="text-black font-[600] py-8">
+          지금까지 총 {mockQuestions.length.toLocaleString()}개의 질문을
+          작성했어요
+        </p>
+        <SortSelector />
+      </div>
 
       <div className="w-[70%] flex flex-col">
         {paginatedQuestions.map(question => (
