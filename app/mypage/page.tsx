@@ -21,7 +21,7 @@ export default function MyPage() {
   );
 
   return (
-    <main className="flex w-full flex-col items-center bg-white min-h-screen">
+    <main className="flex w-full pb-20 flex-col items-center bg-white min-h-screen">
       <SearchBar />
       <InfoCard name="김하나" university="홍익대학교" department="경영학부" />
       <SelectField
@@ -31,8 +31,10 @@ export default function MyPage() {
 
       <div className="flex w-[70%] justify-between">
         <p className="text-black font-[600] py-8">
-          지금까지 총 {mockQuestions.length.toLocaleString()}개의 질문을
-          작성했어요
+          {selectedField === '전체'
+            ? `지금까지 총 ${mockQuestions.length.toLocaleString()}개의 질문을
+          작성했어요`
+            : `${selectedField} 분야의 등록된 질문은 0개가 있어요`}
         </p>
         <SortSelector />
       </div>

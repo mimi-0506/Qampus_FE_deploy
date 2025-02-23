@@ -22,7 +22,7 @@ export default function AnswerMainPage() {
   );
 
   return (
-    <main className="w-full flex bg-white min-h-screen flex-col items-center">
+    <main className="w-full flex bg-white min-h-screen pb-20 flex-col items-center">
       <SearchBar />
       <div className="w-full relative mt-10">
         <Image
