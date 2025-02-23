@@ -1,6 +1,6 @@
 'use client';
 
-import {useRef, useState} from 'react';
+import {Dispatch, SetStateAction, useRef, useState} from 'react';
 
 async function postSendAuthNumber(school: string, email: string) {
   const res = await fetch(`https://univcert.com/api/v1/certify`, {
@@ -9,14 +9,15 @@ async function postSendAuthNumber(school: string, email: string) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      Key: process.env.NEXT_PUBLIC_UNIVCERT,
+      key: process.env.NEXT_PUBLIC_UNIVCERT,
       email: email,
       univName: school,
+      univ_check: true,
     }),
   });
   const data = await res.json();
 
-  return data.success;
+  return data;
 }
 
 async function postCheckAuthNumber(
@@ -24,7 +25,7 @@ async function postCheckAuthNumber(
   email: string,
   authNumber: number,
 ) {
-  const res = await fetch(`https://univcert.com/api/v1/certify`, {
+  const res = await fetch(`https://univcert.com/api/v1/certifycode`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +42,13 @@ async function postCheckAuthNumber(
   return data.success;
 }
 
-export default function Email({school}: {school: string}) {
+export default function Email({
+  school,
+  setIsAuthValid,
+}: {
+  school: string;
+  setIsAuthValid: Dispatch<SetStateAction<boolean>>;
+}) {
   const [isEmailValid, setEmailValid] = useState<boolean>(false);
   const [isSendAuth, setIsSendAuth] = useState<boolean>(false);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -55,16 +62,19 @@ export default function Email({school}: {school: string}) {
     else setEmailValid(false);
   };
 
-  const handleEmailAuth = async () => {
+  const handleEmailAuth = async e => {
+    e.preventDefault();
     if (emailRef.current) {
       const res = await postSendAuthNumber(school, emailRef.current.value);
-      console.log(res);
 
-      if (res.success) setIsSendAuth(true);
+      //이거 정크메일로 갈때가 있어서 그걸 확인해달라는 문구가 필요할듯
+      if (res) setIsSendAuth(true);
+      else alert(res.message);
     }
   };
 
-  const handleAuthNumberCheck = async () => {
+  const handleAuthNumberCheck = async e => {
+    e.preventDefault();
     if (emailRef.current && authRef.current) {
       const res = await postCheckAuthNumber(
         school,
@@ -73,9 +83,10 @@ export default function Email({school}: {school: string}) {
       );
       console.log(res);
 
-      if (res.success) {
+      if (res) {
         alert('인증되었습니다');
-      }
+        setIsAuthValid(true);
+      } else alert('인증코드가 잘못되었습니다.');
     }
   };
 
@@ -90,7 +101,7 @@ export default function Email({school}: {school: string}) {
         placeholder="학교 계정 이메일을 입력하세요"
       />
 
-      {!isEmailValid && (
+      {isEmailValid && (
         <button
           className="absolute right-0 top-[2.5vw]
     flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw]

@@ -1,4 +1,7 @@
 'use client';
+
+import {Dispatch, SetStateAction} from 'react';
+
 async function getPost(search: string) {
   const res = await fetch(`https://univcert.com/api/v1/check`, {
     method: 'POST',
@@ -15,17 +18,23 @@ async function getPost(search: string) {
   return data.success;
 }
 
-export default function School() {
+export default function School({
+  setSchool,
+  school,
+}: {
+  setSchool: Dispatch<SetStateAction<string>>;
+  school: string;
+}) {
   const handleSchoolSearch = async e => {
     const searchSchool = e.target.value;
 
-    if (searchSchool !== '') {
+    if (searchSchool !== '' && searchSchool !== school) {
       const isValid = await getPost(searchSchool);
 
       if (!isValid) {
         alert('인증되지 않은 대학입니다.'); //나중에 모달로 바꾸기
         e.target.value = '';
-      }
+      } else setSchool(searchSchool);
     }
   };
 
