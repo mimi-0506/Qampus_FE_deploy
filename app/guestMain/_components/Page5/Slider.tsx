@@ -4,11 +4,11 @@ import {motion} from 'motion/react';
 import Image from 'next/image';
 
 const items = [
-  {image: '4', button: '4th', num: 792},
-  {image: '2', button: '2nd', num: 791},
-  {image: '1', button: '1st', num: 790},
-  {image: '3', button: '3rd', num: 794},
-  {image: '5', button: '5th', num: 793},
+  {image: '4', button: '4th', num: 792, rank: 4},
+  {image: '2', button: '2nd', num: 791, rank: 2},
+  {image: '1', button: '1st', num: 790, rank: 1},
+  {image: '3', button: '3rd', num: 794, rank: 3},
+  {image: '5', button: '5th', num: 793, rank: 5},
 ];
 
 export default function CircularCarousel() {
@@ -31,7 +31,9 @@ export default function CircularCarousel() {
 
   return (
     <div className="flex flex-col items-center absolute top-[22vw] z-10 ">
-      <div className="text-white text-[1.2vw] font-bold mb-[1vw]">주간 1위</div>
+      <div className="text-white text-[1.2vw] font-bold mb-[1vw]">
+        주간 {nowCenter.rank}위
+      </div>
       <div className="flex gap-[1vw] relative z-10 w-screen h-[12vw] items-center justify-center overflow-hidden ">
         {circles.map((univ, index) => {
           const position = index - 2;
