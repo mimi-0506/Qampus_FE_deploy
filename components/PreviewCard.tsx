@@ -39,7 +39,7 @@ export default function PreviewCard({
         )}
       </div>
 
-      <p className="text-xs text-[#606060] mt-5 line-clamp-2">{content}</p>
+      <p className="text-[13px] text-[#606060] mt-5 line-clamp-2">{content}</p>
       <div className="mt-4 text-xs text-[#606060] font-[0] flex justify-end space-x-2">
         <p>답변 {answerCount}개 ·</p>
         <p>{getKSTTimeAgo(createdDate)}</p>
