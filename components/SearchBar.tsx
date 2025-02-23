@@ -10,7 +10,11 @@ export default function SearchBar() {
   const {query, setQuery} = useSearchStore();
   const [inputValue, setInputValue] = useState(query);
 
-  useEffect(() => setInputValue(query), [query]);
+  useEffect(() => {
+    if (query === '' && inputValue !== '') {
+      setInputValue('');
+    }
+  }, [inputValue, query]);
 
   const handleSearch = () => {
     if (!inputValue.trim()) return;
@@ -18,13 +22,17 @@ export default function SearchBar() {
     router.push('/search');
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <div className="w-[600px] h-[40px] flex items-center border border-[#D9D9D9] text-sm rounded-3xl px-4">
       <input
         type="text"
         className="w-full h-full bg-transparent focus:outline-none text-black pd-2"
-        value={inputValue || query}
-        onChange={e => setInputValue(e.target.value)}
+        value={inputValue}
+        onChange={handleChange}
         onKeyDown={e => e.key === 'Enter' && handleSearch()}
       />
       <IoIosSearch
