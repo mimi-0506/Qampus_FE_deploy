@@ -1,3 +1,6 @@
+'use client';
+
+//학과 자동검색을 넣을까 했는데 2023이 최신임...
 export default function Department() {
   return (
     <div className="flex flex-col text-[1.4vw] text-grey4">
