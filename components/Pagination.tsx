@@ -13,6 +13,11 @@ export default function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  const maxPageButtons = 5;
+  const currentGroup = Math.ceil(currentPage / maxPageButtons);
+  const startPage = (currentGroup - 1) * maxPageButtons + 1;
+  const endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
+
   return (
     <div className="flex items-center justify-center space-x-2 my-6">
       <button
@@ -24,19 +29,22 @@ export default function Pagination({
         <span>Prev</span>
       </button>
 
-      {Array.from({length: totalPages}).map((_, index) => (
-        <button
-          key={index}
-          onClick={() => onPageChange(index + 1)}
-          className={`px-4 py-2 rounded-full ${
-            currentPage === index + 1
-              ? 'bg-[#7BA1FF] text-white'
-              : 'bg-white text-[#424242]'
-          }`}
-        >
-          {index + 1}
-        </button>
-      ))}
+      {Array.from({length: endPage - startPage + 1}).map((_, index) => {
+        const pageNum = startPage + index;
+        return (
+          <button
+            key={pageNum}
+            onClick={() => onPageChange(pageNum)}
+            className={`px-4 py-2 rounded-full ${
+              currentPage === pageNum
+                ? 'bg-[#7BA1FF] text-white'
+                : 'bg-white text-[#424242]'
+            }`}
+          >
+            {pageNum}
+          </button>
+        );
+      })}
 
       <button
         onClick={() => onPageChange(currentPage + 1)}
