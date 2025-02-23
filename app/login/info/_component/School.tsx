@@ -1,19 +1,12 @@
 'use client';
 
+import {univcertApi} from '@/app/api/univcert';
 import {Dispatch, SetStateAction} from 'react';
 
-async function getPost(search: string) {
-  const res = await fetch(`https://univcert.com/api/v1/check`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      Key: process.env.NEXT_PUBLIC_UNIVCERT,
-      univName: search,
-    }),
+async function postSchoolCheck(search: string) {
+  const data = await univcertApi('check', {
+    univName: search,
   });
-  const data = await res.json();
 
   return data.success;
 }
@@ -29,7 +22,7 @@ export default function School({
     const searchSchool = e.target.value;
 
     if (searchSchool !== '' && searchSchool !== school) {
-      const isValid = await getPost(searchSchool);
+      const isValid = await postSchoolCheck(searchSchool);
 
       if (!isValid) {
         alert('인증되지 않은 대학입니다.'); //나중에 모달로 바꾸기

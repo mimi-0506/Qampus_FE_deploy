@@ -1,21 +1,14 @@
 'use client';
 
+import {univcertApi} from '@/app/api/univcert';
 import {Dispatch, SetStateAction, useRef, useState} from 'react';
 
 async function postSendAuthNumber(school: string, email: string) {
-  const res = await fetch(`https://univcert.com/api/v1/certify`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      key: process.env.NEXT_PUBLIC_UNIVCERT,
-      email: email,
-      univName: school,
-      univ_check: true,
-    }),
+  const data = await univcertApi('certify', {
+    email: email,
+    univName: school,
+    univ_check: true,
   });
-  const data = await res.json();
 
   return data;
 }
@@ -25,19 +18,11 @@ async function postCheckAuthNumber(
   email: string,
   authNumber: number,
 ) {
-  const res = await fetch(`https://univcert.com/api/v1/certifycode`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      Key: process.env.NEXT_PUBLIC_UNIVCERT,
-      email: email,
-      univName: school,
-      code: authNumber,
-    }),
+  const data = await univcertApi('certifycode', {
+    email: email,
+    univName: school,
+    code: authNumber,
   });
-  const data = await res.json();
 
   return data.success;
 }
