@@ -28,7 +28,7 @@ export default function QuestionCreatePage() {
     console.log('질문 등록하기:', {title, content, images});
 
     setTimeout(() => {
-      router.push('/questionLoading');
+      router.push('/question/questionLoading');
     }, 1000);
   };
 
@@ -65,11 +65,7 @@ export default function QuestionCreatePage() {
             <button
               className={`mt-4 w-[80vw] max-w-[300px] justify-center py-[1vh] rounded-2xl text-sm font-[600] 
                 transition-all duration-300 ease-in-out transform
-                ${
-                  questionSubmit
-                    ? 'bg-[#7BA1FF] text-white shadow-md'
-                    : 'bg-[#E8E8E8] text-[#8D8D8D] hover:bg-[#C0C0C0]'
-                }`}
+               bg-[#E8E8E8] text-[#8D8D8D] hover:bg-[#7BA1FF] hover:text-white`}
               onClick={handleSubmit}
             >
               {questionSubmit ? '등록 완료' : '질문 등록하기'}
