@@ -89,7 +89,7 @@ export default function Email({
         type="email"
         ref={emailRef}
         onChange={handleEmailChange}
-        className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py=[0.2vw]"
+        className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
         placeholder="학교 계정 이메일을 입력하세요"
       />
 
@@ -107,7 +107,7 @@ export default function Email({
           <input
             ref={authRef}
             type="number"
-            className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py=[0.2vw]"
+            className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
             placeholder="인증번호를 입력하세요"
           />
           <button onClick={handleAuthNumberCheck}>인증번호 확인</button>

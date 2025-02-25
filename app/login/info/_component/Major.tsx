@@ -5,7 +5,7 @@ export default function Major() {
       <label className="ml-[0.7vw]">학과</label>
       <input
         name="major"
-        className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py=[0.2vw]"
+        className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
         placeholder="학과를 입력해주세요"
       />
     </div>
