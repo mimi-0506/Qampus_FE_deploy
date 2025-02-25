@@ -39,7 +39,7 @@ export default function QuestionDonePage() {
       <div className="mt-10 flex justify-center">
         <p
           className="pt-6 md:pt-10 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
-          onClick={() => router.push('/questionCreate')}
+          onClick={() => router.push('/question/questionCreate')}
         >
           추가 질문하기
         </p>

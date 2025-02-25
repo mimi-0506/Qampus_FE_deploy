@@ -45,7 +45,7 @@ export default function ViewAnswer({answers}: ViewAnswerProps) {
                 width={24}
                 height={24}
               />
-              <p className="text-black">{answer.content}</p>
+              <p className="text-black text-sm">{answer.content}</p>
             </div>
             <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
               건국대학교
