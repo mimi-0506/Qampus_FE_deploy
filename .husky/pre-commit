@@ -7,6 +7,9 @@ FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
 [ -z "$FILES" ] && exit 0
 
 # Prettier 적용
+export PATH=$PATH:/usr/local/bin  # Mac/Linux
+export PATH=$PATH:$HOME/.nvm/versions/node/$(nvm version)/bin  # nvm 사용자
+
 echo "🔹 Formatting files with Prettier..."
 echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write
 
