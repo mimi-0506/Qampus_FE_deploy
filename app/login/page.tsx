@@ -1,15 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import {useRouter} from 'next/navigation';
+//import {useRouter} from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
+  //  const router = useRouter();
 
-  const loginWithKakao = () => {
-    const url = '/login/info';
-    router.push(url);
-  };
+  const loginWithKakao = async () => {};
 
   return (
     <>

@@ -1,12 +1,19 @@
 'use client';
 
 import {univcertApi} from '@/app/api/univcert';
-import {Dispatch, SetStateAction, useRef, useState} from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useRef,
+  useState,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
 
-async function postSendAuthNumber(school: string, email: string) {
+async function postSendAuthNumber(university: string, email: string) {
   const data = await univcertApi('certify', {
     email: email,
-    univName: school,
+    univName: university,
     univ_check: true,
   });
 
@@ -14,13 +21,13 @@ async function postSendAuthNumber(school: string, email: string) {
 }
 
 async function postCheckAuthNumber(
-  school: string,
+  university: string,
   email: string,
   authNumber: number,
 ) {
   const data = await univcertApi('certifycode', {
     email: email,
-    univName: school,
+    univName: university,
     code: authNumber,
   });
 
@@ -28,10 +35,10 @@ async function postCheckAuthNumber(
 }
 
 export default function Email({
-  school,
+  university,
   setIsAuthValid,
 }: {
-  school: string;
+  university: string;
   setIsAuthValid: Dispatch<SetStateAction<boolean>>;
 }) {
   const [isEmailValid, setEmailValid] = useState<boolean>(false);
@@ -39,34 +46,34 @@ export default function Email({
   const emailRef = useRef<HTMLInputElement>(null);
   const authRef = useRef<HTMLInputElement>(null);
 
-  const handleEmailChange = async e => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const nowEmail = e.target.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (emailRegex.test(nowEmail)) setEmailValid(true);
-    else setEmailValid(false);
+    setEmailValid(emailRegex.test(nowEmail));
   };
 
-  const handleEmailAuth = async e => {
+  const handleEmailAuth = async (e: FormEvent) => {
     e.preventDefault();
     if (emailRef.current) {
-      const res = await postSendAuthNumber(school, emailRef.current.value);
+      const res = await postSendAuthNumber(university, emailRef.current.value);
 
-      //이거 정크메일로 갈때가 있어서 그걸 확인해달라는 문구가 필요할듯
-      if (res) setIsSendAuth(true);
-      else alert(res.message);
+      if (res.success) setIsSendAuth(true);
+      else if (res.message === '이미 완료된 요청입니다.') {
+        alert('인증된 이메일입니다.');
+        setIsAuthValid(true);
+      } else alert(res.message);
     }
   };
 
-  const handleAuthNumberCheck = async e => {
+  const handleAuthNumberCheck = async (e: FormEvent) => {
     e.preventDefault();
     if (emailRef.current && authRef.current) {
       const res = await postCheckAuthNumber(
-        school,
+        university,
         emailRef.current.value,
         parseInt(authRef.current.value),
       );
-      console.log(res);
 
       if (res) {
         alert('인증되었습니다');
@@ -88,10 +95,7 @@ export default function Email({
 
       {isEmailValid && (
         <button
-          className="absolute right-0 top-[2.5vw]
-    flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw]
-    bg-grey4 text-black text-[0.7vw]
-    "
+          className="absolute right-0 top-[2.5vw] flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw] bg-grey4 text-black text-[0.7vw]"
           onClick={handleEmailAuth}
         >
           인증번호 전송

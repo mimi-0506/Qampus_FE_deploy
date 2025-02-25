@@ -5,7 +5,7 @@ export async function univcertApi(endpoint: string, body: object) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      Key: process.env.NEXT_PUBLIC_UNIVCERT,
+      key: process.env.NEXT_PUBLIC_UNIVCERT_API_KEY,
       ...body,
     }),
   });

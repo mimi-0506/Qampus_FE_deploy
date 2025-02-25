@@ -1,37 +1,49 @@
 'use client';
 
-import {useState} from 'react';
-import Department from './_component/Deparment';
+import {FormEvent, useState} from 'react';
+import Major from './_component/Major';
 import Email from './_component/Email';
-import School from './_component/School';
-import {useRouter} from 'next/navigation';
+import University from './_component/University';
+//import {useRouter} from 'next/navigation';
 
-async function postSetInfo() {
-  const res = await fetch(`test.com`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+//이건 입력이 필요하니까 사전 호출 못 함.
+const postSetInfo = async (formData: {[k: string]: FormDataEntryValue}) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/signup/complete`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        universityName: formData.universityName,
+        major: formData.major,
+      }),
     },
-    body: JSON.stringify({
-      //토큰과 form에서 뽑아낸 로그인 정보 전송
-    }),
-  });
-  const data = await res.json();
+  );
+
+  const data = await response.json();
 
   return data;
-}
+};
 
 export default function Page() {
-  const [school, setSchool] = useState<string>('');
+  const [university, setUniversity] = useState<string>('');
   const [isAuthValid, setIsAuthValid] = useState<boolean>(false);
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleNextStep = async e => {
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
 
-    const res = await postSetInfo();
-    if (res) router.push('/login/complete');
-    else alert('회원가입 중 문제가 발생했습니다');
+    const res = await postSetInfo(data);
+
+    console.log(res);
+    return;
+
+    //  if (res) router.push('/login/complete');
   };
 
   return (
@@ -40,15 +52,19 @@ export default function Page() {
         더 원활한 서비스 이용을 위해 추가 정보를 입력해주세요
       </p>
 
-      <form className="flex flex-col justify-center items-center mt-[3vw] gap-[2.5vw]">
-        <School setSchool={setSchool} school={school} />
-        <Department />
-        <Email school={school} setIsAuthValid={setIsAuthValid} />
+      <form
+        className="flex flex-col justify-center items-center mt-[3vw] gap-[2.5vw] "
+        onSubmit={handleSignup}
+      >
+        <University setUniversity={setUniversity} university={university} />
+        <Major />
+        {university && (
+          <Email university={university} setIsAuthValid={setIsAuthValid} />
+        )}
         <button
           disabled={!isAuthValid}
           className={`mt-[2.5vw] aspect-[475/63] w-[24.7vw] flex justify-center items-center text-white 
           ${isAuthValid ? 'bg-main' : 'bg-grey2'} rounded-lg`}
-          onClick={handleNextStep}
         >
           다음으로
         </button>
