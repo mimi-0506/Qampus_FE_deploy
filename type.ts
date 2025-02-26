@@ -21,3 +21,13 @@ export type userMainDataType = {
   weekly_questions: questionType[];
   popular_answers: answerType[];
 };
+
+export type rankType = {
+  university_id: number;
+  university_name: string;
+  ranking: number;
+  participant_count: number;
+  rate: number;
+  choice_cnt: number;
+  button?: string;
+};
