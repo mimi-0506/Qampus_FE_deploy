@@ -1,19 +1,34 @@
 'use client';
-import {useEffect} from 'react';
+
+import {fetchWithoutAuth} from '@/lib/clientFetch';
 import {useSearchParams} from 'next/navigation';
-import {getKakaoUserFromCode} from '@/app/actions';
+import {useEffect} from 'react';
 
 export default function Kakao() {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
 
   useEffect(() => {
-    if (code) kakaoAccess(code);
+    if (code) test(code);
   }, [code]);
 
-  const kakaoAccess = async (code: string) => {
-    const response = await getKakaoUserFromCode(code);
-    console.log(response);
+  const test = async (code: string) => {
+    try {
+      const response = await fetchWithoutAuth({
+        method: 'GET',
+        url: `/auth/login/kakao?code=${code.trim()}`,
+      });
+
+      console.log(response);
+
+      // 회원 정보가 있으면 유저 메인으로 이동
+      // router.push("/userMain");
+
+      // 회원 정보가 없으면 회원가입 창으로 이동
+      // router.push("/login/info");
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   return <p>카카오 로그인 중...</p>;
