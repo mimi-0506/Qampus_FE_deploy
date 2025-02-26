@@ -1,6 +1,6 @@
 'use client';
 
-import {fetchWithoutAuth} from '@/lib/clientFetch';
+import {fetchWithoutAuth} from '@/app/api/clientFetch';
 import {useSearchParams} from 'next/navigation';
 import {useEffect} from 'react';
 
