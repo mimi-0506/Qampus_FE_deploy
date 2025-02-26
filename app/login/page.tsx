@@ -1,12 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-//import {useRouter} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 
 export default function LoginPage() {
-  //  const router = useRouter();
+  const router = useRouter();
 
-  const loginWithKakao = async () => {};
+  const loginWithKakao = () => {
+    const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`;
+    router.push(url);
+  };
 
   return (
     <>

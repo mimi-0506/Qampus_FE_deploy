@@ -9,7 +9,7 @@ import University from './_component/University';
 //이건 입력이 필요하니까 사전 호출 못 함.
 const postSetInfo = async (formData: {[k: string]: FormDataEntryValue}) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/signup/complete`,
+    `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/signup/complete%email=${formData.email}`,
     {
       method: 'POST',
       headers: {
