@@ -8,8 +8,8 @@ export default function BoxSlider({
   move: string;
 }) {
   return (
-    <>
-      <div className="flex justify-center gap-[2vw] relative bottom-[5vw] text-center">
+    <div className="relative z-10">
+      <div className="flex justify-center gap-[2vw] text-center">
         {items.map((item, i) => {
           return (
             <div
@@ -43,6 +43,6 @@ export default function BoxSlider({
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
