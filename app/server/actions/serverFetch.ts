@@ -70,21 +70,26 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
   }
 }
 
+//서버액션은 get 사용 못함! clientFetch 이용하기
 export async function fetchWithoutAuth({
   method,
   url,
   body,
   cache,
 }: FetchOptions) {
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    cache: cache ? 'force-cache' : 'no-store',
+    ...(method === 'POST' && body ? {body: JSON.stringify(body)} : {}), // POST일 때만 body 추가
+  };
+
   try {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: body ? JSON.stringify(body) : undefined,
-      cache: cache ? 'force-cache' : 'no-store',
-    });
+    const response = await fetch(`${API_BASE_URL}${url}`, options);
+
+    console.log(url, response);
 
     if (!response.ok) {
       const errorData = await response.json();
