@@ -1,6 +1,6 @@
 'use client';
 
-import {univcertApi} from '@/app/api/univcert';
+import {univcertApi} from '@/app/apis/univcert';
 import {
   Dispatch,
   SetStateAction,
