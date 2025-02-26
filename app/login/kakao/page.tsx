@@ -1,33 +1,33 @@
 'use client';
 
-import {fetchWithoutAuth} from '@/app/api/clientFetch';
-import {useSearchParams} from 'next/navigation';
+//import {useInfoStore} from '@/providers/store-provider';
+import {useSearchParams, useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 
 export default function Kakao() {
   const searchParams = useSearchParams();
+  // const setInfo = useInfoStore(state => state.setInfo);
+  const router = useRouter();
   const code = searchParams.get('code');
 
   useEffect(() => {
-    if (code) test(code);
+    if (code) login(code);
   }, [code]);
 
-  const test = async (code: string) => {
-    try {
-      const response = await fetchWithoutAuth({
-        method: 'GET',
-        url: `/auth/login/kakao?code=${code.trim()}`,
-      });
+  const login = async (code: string) => {
+    const response = await fetch(`/api/login?code=${code}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
 
-      console.log(response);
-
-      // 회원 정보가 있으면 유저 메인으로 이동
-      // router.push("/userMain");
-
-      // 회원 정보가 없으면 회원가입 창으로 이동
-      // router.push("/login/info");
-    } catch (error) {
-      console.error('Login error:', error);
+    const data = await response.json();
+    if (response.ok && data.success) {
+      // 로그인 성공 → 유저 메인으로 이동
+      //setInfo({..data});
+      router.push('/userMain');
+    } else {
+      // 회원가입 페이지로 이동
+      router.push('/login/info');
     }
   };
 
