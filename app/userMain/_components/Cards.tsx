@@ -17,7 +17,7 @@ export default function Cards({
       {[1, 2, 3].map(index => {
         const data = datas[index - 1];
 
-        if (!('like_count' in data)) {
+        if (data && !('like_count' in data)) {
           return (
             <QuestionCard
               key={index}

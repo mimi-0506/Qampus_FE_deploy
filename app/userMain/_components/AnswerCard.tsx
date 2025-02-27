@@ -64,11 +64,15 @@ export default function AnswerCard({
             </div>
           </div>
           <div className="mt-[4vw] gap-[0.8vw] flex text-[1.04vw] items-start">
-            <Image src="/svg/q.svg" width={29} height={29} alt="q" />
+            <div className="w-[1.5vw] h-[1.5vw] relative">
+              <Image src="/svg/q.svg" fill alt="q" />
+            </div>
             <div>{data?.title}</div>
           </div>
           <div className="mt-[4vw] gap-[0.8vw] flex text-[1.04vw] items-start">
-            <Image src="/svg/a.svg" width={29} height={29} alt="q" />
+            <div className="w-[1.5vw] h-[1.5vw] relative">
+              <Image src="/svg/a.svg" fill alt="q" />
+            </div>
             <div>{data?.content}</div>
           </div>
         </div>

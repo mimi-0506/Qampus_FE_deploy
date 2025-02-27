@@ -17,9 +17,16 @@ export type answerType = {
   like_count: number;
 };
 
+export type userHomeDtoType = {
+  name: string;
+  universityName: string;
+  major: string;
+};
+
 export type userMainDataType = {
   weekly_questions: questionType[];
   popular_answers: answerType[];
+  userHomeDto: userHomeDtoType;
 };
 
 export type rankType = {
