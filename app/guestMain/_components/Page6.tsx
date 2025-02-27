@@ -1,6 +1,11 @@
+'use client';
+
 import Image from 'next/image';
+import useScrollAnimation from './useScrollAnimation';
 
 export default function Page6() {
+  const {ref, isVisible} = useScrollAnimation();
+
   return (
     <div className="aspect-[16/9] flex flex-col relative w-screen items-center justify-center bg-gradient-to-b from-black to-page6bg">
       <div className="flex flex-col items-center justify-center">
@@ -10,7 +15,9 @@ export default function Page6() {
         <div className="text-[1.46vw] text-white">금주의 인기 질문</div>
       </div>
 
-      <div className="mt-[8.33vw] flex flex-col w-screen gap-[1.87vw]">
+      <div
+        className={`mt-[8.33vw] flex flex-col w-screen gap-[1.87vw]  opacity-0 ${isVisible ? 'animate-fadeIn' : ''}`}
+      >
         {/* Card 1 */}
         <div className="relative left-[12.3vw] box-border flex h-[10.83vw] w-[65.38vw] items-center gap-[2.29vw] p-[0.78vw] bg-[url('/images/main/box1_page6.png')] bg-cover bg-center">
           <div className="relative h-[5.57vw] w-[5.06vw]">
@@ -68,6 +75,7 @@ export default function Page6() {
           </div>
         </div>
       </div>
+      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
     </div>
   );
 }
