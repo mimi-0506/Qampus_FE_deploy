@@ -3,7 +3,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
 interface FetchOptions {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   url: string;
-  body?: Record<string, unknown>;
+  body?: unknown;
   cache?: boolean;
 }
 
@@ -30,6 +30,8 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
 
   console.log('fetchWithAuth', data);
 
+  //차후 에러일괄처리 추가
+
   return data;
 }
 
@@ -38,12 +40,7 @@ export async function fetchWithoutAuth({
   url,
   body,
   cache = false,
-}: {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  url: string;
-  body?: unknown;
-  cache?: boolean;
-}) {
+}: FetchOptions) {
   const options: RequestInit = {
     method,
     headers: {
