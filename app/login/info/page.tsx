@@ -4,46 +4,42 @@ import {FormEvent, useState} from 'react';
 import Major from './_component/Major';
 import Email from './_component/Email';
 import University from './_component/University';
-//import {useRouter} from 'next/navigation';
+import {useRouter} from 'next/navigation';
+import {fetchWithAuth} from '@/app/server/actions/serverFetch';
 
-//이건 입력이 필요하니까 사전 호출 못 함.
 const postSetInfo = async (formData: {[k: string]: FormDataEntryValue}) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/signup/complete`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        universityName: formData.universityName,
-        major: formData.major,
-      }),
+  return await fetchWithAuth({
+    method: 'POST',
+    url: `/auth/signup/complete?email=${formData.email}`,
+    body: {
+      universityName: formData.universityName,
+      major: formData.major,
     },
-  );
-
-  const data = await response.json();
-
-  return data;
+  });
 };
 
 export default function Page() {
   const [university, setUniversity] = useState<string>('');
   const [isAuthValid, setIsAuthValid] = useState<boolean>(false);
-  // const router = useRouter();
+
+  const router = useRouter();
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
 
     const res = await postSetInfo(data);
 
     console.log(res);
-    return;
 
-    //  if (res) router.push('/login/complete');
+    if (res.success) router.push('/login/complete');
+    else {
+      //에러처리
+      //회원가입 된 유저가 회원가입 다시 한번 하면
+      //  status: 404,
+      //  detail: '임시로 저장된 사용자 정보가 존재하지 않거나 만료되었습니다.',
+    }
   };
 
   return (
