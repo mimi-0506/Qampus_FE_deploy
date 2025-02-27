@@ -15,6 +15,18 @@ export default function Kakao() {
   }, [code]);
 
   const login = async (code: string) => {
+    const response2 = await fetch(
+      `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/login/kakao?code=${code}`,
+      {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        cache: 'no-cache',
+      },
+    );
+    console.log(response2);
+
+    return;
+
     const response = await fetch(`/api/login?code=${code}`, {
       method: 'GET',
       credentials: 'include',
