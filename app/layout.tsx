@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 import localFont from 'next/font/local';
+import {InfoStoreProvider} from '@/providers/store-provider';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable} font-pretendard`}>
-        <Header />
-        <main className="flex-grow pt-[80px]">{children}</main>
-        <Footer />
+        <InfoStoreProvider>
+          <Header />
+          <main className="flex-grow pt-[80px]">{children}</main>
+          <Footer />
+        </InfoStoreProvider>
       </body>
     </html>
   );

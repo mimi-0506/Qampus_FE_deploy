@@ -12,16 +12,12 @@ export async function GET(req: Request) {
 
   try {
     const response = await fetch(
-      `${process.env.BACKEND_URL}/auth/login/kakao?code=${code}`,
+      `${process.env.NEXT_PUBLIC_API_DOMAIN}/auth/login/kakao?code=${code}`,
       {method: 'GET', headers: {'Content-Type': 'application/json'}},
     );
 
-    const authHeader = response.headers.get('Authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new Error('No token received');
-    }
-
-    const token = authHeader.split(' ')[1];
+    const data = await response.json(); // JSON 형식으로 변환
+    const token = response.headers.get('authorization') || '';
 
     const cookieStore = await cookies();
     cookieStore.set('accessToken', token, {
@@ -32,7 +28,7 @@ export async function GET(req: Request) {
       maxAge: 60 * 60 * 24 * 7,
     });
 
-    return new Response(JSON.stringify({success: true}), {status: 200});
+    return new Response(JSON.stringify({...data}), {status: 200});
   } catch (error) {
     console.log(error);
     return new Response(

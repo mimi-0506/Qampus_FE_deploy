@@ -23,12 +23,9 @@ export async function fetchWithoutAuth({
     options,
   );
 
-  if (!response.ok) {
-    console.error(
-      `[fetchWithoutAuth] 오류: ${response.status}`,
-      await response.text(),
-    );
-  }
+  const data = await response.json();
 
-  return await response.json();
+  //차후 에러일괄처리 추가
+
+  return data;
 }

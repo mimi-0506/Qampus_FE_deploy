@@ -14,33 +14,27 @@ type FetchOptions = {
 };
 
 export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
-  const token = (await cookies()).get('token')?.value;
-  if (!token) redirect('/logout');
+  const accessToken = (await cookies()).get('accessToken')?.value;
 
-  try {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: body ? JSON.stringify(body) : undefined,
-      cache: cache ? 'force-cache' : 'no-store',
-    });
+  console.log('accessToken', accessToken);
+  if (!accessToken) redirect('/logout');
 
-    if (response.status === 401) redirect('/logout');
+  const response = await fetch(`${API_BASE_URL}${url}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: body ? JSON.stringify(body) : undefined,
+    cache: cache ? 'force-cache' : 'no-store',
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error(`API Error: ${response.status}`, errorData);
-      handleApiError(response.status);
-    }
+  const data = await response.json();
 
-    return await response.json();
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw new Error('Internal Server Error');
-  }
+  console.log('fetchWithAuth', data);
+
+  if (response.status !== 200) handleApiError(response.status);
+  else return data;
 }
 
 export async function fetchWithoutAuth({
@@ -55,25 +49,16 @@ export async function fetchWithoutAuth({
       'Content-Type': 'application/json',
     },
     cache: cache ? 'force-cache' : 'no-store',
-    ...(method === 'POST' && body ? {body: JSON.stringify(body)} : {}), // POST일 때만 body 추가
+    ...(method === 'POST' && body ? {body: JSON.stringify(body)} : {}),
   };
 
-  try {
-    const response = await fetch(`${API_BASE_URL}${url}`, options);
+  const response = await fetch(`${API_BASE_URL}${url}`, options);
+  const data = await response.json();
 
-    console.log(url, response);
+  console.log('fetchWithoutAuth', data);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error(`API Error: ${response.status}`, errorData);
-      handleApiError(response.status);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw new Error('Internal Server Error');
-  }
+  if (response.status !== 200) handleApiError(response.status);
+  else return data;
 }
 
 function handleApiError(status: number) {
