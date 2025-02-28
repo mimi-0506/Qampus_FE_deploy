@@ -1,21 +1,20 @@
 'use client';
+import {useInfoStore} from '@/providers/store-provider';
 import Image from 'next/image';
 import {useState} from 'react';
 
-interface InfoCardProps {
-  name: string;
-  university: string;
-  department: string;
-  profileImage?: string;
-}
+// interface InfoCardProps {
+//   name: string;
+//   university: string;
+//   department: string;
+//   profileImage?: string;
+// }
 
-export default function InfoCard({
-  name,
-  university,
-  department,
-  profileImage = '/images/question/profile-example.png',
-}: InfoCardProps) {
-  const [profileSrc, setProfileSrc] = useState(profileImage);
+export default function InfoCard() {
+  const {name, universityName, major, profileImageUrl} = useInfoStore(
+    state => state,
+  );
+  const [profileSrc, setProfileSrc] = useState(profileImageUrl);
 
   return (
     <div className="flex h-[140px] w-[70%] mt-10 flex-col items-center justify-center rounded-2xl bg-[#F8F8F8]">
@@ -29,7 +28,7 @@ export default function InfoCard({
         <div className="flex items-center gap-3">
           {/* 프로필 이미지 */}
           <Image
-            src={profileSrc}
+            src={profileSrc || '/images/question/profile-example.png'}
             alt="profile image"
             className="rounded-full object-cover"
             width={40}
@@ -50,7 +49,7 @@ export default function InfoCard({
                 className="mr-[4px]"
               />
               <p className="text-sm font-[300] text-black">
-                {university} {department} 소속
+                {universityName} {major} 소속
               </p>
             </div>
           </div>
