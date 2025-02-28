@@ -1,19 +1,51 @@
 'use client';
 
+import {useEffect, useState} from 'react';
 import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
+import {getRank} from '@/app/apis/rankApi';
+
+type rankType = 'weekly' | 'monthly';
 
 export default function RightBox1() {
   const {ref, isVisible} = useScrollAnimation();
-  const universities = [
-    '경희대학교',
-    '서강대학교',
-    '홍익대학교',
-    '건국대학교',
-    '상명대학교',
-  ];
+  const [universities, setUniversities] = useState<string[] | []>([]);
+  const [rankStandard, setRankStandard] = useState<rankType>('weekly');
+
+  useEffect(() => {
+    setData(rankStandard);
+  }, [rankStandard]);
+
+  const setData = async (date: rankType) => {
+    const test = await getRank(date);
+    console.log('rank', test);
+
+    setUniversities([
+      '경희대학교',
+      '서강대학교',
+      '홍익대학교',
+      '건국대학교',
+      '상명대학교',
+    ]);
+  };
 
   return (
     <>
+      <div className="flex">
+        <button
+          onClick={() => {
+            setRankStandard('weekly');
+          }}
+        >
+          주간
+        </button>
+        <button
+          onClick={() => {
+            setRankStandard('monthly');
+          }}
+        >
+          월간
+        </button>
+      </div>
       <div
         className={`absolute right-[8.85vw] pt-[1.875vw] px-[1.2vw] box-border h-[23.1vw] w-[17.2vw] text-white 
   bg-[url('/images/main/box3_page5.png')] 

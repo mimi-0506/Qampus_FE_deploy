@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {motion} from 'motion/react';
 import Image from 'next/image';
 import {rankType} from '@/type';
+import {getRank} from '@/app/apis/rankApi';
 
 const dummuy = {
   rank: [
@@ -59,6 +60,9 @@ export default function CircularCarousel({top}: {top: string}) {
   }, []);
 
   const setData = async () => {
+    const test = await getRank('weekly');
+    console.log('rank', test);
+
     const data = dummuy.rank;
     setCircles([
       {...data[3], button: '4th'},
@@ -116,7 +120,7 @@ export default function CircularCarousel({top}: {top: string}) {
 
           return (
             <motion.div
-              key={univ.university_id}
+              key={univ?.university_id}
               className={`absolute`}
               style={{
                 zIndex:
@@ -141,7 +145,7 @@ export default function CircularCarousel({top}: {top: string}) {
                   <div className="w-[83%] aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
                     <div className="w-[82%] aspect-[1/1] rounded-full bg-white relative">
                       <Image
-                        src={`/images/main/univ_${univ.university_id}.png`}
+                        src={`/images/main/univ_${univ?.university_id}.png`}
                         alt="univ logo"
                         fill
                       />
@@ -152,7 +156,7 @@ export default function CircularCarousel({top}: {top: string}) {
                 <div className="w-full h-full rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center shadow-lg">
                   <div className="w-[80%] aspect-[1/1] relative">
                     <Image
-                      src={`/images/main/univ_${univ.university_id}.png`}
+                      src={`/images/main/univ_${univ?.university_id}.png`}
                       alt="univ logo"
                       fill
                     />
