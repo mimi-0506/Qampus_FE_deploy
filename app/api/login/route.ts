@@ -22,6 +22,8 @@ export async function GET(req: Request) {
       '',
     );
 
+    console.log('token---------------------------', token);
+
     const cookieStore = await cookies();
     cookieStore.set('accessToken', token, {
       secure: process.env.NODE_ENV === 'production',
