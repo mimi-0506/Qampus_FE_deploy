@@ -1,4 +1,4 @@
-import {fetchWithoutAuth, fetchWithAuth} from './clientFetch';
+import {fetchWithoutAuth} from './clientFetch';
 
 export const getRank = async (period: 'weekly' | 'monthly') => {
   const data = await fetchWithoutAuth({
@@ -10,7 +10,7 @@ export const getRank = async (period: 'weekly' | 'monthly') => {
 };
 
 export const getUnivDetail = async (name: string) => {
-  const data = await fetchWithAuth({
+  const data = await fetchWithoutAuth({
     method: 'GET',
     url: `/university/detail?name=${name}`,
   });
