@@ -13,7 +13,6 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
     .find(row => row.startsWith('accessToken='))
     ?.split('=')[1];
 
-  console.log('accessToken', accessToken);
   if (!accessToken) window.location.href = '/logout';
 
   const response = await fetch(`${API_BASE_URL}${url}`, {
