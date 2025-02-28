@@ -1,10 +1,6 @@
 import Info from './_component/Info';
-import UnivMap from './_component/UnivMap';
 
-export const metadata = {
-  title: '커뮤니티 | MyApp',
-  description: '사용자들이 자유롭게 의견을 나누는 공간입니다.',
-};
+import UnivMap from './_component/UnivMap';
 
 export default function CommunityPage() {
   return (

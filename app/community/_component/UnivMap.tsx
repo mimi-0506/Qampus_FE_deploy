@@ -1,9 +1,11 @@
 import Image from 'next/image';
+import Test from './Test';
 
 export default function UnivMap() {
   return (
     <div className="h-screen w-screen">
       <div className="relative w-full h-full z-10 bg-red-500">
+        <Test />
         <div className="absolute top-0 left-0 flex gap-[0.6vw]">
           <div className="relative w-[6vw] aspect-[1/1]">
             <Image
@@ -18,10 +20,6 @@ export default function UnivMap() {
           </div>
         </div>
       </div>
-
-      <figure className="highcharts-figure">
-        <div id="container"></div>
-      </figure>
     </div>
   );
 }
