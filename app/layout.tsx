@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-
+import {Toaster} from 'react-hot-toast';
 import localFont from 'next/font/local';
 import {InfoStoreProvider} from '@/providers/store-provider';
 
@@ -30,6 +30,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-grow pt-[80px]">{children}</main>
           <Footer />
+          <Toaster />
         </InfoStoreProvider>
       </body>
     </html>
