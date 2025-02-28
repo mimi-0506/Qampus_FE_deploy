@@ -8,17 +8,17 @@ import Pagination from '@/components/Pagination';
 import {useState} from 'react';
 import {mockQuestions} from '@/constants/mockQuestions';
 import SortSelector from '@/components/SortSelector';
+import {PAGE_SIZE} from '@/constants/constants';
 
 export default function AnswerMainPage() {
-  const [selectedField, setSelectedField] = useState<string>('');
+  const [selectedField, setSelectedField] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize = 10;
-  const totalPages = Math.ceil(mockQuestions.length / pageSize);
+  const totalPages = Math.ceil(mockQuestions.length / PAGE_SIZE);
 
   // 현재 페이지에 해당하는 데이터 필터링
   const paginatedQuestions = mockQuestions.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
   );
 
   return (
