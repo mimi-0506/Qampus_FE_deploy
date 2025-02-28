@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Slider from './Slider';
-import LeftBox1 from './LeftBox1';
-import LeftBox2 from './LeftBox2';
-import RightBox1 from './RightBox1';
+import Slider from '../../../../components/ranking/Slider';
+import LeftBox1 from '../../../../components/ranking/LeftBox1';
+import LeftBox2 from '../../../../components/ranking/LeftBox2';
+import RightBox1 from '../../../../components/ranking/RightBox1';
 
 export default function Page5() {
   return (

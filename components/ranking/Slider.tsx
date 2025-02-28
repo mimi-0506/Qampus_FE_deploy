@@ -49,7 +49,7 @@ const dummuy = {
   ],
 };
 
-export default function CircularCarousel() {
+export default function CircularCarousel({top}: {top: string}) {
   const [circles, setCircles] = useState<rankType[] | []>([]);
   const [nowCenter, setNowCenter] = useState(circles[2]);
   const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
@@ -87,7 +87,9 @@ export default function CircularCarousel() {
   }, [nowCenter]);
 
   return (
-    <div className="flex flex-col items-center absolute top-[22vw] z-10 ">
+    <div
+      className={`flex flex-col items-center absolute ${top ? top : `top-[22vw]`} z-10`}
+    >
       <div className="text-white text-[1.2vw] font-bold mb-[1vw]">
         주간 {nowCenter?.ranking}위
       </div>
@@ -170,7 +172,7 @@ export default function CircularCarousel() {
         className="absolute z-20 top-[-17vw] "
       />
 
-      <div className="mt-[1.2vw] flex flex-col ">
+      <div className="mt-[1.2vw] flex flex-col justify-center items-center">
         <div className="text-white text-[1.25vw] font-bold">
           {nowCenter?.university_name}대학교
         </div>
