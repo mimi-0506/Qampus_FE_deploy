@@ -45,7 +45,7 @@ export default function UserInfo() {
         />
       </div>
 
-      <div className="relative w-[123vw] aspect-[2365/510] top-[-3vw]">
+      <div className="absolute z-10 w-[123vw] aspect-[2365/510] top-[44.5vw]">
         <Image
           src="/images/logo/logo_big.png"
           fill

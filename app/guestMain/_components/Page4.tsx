@@ -25,18 +25,15 @@ export default function Page4() {
           />
         </div>
         <div
-          ref={ref}
-          className={`text-[1.87vw] transition-all duration-700 ease-out transform ${
-            isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 -translate-y-10'
-          }`}
+          className={`text-[1.87vw] 
+          opacity-0 ${isVisible ? 'animate-fadeIn' : ''}`}
         >
           Qampus에서는 자신이 질문한 내용에 달린 답변들을 모아서 확인할 수
           있어요
           <br />
           지금까지 모인 답변들을 확인해볼까요?
         </div>
+        <div ref={ref} className="w-full  bg-white absolute bottom-0" />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import {univcertApi} from '@/app/api/univcert';
+import {univcertApi} from '@/app/apis/univcert';
 import {
   Dispatch,
   SetStateAction,
@@ -87,6 +87,7 @@ export default function Email({
       <label className="ml-[0.7vw]">학교 이메일</label>
       <input
         type="email"
+        name="email"
         ref={emailRef}
         onChange={handleEmailChange}
         className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"

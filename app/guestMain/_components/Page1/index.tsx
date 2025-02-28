@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {Img} from '../Img';
 import Background from './Background';
 import BottomAnimation from './BottomAnimation';
@@ -13,9 +14,12 @@ export default function Page1() {
           alt="character"
           className="object-contain w-[21vw] aspect-[402/406]"
         />
-        <button className="bg-dark2 mt-[3vw] flex w-[21vw] aspect-[404/60] items-center justify-center text-[1.25vw] font-semibold rounded-[20px] text-white ">
+        <Link
+          href="/login"
+          className="bg-dark2 mt-[3vw] flex w-[21vw] aspect-[404/60] items-center justify-center text-[1.25vw] font-semibold rounded-[20px] text-white "
+        >
           질문 시작하기
-        </button>
+        </Link>
 
         <div className="bg-mainlight absolute bottom-0 flex h-[7%] w-full justify-start text-[3%] font-bold">
           <BottomAnimation />

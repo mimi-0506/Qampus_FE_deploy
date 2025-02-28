@@ -18,7 +18,7 @@ export default function ImageSlider({
   setSlide: (newDirection: 1 | -1) => void;
 }) {
   return (
-    <div className="w-full flex gap-[3.7vw] justify-center">
+    <div className="w-full flex gap-[3.7vw] justify-center relative top-[5vw]">
       <motion.button initial={false} onClick={() => setSlide(-1)}>
         <Image src={LeftArrow} alt="leftBtn" width={35} />
       </motion.button>
