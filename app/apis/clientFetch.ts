@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN?.replace(/\/$/, '');
 
 interface FetchOptions {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -16,7 +16,9 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
   console.log('accessToken', accessToken);
   if (!accessToken) window.location.href = '/logout';
 
-  const response = await fetch(`${API_BASE_URL}${url}`, {
+  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
+
+  const response = await fetch(fixedUrl, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -41,6 +43,9 @@ export async function fetchWithoutAuth({
   body,
   cache = false,
 }: FetchOptions) {
+  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`;
+  console.log('📌 최종 요청 URL:', fixedUrl);
+
   const options: RequestInit = {
     method,
     headers: {
@@ -50,8 +55,7 @@ export async function fetchWithoutAuth({
     ...(method !== 'GET' && body ? {body: JSON.stringify(body)} : {}),
   };
 
-  const response = await fetch(`${API_BASE_URL}${url}`, options);
-
+  const response = await fetch(fixedUrl, options);
   const data = await response.json();
 
   //차후 에러일괄처리 추가

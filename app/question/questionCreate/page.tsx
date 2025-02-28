@@ -1,10 +1,13 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
+import Cookies from 'js-cookie';
 import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
 import WriteQuestion from '@/components/WriteQuestion';
+import {setQuestion} from '../../apis/questionApi';
+import {setAccessToken} from '@/utils/cookie';
 
 export default function QuestionCreatePage() {
   const [selectedField, setSelectedField] = useState<string | null>(null);
@@ -15,7 +18,11 @@ export default function QuestionCreatePage() {
   const [questionSubmit, setQuestionSubmit] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    setAccessToken();
+  }, []);
+
+  const handleSubmit = async () => {
     if (!title || !content) {
       alert('제목과 내용을 입력해주세요.');
       return;
@@ -27,9 +34,29 @@ export default function QuestionCreatePage() {
     setQuestionSubmit(true);
     console.log('질문 등록하기:', {title, content, images});
 
-    setTimeout(() => {
-      router.push('/question/questionLoading');
-    }, 1000);
+    const accessToken = Cookies.get('accessToken');
+
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      const response = await setQuestion({
+        categoryId: selectedField,
+        title,
+        content,
+        images,
+      });
+
+      console.log('📌 API 응답:', response);
+
+      setTimeout(() => {
+        router.push('/question/questionLoading');
+      }, 1000);
+    } catch (error) {
+      console.error('❌ API 호출 오류:', error);
+    }
   };
 
   return (
