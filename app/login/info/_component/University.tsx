@@ -1,5 +1,6 @@
 import {univcertApi} from '@/app/apis/univcert';
 import {Dispatch, SetStateAction, ChangeEvent} from 'react';
+import toast from 'react-hot-toast';
 
 async function postUniversityCheck(search: string) {
   const data = await univcertApi('check', {
