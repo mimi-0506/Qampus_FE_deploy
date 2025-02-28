@@ -4,6 +4,7 @@ import Image from 'next/image';
 import useScrollAnimation from './useScrollAnimation';
 import {useEffect, useState} from 'react';
 import {questionType} from '@/type';
+import {fetchWithoutAuth} from '@/app/apis/clientFetch';
 
 const dummy = {
   weekly_questions: [
@@ -50,6 +51,11 @@ export default function Page6() {
   }, []);
 
   const getDatas = async () => {
+    const response = await fetchWithoutAuth({method: 'GET', url: '/home'});
+    const data = await response.json();
+
+    console.log(data);
+
     setDatas(dummy.weekly_questions);
   };
 
