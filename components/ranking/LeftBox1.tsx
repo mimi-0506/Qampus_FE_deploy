@@ -1,6 +1,6 @@
 'use client';
 
-import useScrollAnimation from '../useScrollAnimation';
+import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
 
 export default function LeftBox1() {
   const {ref, isVisible} = useScrollAnimation();
