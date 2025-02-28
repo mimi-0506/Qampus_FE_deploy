@@ -6,19 +6,18 @@ import Image from 'next/image';
 
 export default function Info() {
   return (
-    <div className="w-screen">
-      <div className="flex flex-col top-[10vw] relative aspect-[16/10] w-screen items-center bg-black">
+    <div className="w-screen relative bg-black overflow-hidden">
+      <div className="relative top-[] w-screen aspect-[1954/1524]">
         <Image
           src="/images/main/bg_page5.png"
-          width={1679}
-          height={514}
+          fill
           alt="bg"
           className="absolute z-0 top-[-17vw]"
         />
+      </div>
 
-        <Slider top={'top-[29vw]'} />
-
-        <div className="flex flex-col items-center justify-center relative z-10">
+      <div className="absolute w-screen h-screen top-[10vw]">
+        <div className="w-screen flex flex-col items-center justify-center absolute z-10">
           <h1 className="text-white text-[1.875vw]">
             대전과 챌린지로 학교 순위 올리기
           </h1>
@@ -34,16 +33,18 @@ export default function Info() {
             </div>
           </div>
         </div>
-
-        <div className="relative mt-[10.6vw] w-screen flex justify-center items-center] z-30">
-          <div className="absolute left-[6.25vw] flex flex-col gap-[3.28vw]">
-            <LeftBox1 />
-            <LeftBox2 />
-          </div>
-
-          <RankBox mode={true} />
-        </div>
       </div>
+
+      <div className="w-screen flex justify-center items-center] absolute top-[40vw] z-30">
+        <div className="absolute left-[6.25vw] flex flex-col gap-[3.28vw]">
+          <LeftBox1 />
+          <LeftBox2 />
+        </div>
+
+        <RankBox mode={true} />
+      </div>
+
+      <Slider top={'top-[45vw]'} />
     </div>
   );
 }

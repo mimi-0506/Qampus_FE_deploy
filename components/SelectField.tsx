@@ -1,6 +1,6 @@
 'use client';
 
-import {CATEGORIES} from '@/constants/constants';
+import {CATEGORIES} from '@/constants/field';
 import {Dispatch, SetStateAction} from 'react';
 
 interface SelectFieldProps {
