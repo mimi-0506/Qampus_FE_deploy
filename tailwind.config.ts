@@ -35,6 +35,7 @@ export default {
         usermainoverlay: 'rgba(109, 124, 167, 0.4)',
         yellow: '#FEE500',
         page5roundbg: '#4D67A9',
+        communityGrey: '#8E8E8E',
       },
 
       keyframes: {
