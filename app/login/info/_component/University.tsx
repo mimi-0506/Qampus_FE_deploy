@@ -23,7 +23,7 @@ export default function University({
       const isValid = await postUniversityCheck(searchUniversity);
 
       if (!isValid) {
-        alert('인증되지 않은 대학입니다.');
+        toast.error('인증되지 않은 대학입니다.');
         setUniversity('');
         e.target.value = '';
       } else setUniversity(searchUniversity);

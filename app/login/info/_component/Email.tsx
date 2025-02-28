@@ -9,6 +9,7 @@ import {
   ChangeEvent,
   FormEvent,
 } from 'react';
+import toast from 'react-hot-toast';
 
 async function postSendAuthNumber(university: string, email: string) {
   const data = await univcertApi('certify', {
@@ -60,9 +61,9 @@ export default function Email({
 
       if (res.success) setIsSendAuth(true);
       else if (res.message === '이미 완료된 요청입니다.') {
-        alert('인증된 이메일입니다.');
+        toast('이메일 인증이 완료되어 있어요!');
         setIsAuthValid(true);
-      } else alert(res.message);
+      } else toast.error(res.message);
     }
   };
 
@@ -76,9 +77,9 @@ export default function Email({
       );
 
       if (res) {
-        alert('인증되었습니다');
+        toast.success('인증되었습니다');
         setIsAuthValid(true);
-      } else alert('인증코드가 잘못되었습니다.');
+      } else toast.error('인증코드가 잘못되었습니다.');
     }
   };
 

@@ -6,6 +6,7 @@ import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
 import WriteQuestion from '@/components/WriteQuestion';
 import {setQuestion} from '../../apis/questionApi';
+import toast from 'react-hot-toast';
 
 export default function QuestionCreatePage() {
   const [selectedField, setSelectedField] = useState<number | null>(null);
@@ -18,10 +19,10 @@ export default function QuestionCreatePage() {
 
   const handleSubmit = async () => {
     if (!title || !content) {
-      alert('제목과 내용을 입력해주세요.');
+      toast('제목과 내용을 입력해주세요.');
       return;
     } else if (!selectedField) {
-      alert('분야를 선택해주세요.');
+      toast('분야를 선택해주세요.');
       return;
     }
 
