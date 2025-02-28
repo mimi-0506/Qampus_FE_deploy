@@ -18,7 +18,7 @@ export async function GET(req: Request) {
 
     const data = await response.json(); // JSON 형식으로 변환
     const token = (response.headers.get('authorization') || '').replace(
-      'Bearer',
+      'Bearer ',
       '',
     );
 
