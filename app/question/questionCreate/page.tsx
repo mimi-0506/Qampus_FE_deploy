@@ -1,26 +1,20 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useRouter} from 'next/navigation';
-import Cookies from 'js-cookie';
 import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
 import WriteQuestion from '@/components/WriteQuestion';
 import {setQuestion} from '../../apis/questionApi';
-import {setAccessToken} from '@/utils/cookie';
 
 export default function QuestionCreatePage() {
-  const [selectedField, setSelectedField] = useState<string | null>(null);
+  const [selectedField, setSelectedField] = useState<number | null>(null);
   const [selectedStep, setSelectedStep] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [images, setImages] = useState<string[]>([]);
   const [questionSubmit, setQuestionSubmit] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    setAccessToken();
-  }, []);
 
   const handleSubmit = async () => {
     if (!title || !content) {
@@ -32,14 +26,7 @@ export default function QuestionCreatePage() {
     }
 
     setQuestionSubmit(true);
-    console.log('질문 등록하기:', {title, content, images});
-
-    const accessToken = Cookies.get('accessToken');
-
-    if (!accessToken) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
+    console.log('질문 등록하기:', {title, content, images, selectedField});
 
     try {
       const response = await setQuestion({
@@ -87,7 +74,6 @@ export default function QuestionCreatePage() {
             />
           </div>
 
-          {/* 질문 등록 버튼 */}
           <div className="w-full flex justify-end">
             <button
               className={`mt-4 w-[80vw] max-w-[300px] justify-center py-[1vh] rounded-2xl text-sm font-[600] 

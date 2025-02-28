@@ -7,7 +7,7 @@ export const setQuestion = async ({
   title,
   images,
 }: {
-  categoryId: string | number;
+  categoryId: number;
   content: string;
   title: string;
   images?: string[];
