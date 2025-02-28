@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 import ActInfo from './_components/ActInfo';
 import UserInfo from './_components/UserInfo';
 import {userMainDataType} from '@/type';
+import {fetchWithAuth} from '../apis/clientFetch';
 
 const dummy = {
   userHomeDto: {
@@ -59,6 +60,10 @@ export default function UserMainPage() {
   }, []);
 
   const getData = async () => {
+    const response = await fetchWithAuth({method: 'GET', url: '/home'});
+    const data = await response.json();
+
+    console.log(data);
     setData(dummy);
   };
 

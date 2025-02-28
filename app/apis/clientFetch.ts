@@ -13,7 +13,6 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
     .find(row => row.startsWith('accessToken='))
     ?.split('=')[1];
 
-  console.log('accessToken', accessToken);
   if (!accessToken) window.location.href = '/logout';
 
   const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
