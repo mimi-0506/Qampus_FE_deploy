@@ -1,12 +1,12 @@
 import LeftBox1 from '@/components/ranking/LeftBox1';
 import LeftBox2 from '@/components/ranking/LeftBox2';
-import RightBox1 from '@/components/ranking/RightBox1';
+import RankBox from '@/components/ranking/RankBox';
 import Slider from '@/components/ranking/Slider';
 import Image from 'next/image';
 
 export default function Info() {
   return (
-    <div className="h-screen w-screen">
+    <div className="w-screen">
       <div className="flex flex-col top-[10vw] relative aspect-[16/10] w-screen items-center bg-black">
         <Image
           src="/images/main/bg_page5.png"
@@ -41,7 +41,7 @@ export default function Info() {
             <LeftBox2 />
           </div>
 
-          <RightBox1 />
+          <RankBox mode={true} />
         </div>
       </div>
     </div>

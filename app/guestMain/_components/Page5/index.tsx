@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Slider from '../../../../components/ranking/Slider';
 import LeftBox1 from '../../../../components/ranking/LeftBox1';
 import LeftBox2 from '../../../../components/ranking/LeftBox2';
-import RightBox1 from '../../../../components/ranking/RightBox1';
+import RankBox from '../../../../components/ranking/RankBox';
 
 export default function Page5() {
   return (
@@ -30,7 +30,7 @@ export default function Page5() {
           <LeftBox2 />
         </div>
 
-        <RightBox1 />
+        <RankBox />
       </div>
     </div>
   );
