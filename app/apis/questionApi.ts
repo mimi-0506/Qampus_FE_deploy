@@ -1,15 +1,15 @@
 import toast from 'react-hot-toast';
-import {fetchWithAuth} from '../server/actions/serverFetch';
+import {fetchWithAuth} from '../apis/clientFetch';
 
 export const setQuestion = async ({
   categoryId,
   content,
-  userId,
+  title,
   images,
 }: {
   categoryId: string | number;
   content: string;
-  userId: string | number;
+  title: string;
   images?: string[];
 }) => {
   const data = await fetchWithAuth({
@@ -17,9 +17,9 @@ export const setQuestion = async ({
     url: `/questions`,
     body: {
       requestDto: {
-        user_id: userId,
+        title,
         category_id: categoryId,
-        content: content,
+        content,
       },
       images: images || [],
     },
