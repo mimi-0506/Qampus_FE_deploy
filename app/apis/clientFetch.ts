@@ -20,7 +20,7 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `${accessToken}`,
     },
     body: body ? JSON.stringify(body) : undefined,
     cache: cache ? 'force-cache' : 'no-store',
