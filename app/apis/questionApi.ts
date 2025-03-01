@@ -10,19 +10,30 @@ export const setQuestion = async ({
   categoryId: number;
   content: string;
   title: string;
-  images?: string[];
+  images?: File[];
 }) => {
+  const formData = new FormData();
+  const requestDto = JSON.stringify({
+    title,
+    category_id: categoryId,
+    content,
+  });
+  formData.append(
+    'requestDto',
+    new Blob([requestDto], {type: 'application/json'}),
+  );
+
+  if (images && images.length > 0) {
+    images?.forEach(image => {
+      formData.append('images', image);
+    });
+  }
+
   const data = await fetchWithAuth({
     method: 'POST',
     url: `/questions`,
-    body: {
-      requestDto: {
-        title,
-        category_id: categoryId,
-        content,
-      },
-      images: images || [],
-    },
+    body: formData,
+    isFormData: true,
   });
 
   return data;
