@@ -17,6 +17,33 @@ export type answerType = {
   like_count: number;
 };
 
+export type answerDetailType = {
+  answer_id: number;
+  user_id: number;
+  content: string;
+  created_date: string;
+  like_count: number;
+  is_chosen: boolean;
+  images?: string[];
+};
+
+export type questionDetailType = {
+  question_id: number;
+  title: string;
+  content: string;
+  university_name: string;
+  created_date: string;
+  view_cnt: number;
+  curious_count: number;
+};
+
+export type ViewQuestionProps = {
+  datas: {
+    question: questionDetailType;
+    answers: answerDetailType[];
+  };
+};
+
 export type userHomeDtoType = {
   name: string;
   universityName: string;
