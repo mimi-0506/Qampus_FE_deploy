@@ -13,8 +13,8 @@ import {CATEGORIES, PAGE_SIZE} from '@/constants/constants';
 
 export default function MyPage() {
   //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
-  const [selectedField, setSelectedField] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedField, setSelectedField] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   // const [questionList, setQuestionList] = useState([]);
 
   const totalPages = Math.ceil(mockQuestions.length / PAGE_SIZE);
@@ -30,7 +30,7 @@ export default function MyPage() {
 
   const setData = async (selectedField: number) => {
     const response = await getMyQuestionList({
-      categoryId: selectedField,
+      categoryId: selectedField + 1,
       page: currentPage,
       pageSize: PAGE_SIZE,
     });

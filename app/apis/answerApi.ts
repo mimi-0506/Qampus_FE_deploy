@@ -87,7 +87,7 @@ export const setAnswer = async ({
 export const getAnswerDetail = async (questionId: number) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/${questionId}`,
+    url: `/answers/detail/${questionId}`,
   });
 
   return data;
