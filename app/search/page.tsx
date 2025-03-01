@@ -9,12 +9,13 @@ import {PAGE_SIZE} from '@/constants/constants';
 import {useSearchParams} from 'next/navigation';
 import {getAnswerSearch} from '../apis/answerApi';
 import Pagination from '@/components/Pagination';
+import {PreviewCardProps} from '@/type';
 
 export default function Page() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
 
-  const [questions, setQuestions] = useState(mockQuestions.slice(0, PAGE_SIZE));
+  const [questions, setQuestions] = useState<PreviewCardProps[] | []>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
@@ -48,13 +49,14 @@ export default function Page() {
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {questions.map(question => (
+        {questions?.map((question, index) => (
           <PreviewCard
-            key={question.id}
-            title={question.title}
-            content={question.content}
-            answerCount={question.answerCount}
-            createdDate={question.createdDate}
+            key={index}
+            question_id={question?.question_id}
+            title={question?.title}
+            content={question?.content}
+            answerCount={question?.answerCount}
+            createdDate={question?.createdDate}
           />
         ))}
       </div>

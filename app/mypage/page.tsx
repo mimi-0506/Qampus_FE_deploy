@@ -10,19 +10,15 @@ import {mockQuestions} from '@/constants/mockQuestions';
 import SortSelector from '@/components/SortSelector';
 import {getMyQuestionList} from '../apis/myPageApi';
 import {CATEGORIES, PAGE_SIZE} from '@/constants/constants';
+import {PreviewCardProps} from '@/type';
 
 export default function MyPage() {
   //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
   const [selectedField, setSelectedField] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  // const [questionList, setQuestionList] = useState([]);
+  const [questionList, setQuestionList] = useState<PreviewCardProps[] | []>([]);
 
   const totalPages = Math.ceil(mockQuestions.length / PAGE_SIZE);
-
-  const paginatedQuestions = mockQuestions.slice(
-    (currentPage - 1) * PAGE_SIZE,
-    currentPage * PAGE_SIZE,
-  );
 
   useEffect(() => {
     setData(selectedField);
@@ -39,7 +35,7 @@ export default function MyPage() {
 
     console.log(data);
 
-    // setQuestionList()
+    setQuestionList([...questionList, ...data]);
   };
 
   return (
@@ -62,13 +58,14 @@ export default function MyPage() {
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {paginatedQuestions.map(question => (
+        {questionList?.map((question: PreviewCardProps, index) => (
           <PreviewCard
-            key={question.id}
-            title={question.title}
-            content={question.content}
-            answerCount={question.answerCount}
-            createdDate={question.createdDate}
+            key={index}
+            question_id={question?.question_id}
+            title={question?.title}
+            content={question?.content}
+            answerCount={question?.answerCount}
+            createdDate={question?.createdDate}
           />
         ))}
       </div>
