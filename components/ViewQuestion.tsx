@@ -1,9 +1,9 @@
 import {setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
-import {formatDistanceToNow} from 'date-fns';
+// import {formatDistanceToNow} from 'date-fns';
 import Image from 'next/image';
 import {BsQuestionLg} from 'react-icons/bs';
-import {ko} from 'date-fns/locale';
+// import {ko} from 'date-fns/locale';
 
 export default function ViewQuestion({
   question,
@@ -12,10 +12,10 @@ export default function ViewQuestion({
   question: questionDetailType;
   isMyQuestion: boolean;
 }) {
-  const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
-  };
+  // const getKSTTimeAgo = (utcDate: string) => {
+  //   const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
+  //   return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+  // };
 
   const handleCurious = async () => {
     //궁금해요 눌렀는지 여부에 따라..
@@ -63,8 +63,8 @@ export default function ViewQuestion({
             <button onClick={handleQuestionEdit}>수정하기</button>
           )}
           <p className="text-xs md:text-sm text-[#606060]">
-            답변 {question.answer_cnt}개 ·{' '}
-            {getKSTTimeAgo(question.created_date)}
+            답변 {question.answer_cnt}개 ·
+            {/* {getKSTTimeAgo(question.created_date)} */}
           </p>
         </div>
       </div>

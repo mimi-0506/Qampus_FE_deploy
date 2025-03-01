@@ -38,6 +38,18 @@ export type questionDetailType = {
   answer_cnt?: number;
 };
 
+export type detailDataType = {
+  question_id: number;
+  title: string;
+  content: string;
+  university_name: string;
+  created_date: string;
+  view_cnt: number;
+  curious_count: number;
+  answer_cnt?: number;
+  answers: answerDetailType[];
+};
+
 export type ViewQuestionProps = {
   question: questionDetailType;
   answers: answerDetailType[];
