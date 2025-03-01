@@ -38,3 +38,11 @@ export type rankType = {
   choice_cnt: number;
   button?: string;
 };
+
+export type PreviewCardProps = {
+  id?: number;
+  title: string;
+  content: string;
+  answerCount: number;
+  createdDate: string;
+};

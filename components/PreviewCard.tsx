@@ -1,14 +1,8 @@
 'use client';
 
+import {PreviewCardProps} from '@/type';
 import {formatDistanceToNow} from 'date-fns';
 import {ko} from 'date-fns/locale';
-
-interface PreviewCardProps {
-  title: string;
-  content: string;
-  answerCount: number;
-  createdDate: string;
-}
 
 export default function PreviewCard({
   title,

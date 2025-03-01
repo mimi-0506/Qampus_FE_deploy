@@ -98,22 +98,16 @@ export const getAnswerDetail = async (questionId: string | number) => {
 
 export const getAnswerListByCategory = async ({
   categoryId,
-  sort,
+  size,
   page,
 }: {
   categoryId: string | number;
-  sort?: string;
-  page?: number;
+  size: number;
+  page: number;
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/${categoryId}`,
-    body: {
-      category_id: categoryId,
-      sort,
-      page,
-      size: 10, // default 10
-    },
+    url: `/answers/${categoryId}?page=${page}&size=${size}`,
   });
 
   return data;
