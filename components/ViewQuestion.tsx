@@ -27,7 +27,7 @@ export default function ViewQuestion({
   };
 
   return (
-    <div className="bg-white rounded-2xl px-6 md:px-8 pt-8 pb-5 text-black border">
+    <div className="bg-white w-[72.6vw] rounded-2xl px-6 md:px-8 pt-8 pb-5 text-black border">
       <div className="flex justify-between items-center">
         <h1 className="flex gap-4 text-lg md:text-xl font-[600]">
           <Image

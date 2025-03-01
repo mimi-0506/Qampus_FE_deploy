@@ -32,7 +32,7 @@ export default function Answer({
   };
 
   return (
-    <div className="bg-white rounded-2xl px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
+    <div className="bg-white rounded-2xl w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
           <Image

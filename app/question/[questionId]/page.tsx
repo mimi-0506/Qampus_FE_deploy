@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ViewQuestion from '@/components/ViewQuestion';
 import {ViewQuestionProps} from '@/type';
 import ViewAnswer from '@/components/ViewAnswer';
+import WriteAnswer from '@/components/WriteAnswer';
 // import {getAnswerDetail} from '@/app/apis/answerApi';
 
 //나중에 서버사이드 컴포넌트로 교체
@@ -38,6 +39,7 @@ export default function QuestionDetailPage() {
 
   const [datas, setDatas] = useState<ViewQuestionProps>();
   const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
+  const [answering, setAnswering] = useState<boolean>(false);
 
   // const [loading, setLoading] = useState(true);
 
@@ -60,7 +62,7 @@ export default function QuestionDetailPage() {
   };
 
   return (
-    <main className="flex w-full h-[calc(100vh-80px)] bg-white flex-col items-center">
+    <main className="flex w-full bg-white flex-col items-center">
       <SearchBar />
       {datas ? (
         <>
@@ -74,12 +76,25 @@ export default function QuestionDetailPage() {
         <div>loading...</div>
       )}
       <div className="mt-10 flex justify-center">
-        <Link
-          href="/question/questionCreate"
-          className="pt-6 md:pt-10 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
-        >
-          추가 질문하기
-        </Link>
+        {isMyQuestion ? (
+          <Link
+            href="/question/questionCreate"
+            className="pt-6 md:pt-10 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
+          >
+            추가 질문하기
+          </Link>
+        ) : answering ? (
+          <WriteAnswer />
+        ) : (
+          <button
+            onClick={() => {
+              setAnswering(true);
+            }}
+            className="bg-main text-white w-[50.6vw] rounded-[1vw] text-[1.4vw] flex justify-center items-center aspect-[973/85]"
+          >
+            답변하기
+          </button>
+        )}
       </div>
     </main>
   );
