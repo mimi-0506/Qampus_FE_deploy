@@ -84,13 +84,10 @@ export const setAnswer = async ({
   return data?.success;
 };
 
-export const getAnswerDetail = async (questionId: string | number) => {
+export const getAnswerDetail = async (questionId: number) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
     url: `/answers/${questionId}`,
-    body: {
-      question_id: questionId,
-    },
   });
 
   return data;

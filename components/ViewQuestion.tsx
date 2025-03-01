@@ -33,11 +33,15 @@ interface Answer {
 }
 
 interface ViewQuestionProps {
-  question: Question;
-  answers: Answer[];
+  datas: {
+    question: Question;
+    answers: Answer[];
+  };
 }
 
-export default function ViewQuestion({question, answers}: ViewQuestionProps) {
+export default function ViewQuestion({datas}: ViewQuestionProps) {
+  const {question, answers} = datas;
+
   const getKSTTimeAgo = (utcDate: string) => {
     const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
     return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});

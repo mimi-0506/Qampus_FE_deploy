@@ -6,11 +6,12 @@ import {useRouter} from 'next/navigation';
 export default function ProgressBar() {
   const [progress, setProgress] = useState(0);
   const router = useRouter();
+  const questionId = 0; //나중에 파람을 받게 갈아끼우기
 
   useEffect(() => {
     if (progress >= 100) {
       const timeout = setTimeout(() => {
-        router.push('/question/questionDone');
+        router.push(`/question/${questionId}`);
       }, 300);
 
       return () => clearTimeout(timeout);
