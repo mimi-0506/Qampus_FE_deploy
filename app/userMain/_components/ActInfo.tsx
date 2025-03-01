@@ -10,7 +10,7 @@ export default function ActInfo({
 }) {
   return (
     <div
-      className="absolute w-full top-[60vw] z-10 pb-[26vw] bg-gradient-to-b
+      className="absolute w-full top-[60vw] z-10 pb-[26vw] bg-gradient-to-b bg-usermainbg2
      from-black to-usermainbg2 text-white rounded-t-[5.2vw] flex flex-col"
     >
       <div className="mt-[8.8vw] flex flex-col justify-center items-center">

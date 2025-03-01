@@ -16,25 +16,26 @@ export default function LoginPage() {
       <div className="mt-[5vw] gap-[0.7vw] flex flex-col text-[0.9vw]">
         <button
           onClick={loginWithKakao}
-          className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-yellow flex justify-center items-center box-border p-5"
+          className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-yellow flex justify-center items-center box-border"
         >
-          <Image
-            src="/svg/kakao.svg"
-            width={24}
-            height={22}
-            alt="kakao icon"
-            className="absolute left-[1.1vw]"
-          />
+          <div className="absolute left-[1.1vw]">
+            <div className="relative w-[1.25vw] aspect-[24/22] ">
+              <Image
+                src="/svg/kakao.svg"
+                fill
+                alt="kakao icon"
+                className="absolute"
+              />
+            </div>
+          </div>
           카카오로 시작하기
         </button>
-        <button className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-black text-white  flex justify-center items-center box-border p-5">
-          <Image
-            src="/svg/user.svg"
-            width={24}
-            height={22}
-            alt="user icon"
-            className="absolute left-[1.1vw]"
-          />
+        <button className="relative w-[20.4vw] aspect-[392/63] rounded-lg bg-black text-white  flex justify-center items-center box-border">
+          <div className="absolute left-[1.1vw]">
+            <div className="relative w-[1.25vw] aspect-[24/22]">
+              <Image src="/svg/user.svg" fill alt="user icon" />
+            </div>
+          </div>
           회원가입
         </button>
       </div>

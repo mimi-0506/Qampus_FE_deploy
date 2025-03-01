@@ -68,7 +68,7 @@ export default function UserMainPage() {
   };
 
   return (
-    <main className="flex overflow-hidden flex-col aspect-[1922/3500] w-screen items-center justify-center relative">
+    <main className=" bg-usermainbg2 flex overflow-hidden flex-col aspect-[1922/3500] w-screen items-center justify-center relative">
       <UserInfo userHomeDto={data?.userHomeDto} />
       <ActInfo
         weeklyQuestions={data?.weekly_questions}
