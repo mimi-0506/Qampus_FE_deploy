@@ -66,7 +66,7 @@ export default function AnswerSelection() {
       <SearchBar />
       {data ? (
         <>
-          <ViewQuestion question={data?.question} />
+          <ViewQuestion question={data?.question} isMyQuestion={true} />
           <ViewAnswer answers={data.answers} isMyQuestion={true} />
         </>
       ) : (

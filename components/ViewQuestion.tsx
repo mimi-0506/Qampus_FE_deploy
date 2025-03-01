@@ -7,8 +7,10 @@ import {ko} from 'date-fns/locale';
 
 export default function ViewQuestion({
   question,
+  isMyQuestion,
 }: {
   question: questionDetailType;
+  isMyQuestion: boolean;
 }) {
   const getKSTTimeAgo = (utcDate: string) => {
     const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
@@ -18,6 +20,10 @@ export default function ViewQuestion({
   const handleCurious = async () => {
     //궁금해요 눌렀는지 여부에 따라..
     await setCurious(question.question_id);
+  };
+
+  const handleQuestionEdit = async () => {
+    //생성 창으로 넘기기
   };
 
   return (
@@ -52,9 +58,15 @@ export default function ViewQuestion({
           <BsQuestionLg />
           나도 궁금해요
         </button>
-        <p className="text-xs md:text-sm text-[#606060]">
-          답변 {question.answer_cnt}개 · {getKSTTimeAgo(question.created_date)}
-        </p>
+        <div>
+          {isMyQuestion && (
+            <button onClick={handleQuestionEdit}>수정하기</button>
+          )}
+          <p className="text-xs md:text-sm text-[#606060]">
+            답변 {question.answer_cnt}개 ·{' '}
+            {getKSTTimeAgo(question.created_date)}
+          </p>
+        </div>
       </div>
     </div>
   );

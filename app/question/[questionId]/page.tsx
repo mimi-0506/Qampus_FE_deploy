@@ -37,7 +37,7 @@ export default function QuestionDetailPage() {
   const {questionId} = useParams<{questionId: string}>();
 
   const [datas, setDatas] = useState<ViewQuestionProps>();
-  // const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
+  const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
 
   // const [loading, setLoading] = useState(true);
 
@@ -53,6 +53,7 @@ export default function QuestionDetailPage() {
     console.log(questionId);
 
     //if(parseData.question.create_id === userId) setIsMyQuestion(true)
+    setIsMyQuestion(false);
 
     setDatas(dummy);
     // setLoading(false);
@@ -63,8 +64,11 @@ export default function QuestionDetailPage() {
       <SearchBar />
       {datas ? (
         <>
-          <ViewQuestion question={datas?.question} />
-          <ViewAnswer answers={datas?.answers} isMyQuestion={false} />
+          <ViewQuestion
+            question={datas?.question}
+            isMyQuestion={isMyQuestion}
+          />
+          <ViewAnswer answers={datas?.answers} isMyQuestion={isMyQuestion} />
         </>
       ) : (
         <div>loading...</div>
