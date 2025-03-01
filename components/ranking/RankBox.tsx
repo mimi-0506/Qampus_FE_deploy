@@ -1,27 +1,23 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {Dispatch, SetStateAction} from 'react';
 import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
-import {getRank} from '@/app/apis/rankApi';
+
 import {motion} from 'motion/react';
-import {universityType} from '@/type';
+import {rankType, universityType} from '@/type';
 
-type rankType = 'weekly' | 'monthly';
-
-export default function RankBox({mode = false}: {mode?: boolean}) {
+export default function RankBox({
+  mode = false,
+  universities,
+  rankStandard,
+  setRankStandard,
+}: {
+  mode?: boolean;
+  universities: universityType[];
+  rankStandard?: rankType;
+  setRankStandard?: Dispatch<SetStateAction<rankType>>;
+}) {
   const {ref, isVisible} = useScrollAnimation();
-  const [universities, setUniversities] = useState<universityType[] | []>([]);
-  const [rankStandard, setRankStandard] = useState<rankType>('weekly');
-
-  useEffect(() => {
-    setData(rankStandard);
-  }, [rankStandard]);
-
-  const setData = async (date: rankType) => {
-    const data = await getRank(date);
-
-    setUniversities(data);
-  };
 
   return (
     <>
@@ -45,7 +41,9 @@ export default function RankBox({mode = false}: {mode?: boolean}) {
                 className={`relative z-10 flex-1 text-white py-2 rounded-full text-center ${
                   rankStandard === 'weekly' ? 'font-bold' : 'text-gray-400'
                 }`}
-                onClick={() => setRankStandard('weekly')}
+                onClick={() => {
+                  if (setRankStandard) setRankStandard('weekly');
+                }}
               >
                 주간
               </button>
@@ -53,7 +51,9 @@ export default function RankBox({mode = false}: {mode?: boolean}) {
                 className={`relative z-10 flex-1 text-white py-2 rounded-full text-center ${
                   rankStandard === 'monthly' ? 'font-bold' : 'text-gray-400'
                 }`}
-                onClick={() => setRankStandard('monthly')}
+                onClick={() => {
+                  if (setRankStandard) setRankStandard('monthly');
+                }}
               >
                 월간
               </button>

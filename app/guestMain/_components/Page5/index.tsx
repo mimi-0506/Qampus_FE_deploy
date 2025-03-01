@@ -1,10 +1,26 @@
+'use client';
+
 import Image from 'next/image';
 import Slider from '../../../../components/ranking/Slider';
 import LeftBox1 from '../../../../components/ranking/LeftBox1';
 import LeftBox2 from '../../../../components/ranking/LeftBox2';
 import RankBox from '../../../../components/ranking/RankBox';
+import {useEffect, useState} from 'react';
+import {getRank} from '@/app/apis/rankApi';
+import {universityType} from '@/type';
 
 export default function Page5() {
+  const [data, setData] = useState<universityType[] | []>([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const data = await getRank('weekly');
+    setData(data);
+  };
+
   return (
     <div className="flex flex-col relative aspect-[16/10] w-screen items-center bg-black">
       <Image
@@ -15,7 +31,7 @@ export default function Page5() {
         className="absolute z-0 top-[-24vw]"
       />
 
-      <Slider />
+      <Slider data={data} />
 
       <div className="flex flex-col items-center justify-center relative z-10">
         <div className="from-dark1 to-light1 bg-gradient-to-r bg-clip-text text-[0.9vw] text-transparent">
@@ -30,7 +46,7 @@ export default function Page5() {
           <LeftBox2 />
         </div>
 
-        <RankBox />
+        <RankBox universities={data} />
       </div>
     </div>
   );

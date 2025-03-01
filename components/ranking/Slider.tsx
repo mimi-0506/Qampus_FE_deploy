@@ -2,21 +2,24 @@
 import {useEffect, useState} from 'react';
 import {motion} from 'motion/react';
 import Image from 'next/image';
-import {rankType} from '@/type';
-import {getRank} from '@/app/apis/rankApi';
+import {universityType} from '@/type';
 
-export default function CircularCarousel({top}: {top: string}) {
-  const [circles, setCircles] = useState<rankType[] | []>([]);
+export default function CircularCarousel({
+  top,
+  data,
+}: {
+  top?: string;
+  data: universityType[] | [];
+}) {
+  const [circles, setCircles] = useState<universityType[] | []>([]);
   const [nowCenter, setNowCenter] = useState(circles[2]);
   const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
 
   useEffect(() => {
-    setData();
-  }, []);
+    if (data.length > 0) setData();
+  }, [data]);
 
   const setData = async () => {
-    const data = await getRank('weekly');
-
     setCircles([
       {...data[3], button: '4th'},
       {...data[1], button: '2nd'},

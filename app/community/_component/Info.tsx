@@ -1,10 +1,27 @@
+'use client';
+
+import {getRank} from '@/app/apis/rankApi';
 import LeftBox1 from '@/components/ranking/LeftBox1';
 import LeftBox2 from '@/components/ranking/LeftBox2';
 import RankBox from '@/components/ranking/RankBox';
 import Slider from '@/components/ranking/Slider';
+import {rankType, universityType} from '@/type';
 import Image from 'next/image';
+import {useEffect, useState} from 'react';
 
 export default function Info() {
+  const [rankStandard, setRankStandard] = useState<rankType>('weekly');
+  const [data, setData] = useState<universityType[] | []>([]);
+
+  useEffect(() => {
+    getData();
+  }, [rankStandard]);
+
+  const getData = async () => {
+    const data = await getRank(rankStandard);
+    setData(data);
+  };
+
   return (
     <div className="w-screen relative bg-black overflow-hidden">
       <div className="relative top-[] w-screen aspect-[1954/1524]">
@@ -41,10 +58,15 @@ export default function Info() {
           <LeftBox2 />
         </div>
 
-        <RankBox mode={true} />
+        <RankBox
+          mode={true}
+          universities={data}
+          rankStandard={rankStandard}
+          setRankStandard={setRankStandard}
+        />
       </div>
 
-      <Slider top={'top-[45vw]'} />
+      <Slider top={'top-[45vw]'} data={data} />
     </div>
   );
 }

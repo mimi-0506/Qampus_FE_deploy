@@ -1,6 +1,6 @@
 import Info from './_component/Info';
 
-import UnivMap from './_component/UnivMap';
+import UnivMap from './_component/UnivMapArea';
 
 export default function CommunityPage() {
   return (

@@ -55,16 +55,6 @@ export type userMainDataType = {
   userHomeDto: userHomeDtoType;
 };
 
-export type rankType = {
-  university_id: number;
-  university_name: string;
-  ranking: number;
-  participant_count: number;
-  rate: number;
-  choice_cnt: number;
-  button?: string;
-};
-
 export type PreviewCardProps = {
   id?: number;
   title: string;
@@ -80,4 +70,7 @@ export type universityType = {
   rate: number;
   university_id: number;
   university_name: string;
+  button?: string;
 };
+
+export type rankType = 'weekly' | 'monthly';
