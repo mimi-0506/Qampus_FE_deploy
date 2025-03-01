@@ -1,20 +1,20 @@
 'use client';
-import {useInfoStore} from '@/providers/store-provider';
 import Image from 'next/image';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
-// interface InfoCardProps {
-//   name: string;
-//   university: string;
-//   department: string;
-//   profileImage?: string;
-// }
+interface InfoCardProps {
+  name: string;
+  universityName: string;
+  major: string;
+  profileImage?: string;
+}
 
-export default function InfoCard() {
-  const {name, universityName, major, profileImageUrl} = useInfoStore(
-    state => state,
-  );
-  const [profileSrc, setProfileSrc] = useState(profileImageUrl);
+export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
+  const [profileSrc, setProfileSrc] = useState<string>('');
+
+  useEffect(() => {
+    if (info?.profileImage) setProfileSrc(info?.profileImage);
+  }, [info?.profileImage]);
 
   return (
     <div className="flex h-[140px] w-[70%] mt-10 flex-col items-center justify-center rounded-2xl bg-[#F8F8F8]">
@@ -39,7 +39,7 @@ export default function InfoCard() {
             unoptimized
           />
           <div>
-            <p className="text-[14px] font-[600] text-black">{name}</p>
+            <p className="text-[14px] font-[600] text-black">{info?.name}</p>
             <div className="mt-[2px] flex items-center">
               <Image
                 src="/images/question/cap.svg"
@@ -49,7 +49,7 @@ export default function InfoCard() {
                 className="mr-[4px]"
               />
               <p className="text-sm font-[300] text-black">
-                {universityName} {major} 소속
+                {info?.universityName} {info?.major} 소속
               </p>
             </div>
           </div>
