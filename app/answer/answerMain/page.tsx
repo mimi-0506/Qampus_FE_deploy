@@ -58,19 +58,19 @@ export default function AnswerMainPage() {
 
       <div className="w-[70%] justify-between flex">
         <p className="text-black font-[600] py-8">
-          답변 가능한 질문 {questions.length.toLocaleString()}개가 있어요
+          답변 가능한 질문 {questions?.length?.toLocaleString()}개가 있어요
         </p>
         <SortSelector />
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {questions.map(question => (
+        {questions?.map(question => (
           <PreviewCard
-            key={question.id}
-            title={question.title}
-            content={question.content}
-            answerCount={question.answerCount}
-            createdDate={question.createdDate}
+            key={question?.id}
+            title={question?.title}
+            content={question?.content}
+            answerCount={question?.answerCount}
+            createdDate={question?.createdDate}
           />
         ))}
       </div>
