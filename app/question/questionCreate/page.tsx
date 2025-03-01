@@ -39,9 +39,7 @@ export default function QuestionCreatePage() {
 
       console.log('📌 API 응답:', response);
 
-      setTimeout(() => {
-        router.push('/question/questionLoading');
-      }, 1000);
+      router.push('/question/questionLoading');
     } catch (error) {
       console.error('❌ API 호출 오류:', error);
     }
