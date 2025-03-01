@@ -30,7 +30,7 @@ export async function fetchWithAuth({
   const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
 
   const headers: HeadersInit = {
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `${accessToken}`,
   };
 
   if (!isFormData) {
