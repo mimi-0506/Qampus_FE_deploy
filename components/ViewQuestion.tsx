@@ -7,37 +7,11 @@ import {ko} from 'date-fns/locale';
 import ViewAnswer from './ViewAnswer';
 import ViewAI from './VIewAI';
 import {setCurious} from '@/app/apis/curiousApi';
+import {answerDetailType, ViewQuestionProps} from '@/type';
 
 const mockAnswer = `
  가독성과 성능을 고려한 효율적인 파이썬 코드를 작성하려면 **코딩 스타일 준수, 최적화 기법 활용, 유지보수성 강화**가 필요합니다. PEP 8을 따르고, 의미 있는 변수명과 함수명을 사용하며, 코드 모듈화를 통해 가독성을 높여야 합니다. 성능 최적화를 위해 리스트 컴프리헨션, 제너레이터, 내장 함수를 적극 활용하고, 멀티스레딩·멀티프로세싱으로 병렬 처리를 최적화할 수 있습니다. 또한, 싱글톤, 팩토리, 데코레이터 패턴 등을 적용하면 유지보수성과 확장성이 강화됩니다. 이를 통해 가독성이 좋고 성능이 뛰어난 코드를 작성할 수 있습니다.
   `;
-
-interface Question {
-  question_id: number;
-  title: string;
-  content: string;
-  university_name: string;
-  created_date: string;
-  view_cnt: number;
-  curious_count: number;
-}
-
-interface Answer {
-  answer_id: number;
-  user_id: number;
-  content: string;
-  created_date: string;
-  like_count: number;
-  is_chosen: boolean;
-  images?: string[];
-}
-
-interface ViewQuestionProps {
-  datas: {
-    question: Question;
-    answers: Answer[];
-  };
-}
 
 export default function ViewQuestion({datas}: ViewQuestionProps) {
   const {question, answers} = datas;
@@ -92,7 +66,9 @@ export default function ViewQuestion({datas}: ViewQuestionProps) {
       </div>
 
       <ViewAI answer={mockAnswer} />
-      <ViewAnswer answers={answers} />
+      {answers.map((nowAnswer: answerDetailType, key) => (
+        <ViewAnswer answer={nowAnswer} key={key} />
+      ))}
     </main>
   );
 }

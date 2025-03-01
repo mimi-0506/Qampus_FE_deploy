@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBar';
 import ViewQuestion from '@/components/ViewQuestion';
 import {useParams} from 'next/navigation';
 import Link from 'next/link';
-import {getAnswerDetail} from '@/app/apis/answerApi';
+// import {getAnswerDetail} from '@/app/apis/answerApi';
 
 //나중에 서버사이드 컴포넌트로 교체
 const dummy = {
@@ -43,10 +43,10 @@ export default function QuestionDetailPage() {
 
   const getData = async (questionId: number) => {
     // setLoading(true);
-    const response = await getAnswerDetail(questionId);
+    //  const response = await getAnswerDetail(questionId);
 
-    console.log(response);
-
+    // console.log(response);
+    console.log(questionId);
     setDatas(dummy);
     // setLoading(false);
   };
