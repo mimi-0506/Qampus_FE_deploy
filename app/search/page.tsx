@@ -1,21 +1,50 @@
 'use client';
 
 import SearchBar from '@/components/SearchBar';
-import Pagination from '@/components/Pagination';
 import PreviewCard from '@/components/PreviewCard';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {mockQuestions} from '@/constants/mockQuestions';
 import SortSelector from '@/components/SortSelector';
+import {PAGE_SIZE} from '@/constants/constants';
+import {useSearchParams} from 'next/navigation';
+import {getAnswerSearch} from '../apis/answerApi';
+import {useInView} from 'react-intersection-observer';
 
-export default function SearchPage() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize = 10;
-  const totalPages = Math.ceil(mockQuestions.length / pageSize);
+export default function Page() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
 
-  const paginatedQuestions = mockQuestions.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
-  );
+  const [questions, setQuestions] = useState(mockQuestions.slice(0, PAGE_SIZE));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const {ref, inView} = useInView(); // ref 연결 + 화면에 보이는지 감지
+
+  useEffect(() => {
+    if (inView && !loading) loadMore();
+  }, [inView]);
+
+  useEffect(() => {
+    getData(query);
+  }, [query]);
+
+  const getData = async (query: string) => {
+    setLoading(true);
+    const data = await getAnswerSearch({
+      search: query,
+      page: currentPage,
+      size: PAGE_SIZE,
+    });
+
+    setQuestions(prev => [...prev, ...data]);
+    setLoading(false);
+  };
+
+  const loadMore = () => {
+    console.log('loadMore');
+    if (currentPage * PAGE_SIZE >= mockQuestions.length) return;
+    setCurrentPage(prev => prev + 1);
+    getData(query);
+  };
 
   return (
     <main className="flex flex-col items-center bg-white min-h-screen">
@@ -29,7 +58,7 @@ export default function SearchPage() {
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {paginatedQuestions.map(question => (
+        {questions.map(question => (
           <PreviewCard
             key={question.id}
             title={question.title}
@@ -40,11 +69,9 @@ export default function SearchPage() {
         ))}
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div ref={ref} className="h-1 w-full" />
+
+      {loading && <p>로딩 중...</p>}
     </main>
   );
 }

@@ -15,9 +15,7 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
 
   if (!accessToken) window.location.href = '/logout';
 
-  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
-
-  const response = await fetch(fixedUrl, {
+  const response = await fetch(url, {
     method,
     headers: {
       'Content-Type': 'application/json',

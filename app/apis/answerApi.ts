@@ -121,22 +121,16 @@ export const getAnswerListByCategory = async ({
 
 export const getAnswerSearch = async ({
   search,
-  sort,
+  size,
   page,
 }: {
   search: string;
-  sort?: string;
+  size: number;
   page?: number;
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/search`,
-    body: {
-      value: search,
-      sort,
-      page,
-      size: 10, // default 10
-    },
+    url: `/answers/search?value=${search}&page=${page}&size=${size}`,
   });
 
   return data;
