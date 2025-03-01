@@ -1,0 +1,11 @@
+{
+  "src/**/*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.json": "prettier --write",
+  "*.md": "prettier --write",
+  "!.eslintrc.json": "eslint --fix",
+  "!.husky/pre-commit": "eslint --fix",
+  "!.prettierrc": "eslint --fix",
+  "!.package-lock.json": "eslint --fix",
+  "!.package.json": "eslint --fix",
+  "!.png": "eslint --fix"
+}
