@@ -19,11 +19,11 @@ export default function AnswerMainPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData(1);
+    getData(0);
   }, [selectedField]);
 
   useEffect(() => {
-    getData(currentPage);
+    if (currentPage !== 0) getData(currentPage);
   }, [currentPage]);
 
   const getData = async (page: number) => {
@@ -34,8 +34,8 @@ export default function AnswerMainPage() {
       size: PAGE_SIZE,
     });
 
-    setQuestions(response.items);
-    setTotalPages(response.totalPages);
+    setQuestions(response);
+    setTotalPages(response?.totalPages);
     setLoading(false);
   };
 
@@ -64,9 +64,9 @@ export default function AnswerMainPage() {
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {questions?.map(question => (
+        {questions?.map((question, index) => (
           <PreviewCard
-            key={question?.id}
+            key={index}
             title={question?.title}
             content={question?.content}
             answerCount={question?.answerCount}

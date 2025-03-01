@@ -7,7 +7,7 @@ import ViewQuestion from '@/components/ViewQuestion';
 import {ViewQuestionProps} from '@/type';
 import ViewAnswer from '@/components/ViewAnswer';
 import WriteAnswer from '@/components/WriteAnswer';
-// import {getAnswerDetail} from '@/app/apis/answerApi';
+import {getAnswerDetail} from '@/app/apis/answerApi';
 
 //나중에 서버사이드 컴포넌트로 교체
 const dummy = {
@@ -41,24 +41,20 @@ export default function QuestionDetailPage() {
   const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
   const [answering, setAnswering] = useState<boolean>(false);
 
-  // const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     if (questionId) getData(parseInt(questionId));
   }, []);
 
   const getData = async (questionId: number) => {
-    // setLoading(true);
-    //  const response = await getAnswerDetail(questionId);
+    const response = await getAnswerDetail(questionId);
 
-    // console.log(response);
+    console.log(response);
     console.log(questionId);
 
-    //if(parseData.question.create_id === userId) setIsMyQuestion(true)
+    // if(parseData.question.create_id === userId) setIsMyQuestion(true)
     setIsMyQuestion(false);
 
     setDatas(dummy);
-    // setLoading(false);
   };
 
   return (

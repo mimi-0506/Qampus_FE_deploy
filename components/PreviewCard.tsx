@@ -1,8 +1,8 @@
 'use client';
 
 import {PreviewCardProps} from '@/type';
-import {formatDistanceToNow} from 'date-fns';
-import {ko} from 'date-fns/locale';
+// import {formatDistanceToNow} from 'date-fns';
+// import {ko} from 'date-fns/locale';
 
 export default function PreviewCard({
   title,
@@ -12,8 +12,9 @@ export default function PreviewCard({
 }: PreviewCardProps) {
   // 시간 포맷 (UTC → KST 변환 후 상대 시간으로 표시)
   const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+    return utcDate; //에러나서 우선 이렇게 해뒀습니다!
+    // const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
+    // return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
   };
 
   return (
