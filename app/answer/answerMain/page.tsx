@@ -67,6 +67,7 @@ export default function AnswerMainPage() {
         {questions?.map((question, index) => (
           <PreviewCard
             key={index}
+            question_id={question?.question_id}
             title={question?.title}
             content={question?.content}
             answerCount={question?.answerCount}

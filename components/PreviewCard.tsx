@@ -1,6 +1,7 @@
 'use client';
 
 import {PreviewCardProps} from '@/type';
+import {useRouter} from 'next/navigation';
 // import {formatDistanceToNow} from 'date-fns';
 // import {ko} from 'date-fns/locale';
 
@@ -9,7 +10,9 @@ export default function PreviewCard({
   content,
   answerCount,
   createdDate,
+  question_id,
 }: PreviewCardProps) {
+  const router = useRouter();
   // 시간 포맷 (UTC → KST 변환 후 상대 시간으로 표시)
   const getKSTTimeAgo = (utcDate: string) => {
     return utcDate; //에러나서 우선 이렇게 해뒀습니다!
@@ -18,7 +21,12 @@ export default function PreviewCard({
   };
 
   return (
-    <div className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border">
+    <div
+      className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border cursor-pointer"
+      onClick={() => {
+        router.push(`/question/${question_id}`);
+      }}
+    >
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
         {answerCount > 0 && (
