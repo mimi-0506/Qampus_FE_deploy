@@ -6,41 +6,6 @@ import {useEffect, useState} from 'react';
 import {questionType} from '@/type';
 import {fetchWithoutAuth} from '@/app/apis/clientFetch';
 
-const dummy = {
-  weekly_questions: [
-    {
-      question_id: 1,
-      title:
-        '지속 가능한 환경 기술들을 개발할 때 경제적 타당성과 환경적 이점을 동시에 충족시키는 방법은 뭔가요?',
-      university_name: '서울대학교',
-      major: '환경',
-      curious_count: 215,
-      view_count: 982,
-      total_score: 80,
-    },
-    {
-      question_id: 2,
-      title:
-        ' 여행사에서 판매하는 사회적 약자를 위한 관광상품(휠체어 이동지원)도 esg 경영을 실천하는 방법일까요?',
-      university_name: 'KAIST',
-      major: '경영',
-      curious_count: 174,
-      view_count: 815,
-      total_score: 70,
-    },
-    {
-      question_id: 3,
-      title:
-        'ai를 활용해서 만든 디자인의 저작권은 제작자에게 있다고 봐야 하나요?',
-      university_name: '홍익대학교',
-      major: '디자인',
-      curious_count: 155,
-      view_count: 798,
-      total_score: 80,
-    },
-  ],
-};
-
 export default function Page6() {
   const {ref, isVisible} = useScrollAnimation();
   const [datas, setDatas] = useState<questionType[] | null>(null);
@@ -52,11 +17,8 @@ export default function Page6() {
 
   const getDatas = async () => {
     const response = await fetchWithoutAuth({method: 'GET', url: '/home'});
-    const data = await response.json();
-
-    console.log(data);
-
-    setDatas(dummy.weekly_questions);
+    console.log(response);
+    setDatas(response.weeklyQuestions);
   };
 
   return (
@@ -75,7 +37,10 @@ export default function Page6() {
           return (
             <div
               key={index}
-              className="relative left-[12.3vw] box-border flex h-[10.83vw] w-[65.38vw] items-center gap-[2.29vw] p-[0.78vw] bg-[url('/images/main/box1_page6.png')] bg-cover bg-center"
+              className={`relative box-border flex h-[10.83vw] w-[65.38vw] items-center gap-[2.29vw] p-[0.78vw]
+                ${index === 0 ? "bg-[url('/images/main/box1_page6.png')]" : "bg-[url('/images/main/box2_page6.png')]"}
+                ${index === 0 ? ' left-[12.3vw]' : index === 1 ? 'left-[22.5vw]' : 'left-[15vw]'}
+                bg-cover bg-center`}
             >
               <div className="relative h-[5.57vw] w-[5.06vw]">
                 <Image
@@ -85,9 +50,10 @@ export default function Page6() {
                 />
               </div>
               <div className="flex flex-col gap-[0.94vw]">
-                <div className="bg-page6subtitle text-grey4 flex h-[2.14vw] w-[5.57vw] items-center justify-center rounded-[2.66vw] text-[1.04vw]">
+                <div className="bg-page6subtitle text-grey4 inline-flex h-[2.14vw] px-[0.5vw] items-center justify-center rounded-[2.66vw] text-[1.04vw] whitespace-nowrap self-start min-w-0">
                   {data.major}
                 </div>
+
                 <div className="text-[1.35vw] text-white">{data.title}</div>
                 <div className="text-grey2 text-[1.04vw]">
                   조회수 {data.view_count}회 · 나도 궁금해요{' '}

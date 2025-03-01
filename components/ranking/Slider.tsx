@@ -5,51 +5,6 @@ import Image from 'next/image';
 import {rankType} from '@/type';
 import {getRank} from '@/app/apis/rankApi';
 
-const dummuy = {
-  rank: [
-    {
-      university_id: 1,
-      university_name: '대학1',
-      ranking: 1,
-      participant_count: 12000,
-      rate: 50,
-      choice_cnt: 123,
-    },
-    {
-      university_id: 2,
-      university_name: '대학2',
-      ranking: 2,
-      participant_count: 12000,
-      rate: 30,
-      choice_cnt: 123,
-    },
-    {
-      university_id: 3,
-      university_name: '대학3',
-      ranking: 3,
-      participant_count: 12000,
-      rate: 10,
-      choice_cnt: 123,
-    },
-    {
-      university_id: 4,
-      university_name: '대학4',
-      ranking: 4,
-      participant_count: 12000,
-      rate: 7,
-      choice_cnt: 123,
-    },
-    {
-      university_id: 5,
-      university_name: '대학5',
-      ranking: 5,
-      participant_count: 12000,
-      rate: 3,
-      choice_cnt: 123,
-    },
-  ],
-};
-
 export default function CircularCarousel({top}: {top: string}) {
   const [circles, setCircles] = useState<rankType[] | []>([]);
   const [nowCenter, setNowCenter] = useState(circles[2]);
@@ -60,10 +15,8 @@ export default function CircularCarousel({top}: {top: string}) {
   }, []);
 
   const setData = async () => {
-    const test = await getRank('weekly');
-    console.log('rank', test);
+    const data = await getRank('weekly');
 
-    const data = dummuy.rank;
     setCircles([
       {...data[3], button: '4th'},
       {...data[1], button: '2nd'},
@@ -120,7 +73,7 @@ export default function CircularCarousel({top}: {top: string}) {
 
           return (
             <motion.div
-              key={univ?.university_id}
+              key={`univ${univ?.university_id}`}
               className={`absolute`}
               style={{
                 zIndex:
@@ -178,7 +131,7 @@ export default function CircularCarousel({top}: {top: string}) {
 
       <div className="mt-[1.2vw] flex flex-col justify-center items-center">
         <div className="text-white text-[1.25vw] font-bold">
-          {nowCenter?.university_name}대학교
+          {nowCenter?.university_name}
         </div>
         <div className="text-grey4 text-[0.83vw]">
           채택 {nowCenter?.choice_cnt}회

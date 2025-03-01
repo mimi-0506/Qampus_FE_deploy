@@ -6,7 +6,7 @@ export const getRank = async (period: 'weekly' | 'monthly') => {
     url: `/university/rank?limit=5&period=${period}`,
   });
 
-  return data?.rank;
+  return data?.ranking;
 };
 
 export const getUnivDetail = async (name: string) => {

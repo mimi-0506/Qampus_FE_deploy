@@ -14,7 +14,7 @@ import {PreviewCardProps} from '@/type';
 export default function AnswerMainPage() {
   const [selectedField, setSelectedField] = useState<number>(0);
   const [questions, setQuestions] = useState<PreviewCardProps[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ export default function AnswerMainPage() {
   const getData = async (page: number) => {
     setLoading(true);
     const response = await getAnswerListByCategory({
-      categoryId: selectedField,
+      categoryId: selectedField + 1,
       page,
       size: PAGE_SIZE,
     });

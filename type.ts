@@ -72,3 +72,12 @@ export type PreviewCardProps = {
   answerCount: number;
   createdDate: string;
 };
+
+export type universityType = {
+  choice_cnt: number;
+  participant_count: number;
+  ranking: number;
+  rate: number;
+  university_id: number;
+  university_name: string;
+};

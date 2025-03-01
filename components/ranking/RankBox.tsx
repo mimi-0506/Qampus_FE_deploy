@@ -4,12 +4,13 @@ import {useEffect, useState} from 'react';
 import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
 import {getRank} from '@/app/apis/rankApi';
 import {motion} from 'motion/react';
+import {universityType} from '@/type';
 
 type rankType = 'weekly' | 'monthly';
 
 export default function RankBox({mode = false}: {mode?: boolean}) {
   const {ref, isVisible} = useScrollAnimation();
-  const [universities, setUniversities] = useState<string[] | []>([]);
+  const [universities, setUniversities] = useState<universityType[] | []>([]);
   const [rankStandard, setRankStandard] = useState<rankType>('weekly');
 
   useEffect(() => {
@@ -17,16 +18,9 @@ export default function RankBox({mode = false}: {mode?: boolean}) {
   }, [rankStandard]);
 
   const setData = async (date: rankType) => {
-    const test = await getRank(date);
-    console.log('rank', test);
+    const data = await getRank(date);
 
-    setUniversities([
-      '경희대학교',
-      '서강대학교',
-      '홍익대학교',
-      '건국대학교',
-      '상명대학교',
-    ]);
+    setUniversities(data);
   };
 
   return (
@@ -71,7 +65,7 @@ export default function RankBox({mode = false}: {mode?: boolean}) {
           {rankStandard === 'weekly' ? '주간' : '월간'} 순위
         </h2>
         <ul className="mt-[1vw] mb-[3.2vw] text-[0.83vw]">
-          {universities.map((university, index) => (
+          {universities.map((university: universityType, index) => (
             <li
               key={index}
               className={`flex items-center py-[1vw] border-b border-gray-700 last:border-b-0
@@ -80,7 +74,7 @@ export default function RankBox({mode = false}: {mode?: boolean}) {
       `}
             >
               <span className="">{index + 1}</span>
-              <span className="ml-[1.3vw]">{university}</span>
+              <span className="ml-[1.3vw]">{university?.university_name}</span>
             </li>
           ))}
         </ul>

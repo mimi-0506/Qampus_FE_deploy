@@ -68,7 +68,7 @@ export default function Sliders() {
   };
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col justify- items-center">
+    <div className="w-full h-full relative overflow-hidden flex flex-col justify- items-center">
       <ImageSlider
         direction={direction}
         selectedItem={selectedItem}
