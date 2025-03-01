@@ -1,7 +1,9 @@
-import {setCurious} from '@/app/apis/curiousApi';
+import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
 // import {formatDistanceToNow} from 'date-fns';
 import Image from 'next/image';
+// import {useRouter} from 'next/navigation';
+import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
 // import {ko} from 'date-fns/locale';
 
@@ -12,14 +14,17 @@ export default function ViewQuestion({
   question: questionDetailType;
   isMyQuestion: boolean;
 }) {
+  const [imCurious, setImCurious] = useState(question.curious);
   // const getKSTTimeAgo = (utcDate: string) => {
   //   const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
   //   return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
   // };
 
   const handleCurious = async () => {
-    //궁금해요 눌렀는지 여부에 따라..
-    await setCurious(question.question_id);
+    if (imCurious) await deleteCurious(question.questionId);
+    else await setCurious(question.questionId);
+
+    setImCurious(x => !x);
   };
 
   const handleQuestionEdit = async () => {

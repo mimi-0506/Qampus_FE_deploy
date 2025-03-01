@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBar';
 import {useParams} from 'next/navigation';
 import Link from 'next/link';
 import ViewQuestion from '@/components/ViewQuestion';
-import {detailDataType} from '@/type';
+import {ViewQuestionProps} from '@/type';
 import ViewAnswer from '@/components/ViewAnswer';
 import WriteAnswer from '@/components/WriteAnswer';
 import {getAnswerDetail} from '@/app/apis/answerApi';
@@ -16,7 +16,7 @@ export default function QuestionDetailPage() {
   const userId = useInfoStore(state => state.userId);
   const {questionId} = useParams<{questionId: string}>();
 
-  const [datas, setDatas] = useState<detailDataType>();
+  const [datas, setDatas] = useState<ViewQuestionProps>();
   const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
   const [answering, setAnswering] = useState<boolean>(false);
 
@@ -30,15 +30,21 @@ export default function QuestionDetailPage() {
     console.log(response);
 
     if (response.create_id === userId) setIsMyQuestion(true);
-    setIsMyQuestion(false);
 
-    setDatas(response);
+    const {answers, ...question} = response;
+
+    setDatas({
+      question: question,
+      answers: answers,
+    });
   };
 
   return (
     <main className="flex w-full min-h-screen bg-white flex-col items-center">
       <SearchBar />
-      {datas && <ViewQuestion question={datas} isMyQuestion={isMyQuestion} />}
+      {datas?.question && (
+        <ViewQuestion question={datas.question} isMyQuestion={isMyQuestion} />
+      )}
       {datas?.answers && (
         <ViewAnswer answers={datas?.answers} isMyQuestion={isMyQuestion} />
       )}

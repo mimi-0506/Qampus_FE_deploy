@@ -28,7 +28,7 @@ export type answerDetailType = {
 };
 
 export type questionDetailType = {
-  question_id: number;
+  questionId: number;
   title: string;
   content: string;
   university_name: string;
@@ -36,6 +36,7 @@ export type questionDetailType = {
   view_cnt: number;
   curious_count: number;
   answer_cnt?: number;
+  curious: boolean;
 };
 
 export type detailDataType = {

@@ -12,7 +12,7 @@ export const setCurious = async (questionId: number) => {
   return data?.success;
 };
 
-export const deleteCurious = async (questionId: string) => {
+export const deleteCurious = async (questionId: number) => {
   const data = await fetchWithAuth({
     method: 'DELETE',
     url: `/curious?question=${questionId}`,
