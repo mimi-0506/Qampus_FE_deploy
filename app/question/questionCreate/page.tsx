@@ -13,7 +13,7 @@ export default function QuestionCreatePage() {
   const [selectedStep, setSelectedStep] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [questionSubmit, setQuestionSubmit] = useState(false);
   const router = useRouter();
 

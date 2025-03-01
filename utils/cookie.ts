@@ -12,4 +12,6 @@ export const setAccessToken = () => {
   }
 };
 
-export const getAccessToken = () => Cookies.get('accessToken');
+export const getAccessToken = () => {
+  return Cookies.get('accessToken') || localStorage.getItem('accessToken');
+};

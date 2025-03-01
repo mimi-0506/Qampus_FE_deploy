@@ -1,3 +1,4 @@
+// import {getAccessToken} from './../../utils/cookie';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN?.replace(/\/$/, '');
 
 interface FetchOptions {
@@ -5,24 +6,45 @@ interface FetchOptions {
   url: string;
   body?: unknown;
   cache?: boolean;
+  isFormData?: boolean;
 }
 
-export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
+export async function fetchWithAuth({
+  method,
+  url,
+  body,
+  cache,
+  isFormData = false,
+}: FetchOptions) {
   const accessToken = document.cookie
     .split('; ')
     .find(row => row.startsWith('accessToken='))
     ?.split('=')[1];
 
-  if (!accessToken) window.location.href = '/logout';
+  // const accessToken = getAccessToken();
 
-  const response = await fetch(url, {
+  if (!accessToken) {
+    window.location.href = '/logout';
+  }
+
+  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
+
+  const headers: HeadersInit = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  if (!isFormData) {
+    headers['Content-Type'] = 'application/json';
+  }
+  const requestBody =
+    isFormData && body instanceof FormData ? body : JSON.stringify(body);
+
+  const response = await fetch(fixedUrl, {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${accessToken}`,
-    },
-    body: body ? JSON.stringify(body) : undefined,
+    headers,
+    body: requestBody,
     cache: cache ? 'force-cache' : 'no-store',
+    credentials: 'include',
   });
 
   const data = await response.json();
