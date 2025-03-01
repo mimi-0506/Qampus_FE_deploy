@@ -1,9 +1,11 @@
 'use client';
 import {useEffect, useState} from 'react';
 import SearchBar from '@/components/SearchBar';
-import ViewQuestion from '@/components/ViewQuestion';
 import {useParams} from 'next/navigation';
 import Link from 'next/link';
+import ViewQuestion from '@/components/ViewQuestion';
+import {ViewQuestionProps} from '@/type';
+import ViewAnswer from '@/components/ViewAnswer';
 // import {getAnswerDetail} from '@/app/apis/answerApi';
 
 //나중에 서버사이드 컴포넌트로 교체
@@ -34,7 +36,9 @@ const dummy = {
 export default function QuestionDetailPage() {
   const {questionId} = useParams<{questionId: string}>();
 
-  const [datas, setDatas] = useState();
+  const [datas, setDatas] = useState<ViewQuestionProps>();
+  // const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
+
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,6 +51,9 @@ export default function QuestionDetailPage() {
 
     // console.log(response);
     console.log(questionId);
+
+    //if(parseData.question.create_id === userId) setIsMyQuestion(true)
+
     setDatas(dummy);
     // setLoading(false);
   };
@@ -54,9 +61,14 @@ export default function QuestionDetailPage() {
   return (
     <main className="flex w-full h-[calc(100vh-80px)] bg-white flex-col items-center">
       <SearchBar />
-
-      {datas && <ViewQuestion datas={datas} />}
-
+      {datas ? (
+        <>
+          <ViewQuestion question={datas?.question} />
+          <ViewAnswer answers={datas?.answers} isMyQuestion={false} />
+        </>
+      ) : (
+        <div>loading...</div>
+      )}
       <div className="mt-10 flex justify-center">
         <Link
           href="/question/questionCreate"

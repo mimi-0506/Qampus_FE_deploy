@@ -17,7 +17,7 @@ export const editAnswer = async (
   return data?.success;
 };
 
-export const deleteAnswer = async (answerId: string | number) => {
+export const deleteAnswer = async (answerId: number) => {
   const data = await serverFetchWithAuth({
     method: 'DELETE',
     url: `/answer/${answerId}`,
@@ -28,13 +28,13 @@ export const deleteAnswer = async (answerId: string | number) => {
   return data?.success;
 };
 
-export const editAnswerChoice = async ({
+export const setAnswerChoice = async ({
   answerId,
   questionId,
   isChosen,
 }: {
-  answerId: string | number;
-  questionId: string | number;
+  answerId: number;
+  questionId: number;
   isChosen: boolean;
 }) => {
   const data = await serverFetchWithAuth({
@@ -61,8 +61,8 @@ export const setAnswer = async ({
   content,
   images,
 }: {
-  userId: string | number;
-  questionId: string | number;
+  userId: number;
+  questionId: number;
   content: string;
   images?: string[];
 }) => {
@@ -98,7 +98,7 @@ export const getAnswerListByCategory = async ({
   size,
   page,
 }: {
-  categoryId: string | number;
+  categoryId: number;
   size: number;
   page: number;
 }) => {

@@ -1,73 +1,55 @@
-'use client';
-
-import Image from 'next/image';
-import {useState} from 'react';
-import {TiThumbsUp} from 'react-icons/ti';
-import {formatDistanceToNow} from 'date-fns';
-import {ko} from 'date-fns/locale';
-import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
+import Answer from './Answer';
+import {useState} from 'react';
+import {setAnswerChoice} from '@/app/apis/answerApi';
 
-export default function ViewAnswer({answer}: {answer: answerDetailType}) {
-  const [thumbsUp, setThumbsUp] = useState(false);
+export default function ViewAnswer({
+  answers,
+  isMyQuestion,
+  questionId,
+}: {
+  answers: answerDetailType[];
+  isMyQuestion: boolean;
+  questionId?: number;
+}) {
+  const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(null);
 
-  const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
-  };
+  // 답변 채택
+  const handleSelectAnswer = async (answerId: number) => {
+    if (!questionId) return;
 
-  const handleThumbsUP = async () => {
-    setThumbsUp(prev => !prev);
+    //1. 현재 채택된 답변이 있다면 해당 답변은 채택 취소
+    if (chooseAnswerId) {
+      const response1 = await setAnswerChoice({
+        answerId: chooseAnswerId,
+        questionId,
+        isChosen: false,
+      });
+      console.log('채택했던 답변 취소', response1);
+    }
 
-    if (thumbsUp) await deleteThumbsUP(answer.answer_id);
-    else setThumbsUP(answer.answer_id);
+    //2.선택된 답변 채택
+    const response2 = await setAnswerChoice({
+      answerId,
+      questionId,
+      isChosen: true,
+    });
+    console.log('답변 채택', response2);
+
+    //3.클라이언트측 채택된 답변 수정(낙관적 업데이트)
+    setChooseAnswerId(answerId);
   };
 
   return (
-    <div className="bg-white rounded-2xl px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
-      <div className="flex justify-between items-start">
-        <div className="flex gap-8 w-[87%]">
-          <Image
-            src="/images/question/A.svg"
-            alt="A icon"
-            width={24}
-            height={24}
-          />
-          <p className="text-black text-sm">{answer.content}</p>
-        </div>
-        <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
-          건국대학교
-        </span>
-      </div>
-
-      {Array.isArray(answer.images) && (
-        <div className="flex gap-2 mt-4">
-          {answer.images.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              alt={`답변 이미지 ${index + 1}`}
-              width={150}
-              height={150}
-              className="rounded-lg border"
-            />
-          ))}
-        </div>
-      )}
-
-      <div className="mt-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <button
-          className={`flex items-center gap-2 border px-4 py-2 rounded-3xl text-sm transition-all duration-300 ${
-            thumbsUp ? 'bg-[#7BA1FF] text-white' : 'bg-white text-black'
-          }`}
-          onClick={handleThumbsUP}
-        >
-          <TiThumbsUp /> 좋아요
-        </button>
-        <p className="text-xs md:text-sm text-[#606060]">
-          {getKSTTimeAgo(answer.created_date)}
-        </p>
-      </div>
-    </div>
+    <>
+      {answers.map((nowAnswer: answerDetailType, key) => (
+        <Answer
+          answer={nowAnswer}
+          key={key}
+          isMyQuestion={isMyQuestion}
+          onSelect={handleSelectAnswer}
+        />
+      ))}
+    </>
   );
 }

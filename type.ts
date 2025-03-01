@@ -35,13 +35,12 @@ export type questionDetailType = {
   created_date: string;
   view_cnt: number;
   curious_count: number;
+  answer_cnt?: number;
 };
 
 export type ViewQuestionProps = {
-  datas: {
-    question: questionDetailType;
-    answers: answerDetailType[];
-  };
+  question: questionDetailType;
+  answers: answerDetailType[];
 };
 
 export type userHomeDtoType = {
