@@ -8,7 +8,7 @@ import SortSelector from '@/components/SortSelector';
 import {PAGE_SIZE} from '@/constants/constants';
 import {useSearchParams} from 'next/navigation';
 import {getAnswerSearch} from '../apis/answerApi';
-import {useInView} from 'react-intersection-observer';
+import Pagination from '@/components/Pagination';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -17,15 +17,11 @@ export default function Page() {
   const [questions, setQuestions] = useState(mockQuestions.slice(0, PAGE_SIZE));
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const {ref, inView} = useInView(); // ref 연결 + 화면에 보이는지 감지
-
-  useEffect(() => {
-    if (inView && !loading) loadMore();
-  }, [inView]);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     getData(query);
-  }, [query]);
+  }, [query, currentPage]);
 
   const getData = async (query: string) => {
     setLoading(true);
@@ -35,15 +31,9 @@ export default function Page() {
       size: PAGE_SIZE,
     });
 
-    setQuestions(prev => [...prev, ...data]);
+    setQuestions(data.questions);
+    setTotalPages(data.totalPages);
     setLoading(false);
-  };
-
-  const loadMore = () => {
-    console.log('loadMore');
-    if (currentPage * PAGE_SIZE >= mockQuestions.length) return;
-    setCurrentPage(prev => prev + 1);
-    getData(query);
   };
 
   return (
@@ -69,7 +59,11 @@ export default function Page() {
         ))}
       </div>
 
-      <div ref={ref} className="h-1 w-full" />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
 
       {loading && <p>로딩 중...</p>}
     </main>
