@@ -28,13 +28,15 @@ export default function ViewAnswer({
       console.log('채택했던 답변 취소', response1);
     }
 
-    //2.선택된 답변 채택
-    const response2 = await setAnswerChoice({
-      answerId,
-      questionId,
-      isChosen: true,
-    });
-    console.log('답변 채택', response2);
+    //2. 선택된 답변이 채택했었던 답변과 다르다면 채택
+    if (chooseAnswerId !== answerId) {
+      const response2 = await setAnswerChoice({
+        answerId,
+        questionId,
+        isChosen: true,
+      });
+      console.log('답변 채택', response2);
+    }
 
     //3.클라이언트측 채택된 답변 수정(낙관적 업데이트)
     setChooseAnswerId(answerId);
