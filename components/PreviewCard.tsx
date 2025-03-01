@@ -1,29 +1,32 @@
 'use client';
 
-import {formatDistanceToNow} from 'date-fns';
-import {ko} from 'date-fns/locale';
-
-interface PreviewCardProps {
-  title: string;
-  content: string;
-  answerCount: number;
-  createdDate: string;
-}
+import {PreviewCardProps} from '@/type';
+import {useRouter} from 'next/navigation';
+// import {formatDistanceToNow} from 'date-fns';
+// import {ko} from 'date-fns/locale';
 
 export default function PreviewCard({
   title,
   content,
   answerCount,
   createdDate,
+  question_id,
 }: PreviewCardProps) {
+  const router = useRouter();
   // 시간 포맷 (UTC → KST 변환 후 상대 시간으로 표시)
   const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+    return utcDate; //에러나서 우선 이렇게 해뒀습니다!
+    // const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
+    // return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
   };
 
   return (
-    <div className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border">
+    <div
+      className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border cursor-pointer"
+      onClick={() => {
+        router.push(`/question/${question_id}`);
+      }}
+    >
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
         {answerCount > 0 && (

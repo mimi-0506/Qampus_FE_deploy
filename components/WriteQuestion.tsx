@@ -2,14 +2,15 @@
 
 import {FiUpload, FiX} from 'react-icons/fi';
 import Image from 'next/image';
+import {useState} from 'react';
 
 interface WriteQuestionProps {
   title: string;
   setTitle: (title: string) => void;
   content: string;
   setContent: (content: string) => void;
-  images: string[];
-  setImages: (images: string[]) => void;
+  images: File[];
+  setImages: (images: File[]) => void;
 }
 
 export default function WriteQuestion({
@@ -20,19 +21,26 @@ export default function WriteQuestion({
   images,
   setImages,
 }: WriteQuestionProps) {
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+
   // 이미지 업로드 핸들러
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const uploadedImages = Array.from(event.target.files).map(file =>
-        URL.createObjectURL(file),
-      );
-      setImages([...images, ...uploadedImages]);
+      const fileList = Array.from(event.target.files);
+      const newPreviews = fileList.map(file => URL.createObjectURL(file));
+
+      setImages([...images, ...fileList]);
+      setPreviewImages([...previewImages, ...newPreviews]);
     }
   };
 
   // 이미지 삭제 핸들러
   const handleRemoveImage = (index: number) => {
-    setImages(images.filter((_, i) => i !== index));
+    const updatedImages = images.filter((_, i) => i !== index);
+    const updatedPreviews = previewImages.filter((_, i) => i !== index);
+
+    setImages(updatedImages);
+    setPreviewImages(updatedPreviews);
   };
 
   return (
@@ -86,13 +94,14 @@ export default function WriteQuestion({
             value={content}
             onChange={e => setContent(e.target.value)}
           />
+
           {/* 업로드된 이미지 */}
-          {images.length > 0 && (
+          {previewImages.length > 0 && (
             <div className="relative mt-4 max-h-[300px] overflow-y-auto">
               <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white via-white to-transparent z-10"></div>
 
               <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-                {images.map((image, index) => (
+                {previewImages.map((image, index) => (
                   <div
                     key={index}
                     className="relative w-[180px] h-[240px] flex-shrink-0 group"

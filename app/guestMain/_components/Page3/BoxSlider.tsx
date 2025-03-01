@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 
 export default function BoxSlider({
@@ -8,8 +9,8 @@ export default function BoxSlider({
   move: string;
 }) {
   return (
-    <>
-      <div className="flex justify-center gap-[2vw] relative bottom-[5vw] text-center">
+    <div className="absolute z-10 bottom-[15vw]">
+      <div className="flex justify-center gap-[2vw] text-center">
         {items.map((item, i) => {
           return (
             <div
@@ -27,22 +28,18 @@ export default function BoxSlider({
               <h3 className="text-[1.25vw] text-semiBlack font-semibold">
                 {item.title}
               </h3>
-              <p className="text-[1vw] whitespace-pre-line text-grey2 ">
+              <div className="text-[1vw] whitespace-pre-line text-grey2 ">
                 {item.image && (
-                  <Image
-                    src={item.image}
-                    alt="logo"
-                    width={65.6}
-                    height={14}
-                    className="inline-block align-middle"
-                  />
+                  <div className="relative w-[3.3vw] aspect-[65/14] inline-block align-middle">
+                    <Image src={item.image} alt="logo" fill />
+                  </div>
                 )}
                 {item.description}
-              </p>
+              </div>
             </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

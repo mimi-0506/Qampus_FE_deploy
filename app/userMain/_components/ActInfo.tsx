@@ -1,9 +1,16 @@
 import Cards from './Cards';
+import {answerType, questionType} from '@/type';
 
-export default function ActInfo() {
+export default function ActInfo({
+  weeklyQuestions,
+  popularAnswer,
+}: {
+  weeklyQuestions: questionType[] | undefined;
+  popularAnswer: answerType[] | undefined;
+}) {
   return (
     <div
-      className="absolute w-full top-[60vw] z-10 pb-[26vw] bg-gradient-to-b
+      className="absolute w-full top-[60vw] z-10 pb-[26vw] bg-gradient-to-b 
      from-black to-usermainbg2 text-white rounded-t-[5.2vw] flex flex-col"
     >
       <div className="mt-[8.8vw] flex flex-col justify-center items-center">
@@ -24,7 +31,7 @@ export default function ActInfo() {
         </div>
 
         <div className="flex gap-[1.5vw]">
-          <Cards />
+          <Cards datas={weeklyQuestions} />
         </div>
       </div>
 
@@ -37,7 +44,7 @@ export default function ActInfo() {
         </div>
 
         <div className="flex gap-[1.5vw]">
-          <Cards />
+          <Cards datas={popularAnswer} />
         </div>
       </div>
     </div>

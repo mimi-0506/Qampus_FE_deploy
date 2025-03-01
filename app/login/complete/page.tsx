@@ -7,17 +7,13 @@ export default function page() {
         <Image src="/images/characters/wink.png" fill alt="character" />
       </div>
       <p className="mt-[1.87vw] h-[2.5vw]">로그인 완료!</p>
-      <p className="mt-[0.6vw] w-full h-[2.5vw]">
-        코미와 함께
-        <Image
-          src="/images/logo/logo_mini_white.png"
-          width={107}
-          height={23}
-          alt="logo"
-          className="inline-block ml-[10px]"
-        />
-        를 즐겨보세요
-      </p>
+      <div className="flex w-full justify-center items-center">
+        <p className="mr-[0.6vw]">코미와 함께 </p>
+        <div className="w-[5.56vw] h-[1.2vw] top-[0.1vw] relative flex justify-center items-center">
+          <Image src="/images/logo/logo_mini_white.png" fill alt="logo" />
+        </div>
+        <p>를 즐겨보세요</p>
+      </div>
     </div>
   );
 }

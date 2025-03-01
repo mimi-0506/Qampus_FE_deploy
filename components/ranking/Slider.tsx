@@ -2,21 +2,38 @@
 import {useEffect, useState} from 'react';
 import {motion} from 'motion/react';
 import Image from 'next/image';
+import {universityType} from '@/type';
 
-const items = [
-  {image: '4', button: '4th', num: 792},
-  {image: '2', button: '2nd', num: 791},
-  {image: '1', button: '1st', num: 790},
-  {image: '3', button: '3rd', num: 794},
-  {image: '5', button: '5th', num: 793},
-];
-
-export default function CircularCarousel() {
-  const [circles, setCircles] = useState(items);
+export default function CircularCarousel({
+  top,
+  data,
+}: {
+  top?: string;
+  data: universityType[] | [];
+}) {
+  const [circles, setCircles] = useState<universityType[] | []>([]);
   const [nowCenter, setNowCenter] = useState(circles[2]);
+  const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
 
   useEffect(() => {
-    const nowIndex = circles.findIndex(x => x.image === nowCenter.image);
+    if (data.length > 0) setData();
+  }, [data]);
+
+  const setData = async () => {
+    setCircles([
+      {...data[3], button: '4th'},
+      {...data[1], button: '2nd'},
+      {...data[0], button: '1st'},
+      {...data[2], button: '3rd'},
+      {...data[4], button: '5th'},
+    ]);
+    setNowCenter({...data[0], button: '1st'});
+  };
+
+  useEffect(() => {
+    const nowIndex = circles.findIndex(
+      x => x.university_id === nowCenter?.university_id,
+    );
     const shiftAmount = nowIndex - 2;
 
     setCircles(prev => {
@@ -30,8 +47,12 @@ export default function CircularCarousel() {
   }, [nowCenter]);
 
   return (
-    <div className="flex flex-col items-center absolute top-[22vw] z-10 ">
-      <div className="text-white text-[1.2vw] font-bold mb-[1vw]">주간 1위</div>
+    <div
+      className={`flex flex-col items-center absolute ${top ? top : `top-[22vw]`} z-10`}
+    >
+      <div className="text-white text-[1.2vw] font-bold mb-[1vw]">
+        주간 {nowCenter?.ranking}위
+      </div>
       <div className="flex gap-[1vw] relative z-10 w-screen h-[12vw] items-center justify-center overflow-hidden ">
         {circles.map((univ, index) => {
           const position = index - 2;
@@ -55,7 +76,7 @@ export default function CircularCarousel() {
 
           return (
             <motion.div
-              key={univ.image}
+              key={`univ${univ?.university_id}`}
               className={`absolute`}
               style={{
                 zIndex:
@@ -80,7 +101,7 @@ export default function CircularCarousel() {
                   <div className="w-[83%] aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
                     <div className="w-[82%] aspect-[1/1] rounded-full bg-white relative">
                       <Image
-                        src={`/images/main/univ_${univ.image}.png`}
+                        src={`/images/main/univ_${univ?.university_id}.png`}
                         alt="univ logo"
                         fill
                       />
@@ -91,7 +112,7 @@ export default function CircularCarousel() {
                 <div className="w-full h-full rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center shadow-lg">
                   <div className="w-[80%] aspect-[1/1] relative">
                     <Image
-                      src={`/images/main/univ_${univ.image}.png`}
+                      src={`/images/main/univ_${univ?.university_id}.png`}
                       alt="univ logo"
                       fill
                     />
@@ -111,20 +132,27 @@ export default function CircularCarousel() {
         className="absolute z-20 top-[-17vw] "
       />
 
-      <div className="mt-[1.2vw] flex flex-col ">
+      <div className="mt-[1.2vw] flex flex-col justify-center items-center">
         <div className="text-white text-[1.25vw] font-bold">
-          {nowCenter.image}대학교
+          {nowCenter?.university_name}
         </div>
-        <div className="text-grey4 text-[0.83vw]">채택 {nowCenter.num}회</div>
+        <div className="text-grey4 text-[0.83vw]">
+          채택 {nowCenter?.choice_cnt}회
+        </div>
       </div>
       <div className="flex gap-[1vw] mt-[3vw] text-[1vw] text-white relative z-30">
-        {items.map(item => (
+        {BUTTONS.map((button, key) => (
           <button
-            key={item.image}
-            onClick={() => setNowCenter(item)}
-            className={`${nowCenter.image === item.image ? 'text-white' : 'text-grey1'} rounded-lg`}
+            key={`${key}_button`}
+            onClick={() => {
+              const selectedCircle = circles.find(
+                circle => circle.button === button,
+              );
+              if (selectedCircle) setNowCenter(selectedCircle);
+            }}
+            className={`${nowCenter?.button === button ? 'text-white' : 'text-grey1'} rounded-lg`}
           >
-            {item.button}
+            {button}
           </button>
         ))}
       </div>

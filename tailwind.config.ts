@@ -35,6 +35,7 @@ export default {
         usermainoverlay: 'rgba(109, 124, 167, 0.4)',
         yellow: '#FEE500',
         page5roundbg: '#4D67A9',
+        communityGrey: '#8E8E8E',
       },
 
       keyframes: {
@@ -43,12 +44,13 @@ export default {
           '100%': {transform: 'translateX(-100%)'},
         },
         fadeIn: {
-          '0%': {opacity: '0', transform: 'translateY(-10vw)'},
+          '0%': {opacity: '0', transform: 'translateY(-2vw)'},
           '100%': {opacity: '1', transform: 'translateY(0)'},
         },
       },
       animation: {
         loop: 'loop 20s linear infinite',
+        fadeIn: 'fadeIn 0.5s ease-out forwards',
       },
 
       fontFamily: {

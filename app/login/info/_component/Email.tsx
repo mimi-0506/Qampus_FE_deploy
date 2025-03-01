@@ -1,6 +1,6 @@
 'use client';
 
-import {univcertApi} from '@/app/api/univcert';
+import {univcertApi} from '@/app/apis/univcert';
 import {
   Dispatch,
   SetStateAction,
@@ -9,6 +9,7 @@ import {
   ChangeEvent,
   FormEvent,
 } from 'react';
+import toast from 'react-hot-toast';
 
 async function postSendAuthNumber(university: string, email: string) {
   const data = await univcertApi('certify', {
@@ -60,9 +61,9 @@ export default function Email({
 
       if (res.success) setIsSendAuth(true);
       else if (res.message === '이미 완료된 요청입니다.') {
-        alert('인증된 이메일입니다.');
+        toast('이메일 인증이 완료되어 있어요!');
         setIsAuthValid(true);
-      } else alert(res.message);
+      } else toast.error(res.message);
     }
   };
 
@@ -76,42 +77,50 @@ export default function Email({
       );
 
       if (res) {
-        alert('인증되었습니다');
+        toast.success('인증되었습니다');
         setIsAuthValid(true);
-      } else alert('인증코드가 잘못되었습니다.');
+      } else toast.error('인증코드가 잘못되었습니다.');
     }
   };
 
   return (
-    <div className="flex flex-col text-[1.4vw] relative text-grey4">
+    <div className="flex flex-col text-[1.4vw] relative text-grey4 gap-[0.5vw]">
       <label className="ml-[0.7vw]">학교 이메일</label>
-      <input
-        type="email"
-        ref={emailRef}
-        onChange={handleEmailChange}
-        className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
-        placeholder="학교 계정 이메일을 입력하세요"
-      />
+      <div className="relative">
+        <input
+          type="email"
+          name="email"
+          ref={emailRef}
+          onChange={handleEmailChange}
+          className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
+          placeholder="학교 계정 이메일을 입력하세요"
+        />
 
-      {isEmailValid && (
-        <button
-          className="absolute right-0 top-[2.5vw] flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw] bg-grey4 text-black text-[0.7vw]"
-          onClick={handleEmailAuth}
-        >
-          인증번호 전송
-        </button>
-      )}
+        {isEmailValid && (
+          <button
+            className="absolute top-[0.5vw] right-[0.5vw] flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw] bg-grey4 text-black text-[0.7vw]"
+            onClick={handleEmailAuth}
+          >
+            인증번호 전송
+          </button>
+        )}
+      </div>
 
       {isSendAuth && (
-        <>
+        <div className="relative">
           <input
             ref={authRef}
             type="number"
             className="bg-semiBlack w-[24.7vw] aspect-[475/45] rounded-lg text-grey3 text-[0.9vw] box-border px-[0.7vw] py-[0.2vw]"
             placeholder="인증번호를 입력하세요"
           />
-          <button onClick={handleAuthNumberCheck}>인증번호 확인</button>
-        </>
+          <button
+            className="absolute top-[0.5vw] right-[0.5vw]  flex justify-center items-center w-[5.6vw] aspect-[108/31] rounded-[16vw] bg-grey4 text-black text-[0.7vw]"
+            onClick={handleAuthNumberCheck}
+          >
+            인증번호 확인
+          </button>
+        </div>
       )}
     </div>
   );

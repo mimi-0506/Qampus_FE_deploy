@@ -1,5 +1,6 @@
-import {univcertApi} from '@/app/api/univcert';
+import {univcertApi} from '@/app/apis/univcert';
 import {Dispatch, SetStateAction, ChangeEvent} from 'react';
+import toast from 'react-hot-toast';
 
 async function postUniversityCheck(search: string) {
   const data = await univcertApi('check', {
@@ -23,7 +24,7 @@ export default function University({
       const isValid = await postUniversityCheck(searchUniversity);
 
       if (!isValid) {
-        alert('인증되지 않은 대학입니다.');
+        toast.error('인증되지 않은 대학입니다.');
         setUniversity('');
         e.target.value = '';
       } else setUniversity(searchUniversity);

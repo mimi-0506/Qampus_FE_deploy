@@ -9,7 +9,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen">
       <Image src="/images/login/bg.png" fill alt="bg" sizes="100vw" />
-      <div className="flex flex-col justify-center item-center w-[35.4vw] aspect-[680/750] rounded-3xl overflow-hidden relative">
+      <div className="flex flex-col justify-center item-center min-w-[35.4vw] min-h-[40vw] py-[5vw] rounded-3xl overflow-hidden relative">
         <Image
           src="/images/login/box.png"
           fill

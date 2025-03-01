@@ -1,14 +1,17 @@
 'use client';
 import {Dispatch, SetStateAction} from 'react';
 import Image from 'next/image';
+import {answerType} from '@/type';
 
-export default function Card({
+export default function AnswerCard({
   index,
   open,
+  data,
   setNowOpen,
 }: {
   index: number;
   open: boolean;
+  data: answerType | null;
   setNowOpen: Dispatch<SetStateAction<number>>;
 }) {
   return (
@@ -53,19 +56,24 @@ export default function Card({
           <div className="flex justify-between">
             <div className="flex flex-col">
               <div className="w-[11.25vw] text-[1vw] aspect-[216/38] text-grey2 border border-grey2 rounded-[14.8vw] flex justify-center items-center">
-                경희대학교 환경공학과
+                {data?.university_name}
               </div>
               <div className="mt-[1vw] ml-[1.2vw] text-[0.7vw]">
-                조회 1285회 · 나도 궁금해요 295개
+                좋아요 {data?.like_count}개
               </div>
             </div>
           </div>
           <div className="mt-[4vw] gap-[0.8vw] flex text-[1.04vw] items-start">
-            <Image src="/svg/q.svg" width={29} height={29} alt="q" />
-            <div>
-              지속 가능한 환경 기술을 개발할 때 경제적 타당성과 환경적 이점을
-              동시에 충족시키는 방법은 뭔가요?
+            <div className="w-[1.5vw] h-[1.5vw] relative">
+              <Image src="/svg/q.svg" fill alt="q" />
             </div>
+            <div>{data?.title}</div>
+          </div>
+          <div className="mt-[4vw] gap-[0.8vw] flex text-[1.04vw] items-start">
+            <div className="w-[1.5vw] h-[1.5vw] relative">
+              <Image src="/svg/a.svg" fill alt="q" />
+            </div>
+            <div>{data?.content}</div>
           </div>
         </div>
       </div>

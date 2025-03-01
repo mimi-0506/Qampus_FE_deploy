@@ -1,28 +1,44 @@
-'use client';
-
+import {answerType, questionType} from '@/type';
+import QuestionCard from './QuestionCard';
+import AnswerCard from './AnswerCard';
 import {useState} from 'react';
-import Card from './Card';
 
-export default function Cards() {
+export default function Cards({
+  datas,
+}: {
+  datas: questionType[] | answerType[] | undefined;
+}) {
   const [nowOpen, setNowOpen] = useState<number>(0);
+
+  if (!datas || datas.length === 0) return null;
 
   return (
     <>
-      <Card
-        index={1}
-        open={nowOpen === 1 ? true : false}
-        setNowOpen={setNowOpen}
-      />
-      <Card
-        index={2}
-        open={nowOpen === 2 ? true : false}
-        setNowOpen={setNowOpen}
-      />
-      <Card
-        index={3}
-        open={nowOpen === 3 ? true : false}
-        setNowOpen={setNowOpen}
-      />
+      {[1, 2, 3].map(index => {
+        const data = datas[index - 1];
+
+        if (data && !('like_count' in data)) {
+          return (
+            <QuestionCard
+              key={index}
+              index={index}
+              open={nowOpen === index}
+              data={data as questionType}
+              setNowOpen={setNowOpen}
+            />
+          );
+        } else {
+          return (
+            <AnswerCard
+              key={index}
+              index={index}
+              open={nowOpen === index}
+              data={data as answerType}
+              setNowOpen={setNowOpen}
+            />
+          );
+        }
+      })}
     </>
   );
 }
