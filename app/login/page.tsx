@@ -1,16 +1,14 @@
 'use client';
 
-import {useInfoStore} from '@/providers/store-provider';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const logout = useInfoStore(state => state.logout);
 
   useEffect(() => {
-    logout();
+    document.cookie = 'info=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
   }, []);
 
   const loginWithKakao = () => {
