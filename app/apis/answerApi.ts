@@ -38,7 +38,7 @@ export const setAnswerChoice = async ({
 }) => {
   const data = await clientFetchWithAuth({
     method: 'PUT',
-    url: `/answer/choice`,
+    url: `/answers/choice`,
     body: {
       question_id: questionId,
       answer_id: answerId,
