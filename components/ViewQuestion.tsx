@@ -1,10 +1,9 @@
 import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
-import {formatDistanceToNow} from 'date-fns';
 import Image from 'next/image';
 import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
-import {ko} from 'date-fns/locale';
+import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
 
 export default function ViewQuestion({
   question,
@@ -14,24 +13,6 @@ export default function ViewQuestion({
   isMyQuestion: boolean;
 }) {
   const [imCurious, setImCurious] = useState(question.curious);
-
-  const convertCreatedDate = (createdDate?: number[]) => {
-    if (!createdDate || createdDate.length < 6) return null;
-
-    const [year, month, day, hour, minute, second, nanoseconds = 0] =
-      createdDate;
-
-    const millisec = nanoseconds / 1e6;
-
-    const date = new Date(year, month - 1, day, hour, minute, second, millisec);
-
-    return isNaN(date.getTime()) ? null : date;
-  };
-
-  const getKSTTimeAgo = (date: Date | null) => {
-    if (!date) return '등록일 없음';
-    return formatDistanceToNow(date, {addSuffix: true, locale: ko});
-  };
 
   const createdDate = Array.isArray(question.createdDate)
     ? convertCreatedDate(question.createdDate)

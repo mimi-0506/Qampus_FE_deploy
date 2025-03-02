@@ -3,8 +3,7 @@
 import {useState} from 'react';
 import {PreviewCardProps} from '@/type';
 import {useRouter} from 'next/navigation';
-// import { formatDistanceToNow } from 'date-fns';
-// import { ko } from 'date-fns/locale';
+import {getKSTTimeAgo} from '@/utils/dateUtils';
 
 export default function PreviewCard({
   title,
@@ -15,13 +14,6 @@ export default function PreviewCard({
 }: PreviewCardProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
-  // 시간 포맷 (UTC → KST 변환 후 상대 시간으로 표시)
-  const getKSTTimeAgo = (utcDate: string) => {
-    return utcDate; // 에러나서 우선 이렇게 해뒀습니다!
-    // const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    // return formatDistanceToNow(kstDate, { addSuffix: true, locale: ko });
-  };
 
   const handleNavigation = () => {
     setIsLoading(true);
@@ -57,7 +49,7 @@ export default function PreviewCard({
       <p className="text-[13px] text-[#606060] mt-5 line-clamp-2">{content}</p>
       <div className="mt-4 text-xs text-[#606060] font-[0] flex justify-end space-x-2">
         <p>답변 {answerCount}개 ·</p>
-        <p>{getKSTTimeAgo(createdDate)}</p>
+        <p>{getKSTTimeAgo(new Date(createdDate))}</p>
       </div>
     </div>
   );
