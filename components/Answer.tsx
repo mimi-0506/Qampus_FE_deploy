@@ -26,6 +26,7 @@ export default function Answer({
 
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
+    console.log(answer);
 
     if (thumbsUp) await deleteThumbsUP(answer.answer_id);
     else setThumbsUP(answer.answer_id);
@@ -35,16 +36,19 @@ export default function Answer({
     <div className="bg-white rounded-2xl w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
-          <Image
-            src="/images/question/A.svg"
-            alt="A icon"
-            width={24}
-            height={24}
-          />
+          {answer.chosen ? (
+            <div className="w-[4.68vw] aspect-[90/170] relative">
+              <Image src="/images/question/adopt.svg" alt="adopt" fill />
+            </div>
+          ) : (
+            <div className="w-[1.25vw] aspect-[1/1] relative">
+              <Image src="/images/question/A.svg" alt="A icon" fill />
+            </div>
+          )}
           <p className="text-black text-sm">{answer.content}</p>
         </div>
         <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
-          건국대학교
+          {answer?.universityName}
         </span>
       </div>
 

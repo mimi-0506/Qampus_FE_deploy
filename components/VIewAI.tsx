@@ -21,7 +21,7 @@ export default function ViewAI({questionId}: {questionId: number}) {
   };
 
   return (
-    <div className="w-full mt-6">
+    <div className="w-[72.6vw] mt-6">
       <div className="w-full bg-[#F4F4F4] rounded-lg p-6 shadow-sm">
         <button
           onClick={() => setIsOpen(!isOpen)}
