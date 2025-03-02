@@ -1,4 +1,3 @@
-// import {getAccessToken} from './../../utils/cookie';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_DOMAIN?.replace(/\/$/, '');
 
 interface FetchOptions {
@@ -23,13 +22,11 @@ export async function fetchWithAuth({
     .find(row => row.startsWith('accessToken='))
     ?.split('=')[1];
 
-  // const accessToken = getAccessToken();
-
   if (!accessToken) {
-    window.location.href = '/logout';
+    window.location.href = '/login';
   }
 
-  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`; // url 앞에 있는 / 제거
+  const fixedUrl = `${API_BASE_URL}/${url.replace(/^\//, '')}`;
 
   const headers: HeadersInit = {
     Authorization: `${accessToken}`,
@@ -38,6 +35,7 @@ export async function fetchWithAuth({
   if (!isFormData) {
     headers['Content-Type'] = 'application/json';
   }
+
   const requestBody =
     isFormData && body instanceof FormData ? body : JSON.stringify(body);
 
@@ -49,11 +47,14 @@ export async function fetchWithAuth({
     credentials: 'include',
   });
 
+  if (response.status === 401) {
+    window.location.href = '/login';
+    return;
+  }
+
   const data = await response.json();
 
   console.log('fetchWithAuth', data);
-
-  //차후 에러일괄처리 추가
 
   return data;
 }
@@ -77,9 +78,13 @@ export async function fetchWithoutAuth({
   };
 
   const response = await fetch(fixedUrl, options);
-  const data = await response.json();
 
-  //차후 에러일괄처리 추가
+  if (response.status === 401) {
+    window.location.href = '/login';
+    return;
+  }
+
+  const data = await response.json();
 
   return data;
 }

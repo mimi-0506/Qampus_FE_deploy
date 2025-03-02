@@ -23,8 +23,9 @@ export type answerDetailType = {
   content: string;
   created_date: string;
   like_count: number;
-  is_chosen: boolean;
+  chosen: boolean;
   images?: string[];
+  universityName: string;
 };
 
 export type questionDetailType = {
