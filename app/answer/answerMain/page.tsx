@@ -15,12 +15,12 @@ import {convertCreatedDate} from '@/utils/dateUtils';
 export default function AnswerMainPage() {
   const [selectedField, setSelectedField] = useState<number>(0);
   const [questions, setQuestions] = useState<PreviewCardProps[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData(0);
+    getData(1);
   }, [selectedField]);
 
   useEffect(() => {
