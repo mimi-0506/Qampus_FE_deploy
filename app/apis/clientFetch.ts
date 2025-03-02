@@ -20,7 +20,8 @@ export async function fetchWithAuth({
   const accessToken = document.cookie
     .split('; ')
     .find(row => row.startsWith('accessToken='))
-    ?.split('=')[1];
+    ?.split('=')[1]
+    .replace('Bearer ', '');
 
   if (!accessToken) {
     window.location.href = '/login';

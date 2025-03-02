@@ -15,7 +15,9 @@ type FetchOptions = {
 };
 
 export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
-  const accessToken = (await cookies()).get('accessToken')?.value;
+  const accessToken = (await cookies())
+    .get('accessToken')
+    ?.value.replace('Bearer ', '');
 
   console.log('accessToken', accessToken);
   if (!accessToken) redirect('/login');
