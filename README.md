@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+  
+# Qampus
+ <img src="https://github.com/user-attachments/assets/6348e09f-f7c3-422e-9ea4-0635447d4787" alt="Image" style="width: 20%; height: auto;" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Deployment](https://qampus-fe-deploy.vercel.app/) |  [Figma](https://www.figma.com/design/UcFE01El743kHmDE82Brb1/%EC%8A%A4%EC%9C%84%ED%94%84-10%ED%8C%80) | [Swagger](http://211.188.63.108:8080/swagger-ui/index.html#)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=Tailwind%20CSS&logoColor=white)
+![D3.js](https://img.shields.io/badge/D3.js-F9A825?style=for-the-badge&logo=D3.js&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white)
+![Lodash](https://img.shields.io/badge/Lodash-3492FF?style=for-the-badge&logo=Lodash&logoColor=white)
+![React Hot Toast](https://img.shields.io/badge/React%20Hot%20Toast-FF67B0?style=for-the-badge&logo=React&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-0074C1?style=for-the-badge&logo=Zustand&logoColor=white)
+![React Icons](https://img.shields.io/badge/React%20Icons-61DAFB?style=for-the-badge&logo=React&logoColor=white)
+![Date-fns](https://img.shields.io/badge/Date-fns-6A4E94?style=for-the-badge&logo=Date-fns&logoColor=white)
+![Motion](https://img.shields.io/badge/Motion-FF3B5D?style=for-the-badge&logo=Motion&logoColor=white)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### 대학생들의 문제 해결을 돕고 선의의 경쟁을 통해 성장을 도모하는 서비스
+모르는 문제를 자유롭게 질문하고, 답변을 통해 지식을 공유하며 학문적 성장을 도모할 수 있는 플랫폼 제공
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+</div>
 
-## Deploy on Vercel
+<br/>
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚙️ 기능 설명
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **질문과 답변**: 대학생들이 궁금한 문제를 질문하고, 다른 사용자들이 답변을 통해 해결책을 공유하는 기능
+- **지식 공유**: 답변을 통해 다양한 학문적 지식을 서로 공유하고 성장하는 공간
+- **선의의 경쟁**: 사용자들이 서로 경쟁하며 문제 해결 능력을 키우고, 학문적 성장을 돕는 환경
+- **랭킹 시스템**: 
+
+<br/>
+<br/>
+
+## 🎉 팀 구성
+
+| 역할       | 이름        | 인원 수 |
+|------------|-------------|---------|
+| 기획       | 정유나      | 1명    |
+| 디자이너   | 김이준    | 1명    |
+| 프론트엔드 | 박혜미, 김다은  | 2명    |
+| 백엔드     | 김도연, 박재하, 기문  | 3명    |
+
+
