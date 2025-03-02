@@ -9,6 +9,7 @@ import {useSearchParams} from 'next/navigation';
 import {getAnswerSearch} from '../apis/answerApi';
 import Pagination from '@/components/Pagination';
 import {PreviewCardProps} from '@/type';
+import {convertCreatedDate} from '@/utils/dateUtils';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -31,7 +32,16 @@ export default function Page() {
       size: PAGE_SIZE,
     });
 
-    setQuestions(data.questions);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mappedQuestions = data.content.map((question: any) => ({
+      question_id: question.questionId,
+      title: question.title,
+      content: question.content,
+      answerCount: question.answerCnt,
+      createdDate: convertCreatedDate(question.createdDate),
+    }));
+
+    setQuestions(mappedQuestions);
     setTotalPages(data.totalPages);
     setLoading(false);
   };
@@ -52,11 +62,11 @@ export default function Page() {
           questions.map((question, index) => (
             <PreviewCard
               key={index}
-              question_id={question?.question_id}
-              title={question?.title}
-              content={question?.content}
-              answerCount={question?.answerCount}
-              createdDate={question?.createdDate}
+              question_id={question.question_id}
+              title={question.title}
+              content={question.content}
+              answerCount={question.answerCount}
+              createdDate={question.createdDate}
             />
           ))}
       </div>
