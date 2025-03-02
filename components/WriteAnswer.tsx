@@ -48,7 +48,7 @@ export default function WriteAnswer() {
       setImages([]);
       setIsButtonEnabled(false);
 
-      router.push(window.location.pathname);
+      router.refresh();
     } catch (e) {
       console.log(e);
       router.push('/login');
