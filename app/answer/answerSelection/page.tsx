@@ -8,7 +8,6 @@ import {ViewQuestionProps} from '@/type';
 import ViewAnswer from '@/components/ViewAnswer';
 
 export default function AnswerSelection() {
-  // const userId = useInfoStore(state => state.userId);
   const [data, setData] = useState<ViewQuestionProps | null>(null);
 
   useEffect(() => {
