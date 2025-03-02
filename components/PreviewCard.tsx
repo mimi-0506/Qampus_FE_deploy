@@ -20,6 +20,9 @@ export default function PreviewCard({
     router.push(`/question/${question_id}`);
   };
 
+  const formattedDate = new Date(createdDate);
+  const isValidDate = !isNaN(formattedDate.getTime());
+
   return (
     <div
       className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border cursor-pointer relative"
@@ -49,7 +52,7 @@ export default function PreviewCard({
       <p className="text-[13px] text-[#606060] mt-5 line-clamp-2">{content}</p>
       <div className="mt-4 text-xs text-[#606060] font-[0] flex justify-end space-x-2">
         <p>답변 {answerCount}개 ·</p>
-        <p>{getKSTTimeAgo(new Date(createdDate))}</p>
+        <p>{isValidDate ? getKSTTimeAgo(formattedDate) : '등록일 없음'}</p>
       </div>
     </div>
   );
