@@ -3,7 +3,6 @@
 import SearchBar from '@/components/SearchBar';
 import PreviewCard from '@/components/PreviewCard';
 import {useEffect, useState} from 'react';
-import {mockQuestions} from '@/constants/mockQuestions';
 import SortSelector from '@/components/SortSelector';
 import {PAGE_SIZE} from '@/constants/constants';
 import {useSearchParams} from 'next/navigation';
@@ -43,22 +42,23 @@ export default function Page() {
 
       <div className="w-[70%] flex justify-between">
         <p className="text-black font-[600] py-8">
-          질문 {mockQuestions.length.toLocaleString()}개가 있어요
+          질문 {questions?.length}개가 있어요
         </p>
         <SortSelector />
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {questions?.map((question, index) => (
-          <PreviewCard
-            key={index}
-            question_id={question?.question_id}
-            title={question?.title}
-            content={question?.content}
-            answerCount={question?.answerCount}
-            createdDate={question?.createdDate}
-          />
-        ))}
+        {Array.isArray(questions) &&
+          questions.map((question, index) => (
+            <PreviewCard
+              key={index}
+              question_id={question?.question_id}
+              title={question?.title}
+              content={question?.content}
+              answerCount={question?.answerCount}
+              createdDate={question?.createdDate}
+            />
+          ))}
       </div>
 
       <Pagination

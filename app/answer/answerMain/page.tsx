@@ -64,16 +64,17 @@ export default function AnswerMainPage() {
       </div>
 
       <div className="w-[70%] flex flex-col">
-        {questions?.map((question, index) => (
-          <PreviewCard
-            key={index}
-            question_id={question?.question_id}
-            title={question?.title}
-            content={question?.content}
-            answerCount={question?.answerCount}
-            createdDate={question?.createdDate}
-          />
-        ))}
+        {Array.isArray(questions) &&
+          questions.map((question, index) => (
+            <PreviewCard
+              key={index}
+              question_id={question?.question_id}
+              title={question?.title}
+              content={question?.content}
+              answerCount={question?.answerCount}
+              createdDate={question?.createdDate}
+            />
+          ))}
       </div>
 
       {loading && <p>로딩 중...</p>}
