@@ -18,7 +18,7 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
   const accessToken = (await cookies()).get('accessToken')?.value;
 
   console.log('accessToken', accessToken);
-  if (!accessToken) redirect('/logout');
+  if (!accessToken) redirect('/login');
 
   const response = await fetch(`${API_BASE_URL}${url}`, {
     method,
