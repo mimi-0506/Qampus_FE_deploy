@@ -5,11 +5,15 @@ import Image from 'next/image';
 import {useState, useCallback} from 'react';
 import {setAnswer} from '@/app/apis/answerApi';
 import {debounce} from 'lodash';
+import {useParams} from 'next/navigation';
+import {useInfoStore} from '@/providers/store-provider';
 
 export default function WriteAnswer() {
+  const {questionId} = useParams();
   const [content, setContent] = useState('');
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const userId = useInfoStore(state => state.userId);
 
   const updateContent = useCallback(
     debounce(text => {
@@ -25,12 +29,22 @@ export default function WriteAnswer() {
 
   const handleSubmit = async () => {
     if (!content.trim()) return;
+    if (!questionId) {
+      console.error('questionsId 없음');
+    }
+    if (!userId) {
+      console.error('userId 없음');
+    }
+    console.log('답변 등록:', {userId, questionId, content, images});
 
-    console.log('답변 등록:', {content, images});
+    const response = await setAnswer({
+      userId: 9007199254740991,
+      questionId: Number(questionId),
+      content,
+      images,
+    });
 
-    const response = await setAnswer({userId: 0, questionId: 0, content});
-
-    console.log(response);
+    console.log('WriteAnswer API 응답: ', response);
 
     setContent('');
     setImages([]);
@@ -40,9 +54,7 @@ export default function WriteAnswer() {
   // 이미지 업로드 핸들러
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const uploadedImages = Array.from(event.target.files).map(file =>
-        URL.createObjectURL(file),
-      );
+      const uploadedImages = Array.from(event.target.files);
       setImages([...images, ...uploadedImages]);
     }
   };
@@ -95,7 +107,7 @@ export default function WriteAnswer() {
                     <Image
                       width={180}
                       height={240}
-                      src={image}
+                      src={URL.createObjectURL(image)}
                       alt={`업로드된 이미지 ${index + 1}`}
                       className="w-[180px] h-[240px] object-cover rounded-lg border"
                     />

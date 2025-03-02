@@ -16,6 +16,8 @@ export async function fetchWithAuth({
   cache,
   isFormData = false,
 }: FetchOptions) {
+  console.log('📌 fetchWithAuth 호출 URL:', url);
+
   const accessToken = document.cookie
     .split('; ')
     .find(row => row.startsWith('accessToken='))

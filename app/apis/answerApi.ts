@@ -64,20 +64,34 @@ export const setAnswer = async ({
   userId: number;
   questionId: number;
   content: string;
-  images?: string[];
+  images?: File[];
 }) => {
+  const formData = new FormData();
+
+  const requestDto = JSON.stringify({
+    user_id: userId,
+    question_id: questionId,
+    content,
+  });
+
+  formData.append(
+    'requestDto',
+    new Blob([requestDto], {type: 'application/json'}),
+  );
+
+  if (images && images.length > 0) {
+    images.forEach(image => {
+      formData.append('images', image);
+    });
+  }
+
   const data = await serverFetchWithAuth({
     method: 'POST',
     url: `/answers`,
-    body: {
-      requestDto: {
-        user_id: userId,
-        question_id: questionId,
-        content: content,
-      },
-      images: images || [],
-    },
+    body: formData,
+    isFormData: true,
   });
+
   if (data?.success) toast.success('답변을 생성했습니다.');
   else toast.error(data.message);
 
