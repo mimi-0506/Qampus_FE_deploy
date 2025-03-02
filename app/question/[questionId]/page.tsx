@@ -46,7 +46,11 @@ export default function QuestionDetailPage() {
         <ViewQuestion question={datas.question} isMyQuestion={isMyQuestion} />
       )}
       {datas?.answers && (
-        <ViewAnswer answers={datas?.answers} isMyQuestion={isMyQuestion} />
+        <ViewAnswer
+          answers={datas?.answers}
+          isMyQuestion={isMyQuestion}
+          questionId={datas.question.questionId}
+        />
       )}
       <div className="mt-10 flex justify-center">
         {isMyQuestion ? (
