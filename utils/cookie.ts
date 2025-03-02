@@ -1,17 +1,6 @@
-import Cookies from 'js-cookie';
-
-export const setAccessToken = () => {
-  const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-  if (accessToken) {
-    Cookies.set('accessToken', accessToken, {
-      expires: 7,
-      secure: true,
-      sameSite: 'Strict',
-    });
-    console.log('✅ AccessToken 쿠키 저장');
-  }
-};
-
-export const getAccessToken = () => {
-  return Cookies.get('accessToken') || localStorage.getItem('accessToken');
+export const getCookie = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift();
+  return null;
 };

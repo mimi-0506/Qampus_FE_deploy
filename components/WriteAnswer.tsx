@@ -5,15 +5,16 @@ import Image from 'next/image';
 import {useState, useCallback} from 'react';
 import {setAnswer} from '@/app/apis/answerApi';
 import {debounce} from 'lodash';
-import {useParams} from 'next/navigation';
-import {useInfoStore} from '@/providers/store-provider';
+import {useParams, useRouter} from 'next/navigation';
+import {getCookie} from '@/utils/cookie';
 
 export default function WriteAnswer() {
   const {questionId} = useParams<{questionId: string}>();
   const [content, setContent] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-  const userId = useInfoStore(state => state.userId);
+
+  const router = useRouter();
 
   const updateContent = useCallback(
     debounce(text => {
@@ -29,20 +30,28 @@ export default function WriteAnswer() {
 
   const handleSubmit = async () => {
     if (!content.trim()) return;
-    console.log(userId, questionId);
-    if (userId && questionId) {
+
+    try {
+      const infoCookie = getCookie('info');
+      const info = infoCookie ? JSON.parse(infoCookie) : null;
+
       const response = await setAnswer({
-        userId: userId,
+        userId: info.userId,
         questionId: parseInt(questionId),
         content,
         images,
       });
 
-      console.log('WriteAnswer API 응답: ', response);
+      console.log(response);
 
       setContent('');
       setImages([]);
       setIsButtonEnabled(false);
+
+      router.push(window.location.pathname);
+    } catch (e) {
+      console.log(e);
+      router.push('/login');
     }
   };
 

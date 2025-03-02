@@ -1,12 +1,10 @@
 'use client';
 
-import {useInfoStore} from '@/providers/store-provider';
 import {useSearchParams, useRouter} from 'next/navigation';
 import {useEffect} from 'react';
 
 export default function Kakao() {
   const searchParams = useSearchParams();
-  const setInfo = useInfoStore(state => state.setInfo);
   const router = useRouter();
   const code = searchParams.get('code');
 
@@ -23,7 +21,8 @@ export default function Kakao() {
 
     const data = await response.json();
     console.log('카카오 로그인', data);
-    setInfo(data);
+
+    document.cookie = `info=${JSON.stringify(data)}; path=/;`;
 
     if (data.userId) router.push('/userMain');
     else router.push('/login/info');
