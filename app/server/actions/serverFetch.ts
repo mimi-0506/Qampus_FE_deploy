@@ -11,6 +11,7 @@ type FetchOptions = {
   url: string;
   body?: unknown;
   cache?: boolean;
+  isFormData?: boolean;
 };
 
 export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
