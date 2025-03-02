@@ -62,7 +62,7 @@ export default function QuestionDetailPage() {
         ) : (
           <button
             onClick={() => setAnswering(true)}
-            className="bg-main text-white w-[50.6vw] rounded-[1vw] text-[1.4vw] flex justify-center items-center aspect-[973/85]"
+            className="bg-main mb-[5vw] text-white w-[50.6vw] rounded-[1vw] text-[1 document.cookie = 'info=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';4vw] flex justify-center items-center aspect-[973/85]"
           >
             답변하기
           </button>
