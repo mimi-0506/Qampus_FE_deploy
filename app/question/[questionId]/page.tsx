@@ -10,8 +10,6 @@ import WriteAnswer from '@/components/WriteAnswer';
 import {getAnswerDetail} from '@/app/apis/answerApi';
 import {useInfoStore} from '@/providers/store-provider';
 
-//나중에 서버사이드 컴포넌트로 교체
-
 export default function QuestionDetailPage() {
   const userId = useInfoStore(state => state.userId);
   const {questionId} = useParams<{questionId: string}>();
@@ -22,20 +20,19 @@ export default function QuestionDetailPage() {
 
   useEffect(() => {
     if (questionId) getData(parseInt(questionId));
-  }, []);
+  }, [questionId]);
 
   const getData = async (questionId: number) => {
     const response = await getAnswerDetail(questionId);
 
     console.log(response);
 
-    if (response.create_id === userId) setIsMyQuestion(true);
-
-    const {answers, ...question} = response;
+    // 응답에서 `userId`와 비교하여 내가 작성한 질문인지 확인
+    if (response.userId === userId) setIsMyQuestion(true);
 
     setDatas({
-      question: question,
-      answers: answers,
+      question: response,
+      answers: response.answers || [],
     });
   };
 
@@ -47,7 +44,7 @@ export default function QuestionDetailPage() {
       )}
       {datas?.answers && (
         <ViewAnswer
-          answers={datas?.answers}
+          answers={datas.answers}
           isMyQuestion={isMyQuestion}
           questionId={datas.question.questionId}
         />
@@ -64,9 +61,7 @@ export default function QuestionDetailPage() {
           <WriteAnswer />
         ) : (
           <button
-            onClick={() => {
-              setAnswering(true);
-            }}
+            onClick={() => setAnswering(true)}
             className="bg-main text-white w-[50.6vw] rounded-[1vw] text-[1.4vw] flex justify-center items-center aspect-[973/85]"
           >
             답변하기

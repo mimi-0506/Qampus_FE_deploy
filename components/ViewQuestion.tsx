@@ -1,11 +1,10 @@
 import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
-// import {formatDistanceToNow} from 'date-fns';
+import {formatDistanceToNow} from 'date-fns';
 import Image from 'next/image';
-// import {useRouter} from 'next/navigation';
 import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
-// import {ko} from 'date-fns/locale';
+import {ko} from 'date-fns/locale';
 
 export default function ViewQuestion({
   question,
@@ -15,10 +14,28 @@ export default function ViewQuestion({
   isMyQuestion: boolean;
 }) {
   const [imCurious, setImCurious] = useState(question.curious);
-  // const getKSTTimeAgo = (utcDate: string) => {
-  //   const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-  //   return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
-  // };
+
+  const convertCreatedDate = (createdDate?: number[]) => {
+    if (!createdDate || createdDate.length < 6) return null;
+
+    const [year, month, day, hour, minute, second, nanoseconds = 0] =
+      createdDate;
+
+    const millisec = nanoseconds / 1e6;
+
+    const date = new Date(year, month - 1, day, hour, minute, second, millisec);
+
+    return isNaN(date.getTime()) ? null : date;
+  };
+
+  const getKSTTimeAgo = (date: Date | null) => {
+    if (!date) return '등록일 없음';
+    return formatDistanceToNow(date, {addSuffix: true, locale: ko});
+  };
+
+  const createdDate = Array.isArray(question.createdDate)
+    ? convertCreatedDate(question.createdDate)
+    : null;
 
   const handleCurious = async () => {
     if (imCurious) await deleteCurious(question.questionId);
@@ -68,8 +85,7 @@ export default function ViewQuestion({
             <button onClick={handleQuestionEdit}>수정하기</button>
           )}
           <p className="text-xs md:text-sm text-[#606060]">
-            답변 {question.answer_cnt}개 ·
-            {/* {getKSTTimeAgo(question.created_date)} */}
+            답변 {question.answer_cnt ?? 0}개 · {getKSTTimeAgo(createdDate)}
           </p>
         </div>
       </div>

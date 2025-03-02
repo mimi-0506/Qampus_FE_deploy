@@ -33,7 +33,11 @@ export default function AnswerSelection() {
       {data ? (
         <>
           <ViewQuestion question={data?.question} isMyQuestion={true} />
-          <ViewAnswer answers={data.answers} isMyQuestion={true} />
+          <ViewAnswer
+            answers={data.answers}
+            isMyQuestion={true}
+            questionId={data.question.questionId}
+          />
         </>
       ) : (
         <div>loading...</div>
