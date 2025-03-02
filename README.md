@@ -6,7 +6,7 @@
  <img src="https://github.com/user-attachments/assets/6348e09f-f7c3-422e-9ea4-0635447d4787" alt="Image" style="width: 20%; height: auto;" />
 
 
-[Deployment](https://qampus-fe-deploy.vercel.app/) |  [Figma](https://www.figma.com/design/UcFE01El743kHmDE82Brb1/%EC%8A%A4%EC%9C%84%ED%94%84-10%ED%8C%80) | [Swagger](http://211.188.63.108:8080/swagger-ui/index.html#)
+[Deployment](https://qampus-fe-deploy.vercel.app/) |  [Figma](https://www.figma.com/design/UcFE01El743kHmDE82Brb1/%EC%8A%A4%EC%9C%84%ED%94%84-10%ED%8C%80) | [API docs](https://www.notion.so/API-192415409ec280adb48ff6342c4d96ca?pvs=4)
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
