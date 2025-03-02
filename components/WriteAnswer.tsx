@@ -48,7 +48,7 @@ export default function WriteAnswer() {
       setImages([]);
       setIsButtonEnabled(false);
 
-      router.refresh();
+      router.push(`/question/${questionId}`);
     } catch (e) {
       console.log(e);
       router.push('/login');
