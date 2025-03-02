@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import {useState} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
-import {formatDistanceToNow} from 'date-fns';
-import {ko} from 'date-fns/locale';
+// import {formatDistanceToNow} from 'date-fns';
+// import {ko} from 'date-fns/locale';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
 
@@ -19,10 +19,10 @@ export default function Answer({
 }) {
   const [thumbsUp, setThumbsUp] = useState(false);
 
-  const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
-  };
+  // const getKSTTimeAgo = (utcDate: string) => {
+  //   const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
+  //   return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+  // };
 
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
@@ -82,7 +82,7 @@ export default function Answer({
           </button>
         ) : (
           <p className="text-xs md:text-sm text-[#606060]">
-            {getKSTTimeAgo(answer.created_date)}
+            {/* {getKSTTimeAgo(answer.created_date)} */}
           </p>
         )}
       </div>

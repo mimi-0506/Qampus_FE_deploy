@@ -9,7 +9,7 @@ import {useParams} from 'next/navigation';
 import {useInfoStore} from '@/providers/store-provider';
 
 export default function WriteAnswer() {
-  const {questionId} = useParams();
+  const {questionId} = useParams<{questionId: string}>();
   const [content, setContent] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
@@ -29,26 +29,21 @@ export default function WriteAnswer() {
 
   const handleSubmit = async () => {
     if (!content.trim()) return;
-    if (!questionId) {
-      console.error('questionsId 없음');
+    console.log(userId, questionId);
+    if (userId && questionId) {
+      const response = await setAnswer({
+        userId: userId,
+        questionId: parseInt(questionId),
+        content,
+        images,
+      });
+
+      console.log('WriteAnswer API 응답: ', response);
+
+      setContent('');
+      setImages([]);
+      setIsButtonEnabled(false);
     }
-    if (!userId) {
-      console.error('userId 없음');
-    }
-    console.log('답변 등록:', {userId, questionId, content, images});
-
-    const response = await setAnswer({
-      userId: 9007199254740991,
-      questionId: Number(questionId),
-      content,
-      images,
-    });
-
-    console.log('WriteAnswer API 응답: ', response);
-
-    setContent('');
-    setImages([]);
-    setIsButtonEnabled(false);
   };
 
   // 이미지 업로드 핸들러

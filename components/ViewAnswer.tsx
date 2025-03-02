@@ -45,17 +45,18 @@ export default function ViewAnswer({
 
   return (
     <>
-      {answers.map((nowAnswer: answerDetailType, key) => (
-        <>
-          <ViewAI questionId={questionId} />
-          <Answer
-            answer={nowAnswer}
-            key={key}
-            isMyQuestion={isMyQuestion}
-            onSelect={handleSelectAnswer}
-          />
-        </>
-      ))}
+      {Array.isArray(answers) &&
+        answers.map((nowAnswer: answerDetailType, key) => (
+          <div key={key}>
+            <ViewAI questionId={questionId} />
+            <Answer
+              answer={nowAnswer}
+              key={key}
+              isMyQuestion={isMyQuestion}
+              onSelect={handleSelectAnswer}
+            />
+          </div>
+        ))}
     </>
   );
 }
