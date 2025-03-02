@@ -49,11 +49,7 @@
 
 ## 🎉 팀 구성
 
-| 역할       | 이름        | 인원 수 |
-|------------|-------------|---------|
-| 기획       | 정유나      | 1명    |
-| 디자이너   | 김이준    | 1명    |
-| 프론트엔드 | 박혜미, 김다은  | 2명    |
-| 백엔드     | 김도연, 박재하, 기문  | 3명    |
-
-
+| 기획 &nbsp;&nbsp;&nbsp;&nbsp; | 디자이너 &nbsp;&nbsp;&nbsp;&nbsp; | 프론트엔드 | 프론트엔드 | 백엔드 | 백엔드 | 백엔드 |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|  |  | <img src="https://avatars.githubusercontent.com/u/62527898?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/150661115?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/144890194?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/127723000?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/153352715?v=4" width="150" height="150"/> |
+| 정유나 | 김이준 | 박혜미<br/>[@mimi-0506](https://github.com/mimi-0506) | 김다은<br/>[@dani1552](https://github.com/dani1552) | 김도연<br/>[@tkv00](https://github.com/tkv00) | 박재하<br/>[@jaepar](https://github.com/jaepar) | 홍기문<br/>[@KimoonH](https://github.com/KimoonH) |
