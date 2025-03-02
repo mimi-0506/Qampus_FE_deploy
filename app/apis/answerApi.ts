@@ -117,7 +117,7 @@ export const getAnswerListByCategory = async ({
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/${categoryId}?page=${page}&size=${size}&sort=latest`,
+    url: `/answers?category_id=${categoryId}&page=${page}&size=${size}&sort=latest`,
   });
 
   return data;

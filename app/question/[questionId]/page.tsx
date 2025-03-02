@@ -8,10 +8,9 @@ import {ViewQuestionProps} from '@/type';
 import ViewAnswer from '@/components/ViewAnswer';
 import WriteAnswer from '@/components/WriteAnswer';
 import {getAnswerDetail} from '@/app/apis/answerApi';
-import {useInfoStore} from '@/providers/store-provider';
+import {getCookie} from '@/utils/cookie';
 
 export default function QuestionDetailPage() {
-  const userId = useInfoStore(state => state.userId);
   const {questionId} = useParams<{questionId: string}>();
 
   const [datas, setDatas] = useState<ViewQuestionProps>();
@@ -27,8 +26,10 @@ export default function QuestionDetailPage() {
 
     console.log(response);
 
-    // 응답에서 `userId`와 비교하여 내가 작성한 질문인지 확인
-    if (response.userId === userId) setIsMyQuestion(true);
+    const infoCookie = getCookie('info');
+    const info = infoCookie ? JSON.parse(infoCookie) : null;
+
+    if (response.userId === info.userId) setIsMyQuestion(true);
 
     setDatas({
       question: response,
