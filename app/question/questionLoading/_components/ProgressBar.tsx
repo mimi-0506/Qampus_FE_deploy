@@ -1,17 +1,17 @@
 'use client';
 
 import {useState, useEffect} from 'react';
-import {useRouter} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 
 export default function ProgressBar() {
   const [progress, setProgress] = useState(0);
   const router = useRouter();
-  const questionId = 0; //나중에 파람을 받게 갈아끼우기
+  const searchParam = useSearchParams();
 
   useEffect(() => {
     if (progress >= 100) {
       const timeout = setTimeout(() => {
-        router.push(`/question/${questionId}`);
+        router.push(`/question/${searchParam.get('q')}`);
       }, 300);
 
       return () => clearTimeout(timeout);

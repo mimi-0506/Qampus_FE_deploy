@@ -23,11 +23,24 @@ export type answerDetailType = {
   content: string;
   created_date: string;
   like_count: number;
-  is_chosen: boolean;
+  chosen: boolean;
   images?: string[];
+  universityName: string;
 };
 
 export type questionDetailType = {
+  questionId: number;
+  title: string;
+  content: string;
+  university_name: string;
+  createdDate: string | number[];
+  view_cnt: number;
+  curious_count: number;
+  answer_cnt?: number;
+  curious: boolean;
+};
+
+export type detailDataType = {
   question_id: number;
   title: string;
   content: string;
@@ -36,6 +49,7 @@ export type questionDetailType = {
   view_cnt: number;
   curious_count: number;
   answer_cnt?: number;
+  answers: answerDetailType[];
 };
 
 export type ViewQuestionProps = {
@@ -50,8 +64,8 @@ export type userHomeDtoType = {
 };
 
 export type userMainDataType = {
-  weekly_questions: questionType[];
-  popular_answers: answerType[];
+  weeklyQuestions: questionType[];
+  popularAnswers: answerType[];
   userHomeDto: userHomeDtoType;
 };
 

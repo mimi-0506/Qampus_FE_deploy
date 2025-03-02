@@ -1,10 +1,17 @@
 'use client';
 
+import {useInfoStore} from '@/providers/store-provider';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
+import {useEffect} from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
+  const logout = useInfoStore(state => state.logout);
+
+  useEffect(() => {
+    logout();
+  }, []);
 
   const loginWithKakao = () => {
     const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&client_secret=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY}`;

@@ -1,12 +1,11 @@
 import toast from 'react-hot-toast';
 import {fetchWithAuth as clientFetchWithAuth} from './clientFetch';
-import {fetchWithAuth as serverFetchWithAuth} from '../server/actions/serverFetch';
 
 export const editAnswer = async (
   answerId: string | number,
   content: string,
 ) => {
-  const data = await serverFetchWithAuth({
+  const data = await clientFetchWithAuth({
     method: 'POST',
     url: `/answer/${answerId}`,
     body: {content},
@@ -18,7 +17,7 @@ export const editAnswer = async (
 };
 
 export const deleteAnswer = async (answerId: number) => {
-  const data = await serverFetchWithAuth({
+  const data = await clientFetchWithAuth({
     method: 'DELETE',
     url: `/answer/${answerId}`,
   });
@@ -37,7 +36,7 @@ export const setAnswerChoice = async ({
   questionId: number;
   isChosen: boolean;
 }) => {
-  const data = await serverFetchWithAuth({
+  const data = await clientFetchWithAuth({
     method: 'PUT',
     url: `/answer/choice`,
     body: {
@@ -64,24 +63,38 @@ export const setAnswer = async ({
   userId: number;
   questionId: number;
   content: string;
-  images?: string[];
+  images?: File[];
 }) => {
-  const data = await serverFetchWithAuth({
+  const formData = new FormData();
+
+  const requestDto = JSON.stringify({
+    user_id: userId,
+    question_id: questionId,
+    content,
+  });
+
+  formData.append(
+    'requestDto',
+    new Blob([requestDto], {type: 'application/json'}),
+  );
+
+  if (images && images.length > 0) {
+    images.forEach(image => {
+      formData.append('images', image);
+    });
+  }
+
+  const data = await clientFetchWithAuth({
     method: 'POST',
     url: `/answers`,
-    body: {
-      requestDto: {
-        user_id: userId,
-        question_id: questionId,
-        content: content,
-      },
-      images: images || [],
-    },
+    body: formData,
+    isFormData: true,
   });
+
   if (data?.success) toast.success('답변을 생성했습니다.');
   else toast.error(data.message);
 
-  return data?.success;
+  return data.success;
 };
 
 export const getAnswerDetail = async (questionId: number) => {
