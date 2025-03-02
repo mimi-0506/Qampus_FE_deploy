@@ -10,6 +10,7 @@ import {useEffect, useState} from 'react';
 import {getAnswerListByCategory} from '@/app/apis/answerApi';
 import {PAGE_SIZE} from '@/constants/constants';
 import {PreviewCardProps} from '@/type';
+import {convertCreatedDate} from '@/utils/dateUtils';
 
 export default function AnswerMainPage() {
   const [selectedField, setSelectedField] = useState<number>(0);
@@ -34,8 +35,17 @@ export default function AnswerMainPage() {
       size: PAGE_SIZE,
     });
 
-    setQuestions(response);
-    setTotalPages(response?.totalPages);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mappedQuestions = response.content.map((question: any) => ({
+      question_id: question.question_id,
+      title: question.title,
+      content: question.content,
+      answerCount: question.answerCount,
+      createdDate: convertCreatedDate(question.createdDate),
+    }));
+
+    setQuestions(mappedQuestions);
+    setTotalPages(response.totalPages);
     setLoading(false);
   };
 
@@ -68,11 +78,11 @@ export default function AnswerMainPage() {
           questions.map((question, index) => (
             <PreviewCard
               key={index}
-              question_id={question?.question_id}
-              title={question?.title}
-              content={question?.content}
-              answerCount={question?.answerCount}
-              createdDate={question?.createdDate}
+              question_id={question.question_id}
+              title={question.title}
+              content={question.content}
+              answerCount={question.answerCount}
+              createdDate={question.createdDate}
             />
           ))}
       </div>
