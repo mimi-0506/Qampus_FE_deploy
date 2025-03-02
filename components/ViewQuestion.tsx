@@ -1,7 +1,8 @@
-import {setCurious} from '@/app/apis/curiousApi';
+import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
 import {formatDistanceToNow} from 'date-fns';
 import Image from 'next/image';
+import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
 import {ko} from 'date-fns/locale';
 
@@ -12,14 +13,35 @@ export default function ViewQuestion({
   question: questionDetailType;
   isMyQuestion: boolean;
 }) {
-  const getKSTTimeAgo = (utcDate: string) => {
-    const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+  const [imCurious, setImCurious] = useState(question.curious);
+
+  const convertCreatedDate = (createdDate?: number[]) => {
+    if (!createdDate || createdDate.length < 6) return null;
+
+    const [year, month, day, hour, minute, second, nanoseconds = 0] =
+      createdDate;
+
+    const millisec = nanoseconds / 1e6;
+
+    const date = new Date(year, month - 1, day, hour, minute, second, millisec);
+
+    return isNaN(date.getTime()) ? null : date;
   };
 
+  const getKSTTimeAgo = (date: Date | null) => {
+    if (!date) return '등록일 없음';
+    return formatDistanceToNow(date, {addSuffix: true, locale: ko});
+  };
+
+  const createdDate = Array.isArray(question.createdDate)
+    ? convertCreatedDate(question.createdDate)
+    : null;
+
   const handleCurious = async () => {
-    //궁금해요 눌렀는지 여부에 따라..
-    await setCurious(question.question_id);
+    if (imCurious) await deleteCurious(question.questionId);
+    else await setCurious(question.questionId);
+
+    setImCurious(x => !x);
   };
 
   const handleQuestionEdit = async () => {
@@ -63,8 +85,7 @@ export default function ViewQuestion({
             <button onClick={handleQuestionEdit}>수정하기</button>
           )}
           <p className="text-xs md:text-sm text-[#606060]">
-            답변 {question.answer_cnt}개 ·{' '}
-            {getKSTTimeAgo(question.created_date)}
+            답변 {question.answer_cnt ?? 0}개 · {getKSTTimeAgo(createdDate)}
           </p>
         </div>
       </div>

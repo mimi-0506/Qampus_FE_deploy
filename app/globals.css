@@ -23,3 +23,7 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+#_rht_toaster {
+  top: 30vw !important;
+}

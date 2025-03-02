@@ -1,9 +1,10 @@
 'use client';
 
+import {useState} from 'react';
 import {PreviewCardProps} from '@/type';
 import {useRouter} from 'next/navigation';
-// import {formatDistanceToNow} from 'date-fns';
-// import {ko} from 'date-fns/locale';
+// import { formatDistanceToNow } from 'date-fns';
+// import { ko } from 'date-fns/locale';
 
 export default function PreviewCard({
   title,
@@ -13,20 +14,31 @@ export default function PreviewCard({
   question_id,
 }: PreviewCardProps) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   // 시간 포맷 (UTC → KST 변환 후 상대 시간으로 표시)
   const getKSTTimeAgo = (utcDate: string) => {
-    return utcDate; //에러나서 우선 이렇게 해뒀습니다!
+    return utcDate; // 에러나서 우선 이렇게 해뒀습니다!
     // const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-    // return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
+    // return formatDistanceToNow(kstDate, { addSuffix: true, locale: ko });
+  };
+
+  const handleNavigation = () => {
+    setIsLoading(true);
+    router.push(`/question/${question_id}`);
   };
 
   return (
     <div
-      className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border cursor-pointer"
-      onClick={() => {
-        router.push(`/question/${question_id}`);
-      }}
+      className="w-full bg-white mb-4 rounded-2xl px-6 py-6 border cursor-pointer relative"
+      onClick={handleNavigation}
     >
+      {isLoading && (
+        <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
+        </div>
+      )}
+
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
         {answerCount > 0 && (
