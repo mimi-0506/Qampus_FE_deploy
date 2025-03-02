@@ -1,15 +1,27 @@
 'use client';
 
-import {useState} from 'react';
+import {getAIAnswer} from '@/app/apis/aiApi';
+import {useEffect, useState} from 'react';
 import {FaChevronDown, FaChevronUp} from 'react-icons/fa6';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-export default function ViewAI({answer}: {answer: string}) {
+export default function ViewAI({questionId}: {questionId: number}) {
+  const [data, setData] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await getAIAnswer(questionId);
+
+    setData(response.content);
+  };
+
   return (
-    <div className="w-full mt-6">
+    <div className="w-[72.6vw] mt-6">
       <div className="w-full bg-[#F4F4F4] rounded-lg p-6 shadow-sm">
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -21,7 +33,7 @@ export default function ViewAI({answer}: {answer: string}) {
 
         {isOpen && (
           <div className="mt-6 text-sm text-[#273963]">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{answer}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{data}</ReactMarkdown>
           </div>
         )}
       </div>

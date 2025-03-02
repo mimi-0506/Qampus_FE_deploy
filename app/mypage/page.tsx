@@ -17,6 +17,7 @@ export default function MyPage() {
   const [selectedField, setSelectedField] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [questionList, setQuestionList] = useState<PreviewCardProps[] | []>([]);
+  const [info, setInfo] = useState();
 
   const totalPages = Math.ceil(mockQuestions.length / PAGE_SIZE);
 
@@ -31,17 +32,16 @@ export default function MyPage() {
       pageSize: PAGE_SIZE,
     });
 
-    const data = await response.json();
+    const {questions, ...nowInfo} = response;
+    setQuestionList([...questionList, ...questions]);
 
-    console.log(data);
-
-    setQuestionList([...questionList, ...data]);
+    if (!info) setInfo(nowInfo);
   };
 
   return (
     <main className="flex w-full pb-20 flex-col items-center bg-white min-h-screen">
       <SearchBar />
-      <InfoCard />
+      <InfoCard info={info} />
       <SelectField
         selectedField={selectedField}
         setSelectedField={setSelectedField}
@@ -50,8 +50,8 @@ export default function MyPage() {
       <div className="flex w-[70%] justify-between">
         <p className="text-black font-[600] py-8">
           {selectedField
-            ? `${CATEGORIES[selectedField]} 분야의 등록된 질문은 0개가 있어요`
-            : `지금까지 총 ${mockQuestions.length.toLocaleString()}개의 질문을
+            ? `${CATEGORIES[selectedField]} 분야의 등록된 질문은 ${0}개가 있어요`
+            : `지금까지 총 ${questionList.length}개의 질문을
           작성했어요`}
         </p>
         <SortSelector />

@@ -2,6 +2,7 @@ import {answerDetailType} from '@/type';
 import Answer from './Answer';
 import {useState} from 'react';
 import {setAnswerChoice} from '@/app/apis/answerApi';
+import ViewAI from './VIewAI';
 
 export default function ViewAnswer({
   answers,
@@ -10,7 +11,7 @@ export default function ViewAnswer({
 }: {
   answers: answerDetailType[];
   isMyQuestion: boolean;
-  questionId?: number;
+  questionId: number;
 }) {
   const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(null);
 
@@ -44,14 +45,16 @@ export default function ViewAnswer({
 
   return (
     <>
-      {answers.map((nowAnswer: answerDetailType, key) => (
-        <Answer
-          answer={nowAnswer}
-          key={key}
-          isMyQuestion={isMyQuestion}
-          onSelect={handleSelectAnswer}
-        />
-      ))}
+      <ViewAI questionId={questionId} />
+      {Array.isArray(answers) &&
+        answers.map((nowAnswer: answerDetailType, key) => (
+          <Answer
+            answer={nowAnswer}
+            key={key}
+            isMyQuestion={isMyQuestion}
+            onSelect={handleSelectAnswer}
+          />
+        ))}
     </>
   );
 }

@@ -33,21 +33,21 @@ const universities: MarkerData[] = [
   {name: '전남대', coordinates: [126.9028, 35.1761], rank: 12},
 ];
 
+type hoverType = {
+  univ: MarkerData;
+  coordinate: {x: number; y: number};
+};
+
 // 순위에 따라 색상 변화 (높은 순위는 밝은 색, 낮은 순위는 어두운 색)
 const getColorByRank = (rank: number) => {
   const brightness = 255 - rank * 15; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
   return `rgb(${brightness}, ${brightness}, 255)`; // 푸른 계열의 색상 변화
 };
+const geoUrl =
+  'https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo.json';
 
 export default function UnivMap() {
-  const geoUrl =
-    'https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo.json';
-
-  const [hoveredMarker, setHoveredMarker] = useState<{
-    name: string;
-    x: number;
-    y: number;
-  } | null>(null);
+  const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
 
   const [zoomLevel, setZoomLevel] = useState(1); // 줌 레벨 상태
 
@@ -95,9 +95,12 @@ export default function UnivMap() {
               <Marker
                 key={uni.name}
                 coordinates={uni.coordinates}
-                onMouseEnter={e =>
-                  setHoveredMarker({name: uni.name, x: e.clientX, y: e.clientY})
-                }
+                onMouseEnter={e => {
+                  setHoveredMarker({
+                    univ: uni,
+                    coordinate: {x: e.clientX, y: e.clientY},
+                  });
+                }}
                 onMouseLeave={() => setHoveredMarker(null)}
               >
                 {/* Glow 효과 */}
@@ -137,14 +140,16 @@ export default function UnivMap() {
         <div
           className="bg-gray-800 text-white p-6 rounded-lg shadow-lg w-[20.5vw] absolute"
           style={{
-            left: hoveredMarker.x,
-            top: hoveredMarker.y,
+            left: hoveredMarker.coordinate.x,
+            top: hoveredMarker.coordinate.y,
           }}
         >
-          <h2 className="text-[1.6vw] font-semibold"> {hoveredMarker.name}</h2>
-          <p className="text-grey3 text-[1vw] mt-1">49,201명 참여중</p>
+          <h2 className="text-[1.6vw] font-semibold">
+            {hoveredMarker.univ.name}
+          </h2>
+          {/* <p className="text-grey3 text-[1vw] mt-1">49,201명 참여중</p> */}
           <p className="text-[1.1vw] text-grey5 mt-3">
-            주간 <span className="font-bold">1위</span>
+            주간 <span className="font-bold">{hoveredMarker.univ.rank}위</span>
           </p>
         </div>
       )}
