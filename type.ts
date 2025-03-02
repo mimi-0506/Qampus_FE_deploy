@@ -18,7 +18,7 @@ export type answerType = {
 };
 
 export type answerDetailType = {
-  answer_id: number;
+  answerId: number;
   user_id: number;
   content: string;
   created_date: string;

@@ -28,8 +28,8 @@ export default function Answer({
     setThumbsUp(prev => !prev);
     console.log(answer);
 
-    if (thumbsUp) await deleteThumbsUP(answer.answer_id);
-    else setThumbsUP(answer.answer_id);
+    if (thumbsUp) await deleteThumbsUP(answer.answerId);
+    else setThumbsUP(answer.answerId);
   };
 
   return (
@@ -80,7 +80,7 @@ export default function Answer({
         {isMyQuestion ? (
           <button
             className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
-            onClick={() => onSelect(answer.answer_id)}
+            onClick={() => onSelect(answer.answerId)}
           >
             채택하기
           </button>
