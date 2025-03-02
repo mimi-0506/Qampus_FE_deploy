@@ -3,10 +3,9 @@
 import Image from 'next/image';
 import {useState} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
-// import {formatDistanceToNow} from 'date-fns';
-// import {ko} from 'date-fns/locale';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
+import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
 
 export default function Answer({
   answer,
@@ -19,11 +18,6 @@ export default function Answer({
 }) {
   const [thumbsUp, setThumbsUp] = useState(false);
 
-  // const getKSTTimeAgo = (utcDate: string) => {
-  //   const kstDate = new Date(new Date(utcDate).getTime() + 9 * 60 * 60 * 1000);
-  //   return formatDistanceToNow(kstDate, {addSuffix: true, locale: ko});
-  // };
-
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
     console.log(answer);
@@ -31,6 +25,8 @@ export default function Answer({
     if (thumbsUp) await deleteThumbsUP(answer.answerId);
     else setThumbsUP(answer.answerId);
   };
+
+  const createdDate = convertCreatedDate(answer.created_date);
 
   return (
     <div className="bg-white rounded-2xl w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
@@ -86,7 +82,7 @@ export default function Answer({
           </button>
         ) : (
           <p className="text-xs md:text-sm text-[#606060]">
-            {/* {getKSTTimeAgo(answer.created_date)} */}
+            {getKSTTimeAgo(createdDate)}
           </p>
         )}
       </div>

@@ -21,7 +21,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-[600px] h-[40px] flex items-center border border-[#D9D9D9] text-sm rounded-3xl px-4 mb-[3vw]">
+    <div className="w-[600px] mt-[2vw] h-[40px] flex items-center border border-[#D9D9D9] text-sm rounded-3xl px-4 mb-[3vw]">
       <input
         ref={inputRef}
         type="text"
