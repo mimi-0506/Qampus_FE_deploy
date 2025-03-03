@@ -9,15 +9,22 @@ import remarkGfm from 'remark-gfm';
 export default function ViewAI({questionId}: {questionId: number}) {
   const [data, setData] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const response = await getAIAnswer(questionId);
-
-    setData(response.content);
+    setIsLoading(true);
+    try {
+      const response = await getAIAnswer(questionId);
+      setData(response.content);
+    } catch (error) {
+      console.error('데이터 불러오기 실패:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,7 +40,13 @@ export default function ViewAI({questionId}: {questionId: number}) {
 
         {isOpen && (
           <div className="mt-6 text-sm text-[#273963]">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{data}</ReactMarkdown>
+            {isLoading ? (
+              <div className="text-gray-500 animate-pulse">
+                ai 답변을 받아오는 중..
+              </div>
+            ) : (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{data}</ReactMarkdown>
+            )}
           </div>
         )}
       </div>
