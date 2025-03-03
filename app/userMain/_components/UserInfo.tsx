@@ -32,8 +32,6 @@ export default function UserInfo({
                 lastRank={userHomeDto?.last_month_ranking}
                 thisRank={userHomeDto?.this_month_ranking}
               />
-
-              <p className="text-grey2">3</p>
             </span>
             <span className="gap-[0.3vw] flex  items-center">
               <p>학과 랭킹 {userHomeDto?.this_month_major_ranking}위 </p>

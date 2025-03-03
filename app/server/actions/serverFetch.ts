@@ -34,8 +34,6 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
 
   const data = await response.json();
 
-  console.log('fetchWithAuth', data);
-
   if (response.status !== 200) handleApiError(response.status);
   else return data;
 }
