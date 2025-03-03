@@ -45,11 +45,6 @@ export const setAnswerChoice = async ({
       is_chosen: isChosen,
     },
   });
-  if (data?.success)
-    toast.success(
-      isChosen ? '답변을 채택했습니다.' : '답변 채택을 취소했습니다.',
-    );
-  else toast.error(data.message);
 
   return data?.success;
 };
