@@ -51,7 +51,7 @@ export const editQuestion = async ({
   categoryId: number; //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
 }) => {
   const data = await fetchWithAuth({
-    method: 'POST',
+    method: 'PUT',
     url: `/questions/${questionId}`,
     body: {
       title: title,
