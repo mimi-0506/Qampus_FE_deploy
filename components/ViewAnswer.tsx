@@ -13,7 +13,9 @@ export default function ViewAnswer({
   isMyQuestion: boolean;
   questionId: number;
 }) {
-  const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(null);
+  const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(
+    answers?.find(answer => answer.isChosen)?.answerId ?? null,
+  );
 
   // 답변 채택
   const handleSelectAnswer = async (answerId: number) => {
@@ -41,9 +43,6 @@ export default function ViewAnswer({
 
     //3.클라이언트측 채택된 답변 수정(낙관적 업데이트)
     setChooseAnswerId(answerId);
-
-    //4.새로고침
-    window.location.reload();
   };
 
   return (
@@ -56,6 +55,7 @@ export default function ViewAnswer({
             key={key}
             isMyQuestion={isMyQuestion}
             onSelect={handleSelectAnswer}
+            chooseAnswerId={chooseAnswerId}
           />
         ))}
     </>
