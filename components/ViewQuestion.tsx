@@ -72,7 +72,9 @@ export default function ViewQuestion({
       <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <button
           onClick={handleCurious}
-          className="flex items-center gap-2 border px-4 py-2 rounded-3xl text-sm transition-all duration-300 bg-white text-black"
+          className={`flex items-center gap-2 border px-4 py-2 rounded-3xl text-sm transition-all duration-300
+               ${imCurious ? 'bg-[#7BA1FF] text-white' : 'bg-white text-black'}
+            `}
         >
           <BsQuestionLg />
           나도 궁금해요

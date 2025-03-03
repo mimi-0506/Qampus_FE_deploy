@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {useParams, useRouter} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
 import WriteQuestion from '@/components/WriteQuestion';
@@ -18,7 +18,8 @@ export default function QuestionCreatePage() {
   const [images, setImages] = useState<File[]>([]);
   const [questionSubmit, setQuestionSubmit] = useState(false);
 
-  const {edit} = useParams<{edit: string}>(); //수정일 경우 questionId가 담겨 옴
+  const searchParams = useSearchParams();
+  const edit = searchParams.get('edit');
 
   useEffect(() => {
     if (edit) setEdit(parseInt(edit));
@@ -63,7 +64,7 @@ export default function QuestionCreatePage() {
 
       console.log('📌 API 응답:', response);
 
-      router.push(`/question/questionLoading?q=${response.questionId}`);
+      router.push(`/question/questionLoading?q=${response.questionId || edit}`);
     } catch (error) {
       console.error('❌ API 호출 오류:', error);
     }
