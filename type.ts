@@ -61,6 +61,12 @@ export type userHomeDtoType = {
   name: string;
   universityName: string;
   major: string;
+
+  last_month_major_ranking: number;
+  last_month_ranking: number;
+  this_month_major_ranking: number;
+  this_month_ranking: number;
+  university_name: string;
 };
 
 export type userMainDataType = {
