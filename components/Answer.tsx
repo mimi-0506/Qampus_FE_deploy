@@ -18,6 +18,7 @@ export default function Answer({
   onSelect: (answerId: number) => Promise<void>;
   chooseAnswerId: number | null;
 }) {
+  const iChosed = chooseAnswerId === answer.answerId;
   const [thumbsUp, setThumbsUp] = useState(false);
 
   const handleThumbsUP = async () => {
@@ -31,19 +32,27 @@ export default function Answer({
   const createdDate = convertCreatedDate(answer.created_date);
 
   return (
-    <div className="bg-white rounded-2xl w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
+    <div className="bg-white rounded-2xl relative w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
-          {chooseAnswerId === answer.answerId ? (
-            <div className="w-[4.68vw] aspect-[90/170] relative">
-              <Image src="/images/question/adopt.png" alt="adopt" fill />
-            </div>
+          {iChosed ? (
+            <Image
+              src="/images/question/adopt.png"
+              alt="adopt"
+              width={91}
+              height={170}
+              className="absolute top-0"
+            />
           ) : (
-            <div className="w-[1.25vw] aspect-[1/1] relative">
-              <Image src="/images/question/A.svg" alt="A icon" fill />
-            </div>
+            <Image
+              src="/images/question/A.svg"
+              width={45}
+              height={72}
+              alt="A icon"
+              className="absolute top-[46px] left-[46px]"
+            />
           )}
-          <p className="text-black text-sm">{answer.content}</p>
+          <p className={`text-black text-sm ml-[7vw]`}>{answer.content}</p>
         </div>
         <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
           {answer?.universityName}
@@ -76,7 +85,7 @@ export default function Answer({
         </button>
 
         {isMyQuestion ? (
-          !chooseAnswerId && (
+          !iChosed && (
             <button
               className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
               onClick={() => onSelect(answer.answerId)}
