@@ -69,7 +69,7 @@ export default function MyPage() {
   const [totalPages, setTotalPages] = useState<number>(1);
 
   useEffect(() => {
-    setData(selectedField, 1);
+    setData(selectedField, 0);
   }, [selectedField]);
 
   useEffect(() => {
