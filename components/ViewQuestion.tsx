@@ -4,6 +4,7 @@ import Image from 'next/image';
 import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
+import {useRouter} from 'next/navigation';
 
 export default function ViewQuestion({
   question,
@@ -13,6 +14,7 @@ export default function ViewQuestion({
   isMyQuestion: boolean;
 }) {
   const [imCurious, setImCurious] = useState(question.curious);
+  const router = useRouter();
 
   const createdDate = Array.isArray(question.createdDate)
     ? convertCreatedDate(question.createdDate)
@@ -26,7 +28,7 @@ export default function ViewQuestion({
   };
 
   const handleQuestionEdit = async () => {
-    //생성 창으로 넘기기
+    router.push(`/question/questionCreate?edit=${question.questionId}`);
   };
 
   return (
@@ -51,6 +53,20 @@ export default function ViewQuestion({
           조회수 {question.view_cnt}회
         </p>
         <p className="my-4 text-sm md:my-6 text-black">{question.content}</p>
+        {question.imageUrls && question.imageUrls.length > 0 && (
+          <div className="flex gap-2 mt-4">
+            {question.imageUrls.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt={`Question Image ${index + 1}`}
+                width={200}
+                height={200}
+                className="rounded-lg"
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -63,7 +79,9 @@ export default function ViewQuestion({
         </button>
         <div>
           {isMyQuestion && (
-            <button onClick={handleQuestionEdit}>수정하기</button>
+            <button onClick={handleQuestionEdit} className="text-dark1">
+              수정하기
+            </button>
           )}
           <p className="text-xs md:text-sm text-[#606060]">
             답변 {question.answer_cnt ?? 0}개 · {getKSTTimeAgo(createdDate)}
