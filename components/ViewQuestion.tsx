@@ -50,7 +50,7 @@ export default function ViewQuestion({
 
       <div className="ml-3 md:ml-9">
         <p className="text-xs md:text-sm text-[#606060] mt-2">
-          조회수 {question.view_cnt}회
+          조회수 {question.viewCnt}회
         </p>
         <p className="my-4 text-sm md:my-6 text-black">{question.content}</p>
         {question.imageUrls && question.imageUrls.length > 0 && (
