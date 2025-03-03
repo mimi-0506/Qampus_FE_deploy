@@ -74,12 +74,14 @@ export default function Answer({
         </button>
 
         {isMyQuestion ? (
-          <button
-            className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
-            onClick={() => onSelect(answer.answerId)}
-          >
-            채택하기
-          </button>
+          !answer.isChosen && (
+            <button
+              className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
+              onClick={() => onSelect(answer.answerId)}
+            >
+              채택하기
+            </button>
+          )
         ) : (
           <p className="text-xs md:text-sm text-[#606060]">
             {getKSTTimeAgo(createdDate)}
