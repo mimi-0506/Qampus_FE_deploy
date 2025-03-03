@@ -3,7 +3,7 @@ import Test from './UnivMap';
 
 export default function UnivMapArea() {
   return (
-    <div className="w-screen border border-white">
+    <div className="w-screen">
       <div className="relative w-full h-full z-10">
         <Test />
         <div className="absolute top-[5vw] left-[5vw] flex gap-[0.6vw]">

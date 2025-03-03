@@ -101,7 +101,7 @@ export default function CircularCarousel({
                   <div className="w-[83%] aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
                     <div className="w-[82%] aspect-[1/1] rounded-full bg-white relative">
                       <Image
-                        src={`/images/main/univ_${univ?.university_id}.png`}
+                        src={`/images/main/univ_${index}.png`}
                         alt="univ logo"
                         fill
                       />
@@ -112,7 +112,7 @@ export default function CircularCarousel({
                 <div className="w-full h-full rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center shadow-lg">
                   <div className="w-[80%] aspect-[1/1] relative">
                     <Image
-                      src={`/images/main/univ_${univ?.university_id}.png`}
+                      src={`/images/main/univ_${index}.png`}
                       alt="univ logo"
                       fill
                     />
