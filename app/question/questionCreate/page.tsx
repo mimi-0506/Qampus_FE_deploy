@@ -1,21 +1,38 @@
 'use client';
 
-import {useState} from 'react';
-import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
+import {useParams, useRouter} from 'next/navigation';
 import FieldSelector from './_components/FieldSelector';
 import Stepper from './_components/Stepper';
 import WriteQuestion from '@/components/WriteQuestion';
-import {setQuestion} from '../../apis/questionApi';
+import {editQuestion, setQuestion} from '../../apis/questionApi';
 import toast from 'react-hot-toast';
+import {getAnswerDetail} from '@/app/apis/answerApi';
 
 export default function QuestionCreatePage() {
+  const router = useRouter();
   const [selectedField, setSelectedField] = useState<number | null>(null);
   const [selectedStep, setSelectedStep] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [questionSubmit, setQuestionSubmit] = useState(false);
-  const router = useRouter();
+
+  const {edit} = useParams<{edit: string}>(); //수정일 경우 questionId가 담겨 옴
+
+  useEffect(() => {
+    if (edit) setEdit(parseInt(edit));
+  }, [edit]);
+
+  const setEdit = async (edit: number) => {
+    const response = await getAnswerDetail(edit);
+    console.log(response);
+
+    setTitle(response.title);
+    setImages(response.images);
+    setContent(response.content);
+    setSelectedField(response.categoryId - 1);
+  };
 
   const handleSubmit = async () => {
     if (!title || !content) {
@@ -30,12 +47,19 @@ export default function QuestionCreatePage() {
     console.log('질문 등록하기:', {title, content, images, selectedField});
 
     try {
-      const response = await setQuestion({
-        categoryId: selectedField,
-        title,
-        content,
-        images,
-      });
+      const response = edit
+        ? await editQuestion({
+            questionId: parseInt(edit),
+            categoryId: selectedField,
+            title,
+            content,
+          })
+        : await setQuestion({
+            categoryId: selectedField,
+            title,
+            content,
+            images,
+          });
 
       console.log('📌 API 응답:', response);
 
