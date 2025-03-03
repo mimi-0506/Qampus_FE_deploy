@@ -63,7 +63,7 @@ type Questions = {
 export default function MyPage() {
   //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
   const [selectedField, setSelectedField] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [questionList, setQuestionList] = useState<PreviewCardProps[]>([]);
   const [info, setInfo] = useState<UserInfo | undefined>(undefined);
   const [totalPages, setTotalPages] = useState<number>(1);

@@ -1,5 +1,6 @@
 import {userHomeDtoType} from '@/type';
 import Image from 'next/image';
+import RankChecker from './RankChecker';
 
 export default function UserInfo({
   userHomeDto,
@@ -26,18 +27,20 @@ export default function UserInfo({
           </h3>
           <div className="flex text-[1.25vw] gap-[2.6vw] ">
             <span className="gap-[0.15vw] flex  items-center">
-              <p>전체 랭킹 3위 </p>
-              <div className="w-[0.7vw] h-[0.7vw] relative">
-                <Image src="/svg/up_arrow.svg" fill alt="up arrow" />
-              </div>
+              <p>전체 랭킹 {userHomeDto?.this_month_ranking}위 </p>
+              <RankChecker
+                lastRank={userHomeDto?.last_month_ranking}
+                thisRank={userHomeDto?.this_month_ranking}
+              />
 
               <p className="text-grey2">3</p>
             </span>
             <span className="gap-[0.3vw] flex  items-center">
-              <p>학과 랭킹 2위 </p>
-              <div className="w-[0.94vw] h-[0.94vw] relative">
-                <Image src="/svg/_.svg" fill alt="dash" />
-              </div>
+              <p>학과 랭킹 {userHomeDto?.this_month_major_ranking}위 </p>
+              <RankChecker
+                lastRank={userHomeDto?.last_month_major_ranking}
+                thisRank={userHomeDto?.this_month_major_ranking}
+              />
             </span>
           </div>
           <button className="mt-[2.5vw] bg-dark2 text-white text-[1.25vw] flex justify-center items-center rounded-[1vw] aspect-[492/60] w-[25.6vw]">
