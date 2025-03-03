@@ -23,7 +23,7 @@ export type answerDetailType = {
   content: string;
   created_date: string;
   like_count: number;
-  chosen: boolean;
+  isChosen: boolean;
   imageUrls?: string[];
   universityName: string;
 };
