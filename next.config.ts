@@ -14,5 +14,9 @@ const nextConfig: NextConfig = {
     return config;
   },
 };
-
+module.exports = {
+  images: {
+    domains: ['kr.object.ncloudstorage.com'],
+  },
+};
 export default nextConfig;
