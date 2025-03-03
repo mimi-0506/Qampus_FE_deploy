@@ -64,7 +64,7 @@ export default function QuestionCreatePage() {
 
       console.log('📌 API 응답:', response);
 
-      router.push(`/question/questionLoading?q=${response.questionId}`);
+      router.push(`/question/questionLoading?q=${response.questionId || edit}`);
     } catch (error) {
       console.error('❌ API 호출 오류:', error);
     }
