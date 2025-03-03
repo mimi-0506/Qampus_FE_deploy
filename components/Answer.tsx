@@ -34,7 +34,7 @@ export default function Answer({
         <div className="flex gap-8 w-[87%]">
           {answer.isChosen ? (
             <div className="w-[4.68vw] aspect-[90/170] relative">
-              <Image src="/images/question/adopt.svg" alt="adopt" fill />
+              <Image src="/images/question/adopt.png" alt="adopt" fill />
             </div>
           ) : (
             <div className="w-[1.25vw] aspect-[1/1] relative">
