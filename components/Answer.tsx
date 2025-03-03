@@ -48,9 +48,9 @@ export default function Answer({
         </span>
       </div>
 
-      {Array.isArray(answer.images) && (
+      {Array.isArray(answer.imageUrls) && (
         <div className="flex gap-2 mt-4">
-          {answer.images.map((image, index) => (
+          {answer.imageUrls.map((image: string, index: number) => (
             <Image
               key={index}
               src={image}
