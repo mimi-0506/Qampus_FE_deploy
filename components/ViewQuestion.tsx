@@ -44,7 +44,7 @@ export default function ViewQuestion({
           {question.title}
         </h1>
         <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
-          {question.university_name}
+          {question.universityName}
         </span>
       </div>
 

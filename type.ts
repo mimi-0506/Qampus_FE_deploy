@@ -32,7 +32,7 @@ export type questionDetailType = {
   questionId: number;
   title: string;
   content: string;
-  university_name: string;
+  universityName: string;
   createdDate: string | number[];
   viewCnt: number;
   curious_count: number;
