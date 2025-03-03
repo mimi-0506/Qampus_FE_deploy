@@ -55,8 +55,6 @@ export async function fetchWithAuth({
 
   const data = await response.json();
 
-  console.log('fetchWithAuth', data);
-
   return data;
 }
 
