@@ -34,7 +34,7 @@ export type questionDetailType = {
   content: string;
   university_name: string;
   createdDate: string | number[];
-  view_cnt: number;
+  viewCnt: number;
   curious_count: number;
   answer_cnt?: number;
   curious: boolean;
@@ -47,7 +47,7 @@ export type detailDataType = {
   content: string;
   university_name: string;
   created_date: string;
-  view_cnt: number;
+  viewCnt: number;
   curious_count: number;
   answer_cnt?: number;
   answers: answerDetailType[];
