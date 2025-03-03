@@ -63,41 +63,45 @@ type Questions = {
 export default function MyPage() {
   //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
   const [selectedField, setSelectedField] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [questionList, setQuestionList] = useState<PreviewCardProps[]>([]);
   const [info, setInfo] = useState<UserInfo | undefined>(undefined);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setData(selectedField, 0);
-  }, [selectedField]);
-
-  useEffect(() => {
-    if (currentPage !== 0) setData(selectedField, currentPage);
-  }, [currentPage]);
+    setData(selectedField, currentPage);
+  }, [selectedField, currentPage]);
 
   const setData = async (selectedField: number, page: number) => {
-    const response = await getMyQuestionList({
-      categoryId: selectedField + 1,
-      page,
-      pageSize: PAGE_SIZE,
-    });
+    setLoading(true);
+    try {
+      const response = await getMyQuestionList({
+        categoryId: selectedField + 1,
+        page,
+        pageSize: PAGE_SIZE,
+      });
 
-    const {questions, ...nowInfo} = response;
-    const mappedQuestions = questions.content.map(
-      (question: QuestionResponse) => ({
-        question_id: question.questionId,
-        title: question.title,
-        content: question.content,
-        answerCount: question.answerCnt,
-        createdDate: question.createdDate,
-      }),
-    );
+      const {questions, ...nowInfo} = response;
+      const mappedQuestions = questions.content.map(
+        (question: QuestionResponse) => ({
+          question_id: question.questionId,
+          title: question.title,
+          content: question.content,
+          answerCount: question.answerCnt,
+          createdDate: question.createdDate,
+        }),
+      );
 
-    setQuestionList(mappedQuestions);
-    setTotalPages(questions.totalPages);
+      setQuestionList(mappedQuestions);
+      setTotalPages(questions.totalPages);
 
-    if (!info) setInfo(nowInfo as UserInfo);
+      if (!info) setInfo(nowInfo as UserInfo);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -118,18 +122,24 @@ export default function MyPage() {
         <SortSelector />
       </div>
 
-      <div className="w-[70%] flex flex-col">
-        {questionList?.map((question: PreviewCardProps, index) => (
-          <PreviewCard
-            key={index}
-            question_id={question.question_id}
-            title={question.title}
-            content={question.content}
-            answerCount={question.answerCount}
-            createdDate={question.createdDate}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center h-full">
+          <p>로딩 중...</p>
+        </div>
+      ) : (
+        <div className="w-[70%] flex flex-col">
+          {questionList?.map((question: PreviewCardProps, index) => (
+            <PreviewCard
+              key={index}
+              question_id={question.question_id}
+              title={question.title}
+              content={question.content}
+              answerCount={question.answerCount}
+              createdDate={question.createdDate}
+            />
+          ))}
+        </div>
+      )}
 
       <Pagination
         currentPage={currentPage}
