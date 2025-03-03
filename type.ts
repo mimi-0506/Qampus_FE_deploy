@@ -24,7 +24,7 @@ export type answerDetailType = {
   created_date: string;
   like_count: number;
   chosen: boolean;
-  images?: string[];
+  imageUrls?: string[];
   universityName: string;
 };
 
@@ -38,6 +38,7 @@ export type questionDetailType = {
   curious_count: number;
   answer_cnt?: number;
   curious: boolean;
+  imageUrls?: string[];
 };
 
 export type detailDataType = {

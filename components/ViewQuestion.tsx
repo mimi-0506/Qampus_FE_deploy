@@ -51,6 +51,20 @@ export default function ViewQuestion({
           조회수 {question.view_cnt}회
         </p>
         <p className="my-4 text-sm md:my-6 text-black">{question.content}</p>
+        {question.imageUrls && question.imageUrls.length > 0 && (
+          <div className="flex gap-2 mt-4">
+            {question.imageUrls.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt={`Question Image ${index + 1}`}
+                width={200}
+                height={200}
+                className="rounded-lg"
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
