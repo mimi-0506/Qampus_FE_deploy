@@ -10,7 +10,6 @@ type FetchOptions = {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   url: string;
   body?: unknown;
-  cache?: boolean;
   isFormData?: boolean;
 };
 
@@ -38,18 +37,14 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
   else return data;
 }
 
-export async function fetchWithoutAuth({
-  method,
-  url,
-  body,
-  cache,
-}: FetchOptions) {
+export async function fetchWithoutAuth({method, url, body}: FetchOptions) {
   const options: RequestInit = {
     method,
     headers: {
       'Content-Type': 'application/json',
     },
-    cache: cache ? 'force-cache' : 'no-store',
+    cache: 'force-cache',
+    next: {revalidate: false},
     ...(method === 'POST' && body ? {body: JSON.stringify(body)} : {}),
   };
 

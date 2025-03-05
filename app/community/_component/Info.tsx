@@ -69,7 +69,7 @@ export default function Info() {
 
       <Slider top={'top-[45vw]'} data={data} />
 
-      <BottomBar />
+      <BottomBar style={'top-[-9vw]'} />
     </div>
   );
 }
