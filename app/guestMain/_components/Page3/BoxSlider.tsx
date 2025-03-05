@@ -23,7 +23,7 @@ export default function BoxSlider({
                         ? 'transition-transform duration-500 -translate-x-[-43vw]'
                         : ''
                   }
-            w-[41vw] aspect-[781/203] rounded-[1.8vw] p-[34px] box-border gap-[0.6vw] bg-page3divbg border border-page3divborder flex flex-col justify-start items-center`}
+            w-[41vw] aspect-[781/203] rounded-[1.25vw] p-[34px] box-border gap-[0.6vw] bg-page3divbg border border-page3divborder flex flex-col justify-start items-center`}
             >
               <h3 className="text-[1.25vw] text-semiBlack font-semibold">
                 {item.title}
