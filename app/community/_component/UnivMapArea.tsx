@@ -15,7 +15,7 @@ export default function UnivMapArea() {
               className="object-contain w-[21vw] aspect-[402/406] transform scale-x-[-1]"
             />
           </div>
-          <div className="w-[20.5vw] h-[2.7vw] bg-dark1 text-white rounded-[0.6vw] text-[0.9vw] flex justify-center items-center">
+          <div className="w-[20.5vw] h-[2.7vw] bg-dark1 text-white rounded-[0.468vw] text-[0.9vw] flex justify-center items-center">
             랭킹으로 점수를 높여 학교 영역을 넓혀보세요
           </div>
         </div>
