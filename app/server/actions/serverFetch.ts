@@ -13,7 +13,7 @@ type FetchOptions = {
   isFormData?: boolean;
 };
 
-export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
+export async function fetchWithAuth({method, url, body}: FetchOptions) {
   const accessToken = (await cookies())
     .get('accessToken')
     ?.value.replace('Bearer ', '');
@@ -28,7 +28,8 @@ export async function fetchWithAuth({method, url, body, cache}: FetchOptions) {
       Authorization: `${accessToken}`,
     },
     body: body ? JSON.stringify(body) : undefined,
-    cache: cache ? 'force-cache' : 'no-store',
+    cache: 'force-cache',
+    next: {revalidate: false},
   });
 
   const data = await response.json();
