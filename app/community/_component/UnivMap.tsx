@@ -9,6 +9,7 @@ import {
   ZoomableGroup,
 } from 'react-simple-maps';
 import {motion} from 'framer-motion';
+import {useRouter} from 'next/navigation';
 
 // 마커 좌표 타입 정의
 interface MarkerData {
@@ -48,8 +49,8 @@ const geoUrl =
 
 export default function UnivMap() {
   const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
-
   const [zoomLevel, setZoomLevel] = useState(1); // 줌 레벨 상태
+  const router = useRouter();
 
   return (
     <div
@@ -127,6 +128,9 @@ export default function UnivMap() {
                     duration: 1,
                     repeat: Infinity,
                     ease: 'easeInOut',
+                  }}
+                  onClick={() => {
+                    router.push(`/community/${uni.name}`);
                   }}
                   style={{cursor: 'pointer'}}
                 />
