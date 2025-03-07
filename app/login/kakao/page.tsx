@@ -28,5 +28,7 @@ export default function Kakao() {
     else router.push('/login/info');
   };
 
-  return <p>카카오 로그인 중...</p>;
+  return (
+    <div className="text-white text-[2vw] mt-[2vw]">카카오 로그인 중...</div>
+  );
 }

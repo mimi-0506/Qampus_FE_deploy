@@ -19,14 +19,14 @@ export default function UserInfo({
         />
 
         <div className="ml-[11vw] text-semiblack relative z-10">
-          <h1 className="text-[3.3vw] font-bold ">
+          <h1 className="text-[3.3vw] font-semibold ">
             {userHomeDto?.name}님, 반가워요!
           </h1>
-          <h3 className="text-[1.875vw]">
+          <h3 className="text-[1.875vw] font-medium">
             {userHomeDto?.universityName} {userHomeDto?.major}
           </h3>
-          <div className="flex text-[1.25vw] gap-[2.6vw] ">
-            <span className="gap-[0.15vw] flex  items-center">
+          <div className="flex text-[1.25vw] gap-[2.6vw] leading-[2.24vw] tracking-[-0.072vw]">
+            <span className="gap-[0.15vw] flex font-medium items-center">
               <p>전체 랭킹 {userHomeDto?.this_month_ranking}위 </p>
               <RankChecker
                 lastRank={userHomeDto?.last_month_ranking}
@@ -41,7 +41,7 @@ export default function UserInfo({
               />
             </span>
           </div>
-          <button className="mt-[2.5vw] bg-dark2 text-white text-[1.25vw] flex justify-center items-center rounded-[1vw] aspect-[492/60] w-[25.6vw]">
+          <button className="mt-[2.5vw] bg-dark2 text-white text-[1.25vw] flex justify-center items-center rounded-[0.9vw] aspect-[469/60] w-[24.4vw]">
             나의 소속 랭킹 보기
           </button>
         </div>

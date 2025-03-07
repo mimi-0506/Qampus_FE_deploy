@@ -1,13 +1,9 @@
-'use client';
-
 import Image from 'next/image';
-import useScrollAnimation from './useScrollAnimation';
+import AnimationText from './AnimationText';
 
 export default function Page4() {
-  const {ref, isVisible} = useScrollAnimation();
-
   return (
-    <div className="relative flex aspect-[16/9] w-screen items-center justify-center rounded-tl-[4.17vw] rounded-tr-[4.17vw] bg-black text-white">
+    <div className="relative z-10 flex aspect-[16/9] w-screen items-center justify-center rounded-tl-[4.17vw] rounded-tr-[4.17vw] bg-black text-white">
       <div className="absolute left-[6.25vw] top-[8.85vw]">
         <div className="from-dark1 to-light1 bg-gradient-to-r bg-clip-text text-[0.9vw] text-transparent">
           Answer collection
@@ -24,16 +20,8 @@ export default function Page4() {
             alt="bubble"
           />
         </div>
-        <div
-          className={`text-[1.87vw] 
-          opacity-0 ${isVisible ? 'animate-fadeIn' : ''}`}
-        >
-          Qampus에서는 자신이 질문한 내용에 달린 답변들을 모아서 확인할 수
-          있어요
-          <br />
-          지금까지 모인 답변들을 확인해볼까요?
-        </div>
-        <div ref={ref} className="w-full  bg-white absolute bottom-0" />
+
+        <AnimationText />
       </div>
     </div>
   );

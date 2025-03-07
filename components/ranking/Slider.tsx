@@ -129,7 +129,7 @@ export default function CircularCarousel({
         width={1370}
         height={952}
         alt="bg"
-        className="absolute z-20 top-[-17vw] "
+        className="absolute z-20 top-[-10vw] "
       />
 
       <div className="mt-[1.2vw] flex flex-col justify-center items-center">
