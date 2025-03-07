@@ -1,12 +1,13 @@
 import Image from 'next/image';
+
 export default function Page2() {
   return (
     <div className="flex aspect-[16/9] w-screen items-center justify-between">
-      <div className="ml-[118px] flex aspect-[764/160] w-[40vw] flex-col items-start justify-between">
+      <div className="ml-[6vw] flex aspect-[764/160] w-[40vw] flex-col items-start justify-between">
         <div className="from-dark1 to-light1 bg-gradient-to-r bg-clip-text text-[0.9vw] text-transparent">
           About Qampus
         </div>
-        <div className="text-[3.3vw] font-bold">
+        <div className="text-[3.3vw] leading-[4vw] tracking-[0.2%] font-semibold">
           다양한 사람들과 지식을 나누고 경쟁하며 함께 성장하는 서비스
         </div>
         <div className="text-grey2 text-[1vw]">
@@ -15,7 +16,7 @@ export default function Page2() {
         </div>
       </div>
 
-      <div className="relative w-[18.5vw] aspect-[357/360] mr-[20vw]">
+      <div className="relative w-[18.5vw] aspect-[357/360] mr-[20.4vw]">
         <Image
           src="/images/characters/smile.png"
           width={357}
