@@ -6,6 +6,7 @@ import {TiThumbsUp} from 'react-icons/ti';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
+import {IoIosClose} from 'react-icons/io';
 
 export default function Answer({
   answer,
@@ -13,23 +14,38 @@ export default function Answer({
   onSelect,
   chooseAnswerId,
 }: {
-  answer: answerDetailType;
+  answer?: answerDetailType;
   isMyQuestion: boolean;
   onSelect: (answerId: number) => Promise<void>;
   chooseAnswerId: number | null;
 }) {
-  const iChosed = chooseAnswerId === answer.answerId;
   const [thumbsUp, setThumbsUp] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  if (!answer) {
+    return (
+      <div className="text-center text-gray-500">답변을 불러오는 중...</div>
+    );
+  }
+
+  const iChosed = chooseAnswerId === answer?.answerId;
 
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
-    console.log(answer);
 
-    if (thumbsUp) await deleteThumbsUP(answer.answerId);
-    else setThumbsUP(answer.answerId);
+    if (thumbsUp) await deleteThumbsUP(answer?.answerId);
+    else setThumbsUP(answer?.answerId);
   };
 
-  const createdDate = convertCreatedDate(answer.created_date);
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
+
+  const createdDate = convertCreatedDate(answer?.created_date);
 
   return (
     <div className="bg-white rounded-2xl relative w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
@@ -45,7 +61,7 @@ export default function Answer({
               />
             </div>
           ) : (
-            <div className="absolute top-6 left-8 w-[24px] h-[24px] transition-transform duration-300 ease-in-out transform scale-100">
+            <div className="absolute top-8 left-8 w-[24px] h-[24px] transition-transform duration-300 ease-in-out transform scale-100">
               <Image
                 src="/images/question/A.svg"
                 alt="A icon"
@@ -55,26 +71,26 @@ export default function Answer({
             </div>
           )}
 
-          <p className={`text-black text-sm ml-[4vw] pb-10`}>
-            {answer.content}
-          </p>
+          <p className={`text-black text-sm ml-14 pb-10`}>{answer?.content}</p>
         </div>
         <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
           {answer?.universityName}
         </span>
       </div>
 
-      {Array.isArray(answer.imageUrls) && (
-        <div className="flex gap-2 mt-4 px-10">
-          {answer.imageUrls.map((image: string, index: number) => (
-            <Image
-              key={index}
-              src={image}
-              alt={`답변 이미지 ${index + 1}`}
-              width={200}
-              height={200}
-              className="rounded-lg border"
-            />
+      {Array.isArray(answer?.imageUrls) && answer.imageUrls.length > 0 && (
+        <div className="flex gap-2 mt-4 ml-10">
+          {answer.imageUrls.map((image, index) => (
+            <div key={index} className="relative w-[180px] h-[240px]">
+              <Image
+                src={image}
+                alt={`답변 이미지 ${index + 1}`}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg cursor-pointer"
+                onClick={() => handleImageClick(image)}
+              />
+            </div>
           ))}
         </div>
       )}
@@ -93,7 +109,7 @@ export default function Answer({
           !iChosed && (
             <button
               className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
-              onClick={() => onSelect(answer.answerId)}
+              onClick={() => onSelect(answer?.answerId)}
             >
               채택하기
             </button>
@@ -104,6 +120,26 @@ export default function Answer({
           </p>
         )}
       </div>
+
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <button
+            onClick={handleCloseModal}
+            className="absolute top-20 right-20 text-white rounded-full p-2"
+          >
+            <IoIosClose size={40} />
+          </button>
+          <div className="relative">
+            <Image
+              src={selectedImage}
+              alt="Selected Image"
+              width={800}
+              height={600}
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
