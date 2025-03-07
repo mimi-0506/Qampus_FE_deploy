@@ -55,7 +55,7 @@ export default function AnswerMainPage() {
 
       <div className="relative w-[100vw] aspect-[2000/500]">
         <Image
-          src="/svg/answer_banner.svg"
+          src="/images/question/answer_banner.png"
           alt="banner"
           layout="fill"
           objectFit="cover"
