@@ -1,24 +1,29 @@
 'use client';
 
 import Image from 'next/image';
-import {useState} from 'react';
+import {useState, forwardRef} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
 import {IoIosClose} from 'react-icons/io';
 
-export default function Answer({
-  answer,
-  isMyQuestion,
-  onSelect,
-  chooseAnswerId,
-}: {
-  answer?: answerDetailType;
-  isMyQuestion: boolean;
-  onSelect: (answerId: number) => Promise<void>;
-  chooseAnswerId: number | null;
-}) {
+const Answer = forwardRef(function Answer(
+  {
+    answer,
+    isMyQuestion,
+    onSelect,
+    chooseAnswerId,
+    isCentered,
+  }: {
+    answer?: answerDetailType;
+    isMyQuestion: boolean;
+    onSelect: (answerId: number) => Promise<void>;
+    chooseAnswerId: number | null;
+    isCentered: boolean;
+  },
+  ref: React.Ref<HTMLDivElement>,
+) {
   const [thumbsUp, setThumbsUp] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -32,7 +37,6 @@ export default function Answer({
 
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
-
     if (thumbsUp) await deleteThumbsUP(answer?.answerId);
     else setThumbsUP(answer?.answerId);
   };
@@ -48,7 +52,13 @@ export default function Answer({
   const createdDate = convertCreatedDate(answer?.created_date);
 
   return (
-    <div className="bg-white rounded-2xl relative w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6">
+    <div
+      ref={ref}
+      data-answer-id={answer.answerId}
+      className={`bg-white rounded-2xl relative w-[72.6vw] px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5 text-black border mt-6
+        ${isCentered ? 'border-1 border-blue-500 shadow-sm transition-all duration-300' : 'border'}
+      `}
+    >
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
@@ -61,7 +71,7 @@ export default function Answer({
               />
             </div>
           ) : (
-            <div className="absolute top-8 left-8 w-[24px] h-[24px] transition-transform duration-300 ease-in-out transform scale-100">
+            <div className="absolute top-8 left-8 w-[24px] h-[24px]">
               <Image
                 src="/images/question/A.svg"
                 alt="A icon"
@@ -71,11 +81,8 @@ export default function Answer({
             </div>
           )}
 
-          <p className={`text-black text-sm ml-14 pb-10`}>{answer?.content}</p>
+          <p className="text-black text-sm ml-14 pb-10">{answer?.content}</p>
         </div>
-        <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
-          {answer?.universityName}
-        </span>
       </div>
 
       {Array.isArray(answer?.imageUrls) && answer.imageUrls.length > 0 && (
@@ -142,4 +149,6 @@ export default function Answer({
       )}
     </div>
   );
-}
+});
+
+export default Answer;
