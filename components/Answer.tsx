@@ -36,16 +36,22 @@ export default function Answer({
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
-            <div className="absolute top-0 w-[4.74vw] h-[8.85vw]">
-              <div className="relative w-full h-full">
-                <Image src="/images/question/adopt.png" alt="adopt" fill />
-              </div>
+            <div className="absolute top-0 left-5 ">
+              <Image
+                src="/images/question/adopt.png"
+                alt="adopt"
+                width={40}
+                height={40}
+              />
             </div>
           ) : (
-            <div className="absolute top-[2.4vw] left-[2.4vw] w-[2.34vw] h-[3.75vw]">
-              <div className="relative w-full h-full">
-                <Image src="/images/question/A.svg" alt="A icon" fill />
-              </div>
+            <div className="absolute top-6 left-7 w-[24px] h-[24px]">
+              <Image
+                src="/images/question/A.svg"
+                alt="A icon"
+                width={24}
+                height={24}
+              />
             </div>
           )}
 
