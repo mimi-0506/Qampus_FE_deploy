@@ -1,23 +1,18 @@
-'use client';
-
-import {useEffect, useState} from 'react';
+import {fetchWithAuth} from '../server/actions/serverFetch';
 import ActInfo from './_components/ActInfo';
 import UserInfo from './_components/UserInfo';
 import {userMainDataType} from '@/type';
-import {fetchWithAuth} from '../apis/clientFetch';
 
-export default function UserMainPage() {
-  const [data, setData] = useState<userMainDataType | null>(null);
+const preload = async () => {
+  void fetchWithAuth({method: 'GET', url: '/home'});
+};
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const response = await fetchWithAuth({method: 'GET', url: '/home'});
-
-    setData(response);
-  };
+export default async function UserMainPage() {
+  preload();
+  const data: userMainDataType = await fetchWithAuth({
+    method: 'GET',
+    url: '/home',
+  });
 
   return (
     <main className=" bg-usermainbg2 flex overflow-hidden flex-col aspect-[1922/3500] w-screen items-center justify-center relative">

@@ -42,7 +42,7 @@ export default function Page6() {
                 ${index === 0 ? ' left-[12.3vw]' : index === 1 ? 'left-[22.5vw]' : 'left-[15vw]'}
                 bg-cover bg-center`}
             >
-              <div className="relative h-[5.57vw] w-[5.06vw]">
+              <div className="relative aspect-[1/1.15] w-[5vw]">
                 <Image
                   src={`/images/main/medal_${MEDAL[index]}.png`}
                   fill

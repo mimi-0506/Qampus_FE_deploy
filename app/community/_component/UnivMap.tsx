@@ -148,7 +148,7 @@ export default function UnivMap() {
             {hoveredMarker.univ.name}
           </h2>
           {/* <p className="text-grey3 text-[1vw] mt-1">49,201명 참여중</p> */}
-          <p className="text-[1.1vw] text-grey5 mt-3">
+          <p className="text-[1.14vw] text-grey5 mt-3">
             주간 <span className="font-bold">{hoveredMarker.univ.rank}위</span>
           </p>
         </div>

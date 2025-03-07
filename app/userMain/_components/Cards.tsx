@@ -1,3 +1,5 @@
+'use client';
+
 import {answerType, questionType} from '@/type';
 import QuestionCard from './QuestionCard';
 import AnswerCard from './AnswerCard';
