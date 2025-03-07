@@ -36,16 +36,16 @@ export default function Answer({
       <div className="flex justify-between items-start">
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
-            <div className="absolute top-0 left-5 ">
+            <div className="absolute top-0 left-6 transition-transform duration-300 ease-in-out transform scale-100">
               <Image
                 src="/images/question/adopt.png"
                 alt="adopt"
-                width={40}
-                height={40}
+                width={44}
+                height={44}
               />
             </div>
           ) : (
-            <div className="absolute top-6 left-7 w-[24px] h-[24px]">
+            <div className="absolute top-6 left-8 w-[24px] h-[24px] transition-transform duration-300 ease-in-out transform scale-100">
               <Image
                 src="/images/question/A.svg"
                 alt="A icon"
@@ -55,7 +55,9 @@ export default function Answer({
             </div>
           )}
 
-          <p className={`text-black text-sm ml-[7vw]`}>{answer.content}</p>
+          <p className={`text-black text-sm ml-[4vw] pb-10`}>
+            {answer.content}
+          </p>
         </div>
         <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
           {answer?.universityName}
@@ -63,14 +65,14 @@ export default function Answer({
       </div>
 
       {Array.isArray(answer.imageUrls) && (
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-4 px-10">
           {answer.imageUrls.map((image: string, index: number) => (
             <Image
               key={index}
               src={image}
               alt={`답변 이미지 ${index + 1}`}
-              width={150}
-              height={150}
+              width={200}
+              height={200}
               className="rounded-lg border"
             />
           ))}

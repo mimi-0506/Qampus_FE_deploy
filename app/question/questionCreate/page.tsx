@@ -71,13 +71,13 @@ export default function QuestionCreatePage() {
   };
 
   return (
-    <main className="flex w-full min-h-screen flex-col items-center px-[2vw] py-[5vh] bg-white">
-      <div className="flex w-full gap-[3vw] flex-wrap justify-around">
-        <div className="w-[10vw] max-w-[200px] min-w-[150px]">
+    <main className="flex w-full min-h-screen flex-col items-center px-[4vw] py-[5vh] bg-white">
+      <div className="flex w-full max-w-[1200px] gap-[3vw] flex-wrap justify-center">
+        <div className="w-[20vw] max-w-[200px] min-w-[150px]">
           <Stepper selectedStep={selectedStep} />
         </div>
 
-        <div className="w-full max-w-[1000px] flex flex-col gap-[3vh]">
+        <div className="w-full max-w-[800px] flex flex-col gap-[3vh]">
           {/* Step 1 */}
           <div onClick={() => setSelectedStep(1)}>
             <FieldSelector
