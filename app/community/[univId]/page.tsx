@@ -18,7 +18,7 @@ type univDetailType = {
 };
 
 export default function Page() {
-  const [data, setData] = useState<univDetailType>(null);
+  const [data, setData] = useState<univDetailType | null>(null);
   const {univId} = useParams<{univId: string}>();
 
   useEffect(() => {
@@ -41,14 +41,15 @@ export default function Page() {
     // fetchData();
 
     setData({
-      university_id: 0,
-      university_name: '서울대학교',
-      rate: 1,
-      ranking: 1,
-      participant_count: 14,
       question_cnt: 19,
       answer_cnt: 3,
-      choice_cnt: 5,
+
+      choice_cnt: 9,
+      participant_count: 6,
+      ranking: 1,
+      rate: 10,
+      university_id: 0,
+      university_name: '서울대학교',
     });
   }, [univId]);
 

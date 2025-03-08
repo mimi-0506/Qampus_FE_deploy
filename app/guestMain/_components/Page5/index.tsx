@@ -20,7 +20,49 @@ export default function Page5() {
 
   const getData = async () => {
     const data = await getRank('weekly');
-    setData(data);
+    console.log(data);
+    setData([
+      {
+        choice_cnt: 9,
+        participant_count: 6,
+        ranking: 1,
+        rate: 10,
+        university_id: 0,
+        university_name: '서울대학교',
+      },
+      {
+        choice_cnt: 16,
+        participant_count: 6,
+        ranking: 2,
+        rate: 10,
+        university_id: 1,
+        university_name: '연세대학교',
+      },
+      {
+        choice_cnt: 15,
+        participant_count: 6,
+        ranking: 3,
+        rate: 10,
+        university_id: 2,
+        university_name: '국민대학교',
+      },
+      {
+        choice_cnt: 17,
+        participant_count: 6,
+        ranking: 4,
+        rate: 10,
+        university_id: 3,
+        university_name: '동국대학교',
+      },
+      {
+        choice_cnt: 10,
+        participant_count: 6,
+        ranking: 5,
+        rate: 10,
+        university_id: 4,
+        university_name: '성균관대학교',
+      },
+    ]);
   };
 
   return (
