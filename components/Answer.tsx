@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import {useState, forwardRef} from 'react';
+import {useState, forwardRef, useEffect} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
@@ -26,6 +26,27 @@ const Answer = forwardRef(function Answer(
 ) {
   const [thumbsUp, setThumbsUp] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [timeAgo, setTimeAgo] = useState<string>('등록일 없음');
+
+  useEffect(() => {
+    if (!answer?.createdDate) {
+      setTimeAgo('등록일 없음');
+      return;
+    }
+
+    let createdDate;
+    if (Array.isArray(answer.createdDate)) {
+      createdDate = convertCreatedDate(answer.createdDate);
+    } else {
+      createdDate = convertCreatedDate(String(answer.createdDate));
+    }
+
+    if (createdDate) {
+      setTimeAgo(getKSTTimeAgo(createdDate));
+    } else {
+      setTimeAgo('방금 전');
+    }
+  }, [answer?.createdDate]);
 
   if (!answer) {
     return (
@@ -48,8 +69,6 @@ const Answer = forwardRef(function Answer(
   const handleCloseModal = () => {
     setSelectedImage(null);
   };
-
-  const createdDate = convertCreatedDate(answer?.created_date);
 
   return (
     <div
@@ -81,7 +100,10 @@ const Answer = forwardRef(function Answer(
             </div>
           )}
 
-          <p className="text-black text-sm ml-14 pb-10">{answer?.content}</p>
+          <div>
+            <p className="text-black text-sm ml-14 pb-2">{answer?.content}</p>
+            <p className="text-xs text-gray-500 ml-14">{timeAgo}</p>
+          </div>
         </div>
       </div>
 
@@ -123,9 +145,7 @@ const Answer = forwardRef(function Answer(
             </button>
           )
         ) : (
-          <p className="text-xs md:text-sm text-[#606060]">
-            {getKSTTimeAgo(createdDate)}
-          </p>
+          <p className="text-xs md:text-sm text-[#606060]">{timeAgo}</p>
         )}
       </div>
 
