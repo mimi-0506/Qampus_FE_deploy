@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
+import {postLogout} from '@/app/apis/logoutApi';
 
 interface InfoCardProps {
   name: string;
@@ -16,16 +17,28 @@ export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
     if (info?.profileImage) setProfileSrc(info?.profileImage);
   }, [info?.profileImage]);
 
+  const handleLogout = async () => {
+    try {
+      await postLogout();
+      document.cookie =
+        'localstorage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      localStorage.removeItem('localstorage');
+      window.location.reload();
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
+  };
+
   return (
-    <div className="flex h-[140px] w-[70%] mt-10 flex-col items-center justify-center rounded-2xl bg-[#F8F8F8]">
-      <div className="w-full px-[30px] py-[30px]">
+    <div className="relative flex h-[140px] w-[70%] mt-10 flex-col items-center justify-center rounded-2xl bg-[#F8F8F8] p-6">
+      <div className="w-full">
         <p className="font-[600] text-[16px] text-black">내 정보</p>
         <p className="text-[13px] font-[200] text-[#8D8D8D]">
           로그인시 입력한 나의 학교/학과 정보입니다.
         </p>
+
         {/* 사용자 정보 */}
-        <div className="h-[20px] w-full"></div>
-        <div className="flex items-center gap-3">
+        <div className="mt-4 flex items-center gap-3">
           {/* 프로필 이미지 */}
           <Image
             src={profileSrc || '/images/question/profile-example.png'}
@@ -55,6 +68,13 @@ export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
           </div>
         </div>
       </div>
+
+      <button
+        onClick={handleLogout}
+        className="absolute bottom-[24px] right-[28px] px-3 py-2 text-xs font-300 text-black bg-white shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)] rounded-full"
+      >
+        로그아웃
+      </button>
     </div>
   );
 }
