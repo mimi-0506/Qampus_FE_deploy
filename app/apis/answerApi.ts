@@ -112,7 +112,7 @@ export const getAnswerListByCategory = async ({
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers?category_id=${categoryId}&page=${page}&size=${size}&sort=latest`,
+    url: `/answers?category_id=${categoryId}&page=${page - 1}&size=${size}&sort=latest`,
   });
 
   return data;
@@ -129,7 +129,7 @@ export const getAnswerSearch = async ({
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/search?value=${search}&page=${page}&size=${size}`,
+    url: `/answers/search?value=${search}&page=${page !== undefined ? page - 1 : page}&size=${size}`,
   });
 
   return data;
