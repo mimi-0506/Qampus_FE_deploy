@@ -39,6 +39,11 @@ type hoverType = {
   coordinate: {x: number; y: number};
 };
 
+type positionType = {
+  coordinates: [number, number];
+  zoom: number;
+};
+
 // 순위에 따라 색상 변화 (높은 순위는 밝은 색, 낮은 순위는 어두운 색)
 const getColorByRank = (rank: number) => {
   const brightness = 255 - rank * 15; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
@@ -49,8 +54,25 @@ const geoUrl =
 
 export default function UnivMap() {
   const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
-  const [zoomLevel, setZoomLevel] = useState(1); // 줌 레벨 상태
+  const [position, setPosition] = useState<positionType>({
+    coordinates: [127, 36],
+    zoom: 1,
+  });
+
   const router = useRouter();
+
+  const handleZoomIn = () => {
+    console.log(position.zoom);
+    setPosition(pos => ({...pos, zoom: pos.zoom + 0.1}));
+  };
+
+  const handleZoomOut = () => {
+    setPosition(pos => ({...pos, zoom: pos.zoom - 0.1}));
+  };
+
+  function handleMoveEnd(position: positionType) {
+    setPosition(position);
+  }
 
   return (
     <div
@@ -58,15 +80,20 @@ export default function UnivMap() {
     >
       <ComposableMap
         projection="geoMercator"
-        projectionConfig={{scale: 5000, center: [127, 36]}}
+        projectionConfig={{
+          scale: 8000,
+          center: [100, 36],
+        }}
         style={{backgroundColor: '#000'}}
       >
         <ZoomableGroup
-          minZoom={1}
-          maxZoom={25}
-          onMoveEnd={({zoom}) => {
-            setZoomLevel(zoom);
+          zoom={position.zoom}
+          center={position.coordinates}
+          filterZoomEvent={e => {
+            if (e instanceof WheelEvent) return false;
+            else return true;
           }}
+          onMoveEnd={handleMoveEnd}
         >
           <Geographies geography={geoUrl}>
             {({geographies}) =>
@@ -87,7 +114,7 @@ export default function UnivMap() {
           {/* 대학 마커 표시 */}
           {universities.map(uni => {
             const size =
-              Math.max(8 - uni.rank * 0.5, 2) * (1 / Math.sqrt(zoomLevel));
+              Math.max(8 - uni.rank * 0.5, 2) * (1 / Math.sqrt(position.zoom));
             const glowSize = size * 1.5;
             const opacity = 1 - uni.rank * 0.07;
             const color = getColorByRank(uni.rank);
@@ -103,6 +130,9 @@ export default function UnivMap() {
                   });
                 }}
                 onMouseLeave={() => setHoveredMarker(null)}
+                onClick={() => {
+                  router.push(`/community/${uni.name}`);
+                }}
               >
                 {/* Glow 효과 */}
                 <motion.circle
@@ -129,9 +159,6 @@ export default function UnivMap() {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
-                  onClick={() => {
-                    router.push(`/community/${uni.name}`);
-                  }}
                   style={{cursor: 'pointer'}}
                 />
               </Marker>
@@ -151,12 +178,28 @@ export default function UnivMap() {
           <h2 className="text-[1.6vw] font-semibold">
             {hoveredMarker.univ.name}
           </h2>
-          {/* <p className="text-grey3 text-[1vw] mt-1">49,201명 참여중</p> */}
+          <p className="text-grey3 text-[1vw] mt-1">명 참여중</p>
           <p className="text-[1.14vw] text-grey5 mt-3">
             주간 <span className="font-bold">{hoveredMarker.univ.rank}위</span>
           </p>
         </div>
       )}
+
+      {/* 줌 버튼 */}
+      <div
+        className="absolute bottom-[10vw] right-[10vw] bg-[url('/images/community/zoomButton.png')] 
+      bg-contain bg-no-repeat w-[4.4vw] aspect-[86/191] flex justify-center items-center flex-col"
+      >
+        <button
+          onClick={handleZoomIn}
+          className="w-[4vw] h-[5vw]  rounded-full "
+        />
+
+        <button
+          onClick={handleZoomOut}
+          className="w-[4vw] h-[5vw] rounded-full"
+        />
+      </div>
     </div>
   );
 }
