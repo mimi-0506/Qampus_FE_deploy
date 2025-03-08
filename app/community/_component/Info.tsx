@@ -1,6 +1,7 @@
 'use client';
 
 import {getRank} from '@/app/apis/rankApi';
+import useScrollAnimation from '@/app/guestMain/_components/useScrollAnimation';
 import LeftBox1 from '@/components/ranking/LeftBox1';
 import LeftBox2 from '@/components/ranking/LeftBox2';
 import RankBox from '@/components/ranking/RankBox';
@@ -12,6 +13,7 @@ import {useEffect, useState} from 'react';
 export default function Info() {
   const [rankStandard, setRankStandard] = useState<rankType>('weekly');
   const [data, setData] = useState<universityType[] | []>([]);
+  const {ref, isVisible} = useScrollAnimation();
 
   useEffect(() => {
     getData();
@@ -54,11 +56,12 @@ export default function Info() {
 
       <div className="w-screen flex justify-center items-center] absolute top-[40vw] z-30">
         <div className="absolute left-[6.25vw] flex flex-col gap-[3.28vw]">
-          <LeftBox1 />
-          <LeftBox2 />
+          <LeftBox1 isVisible={isVisible} />
+          <LeftBox2 isVisible={isVisible} />
         </div>
 
         <RankBox
+          isVisible={isVisible}
           mode={true}
           universities={data}
           rankStandard={rankStandard}
@@ -73,6 +76,8 @@ export default function Info() {
           <Image fill src="/images/community/bottom.png" alt="" />
         </div>
       </div>
+
+      <div ref={ref} className="w-full  bg-white absolute bottom-[20vw]" />
     </div>
   );
 }

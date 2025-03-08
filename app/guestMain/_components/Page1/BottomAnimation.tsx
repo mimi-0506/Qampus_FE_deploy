@@ -8,8 +8,8 @@ const COMMENTS = [
 
 export default function BottomAnimation() {
   return (
-    <div className="text-dark2 px-[5vw]  bg-page1anibg flex shrink-0 animate-loop items-center justify-start gap-[3vw] pr-[5vw]">
-      <div className="w-[7vw] aspect-[269/58] relative">
+    <div className="text-dark2 bg-page1anibg flex shrink-0 animate-loop items-center justify-start gap-[3vw] pr-[5vw]">
+      <div className="w-[8vw] aspect-[155/30] relative">
         <Image src="/images/logo/logo_mini.png" alt="logo" fill />
       </div>
 

@@ -57,7 +57,7 @@ export default function UserInfo({
 
       <div className="absolute z-10 w-[123vw] aspect-[2365/510] top-[44.5vw]">
         <Image
-          src="/images/logo/logo_big.png"
+          src="/images/logo/logo_big.svg"
           fill
           alt="bg logo"
           sizes="123vw"
