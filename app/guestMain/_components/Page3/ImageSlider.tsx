@@ -18,10 +18,13 @@ export default function ImageSlider({
   setSlide: (newDirection: 1 | -1) => void;
 }) {
   return (
-    <div className="w-full flex gap-[3.7vw] absolute justify-center">
-      <motion.button initial={false} onClick={() => setSlide(-1)}>
+    <div className="w-full flex gap-[3.7vw] justify-center items-center relative top-[5vw]">
+      <button
+        onClick={() => setSlide(-1)}
+        className="absolute top-[20vw] left-[12vw]"
+      >
         <Image src={LeftArrow} alt="leftBtn" width={35} />
-      </motion.button>
+      </button>
 
       <AnimatePresence custom={direction} initial={false} mode="popLayout">
         <motion.div
@@ -55,9 +58,14 @@ export default function ImageSlider({
         </motion.div>
       </AnimatePresence>
 
-      <motion.button initial={false} onClick={() => setSlide(1)}>
-        <Image src={RightArrow} alt="rightBtn" width={35} />
-      </motion.button>
+      <button onClick={() => setSlide(1)}>
+        <Image
+          src={RightArrow}
+          alt="rightBtn"
+          width={35}
+          className="absolute top-[20vw] right-[16vw]"
+        />
+      </button>
     </div>
   );
 }
