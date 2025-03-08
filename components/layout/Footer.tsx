@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <footer className="h-[14.8vw] w-screen bg-black text-white py-[2vw] px-[13.5vw] text-[0.7vw] flex justify-center items-start overflow-hidden">
       <div className="mr-[26.45vw]">
-        <div className="relative w-[6.5vw] aspect-[125/27]">
+        <div className="relative w-[7.6vw] aspect-[147/26]">
           <Image
             src="/images/logo/logo_mini_white.png"
             fill

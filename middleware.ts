@@ -6,7 +6,9 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken');
 
   if (pathname === '/')
-    return NextResponse.redirect(new URL('/guestMain', request.url));
+    return NextResponse.redirect(
+      new URL(accessToken ? '/userMain' : '/guestMain', request.url),
+    );
 
   if (pathname === '/login') {
     const response = NextResponse.next();

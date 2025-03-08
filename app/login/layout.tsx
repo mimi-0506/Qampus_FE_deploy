@@ -18,7 +18,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
           className="absolute z-0"
         />
         <div className="aboslute z-10 flex flex-col justify-center items-center">
-          <div className="relative w-[9vw] aspect-[176/38]">
+          <div className="relative w-[10.78vw] aspect-[207/37]">
             <Image
               src="/images/logo/logo_mini_white.png"
               fill

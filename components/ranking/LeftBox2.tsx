@@ -1,9 +1,6 @@
 'use client';
 
-import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
-
-export default function LeftBox2() {
-  const {ref, isVisible} = useScrollAnimation();
+export default function LeftBox2({isVisible}: {isVisible: boolean}) {
   return (
     <>
       <div
@@ -19,7 +16,6 @@ export default function LeftBox2() {
           얻은 사용자에게 보상을 제공해요!
         </p>
       </div>
-      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
     </>
   );
 }

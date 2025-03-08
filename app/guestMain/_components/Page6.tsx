@@ -64,7 +64,7 @@ export default function Page6() {
           );
         })}
       </div>
-      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
+      <div ref={ref} className="w-full  bg-white absolute bottom-[20vw]" />
     </div>
   );
 }
