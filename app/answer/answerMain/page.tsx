@@ -50,12 +50,12 @@ export default function AnswerMainPage() {
   };
 
   return (
-    <main className="w-full flex bg-white min-h-screen pb-20 flex-col items-center">
+    <main className="w-full flex bg-white min-h-screen flex-col items-center">
       <SearchBar />
 
-      <div className="relative w-[100vw] aspect-[2000/500] mt-10">
+      <div className="relative w-[100vw] aspect-[2000/500]">
         <Image
-          src="/svg/answer_banner.svg"
+          src="/images/question/answer_banner.png"
           alt="banner"
           layout="fill"
           objectFit="cover"
