@@ -86,13 +86,16 @@ const Answer = forwardRef(function Answer(
       </div>
 
       {Array.isArray(answer?.imageUrls) && answer.imageUrls.length > 0 && (
-        <div className="flex gap-2 mt-4 ml-10">
+        <div className="overflow-x-auto flex gap-2 mt-4 ml-10 pb-4 scrollbar-hide">
           {answer.imageUrls.map((image, index) => (
-            <div key={index} className="relative w-[180px] h-[240px]">
+            <div
+              key={index}
+              className="relative w-[180px] h-[240px] flex-shrink-0 rounded-lg overflow-hidden"
+            >
               <img
                 src={image}
                 alt={`답변 이미지 ${index + 1}`}
-                className="rounded-lg cursor-pointer"
+                className="w-full h-full object-cover rounded-lg cursor-pointer"
                 onClick={() => handleImageClick(image)}
               />
             </div>
@@ -130,17 +133,15 @@ const Answer = forwardRef(function Answer(
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
           <button
             onClick={handleCloseModal}
-            className="absolute top-20 right-20 text-white rounded-full p-2"
+            className="absolute top-5 right-5 text-white"
           >
             <IoIosClose size={40} />
           </button>
-          <div className="relative">
+          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
             <img
               src={selectedImage}
               alt="Selected Image"
-              width={800}
-              height={600}
-              className="rounded-lg"
+              className="max-w-full max-h-full rounded-lg"
             />
           </div>
         </div>

@@ -65,14 +65,18 @@ export default function ViewQuestion({
           조회수 {question.viewCnt}회
         </p>
         <p className="my-4 text-sm md:my-6 text-black">{question.content}</p>
+
         {question.imageUrls && question.imageUrls.length > 0 && (
           <div className="flex gap-2 mt-4">
             {question.imageUrls.map((image, index) => (
-              <div key={index} className="relative w-[180px] h-[240px]">
+              <div
+                key={index}
+                className="relative w-[180px] h-[240px] overflow-hidden rounded-lg"
+              >
                 <img
                   src={image}
                   alt={`Question Image ${index + 1}`}
-                  className="rounded-lg cursor-pointer"
+                  className="w-full h-full object-cover rounded-lg cursor-pointer"
                   onClick={() => handleImageClick(image)}
                 />
               </div>
@@ -110,17 +114,15 @@ export default function ViewQuestion({
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
           <button
             onClick={handleCloseModal}
-            className="absolute top-20 right-2 text-white rounded-full p-2"
+            className="absolute top-5 right-5 text-white "
           >
             <IoIosClose size={40} />
           </button>
-          <div className="relative">
+          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
             <img
               src={selectedImage}
               alt="Selected Image"
-              width={800}
-              height={600}
-              className="rounded-lg"
+              className="max-w-full max-h-full rounded-lg"
             />
           </div>
         </div>
