@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+import {useEffect, useState} from 'react';
 
 const NAV_ITEMS = [
   {label: '질문하기', path: '/question/questionCreate'},
@@ -12,7 +13,19 @@ const NAV_ITEMS = [
 
 const Header = () => {
   const pathname = usePathname();
-  const isCommunity = pathname === '/community';
+  const isCommunity = pathname === '/community' || '/login';
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    // accessToken 확인
+    const cookies = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('accessToken='));
+
+    if (cookies) {
+      setAccessToken(cookies.split('=')[1]);
+    }
+  }, []);
 
   return (
     <header
@@ -48,17 +61,35 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* 마이페이지 아이콘 */}
-        <Link href="/mypage" className="ml-16">
-          <Image
-            src="/icon/user.svg"
-            alt="user icon"
-            width={15}
-            height={15}
-            className={`${isCommunity ? 'fill invert' : ''} `}
-            priority
-          />
-        </Link>
+        <div className="ml-16">
+          {accessToken ? (
+            // 로그인한 경우 (마이페이지 아이콘 표시)
+            <Link href="/mypage">
+              <Image
+                src="/icon/user.svg"
+                alt="user icon"
+                width={15}
+                height={15}
+                className={`${isCommunity ? 'fill invert' : ''} `}
+                priority
+              />
+            </Link>
+          ) : (
+            // 로그인하지 않은 경우 (로그인 버튼 표시)
+            <Link
+              href="/login"
+              className="flex items-center px-3 py-2 gap-2 rounded-full shadow-md bg-white shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)]"
+            >
+              <span className="text-black text-xs font-300">로그인</span>
+              <Image
+                src="/svg/right-arrow-black.svg"
+                alt="arrow"
+                width={8}
+                height={8}
+              />
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );
