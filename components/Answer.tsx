@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import Image from 'next/image';
 import {useState, forwardRef} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
@@ -63,7 +63,7 @@ const Answer = forwardRef(function Answer(
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
             <div className="absolute top-0 left-6 transition-transform duration-300 ease-in-out transform scale-100">
-              <Image
+              <img
                 src="/images/question/adopt.png"
                 alt="adopt"
                 width={44}
@@ -72,7 +72,7 @@ const Answer = forwardRef(function Answer(
             </div>
           ) : (
             <div className="absolute top-8 left-8 w-[24px] h-[24px]">
-              <Image
+              <img
                 src="/images/question/A.svg"
                 alt="A icon"
                 width={24}
@@ -89,11 +89,9 @@ const Answer = forwardRef(function Answer(
         <div className="flex gap-2 mt-4 ml-10">
           {answer.imageUrls.map((image, index) => (
             <div key={index} className="relative w-[180px] h-[240px]">
-              <Image
+              <img
                 src={image}
                 alt={`답변 이미지 ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
                 className="rounded-lg cursor-pointer"
                 onClick={() => handleImageClick(image)}
               />
@@ -137,7 +135,7 @@ const Answer = forwardRef(function Answer(
             <IoIosClose size={40} />
           </button>
           <div className="relative">
-            <Image
+            <img
               src={selectedImage}
               alt="Selected Image"
               width={800}
