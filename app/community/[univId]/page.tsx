@@ -1,42 +1,56 @@
+'use client';
+
+import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import MainCircle from '@/components/ranking/MainCircle';
-import {fetchWithoutAuth} from '@/app/server/actions/serverFetch';
+// import {fetchWithoutAuth} from '@/app/server/actions/serverFetch';
+import {useParams} from 'next/navigation';
 
-// type univType = {
-//   university_id: number;
-//   university_name: string;
-//   rate: number;
-//   participant_count: number;
-//   question_cnt: number;
-//   answer_cnt: number;
-//   choice_cnt: number;
-// };
-
-const preload = async (univName: string) => {
-  void fetch(`https://api.example.com/university/detail?name=${univName}`, {
-    cache: 'force-cache',
-  }).catch(error => {
-    console.error('Preload Error:', error); // ❌ 프리로드 실패 시 콘솔에만 표시
-  });
+type univDetailType = {
+  university_id: number;
+  university_name: string;
+  rate: number;
+  participant_count: number;
+  question_cnt: number;
+  answer_cnt: number;
+  choice_cnt: number;
+  ranking: number;
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: {[key: string]: string};
-}) {
-  const univName = searchParams.univ;
-  preload(univName);
+export default function Page() {
+  const [data, setData] = useState<univDetailType>(null);
+  const {univId} = useParams<{univId: string}>();
 
-  let data = null;
-  try {
-    data = await fetchWithoutAuth({
-      method: 'GET',
-      url: `university/detail?name=${univName}`,
+  useEffect(() => {
+    if (!univId) return;
+    const univName = decodeURIComponent(univId);
+    console.log(univName);
+
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetchWithoutAuth({
+    //       method: 'GET',
+    //       url: `university/detail?universityName=${univId}`,
+    //     });
+    //     setData(response);
+    //   } catch (error) {
+    //     console.error('데이터 로드 실패:', error);
+    //   }
+    // };
+
+    // fetchData();
+
+    setData({
+      university_id: 0,
+      university_name: '서울대학교',
+      rate: 1,
+      ranking: 1,
+      participant_count: 14,
+      question_cnt: 19,
+      answer_cnt: 3,
+      choice_cnt: 5,
     });
-  } catch (e) {
-    console.log(e);
-  }
+  }, [univId]);
 
   return (
     <div className="w-screen flex flex-col justify-between relative bg-black mb-[3.3vw]">
