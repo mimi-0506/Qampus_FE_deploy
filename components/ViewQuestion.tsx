@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
-import Image from 'next/image';
 import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
 import {IoIosClose} from 'react-icons/io';
@@ -47,7 +47,7 @@ export default function ViewQuestion({
     <div className="bg-white w-[72.6vw] rounded-2xl px-6 md:px-8 pt-8 pb-5 text-black border">
       <div className="flex justify-between items-center">
         <h1 className="flex gap-4 text-lg md:text-xl font-[600]">
-          <Image
+          <img
             src="/images/question/Q.svg"
             alt="Q icon"
             width={24}
@@ -69,11 +69,9 @@ export default function ViewQuestion({
           <div className="flex gap-2 mt-4">
             {question.imageUrls.map((image, index) => (
               <div key={index} className="relative w-[180px] h-[240px]">
-                <Image
+                <img
                   src={image}
                   alt={`Question Image ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
                   className="rounded-lg cursor-pointer"
                   onClick={() => handleImageClick(image)}
                 />
@@ -117,7 +115,7 @@ export default function ViewQuestion({
             <IoIosClose size={40} />
           </button>
           <div className="relative">
-            <Image
+            <img
               src={selectedImage}
               alt="Selected Image"
               width={800}
