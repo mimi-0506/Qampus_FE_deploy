@@ -78,7 +78,7 @@ const Answer = forwardRef(function Answer(
         ${isCentered ? 'border-1 border-blue-500 shadow-sm transition-all duration-300' : 'border'}
       `}
     >
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-center">
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
             <div className="absolute top-0 left-6 transition-transform duration-300 ease-in-out transform scale-100">
@@ -102,13 +102,18 @@ const Answer = forwardRef(function Answer(
 
           <div>
             <p className="text-black text-sm ml-14 pb-2">{answer?.content}</p>
-            <p className="text-xs text-gray-500 ml-14">{timeAgo}</p>
           </div>
         </div>
+
+        {answer.universityName && (
+          <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
+            {answer.universityName}
+          </span>
+        )}
       </div>
 
       {Array.isArray(answer?.imageUrls) && answer.imageUrls.length > 0 && (
-        <div className="overflow-x-auto flex gap-2 mt-4 ml-10 pb-4 scrollbar-hide">
+        <div className="overflow-x-auto flex gap-2 mt-8 ml-10 pb-4 scrollbar-hide">
           {answer.imageUrls.map((image, index) => (
             <div
               key={index}
