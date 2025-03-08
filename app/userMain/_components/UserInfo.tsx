@@ -9,7 +9,7 @@ export default function UserInfo({
 }) {
   return (
     <div className="bg-white w-full h-[70vw] absolute top-0">
-      <div className="w-full mt-[7.5vw] aspect-[1920/650] bg-usermainbg flex justify-between items-center absolute top-0">
+      <div className="w-full mt-[7.5vw] aspect-[1920/650] flex justify-between items-center absolute top-0">
         <Image
           src="/images/user/bg.png"
           width={1920}
