@@ -24,21 +24,27 @@ export default function Page5() {
   };
 
   return (
-    <div className="flex flex-col relative w-screen items-center bg-black border border-white">
+    <div className="flex flex-col relative w-screen items-center bg-black">
       {/* background */}
       <div className="relative w-full h-auto aspect-[1920/1498] z-0 top-0">
         <Image src="/images/main/bg_page5.png" fill alt="bg" />
       </div>
 
-      <div className="flex flex-col items-center justify-center absolute top-[20vw] z-10">
+      <div className="absolute top-[46vw] left-0">
+        <Slider data={data} />
+      </div>
+
+      <div className="absolute top-[25vw] left-[6.5vw] z-10">
+        <div className="relative w-[87.5vw] aspect-[1680/830]">
+          <Image src="/images/main/overlay_page5.png" alt="bg" fill />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center absolute top-[21vw] z-10">
         <div className="from-dark1 to-light1 bg-gradient-to-r bg-clip-text text-[0.9vw] text-transparent">
           Ranking
         </div>
         <div className="text-white text-[1.46vw] mt-[1.35vw]">학교 별 순위</div>
-      </div>
-
-      <div className="absolute top-[20vw] left-0">
-        <Slider data={data} />
       </div>
 
       <div className="absolute top-[40vw] w-screen flex justify-center items-center] z-30">
