@@ -15,7 +15,7 @@ export default function AnimationText() {
         <br />
         지금까지 모인 답변들을 확인해볼까요?
       </div>
-      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
+      <div ref={ref} className="w-full absolute bottom-[15vw]" />
     </>
   );
 }

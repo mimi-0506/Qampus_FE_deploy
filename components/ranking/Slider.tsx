@@ -47,12 +47,11 @@ export default function CircularCarousel({
   }, [nowCenter]);
 
   return (
-    <div
-      className={`flex flex-col items-center absolute ${top ? top : `top-[22vw]`} z-10`}
-    >
+    <div className={`flex flex-col items-center absolute ${top} z-10`}>
       <div className="text-white text-[1.2vw] font-bold mb-[1vw]">
         주간 {nowCenter?.ranking}위
       </div>
+
       <div className="flex gap-[1vw] relative z-10 w-screen h-[12vw] items-center justify-center overflow-hidden ">
         {circles.map((univ, index) => {
           const position = index - 2;
@@ -97,9 +96,9 @@ export default function CircularCarousel({
               }}
             >
               {position === 0 ? (
-                <div className="w-full aspect-[1/1] rounded-full bg-gradient-to-b from-white to-blue-600 flex items-center justify-center shadow-2xl border-[0.6vw] border-blue-800">
-                  <div className="w-[83%] aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
-                    <div className="w-[82%] aspect-[1/1] rounded-full bg-white relative">
+                <div className="w-full aspect-[1/1] rounded-full overflow-hidden bg-gradient-to-b from-white to-blue-600 flex items-center justify-center border-[0.6vw] border-blue-800">
+                  <div className="w-[83%] overflow-hidden aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
+                    <div className="w-[82%] overflow-hidden aspect-[1/1] rounded-full bg-white relative">
                       <Image
                         src={`/images/main/univ_${index}.png`}
                         alt="univ logo"
@@ -109,8 +108,8 @@ export default function CircularCarousel({
                   </div>
                 </div>
               ) : (
-                <div className="w-full h-full rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center shadow-lg">
-                  <div className="w-[80%] aspect-[1/1] relative">
+                <div className="w-full h-full overflow-hidden rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center">
+                  <div className="w-[80%] overflow-hidden aspect-[1/1] relative">
                     <Image
                       src={`/images/main/univ_${index}.png`}
                       alt="univ logo"
@@ -124,14 +123,6 @@ export default function CircularCarousel({
         })}
       </div>
 
-      <Image
-        src="/images/main/overlay_page5.png"
-        width={1370}
-        height={952}
-        alt="bg"
-        className="absolute z-20 top-[-10vw] "
-      />
-
       <div className="mt-[1.2vw] flex flex-col justify-center items-center">
         <div className="text-white text-[1.25vw] font-bold">
           {nowCenter?.university_name}
@@ -140,7 +131,7 @@ export default function CircularCarousel({
           채택 {nowCenter?.choice_cnt}회
         </div>
       </div>
-      <div className="flex gap-[1vw] mt-[3vw] text-[1vw] text-white relative z-30">
+      <div className="flex gap-[1vw] mt-[4vw] text-[1vw] text-white relative z-30">
         {BUTTONS.map((button, key) => (
           <button
             key={`${key}_button`}

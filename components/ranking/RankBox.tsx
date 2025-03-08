@@ -1,8 +1,6 @@
 'use client';
 
 import {Dispatch, SetStateAction} from 'react';
-import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
-
 import {motion} from 'motion/react';
 import {rankType, universityType} from '@/type';
 
@@ -11,14 +9,14 @@ export default function RankBox({
   universities,
   rankStandard,
   setRankStandard,
+  isVisible,
 }: {
   mode?: boolean;
   universities: universityType[];
   rankStandard?: rankType;
   setRankStandard?: Dispatch<SetStateAction<rankType>>;
+  isVisible: boolean;
 }) {
-  const {ref, isVisible} = useScrollAnimation();
-
   return (
     <>
       <div
@@ -30,7 +28,7 @@ export default function RankBox({
       >
         <div className="absolute right-0">
           {mode && (
-            <div className="relative top-[-5vw] flex items-center bg-black p-1 rounded-full w-[6vw] aspect-[117/47] text-[0.88vw] ">
+            <div className="relative top-[-5vw] flex items-center bg-black px-[0.2vw] py-[0.1vw] rounded-full w-[6vw] aspect-[117/47] text-[0.88vw] ">
               <motion.div
                 className="absolute w-[3vw] aspect-[58/39] bg-gray-700 rounded-full"
                 initial={{x: 0}}
@@ -79,7 +77,6 @@ export default function RankBox({
           ))}
         </ul>
       </div>
-      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
     </>
   );
 }
