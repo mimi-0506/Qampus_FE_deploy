@@ -48,6 +48,7 @@ export default function ViewAnswer({
     });
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       answerRefs.current.forEach(answer => {
         if (answer) observer.unobserve(answer);
       });
