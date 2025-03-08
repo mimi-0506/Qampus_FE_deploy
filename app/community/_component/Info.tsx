@@ -111,7 +111,7 @@ export default function Info() {
         />
       </div>
 
-      <Slider top={'top-[45vw]'} data={data} />
+      <Slider top={'top-[46vw]'} data={data} />
 
       <div className="absolute top-[25vw] left-[6.5vw] z-10">
         <div className="relative w-[87.5vw] aspect-[1680/830]">
