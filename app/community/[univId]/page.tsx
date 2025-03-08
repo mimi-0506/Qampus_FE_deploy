@@ -12,7 +12,7 @@ import {fetchWithoutAuth} from '@/app/server/actions/serverFetch';
 //   choice_cnt: number;
 // };
 
-export const preload = (univName: string) => {
+const preload = async (univName: string) => {
   void fetch(`https://api.example.com/university/detail?name=${univName}`, {
     cache: 'force-cache',
   }).catch(error => {

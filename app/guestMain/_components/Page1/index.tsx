@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Page1() {
   return (
-    <div className="flex flex-col relative z-0 w-screen h-screen items-center top-[-80px] overflow-hidden">
+    <div className="flex flex-col relative z-0 w-screen aspect-[1920/1020] items-center top-[-80px] overflow-hidden">
       <Background />
 
       <div className="relative w-[20vw] mt-[16.8vw] aspect-[402/405]">
