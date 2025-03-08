@@ -13,6 +13,7 @@ export default async function UserMainPage() {
     method: 'GET',
     url: '/home',
   });
+  console.log(data);
 
   return (
     <main className=" bg-usermainbg2 flex overflow-hidden flex-col aspect-[1922/3500] w-screen items-center justify-center relative">
