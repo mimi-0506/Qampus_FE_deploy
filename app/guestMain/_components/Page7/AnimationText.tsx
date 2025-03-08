@@ -13,7 +13,7 @@ export default function AnimationText() {
       >
         Qampus에서 성장하기
       </div>
-      <div ref={ref} className="w-full bg-white absolute bottom-0" />
+      <div ref={ref} className="w-full bg-white absolute bottom-[20vw]" />
     </>
   );
 }
