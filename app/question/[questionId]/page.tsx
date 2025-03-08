@@ -54,7 +54,7 @@ export default function QuestionDetailPage() {
         {isMyQuestion ? (
           <Link
             href="/question/questionCreate"
-            className="pt-6 md:pt-10 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
+            className="pt-6 cursor-pointer text-[#333333] text-sm md:text-base border-b border-[#333333]"
           >
             추가 질문하기
           </Link>
@@ -63,7 +63,7 @@ export default function QuestionDetailPage() {
         ) : (
           <button
             onClick={() => setAnswering(true)}
-            className="bg-main mb-[5vw] text-white w-[50.6vw] rounded-[1vw] text-[1 document.cookie = 'info=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';4vw] flex justify-center items-center aspect-[973/85]"
+            className="bg-main mb-[5vw] text-white w-[50.6vw] px-4 py-4 rounded-[1vw] text-20px flex justify-center items-center"
           >
             답변하기
           </button>
