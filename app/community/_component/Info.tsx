@@ -26,7 +26,7 @@ export default function Info() {
 
   return (
     <div className="w-screen relative bg-black overflow-hidden">
-      <div className="relative top-[] w-screen aspect-[1954/1524]">
+      <div className="relative w-screen aspect-[1954/1524]">
         <Image
           src="/images/main/bg_page5.png"
           fill
@@ -70,6 +70,12 @@ export default function Info() {
       </div>
 
       <Slider top={'top-[45vw]'} data={data} />
+
+      <div className="absolute top-[25vw] left-[6.5vw] z-10">
+        <div className="relative w-[87.5vw] aspect-[1680/830]">
+          <Image src="/images/main/overlay_page5.png" alt="bg" fill />
+        </div>
+      </div>
 
       <div className="relative overflow-hidden w-[111vw]  h-[10vw] left-[-5vw] top-[-9vw] flex justify-center">
         <div className="absolute left-0 top-0 w-[111vw] aspect-[2132/585] z-10">
