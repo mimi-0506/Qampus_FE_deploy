@@ -92,7 +92,9 @@ export default function ViewAnswer({
             onSelect={handleSelectAnswer}
             chooseAnswerId={chooseAnswerId}
             isCentered={centeredAnswerIds.includes(nowAnswer.answerId)}
-            ref={el => (answerRefs.current[index] = el)}
+            ref={el => {
+              answerRefs.current[index] = el;
+            }}
           />
         ))}
     </>
