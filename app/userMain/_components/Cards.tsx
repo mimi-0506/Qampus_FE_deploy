@@ -3,7 +3,7 @@
 import {answerType, questionType} from '@/type';
 import QuestionCard from './QuestionCard';
 import AnswerCard from './AnswerCard';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default function Cards({
   datas,
@@ -11,6 +11,10 @@ export default function Cards({
   datas: questionType[] | answerType[] | undefined;
 }) {
   const [nowOpen, setNowOpen] = useState<number>(0);
+
+  useEffect(() => {
+    console.log(datas);
+  }, [datas]);
 
   if (!datas || datas.length === 0) return null;
 
