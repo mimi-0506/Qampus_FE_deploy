@@ -1,8 +1,11 @@
+'use client';
+
 import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
 import Image from 'next/image';
 import {useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
+import {IoIosClose} from 'react-icons/io';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
 import {useRouter} from 'next/navigation';
 
@@ -14,6 +17,7 @@ export default function ViewQuestion({
   isMyQuestion: boolean;
 }) {
   const [imCurious, setImCurious] = useState(question.curious);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const router = useRouter();
 
   const createdDate = Array.isArray(question.createdDate)
@@ -29,6 +33,14 @@ export default function ViewQuestion({
 
   const handleQuestionEdit = async () => {
     router.push(`/question/questionCreate?edit=${question.questionId}`);
+  };
+
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
   };
 
   return (
@@ -56,14 +68,16 @@ export default function ViewQuestion({
         {question.imageUrls && question.imageUrls.length > 0 && (
           <div className="flex gap-2 mt-4">
             {question.imageUrls.map((image, index) => (
-              <Image
-                key={index}
-                src={image}
-                alt={`Question Image ${index + 1}`}
-                width={200}
-                height={200}
-                className="rounded-lg"
-              />
+              <div key={index} className="relative w-[180px] h-[240px]">
+                <Image
+                  src={image}
+                  alt={`Question Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg cursor-pointer"
+                  onClick={() => handleImageClick(image)}
+                />
+              </div>
             ))}
           </div>
         )}
@@ -81,7 +95,10 @@ export default function ViewQuestion({
         </button>
         <div>
           {isMyQuestion && (
-            <button onClick={handleQuestionEdit} className="text-dark1">
+            <button
+              onClick={handleQuestionEdit}
+              className="text-dark1 text-sm font-semibold"
+            >
               수정하기
             </button>
           )}
@@ -90,6 +107,26 @@ export default function ViewQuestion({
           </p>
         </div>
       </div>
+
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <button
+            onClick={handleCloseModal}
+            className="absolute top-20 right-2 text-white rounded-full p-2"
+          >
+            <IoIosClose size={40} />
+          </button>
+          <div className="relative">
+            <Image
+              src={selectedImage}
+              alt="Selected Image"
+              width={800}
+              height={600}
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
