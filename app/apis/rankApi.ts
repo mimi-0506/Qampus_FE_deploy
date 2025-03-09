@@ -22,7 +22,7 @@ export const getUnivDetail = async (name: string) => {
 export const getUnivActivity = async (name: string) => {
   const data = await fetchWithoutAuth({
     method: 'GET',
-    url: `/activity/recent?universityName =${name}`,
+    url: `/activity/recent?universityName=${name}`,
   });
 
   return data;
