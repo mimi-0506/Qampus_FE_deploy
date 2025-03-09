@@ -31,7 +31,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!univId) return;
-    const univName = decodeURIComponent(univId);
+    const univName = decodeURIComponent(univId).replace('대학교', '대');
     console.log(univName);
 
     const getDatas = async () => {
