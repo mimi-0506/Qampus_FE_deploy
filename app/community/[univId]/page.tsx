@@ -3,8 +3,8 @@
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import MainCircle from '@/components/ranking/MainCircle';
-// import {fetchWithoutAuth} from '@/app/server/actions/serverFetch';
 import {useParams} from 'next/navigation';
+import {getUnivActivity, getUnivDetail} from '@/app/apis/rankApi';
 
 type univDetailType = {
   university_id: number;
@@ -17,8 +17,16 @@ type univDetailType = {
   ranking: number;
 };
 
+type univActivityType = {
+  major: string;
+  activityType: string;
+  id: number;
+  activityId: number;
+};
+
 export default function Page() {
   const [data, setData] = useState<univDetailType | null>(null);
+  const [activityData, setActivityData] = useState<univActivityType[] | []>([]);
   const {univId} = useParams<{univId: string}>();
 
   useEffect(() => {
@@ -26,31 +34,17 @@ export default function Page() {
     const univName = decodeURIComponent(univId);
     console.log(univName);
 
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetchWithoutAuth({
-    //       method: 'GET',
-    //       url: `university/detail?universityName=${univId}`,
-    //     });
-    //     setData(response);
-    //   } catch (error) {
-    //     console.error('데이터 로드 실패:', error);
-    //   }
-    // };
+    const getDatas = async () => {
+      const [univData, activityData] = await Promise.all([
+        getUnivDetail(univName),
+        getUnivActivity(univName),
+      ]);
 
-    // fetchData();
+      setData(univData);
+      setActivityData(activityData);
+    };
 
-    setData({
-      question_cnt: 19,
-      answer_cnt: 3,
-
-      choice_cnt: 9,
-      participant_count: 6,
-      ranking: 1,
-      rate: 10,
-      university_id: 0,
-      university_name: '서울대학교',
-    });
+    getDatas();
   }, [univId]);
 
   return (
@@ -116,10 +110,17 @@ export default function Page() {
             최근 활동
           </h2>
           <ul className="flex flex-col text-[1vw] gap-[2.6vw] mt-[2vw] relative left-[1vw] top-[-0.9vw]">
-            <li>국어국문학과에서 답변을 등록했어요!</li>
-            <li>영문학과에서 답변을 등록했어요!</li>
-            <li>철학과에서 답변을 등록했어요!</li>
-            <li>수학과에서 답변을 등록했어요!</li>
+            {activityData.map((act, index) => {
+              let activityMessage = `${act?.major}에서 `;
+              if (act?.activityType === 'ANSWER')
+                activityMessage += '질문을 등록했어요!';
+              else if (act?.activityType === 'QUESTION_REGISTRACTION')
+                activityMessage += '답변을 등록했어요!';
+              else if (act?.activityType === 'QUESTION_CHOICE')
+                activityMessage += '답변을 채택했어요!';
+
+              return <li key={index}>{activityMessage}</li>;
+            })}
           </ul>
           <div className="absolute bottom-0 left-0 w-full aspect-[453/349]">
             <div className="relative w-full h-full">
