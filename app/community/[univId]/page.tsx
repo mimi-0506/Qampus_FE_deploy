@@ -113,10 +113,10 @@ export default function Page() {
             {activityData.map((act, index) => {
               let activityMessage = `${act?.major}에서 `;
               if (act?.activityType === 'ANSWER')
-                activityMessage += '질문을 등록했어요!';
-              else if (act?.activityType === 'QUESTION_REGISTRACTION')
                 activityMessage += '답변을 등록했어요!';
-              else if (act?.activityType === 'QUESTION_CHOICE')
+              else if (act?.activityType === 'QUESTION')
+                activityMessage += '질문을 등록했어요!';
+              else if (act?.activityType === 'CHOICE_SAVE')
                 activityMessage += '답변을 채택했어요!';
 
               return <li key={index}>{activityMessage}</li>;
