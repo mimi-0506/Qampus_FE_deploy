@@ -41,7 +41,9 @@ export default function Page() {
       ]);
 
       setData(univData);
-      setActivityData(activityData);
+
+      if (activityData.code !== 'NOT_EXIST_UNIVERSITY')
+        setActivityData(activityData);
     };
 
     getDatas();
@@ -75,7 +77,7 @@ export default function Page() {
 
         <div className="flex flex-col">
           <h1 className="text-[1.875vw] text-white mb-[0.9vw]">
-            {data?.university_name}
+            {data?.university_name || '대학 정보가 없습니다'}
           </h1>
           <div className="flex text-grey3 text-[0.8vw] gap-[0.6vw] mb-[2.5vw]">
             <div className="w-[5.36vw] aspect-[103/33] flex justify-center items-center bg-[url('/images/community/tag1.png')] bg-cover bg-center">
@@ -110,17 +112,21 @@ export default function Page() {
             최근 활동
           </h2>
           <ul className="flex flex-col text-[1vw] gap-[2.6vw] mt-[2vw] relative left-[1vw] top-[-0.9vw]">
-            {activityData.map((act, index) => {
-              let activityMessage = `${act?.major}에서 `;
-              if (act?.activityType === 'ANSWER')
-                activityMessage += '답변을 등록했어요!';
-              else if (act?.activityType === 'QUESTION')
-                activityMessage += '질문을 등록했어요!';
-              else if (act?.activityType === 'CHOICE_SAVE')
-                activityMessage += '답변을 채택했어요!';
+            {activityData.length > 0 ? (
+              activityData.map((act, index) => {
+                let activityMessage = `${act?.major}에서 `;
+                if (act?.activityType === 'ANSWER')
+                  activityMessage += '답변을 등록했어요!';
+                else if (act?.activityType === 'QUESTION')
+                  activityMessage += '질문을 등록했어요!';
+                else if (act?.activityType === 'CHOICE_SAVE')
+                  activityMessage += '답변을 채택했어요!';
 
-              return <li key={index}>{activityMessage}</li>;
-            })}
+                return <li key={index}>{activityMessage}</li>;
+              })
+            ) : (
+              <li>아직 활동이 없어요!</li>
+            )}
           </ul>
           <div className="absolute bottom-0 left-0 w-full aspect-[453/349]">
             <div className="relative w-full h-full">
