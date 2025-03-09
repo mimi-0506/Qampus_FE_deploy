@@ -11,7 +11,6 @@ import {
 import {motion} from 'framer-motion';
 import {useRouter} from 'next/navigation';
 import {communityUnivType} from '@/type';
-import {universities} from '@/constants/dummy';
 
 type hoverType = {
   univ: communityUnivType;
@@ -31,7 +30,7 @@ const getColorByRank = (rank: number) => {
 const geoUrl =
   'https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo.json';
 
-export default function UnivMap() {
+export default function UnivMap({data}: {data: communityUnivType[] | []}) {
   const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
   const [position, setPosition] = useState<positionType>({
     coordinates: [127, 36],
@@ -89,16 +88,15 @@ export default function UnivMap() {
           </Geographies>
 
           {/* 대학 마커 표시 */}
-          {universities.map(uni => {
+          {data.map(uni => {
             const size =
               Math.max(8 - uni.ranking * 0.5, 2) *
               (1 / Math.sqrt(position.zoom));
-            const glowSize = size * 1.5;
-            const opacity = 1 - uni.ranking * 0.07;
             const color = getColorByRank(uni.ranking);
 
             return (
               <Marker
+                className={`w-[${size}] aspect-[1/1] bg-[${color}]`}
                 key={uni.university_name}
                 coordinates={[uni.location.latitude, uni.location.longitude]}
                 onMouseEnter={e => {
@@ -158,7 +156,7 @@ export default function UnivMap() {
           </h2>
           <p className="text-grey3 text-[1vw] mt-1">10명 참여중</p>
           <p className="text-[1.14vw] text-grey5 mt-3">
-            주간{' '}
+            주간
             <span className="font-bold">{hoveredMarker.univ.ranking}위</span>/
             차지율 <span className="font-bold">{hoveredMarker.univ.rate}%</span>
           </p>
