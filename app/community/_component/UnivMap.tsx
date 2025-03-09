@@ -8,7 +8,6 @@ import {
   Marker,
   ZoomableGroup,
 } from 'react-simple-maps';
-import {motion} from 'framer-motion';
 import {useRouter} from 'next/navigation';
 import {communityUnivType} from '@/type';
 
@@ -109,35 +108,7 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
                 onClick={() => {
                   router.push(`/community/${uni.university_name}`);
                 }}
-              >
-                {/* Glow 효과 */}
-                <motion.circle
-                  r={glowSize}
-                  fill={color}
-                  style={{filter: 'blur(6px)', opacity, cursor: 'pointer'}}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [opacity, opacity * 0.5, opacity],
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                {/* 실제 마커 */}
-                <motion.circle
-                  r={size}
-                  fill={color}
-                  animate={{scale: [1, 1.2, 1], opacity: [1, 0.6, 1]}}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  style={{cursor: 'pointer'}}
-                />
-              </Marker>
+              ></Marker>
             );
           })}
         </ZoomableGroup>
