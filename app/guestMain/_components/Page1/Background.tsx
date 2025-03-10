@@ -2,24 +2,13 @@ import Image from 'next/image';
 
 export default function Background() {
   return (
-    <div className="absolute top-0 min-h-screen bg-white h-screen w-full">
-      <Image
-        src="/images/logo/logo_big.png"
-        alt="bg text"
-        width={2105}
-        height={380}
-        sizes={'110vw'}
-        className="mt-[5vw] ml-[9.52vw]"
-      />
-
-      <Image
-        src="/images/logo/logo_bigpng"
-        alt="bg text"
-        width={2105}
-        height={380}
-        sizes={'110vw'}
-        className=" relative top-[2.60vw] right-[15.63vw]"
-      />
+    <div className="absolute top-0 min-h-screen bg-white w-full">
+      <div className="relative mt-[11.2vw] ml-[9.52vw] aspect-[2518/454] w-[131vw]">
+        <Image src="/images/logo/logo_big.svg" alt="bg text" fill />
+      </div>
+      <div className="relative left-[-15vw] aspect-[2518/454] w-[131vw]">
+        <Image src="/images/logo/logo_big.svg" alt="bg text" fill />
+      </div>
 
       <Image
         src="/images/main/gradient_page1.png"

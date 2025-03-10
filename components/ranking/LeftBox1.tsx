@@ -1,9 +1,6 @@
 'use client';
 
-import useScrollAnimation from '../../app/guestMain/_components/useScrollAnimation';
-
-export default function LeftBox1() {
-  const {ref, isVisible} = useScrollAnimation();
+export default function LeftBox1({isVisible}: {isVisible: boolean}) {
   return (
     <>
       <div
@@ -19,7 +16,6 @@ export default function LeftBox1() {
           지식 대결로 점수를 얻어 랭킹을 올려봐요!
         </p>
       </div>
-      <div ref={ref} className="w-full  bg-white absolute bottom-0" />
     </>
   );
 }

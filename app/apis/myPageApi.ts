@@ -11,7 +11,7 @@ export const getMyQuestionList = async ({
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/users/mypage?category_id=${categoryId}&page=${page}&size=${pageSize}&sort=latest`,
+    url: `/users/mypage?category_id=${categoryId}&page=${page !== undefined ? page - 1 : page}&size=${pageSize}&sort=latest`,
   });
 
   return data;

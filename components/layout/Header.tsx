@@ -37,12 +37,11 @@ const Header = () => {
     >
       <div className="mx-auto flex w-[95%] items-center justify-between px-6">
         {/* 로고 아이콘 */}
-        <Link href="/">
+        <Link href="/" className="relative w-[7.65vw] aspect-[147/26]">
           <Image
-            src="/icon/logo.svg"
+            src="/images/logo/logo_mini_black.png"
             alt="logo icon"
-            width={70}
-            height={30}
+            fill
             priority
             className={`${isCommunity ? 'fill invert' : ''}`}
           />

@@ -5,10 +5,10 @@ import Image from 'next/image';
 
 export default function Page1() {
   return (
-    <div className="flex flex-col relative aspect-[16/9] z-0 w-screen items-center overflow-hidden">
+    <div className="flex flex-col relative z-0 w-screen aspect-[1920/1020] items-center top-[-80px] overflow-hidden">
       <Background />
 
-      <div className="relative w-[21vw] mt-[13vw] aspect-[402/405]">
+      <div className="relative w-[20vw] mt-[16.8vw] aspect-[402/405]">
         <Image src="/images/characters/wink.png" alt="character" fill />
       </div>
 
@@ -19,9 +19,8 @@ export default function Page1() {
         질문 시작하기
       </Link>
 
-      <div className="bg-mainlight absolute bottom-0   bg-page1anibg flex h-[7%] w-full justify-start text-[3%] font-bold">
+      <div className="bg-mainlight absolute bottom-0 bg-page1anibg flex h-[7%] w-full justify-start text-[3%] font-bold">
         <BottomAnimation />
-        끊김테스트
         <BottomAnimation />
       </div>
     </div>
