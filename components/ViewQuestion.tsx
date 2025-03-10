@@ -105,7 +105,7 @@ export default function ViewQuestion({
             </button>
           )}
           <p className="text-xs md:text-sm text-[#606060]">
-            답변 {question.answer_cnt ?? 0}개 · {getKSTTimeAgo(createdDate)}
+            답변 {question.answers?.length ?? 0}개 ·{getKSTTimeAgo(createdDate)}
           </p>
         </div>
       </div>
