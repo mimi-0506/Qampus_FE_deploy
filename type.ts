@@ -72,7 +72,7 @@ export type userHomeDtoType = {
 
 export type userMainDataType = {
   weeklyQuestions: questionType[];
-  popularAnswers: answerType[];
+  weeklyAnswers: answerType[];
   userHomeDto: userHomeDtoType;
 };
 
