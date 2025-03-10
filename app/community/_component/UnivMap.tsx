@@ -23,7 +23,7 @@ type positionType = {
 
 // 순위에 따라 색상 변화 (높은 순위는 밝은 색, 낮은 순위는 어두운 색)
 const getColorByRank = (rank: number) => {
-  const brightness = 255 - rank * 15; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
+  const brightness = 255 - rank * 10; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
   return `rgb(${brightness}, ${brightness}, 255)`; // 푸른 계열의 색상 변화
 };
 const geoUrl =
@@ -39,7 +39,6 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
   const router = useRouter();
 
   const handleZoomIn = () => {
-    console.log(position.zoom);
     setPosition(pos => ({...pos, zoom: pos.zoom + 0.1}));
   };
 
@@ -89,16 +88,16 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
           {/* 대학 마커 표시 */}
           {data.map(uni => {
             const size =
-              Math.max(8 - uni.ranking * 0.5, 2) *
+              Math.max(12 - uni.ranking * 0.4, 4) *
               (1 / Math.sqrt(position.zoom));
             const color = getColorByRank(uni.ranking);
 
             return (
               <Marker
-                className={`w-[${size}] aspect-[1/1] bg-[${color}]`}
                 key={uni.university_name}
-                coordinates={[uni.location.latitude, uni.location.longitude]}
+                coordinates={[uni.location[1], uni.location[0]]}
                 onMouseEnter={e => {
+                  console.log(e);
                   setHoveredMarker({
                     univ: uni,
                     coordinate: {x: e.clientX, y: e.clientY},
@@ -108,7 +107,17 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
                 onClick={() => {
                   router.push(`/community/${uni.university_name}`);
                 }}
-              ></Marker>
+              >
+                <circle
+                  cx={0}
+                  cy={0}
+                  r={size}
+                  fill={color}
+                  className="filter 
+                   bg-opacity-70   shadow-green-300 animate-pulse
+                 transition-all duration-500 ease-in-out"
+                />
+              </Marker>
             );
           })}
         </ZoomableGroup>

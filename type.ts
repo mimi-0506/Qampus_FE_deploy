@@ -104,8 +104,5 @@ export type communityUnivType = {
   participant_count: number;
   rate: number;
   choice_cnt: number;
-  location: {
-    latitude: number;
-    longitude: number;
-  };
+  location: [number, number];
 };
