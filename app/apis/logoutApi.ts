@@ -1,27 +1,22 @@
 import toast from 'react-hot-toast';
-import {fetchWithAuth} from './clientFetch';
+import {fetchWithAuth as clientFetchWithAuth} from './clientFetch';
 
-export const postLogout = async () => {
-  try {
-    const data = await fetchWithAuth({
-      method: 'POST',
-      url: '/auth/logout/kakao',
-    });
+export const postLogout = () => {
+  return async () => {
+    try {
+      const response = await clientFetchWithAuth({
+        method: 'POST',
+        url: '/auth/logout',
+      });
 
-    if (data?.success) {
-      toast.success('로그아웃 성공');
-      removeAccessToken();
-      window.location.href = '/';
-    } else {
-      toast.error(`로그아웃 실패: ${data.message}`);
+      if (response.status === 200) {
+        toast.success('로그아웃 성공');
+      } else {
+        toast.error(`로그아웃 실패: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('❌ 로그아웃 요청 중 오류 발생:', error);
+      toast.error('서버 오류로 로그아웃 실패');
     }
-  } catch (error) {
-    console.error('❌ 로그아웃 요청 중 오류 발생:', error);
-    toast.error('서버 오류로 로그아웃 실패');
-  }
-};
-
-const removeAccessToken = () => {
-  document.cookie =
-    'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  };
 };

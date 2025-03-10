@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
 import {postLogout} from '@/app/apis/logoutApi';
+import {useRouter} from 'next/navigation';
 
 interface InfoCardProps {
   name: string;
@@ -12,6 +13,7 @@ interface InfoCardProps {
 
 export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
   const [profileSrc, setProfileSrc] = useState<string>('');
+  const router = useRouter();
 
   useEffect(() => {
     if (info?.profileImage) setProfileSrc(info?.profileImage);
@@ -20,10 +22,8 @@ export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
   const handleLogout = async () => {
     try {
       await postLogout();
-      document.cookie =
-        'localstorage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      localStorage.removeItem('localstorage');
-      window.location.reload();
+
+      router.push('/login');
     } catch (error) {
       console.error('로그아웃 실패:', error);
     }
@@ -34,7 +34,7 @@ export default function InfoCard({info}: {info: InfoCardProps | undefined}) {
       <div className="w-full">
         <p className="font-[600] text-[16px] text-black">내 정보</p>
         <p className="text-[13px] font-[200] text-[#8D8D8D]">
-          로그인시 입력한 나의 학교/학과 정보입니다.
+          로그인 시 입력한 나의 학교/학과 정보입니다.
         </p>
 
         {/* 사용자 정보 */}
