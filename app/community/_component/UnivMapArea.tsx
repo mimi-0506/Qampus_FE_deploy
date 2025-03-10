@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import UnivMap from './UnivMap';
-import {universities} from '@/constants/dummy';
 import {useEffect, useState} from 'react';
 import {communityUnivType} from '@/type';
 import {getRank} from '@/app/apis/rankApi';
@@ -16,8 +15,7 @@ export default function UnivMapArea() {
 
   const getData = async () => {
     const data = await getRank('weekly', 20);
-    console.log(data);
-    setData(universities);
+    setData(data);
   };
 
   return (
