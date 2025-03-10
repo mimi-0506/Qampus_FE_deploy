@@ -77,7 +77,7 @@ export default function Page() {
 
         <div className="flex flex-col">
           <h1 className="text-[1.875vw] text-white mb-[0.9vw]">
-            {data?.university_name || '대학 정보가 없습니다'}
+            {data?.university_name + '학교' || '대학 정보가 없습니다'}
           </h1>
           <div className="flex text-grey3 text-[0.8vw] gap-[0.6vw] mb-[2.5vw]">
             <div className="w-[5.36vw] aspect-[103/33] flex justify-center items-center bg-[url('/images/community/tag1.png')] bg-cover bg-center">
