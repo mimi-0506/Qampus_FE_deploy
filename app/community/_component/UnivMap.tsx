@@ -10,11 +10,7 @@ import {
 } from 'react-simple-maps';
 import {useRouter} from 'next/navigation';
 import {communityUnivType} from '@/type';
-
-type positionType = {
-  coordinates: [number, number];
-  zoom: number;
-};
+import useMapPosition from '../../../hooks/useMapPosition';
 
 // 순위에 따라 색상 변화 (높은 순위는 밝은 색, 낮은 순위는 어두운 색)
 const getColorByRank = (rank: number) => {
@@ -26,24 +22,9 @@ const geoUrl =
 
 export default function UnivMap({data}: {data: communityUnivType[] | []}) {
   const [hoveredMarker, setHoveredMarker] = useState<number | null>(null);
-  const [position, setPosition] = useState<positionType>({
-    coordinates: [127, 36],
-    zoom: 1,
-  });
-
+  const {position, handleZoomIn, handleZoomOut, handleMoveEnd} =
+    useMapPosition();
   const router = useRouter();
-
-  const handleZoomIn = () => {
-    setPosition(pos => ({...pos, zoom: pos.zoom + 0.1}));
-  };
-
-  const handleZoomOut = () => {
-    setPosition(pos => ({...pos, zoom: pos.zoom - 0.1}));
-  };
-
-  function handleMoveEnd(position: positionType) {
-    setPosition(position);
-  }
 
   return (
     <div className="bg-black w-full h-full">
@@ -73,7 +54,6 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
                   style={{
                     default: {fill: '#3765D6', stroke: '#FFF'},
                     hover: {fill: '#5A82E6', stroke: '#FFF'},
-                    pressed: {fill: '#2A4BA5', stroke: '#FFF'},
                   }}
                 />
               ))
@@ -154,7 +134,7 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
       >
         <button
           onClick={handleZoomIn}
-          className="w-[4vw] h-[5vw]  rounded-full "
+          className="w-[4vw] h-[5vw] rounded-full "
         />
 
         <button
