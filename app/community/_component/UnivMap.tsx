@@ -8,72 +8,23 @@ import {
   Marker,
   ZoomableGroup,
 } from 'react-simple-maps';
-import {motion} from 'framer-motion';
 import {useRouter} from 'next/navigation';
-
-// 마커 좌표 타입 정의
-interface MarkerData {
-  name: string;
-  coordinates: [number, number];
-  rank: number;
-  rate: number;
-}
-
-// 대학 마커 데이터 (순위 부여, 숫자가 작을수록 높은 순위)
-const universities: MarkerData[] = [
-  {name: '서울대', coordinates: [126.9526, 37.4602], rank: 1, rate: 10},
-  {name: '연세대', coordinates: [126.9368, 37.5645], rank: 2, rate: 11},
-  {name: '부산대', coordinates: [129.0897, 35.2323], rank: 3, rate: 15},
-  {name: '이화여대', coordinates: [126.9469, 37.5623], rank: 4, rate: 18},
-  {name: '홍익대', coordinates: [126.9222, 37.551], rank: 5, rate: 5},
-  {name: '충남대', coordinates: [127.3463, 36.3725], rank: 6, rate: 1},
-  {name: '서울예대', coordinates: [127.1266, 37.4449], rank: 7, rate: 8},
-  {name: '충북대', coordinates: [127.4562, 36.6294], rank: 8, rate: 12},
-  {name: '경북대', coordinates: [128.6062, 35.8886], rank: 9, rate: 9},
-  {name: '경남대', coordinates: [128.2132, 35.1814], rank: 10, rate: 5},
-  {name: '전북대', coordinates: [127.1291, 35.8467], rank: 11, rate: 10},
-  {name: '전남대', coordinates: [126.9028, 35.1761], rank: 12, rate: 18},
-];
-
-type hoverType = {
-  univ: MarkerData;
-  coordinate: {x: number; y: number};
-};
-
-type positionType = {
-  coordinates: [number, number];
-  zoom: number;
-};
+import {communityUnivType} from '@/type';
+import useMapPosition from '../../../hooks/useMapPosition';
 
 // 순위에 따라 색상 변화 (높은 순위는 밝은 색, 낮은 순위는 어두운 색)
 const getColorByRank = (rank: number) => {
-  const brightness = 255 - rank * 15; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
+  const brightness = 255 - rank * 10; // 순위가 낮을수록 어두운 색 (최대 255, 최소 75)
   return `rgb(${brightness}, ${brightness}, 255)`; // 푸른 계열의 색상 변화
 };
 const geoUrl =
   'https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo.json';
 
-export default function UnivMap() {
-  const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
-  const [position, setPosition] = useState<positionType>({
-    coordinates: [127, 36],
-    zoom: 1,
-  });
-
+export default function UnivMap({data}: {data: communityUnivType[] | []}) {
+  const [hoveredMarker, setHoveredMarker] = useState<number | null>(null);
+  const {position, handleZoomIn, handleZoomOut, handleMoveEnd} =
+    useMapPosition();
   const router = useRouter();
-
-  const handleZoomIn = () => {
-    console.log(position.zoom);
-    setPosition(pos => ({...pos, zoom: pos.zoom + 0.1}));
-  };
-
-  const handleZoomOut = () => {
-    setPosition(pos => ({...pos, zoom: pos.zoom - 0.1}));
-  };
-
-  function handleMoveEnd(position: positionType) {
-    setPosition(position);
-  }
 
   return (
     <div className="bg-black w-full h-full">
@@ -103,7 +54,6 @@ export default function UnivMap() {
                   style={{
                     default: {fill: '#3765D6', stroke: '#FFF'},
                     hover: {fill: '#5A82E6', stroke: '#FFF'},
-                    pressed: {fill: '#2A4BA5', stroke: '#FFF'},
                   }}
                 />
               ))
@@ -111,79 +61,71 @@ export default function UnivMap() {
           </Geographies>
 
           {/* 대학 마커 표시 */}
-          {universities.map(uni => {
+          {data.map(uni => {
             const size =
-              Math.max(8 - uni.rank * 0.5, 2) * (1 / Math.sqrt(position.zoom));
-            const glowSize = size * 1.5;
-            const opacity = 1 - uni.rank * 0.07;
-            const color = getColorByRank(uni.rank);
+              Math.max(12 - uni.ranking * 0.4, 4) *
+              (1 / Math.sqrt(position.zoom));
+            const color = getColorByRank(uni.ranking);
 
             return (
               <Marker
-                key={uni.name}
-                coordinates={uni.coordinates}
-                onMouseEnter={e => {
-                  setHoveredMarker({
-                    univ: uni,
-                    coordinate: {x: e.clientX, y: e.clientY},
-                  });
+                key={uni.university_name}
+                coordinates={uni.location}
+                onMouseEnter={() => {
+                  setHoveredMarker(uni.university_id);
                 }}
                 onMouseLeave={() => setHoveredMarker(null)}
                 onClick={() => {
-                  router.push(`/community/${uni.name}`);
+                  router.push(`/community/${uni.university_name}`);
                 }}
               >
-                {/* Glow 효과 */}
-                <motion.circle
-                  r={glowSize}
-                  fill={color}
-                  style={{filter: 'blur(6px)', opacity, cursor: 'pointer'}}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [opacity, opacity * 0.5, opacity],
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                {/* 실제 마커 */}
-                <motion.circle
-                  r={size}
-                  fill={color}
-                  animate={{scale: [1, 1.2, 1], opacity: [1, 0.6, 1]}}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  style={{cursor: 'pointer'}}
-                />
+                <svg
+                  width="100"
+                  height="100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="-20 -20 140 140"
+                >
+                  <circle
+                    r={size}
+                    fill={color}
+                    className="animate-custom-scale filter blur-sm"
+                  />
+
+                  <circle
+                    r={size}
+                    fill={color}
+                    className="cursor-pointer animate-custom-scale opacity-100 hover:opacity-80"
+                  />
+                </svg>
+
+                {hoveredMarker === uni.university_id && (
+                  <foreignObject
+                    width={200}
+                    height={100}
+                    x={17}
+                    y={17}
+                    style={{
+                      transform: `scale(${0.8 / position.zoom})`,
+                    }}
+                  >
+                    <div className="bg-gray-800 text-white p-3 rounded-lg shadow-lg">
+                      <h2 className="font-semibold">{uni.university_name}</h2>
+                      <p className="text-grey3 text-sm mt-1">
+                        {uni.participant_count}명 참여중
+                      </p>
+                      <p className="text-sm text-grey5 mt-2">
+                        주간
+                        <span className="font-bold">{uni.ranking}위</span>/
+                        차지율 <span className="font-bold">{uni.rate}%</span>
+                      </p>
+                    </div>
+                  </foreignObject>
+                )}
               </Marker>
             );
           })}
         </ZoomableGroup>
       </ComposableMap>
-
-      {hoveredMarker && (
-        <div
-          className="bg-gray-800 text-white p-6 rounded-lg shadow-lg w-[20.5vw] absolute"
-          style={{
-            left: hoveredMarker.coordinate.x,
-            top: hoveredMarker.coordinate.y,
-          }}
-        >
-          <h2 className="text-[1.6vw] font-semibold">
-            {hoveredMarker.univ.name}
-          </h2>
-          <p className="text-grey3 text-[1vw] mt-1">10명 참여중</p>
-          <p className="text-[1.14vw] text-grey5 mt-3">
-            주간 <span className="font-bold">{hoveredMarker.univ.rank}위</span>/
-            차지율 <span className="font-bold">{hoveredMarker.univ.rate}%</span>
-          </p>
-        </div>
-      )}
 
       {/* 줌 버튼 */}
       <div
@@ -192,7 +134,7 @@ export default function UnivMap() {
       >
         <button
           onClick={handleZoomIn}
-          className="w-[4vw] h-[5vw]  rounded-full "
+          className="w-[4vw] h-[5vw] rounded-full "
         />
 
         <button

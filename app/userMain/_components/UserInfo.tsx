@@ -1,6 +1,7 @@
 import {userHomeDtoType} from '@/type';
 import Image from 'next/image';
 import RankChecker from './RankChecker';
+import MoveButton from './MoveButton';
 
 export default function UserInfo({
   userHomeDto,
@@ -23,7 +24,7 @@ export default function UserInfo({
             {userHomeDto?.name}님, 반가워요!
           </h1>
           <h3 className="text-[1.875vw] font-medium">
-            {userHomeDto?.universityName} {userHomeDto?.major}
+            {userHomeDto?.university_name} {userHomeDto?.major}
           </h3>
           <div className="flex text-[1.25vw] gap-[2.6vw] leading-[2.24vw] tracking-[-0.072vw]">
             <span className="gap-[0.15vw] flex font-medium items-center">
@@ -41,9 +42,7 @@ export default function UserInfo({
               />
             </span>
           </div>
-          <button className="mt-[2.5vw] bg-dark2 text-white text-[1.25vw] flex justify-center items-center rounded-[0.9vw] aspect-[469/60] w-[24.4vw]">
-            나의 소속 랭킹 보기
-          </button>
+          <MoveButton universityName={userHomeDto?.university_name} />
         </div>
 
         <Image

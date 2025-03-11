@@ -86,7 +86,7 @@ const Header = () => {
               href="/login"
               className={`flex items-center px-3 py-2 gap-2 rounded-full shadow-md ${
                 isCommunity ? 'bg-black text-white' : 'bg-white text-black'
-              } shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)]`}
+              } shadow-[0px_0px_4px_0px_rgba(0,0,0,0.15)]`}
             >
               <span
                 className={`text-xs font-300 ${isCommunity ? 'text-white' : 'text-black'}`}
