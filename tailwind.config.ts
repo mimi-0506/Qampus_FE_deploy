@@ -47,14 +47,24 @@ export default {
           '0%': {opacity: '0', transform: 'translateY(-2vw)'},
           '100%': {opacity: '1', transform: 'translateY(0)'},
         },
+        scale: {
+          '0%, 100%': {transform: 'scale(1)'},
+          '50%': {transform: 'scale(1.1)'},
+        },
       },
       animation: {
         loop: 'loop 20s linear infinite',
         fadeIn: 'fadeIn 0.5s ease-out forwards',
+        'custom-scale': 'scale 1s ease-in-out infinite',
       },
 
       fontFamily: {
         pretendard: ['var(--font-pretendard)'],
+      },
+    },
+    variants: {
+      extend: {
+        filter: ['responsive', 'hover', 'focus'],
       },
     },
   },

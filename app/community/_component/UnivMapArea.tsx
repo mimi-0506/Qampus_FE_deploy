@@ -1,11 +1,27 @@
+'use client';
+
 import Image from 'next/image';
-import Test from './UnivMap';
+import UnivMap from './UnivMap';
+import {useEffect, useState} from 'react';
+import {communityUnivType} from '@/type';
+import {getRank} from '@/app/apis/rankApi';
 
 export default function UnivMapArea() {
+  const [data, setData] = useState<communityUnivType[] | []>([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const data = await getRank('weekly', 20);
+    setData(data);
+  };
+
   return (
     <div className="w-screen">
       <div className="relative w-full aspect-[1920/1020] overflow-hidden z-10">
-        <Test />
+        <UnivMap data={data} />
         <div className="absolute top-[5vw] left-[5vw] flex gap-[0.6vw]">
           <div className="relative w-[6vw] aspect-[1/1]">
             <Image

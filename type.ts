@@ -21,7 +21,7 @@ export type answerDetailType = {
   answerId: number;
   user_id: number;
   content: string;
-  created_date: string;
+  createdDate: string | number[];
   like_count: number;
   isChosen: boolean;
   imageUrls?: string[];
@@ -36,9 +36,9 @@ export type questionDetailType = {
   createdDate: string | number[];
   viewCnt: number;
   curious_count: number;
-  answer_cnt?: number;
   curious: boolean;
   imageUrls?: string[];
+  answers?: answerDetailType[];
 };
 
 export type detailDataType = {
@@ -72,7 +72,7 @@ export type userHomeDtoType = {
 
 export type userMainDataType = {
   weeklyQuestions: questionType[];
-  popularAnswers: answerType[];
+  weeklyAnswers: answerType[];
   userHomeDto: userHomeDtoType;
 };
 
@@ -96,3 +96,13 @@ export type universityType = {
 };
 
 export type rankType = 'weekly' | 'monthly';
+
+export type communityUnivType = {
+  university_id: number;
+  university_name: string;
+  ranking: number;
+  participant_count: number;
+  rate: number;
+  choice_cnt: number;
+  location: [number, number];
+};

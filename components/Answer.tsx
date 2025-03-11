@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import {useState, forwardRef} from 'react';
+import {useState, forwardRef, useEffect} from 'react';
 import {TiThumbsUp} from 'react-icons/ti';
 import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
@@ -26,6 +26,27 @@ const Answer = forwardRef(function Answer(
 ) {
   const [thumbsUp, setThumbsUp] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [timeAgo, setTimeAgo] = useState<string>('등록일 없음');
+
+  useEffect(() => {
+    if (!answer?.createdDate) {
+      setTimeAgo('등록일 없음');
+      return;
+    }
+
+    let createdDate;
+    if (Array.isArray(answer.createdDate)) {
+      createdDate = convertCreatedDate(answer.createdDate);
+    } else {
+      createdDate = convertCreatedDate(String(answer.createdDate));
+    }
+
+    if (createdDate) {
+      setTimeAgo(getKSTTimeAgo(createdDate));
+    } else {
+      setTimeAgo('방금 전');
+    }
+  }, [answer?.createdDate]);
 
   if (!answer) {
     return (
@@ -49,8 +70,6 @@ const Answer = forwardRef(function Answer(
     setSelectedImage(null);
   };
 
-  const createdDate = convertCreatedDate(answer?.created_date);
-
   return (
     <div
       ref={ref}
@@ -59,7 +78,7 @@ const Answer = forwardRef(function Answer(
         ${isCentered ? 'border-1 border-blue-500 shadow-sm transition-all duration-300' : 'border'}
       `}
     >
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-center">
         <div className="flex gap-8 w-[87%]">
           {iChosed ? (
             <div className="absolute top-0 left-6 transition-transform duration-300 ease-in-out transform scale-100">
@@ -81,18 +100,29 @@ const Answer = forwardRef(function Answer(
             </div>
           )}
 
-          <p className="text-black text-sm ml-14 pb-10">{answer?.content}</p>
+          <div>
+            <p className="text-black text-sm ml-14 pb-2">{answer?.content}</p>
+          </div>
         </div>
+
+        {answer.universityName && (
+          <span className="text-sm px-2 py-1 bg-[#EBEBEB] font-semibold rounded-md whitespace-nowrap">
+            {answer.universityName}
+          </span>
+        )}
       </div>
 
       {Array.isArray(answer?.imageUrls) && answer.imageUrls.length > 0 && (
-        <div className="flex gap-2 mt-4 ml-10">
+        <div className="overflow-x-auto flex gap-2 mt-8 ml-10 pb-4 scrollbar-hide">
           {answer.imageUrls.map((image, index) => (
-            <div key={index} className="relative w-[180px] h-[240px]">
+            <div
+              key={index}
+              className="relative w-[180px] h-[240px] flex-shrink-0 rounded-lg overflow-hidden"
+            >
               <img
                 src={image}
                 alt={`답변 이미지 ${index + 1}`}
-                className="rounded-lg cursor-pointer"
+                className="w-full h-full object-cover rounded-lg cursor-pointer"
                 onClick={() => handleImageClick(image)}
               />
             </div>
@@ -120,9 +150,7 @@ const Answer = forwardRef(function Answer(
             </button>
           )
         ) : (
-          <p className="text-xs md:text-sm text-[#606060]">
-            {getKSTTimeAgo(createdDate)}
-          </p>
+          <p className="text-xs md:text-sm text-[#606060]">{timeAgo}</p>
         )}
       </div>
 
@@ -130,17 +158,15 @@ const Answer = forwardRef(function Answer(
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
           <button
             onClick={handleCloseModal}
-            className="absolute top-20 right-20 text-white rounded-full p-2"
+            className="absolute top-5 right-5 text-white"
           >
             <IoIosClose size={40} />
           </button>
-          <div className="relative">
+          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
             <img
               src={selectedImage}
               alt="Selected Image"
-              width={800}
-              height={600}
-              className="rounded-lg"
+              className="max-w-full max-h-full rounded-lg"
             />
           </div>
         </div>
