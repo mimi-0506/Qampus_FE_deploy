@@ -21,7 +21,7 @@ export type answerDetailType = {
   answerId: number;
   user_id: number;
   content: string;
-  created_date: string;
+  createdDate: string | number[];
   like_count: number;
   isChosen: boolean;
   imageUrls?: string[];
@@ -36,9 +36,9 @@ export type questionDetailType = {
   createdDate: string | number[];
   viewCnt: number;
   curious_count: number;
-  answer_cnt?: number;
   curious: boolean;
   imageUrls?: string[];
+  answers?: answerDetailType[];
 };
 
 export type detailDataType = {

@@ -3,7 +3,7 @@
 import {useState} from 'react';
 import {PreviewCardProps} from '@/type';
 import {useRouter} from 'next/navigation';
-import {getKSTTimeAgo} from '@/utils/dateUtils';
+import {getKSTTimeAgo, convertCreatedDate} from '@/utils/dateUtils';
 
 export default function PreviewCard({
   title,
@@ -20,8 +20,8 @@ export default function PreviewCard({
     router.push(`/question/${question_id}`);
   };
 
-  const formattedDate = new Date(createdDate);
-  const isValidDate = !isNaN(formattedDate.getTime());
+  const formattedDate = convertCreatedDate(createdDate);
+  const timeAgo = formattedDate ? getKSTTimeAgo(formattedDate) : '등록일 없음';
 
   return (
     <div
@@ -52,7 +52,7 @@ export default function PreviewCard({
       <p className="text-[13px] text-[#606060] mt-5 line-clamp-2">{content}</p>
       <div className="mt-4 text-xs text-[#606060] font-[0] flex justify-end space-x-2">
         <p>답변 {answerCount}개 ·</p>
-        <p>{isValidDate ? getKSTTimeAgo(formattedDate) : '등록일 없음'}</p>
+        <p>{timeAgo}</p>
       </div>
     </div>
   );
