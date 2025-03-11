@@ -20,7 +20,7 @@ export default async function UserMainPage() {
       <UserInfo userHomeDto={data?.userHomeDto} />
       <ActInfo
         weeklyQuestions={data?.weeklyQuestions}
-        popularAnswer={data?.popularAnswers}
+        popularAnswer={data?.weeklyAnswers}
       />
     </main>
   );

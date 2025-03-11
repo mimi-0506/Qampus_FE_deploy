@@ -72,7 +72,7 @@ export type userHomeDtoType = {
 
 export type userMainDataType = {
   weeklyQuestions: questionType[];
-  popularAnswers: answerType[];
+  weeklyAnswers: answerType[];
   userHomeDto: userHomeDtoType;
 };
 
@@ -96,3 +96,13 @@ export type universityType = {
 };
 
 export type rankType = 'weekly' | 'monthly';
+
+export type communityUnivType = {
+  university_id: number;
+  university_name: string;
+  ranking: number;
+  participant_count: number;
+  rate: number;
+  choice_cnt: number;
+  location: [number, number];
+};
