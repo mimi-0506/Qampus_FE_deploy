@@ -11,11 +11,6 @@ import {
 import {useRouter} from 'next/navigation';
 import {communityUnivType} from '@/type';
 
-type hoverType = {
-  univ: communityUnivType;
-  coordinate: {x: number; y: number};
-};
-
 type positionType = {
   coordinates: [number, number];
   zoom: number;
@@ -30,7 +25,7 @@ const geoUrl =
   'https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-provinces-2018-topo.json';
 
 export default function UnivMap({data}: {data: communityUnivType[] | []}) {
-  const [hoveredMarker, setHoveredMarker] = useState<hoverType | null>(null);
+  const [hoveredMarker, setHoveredMarker] = useState<number | null>(null);
   const [position, setPosition] = useState<positionType>({
     coordinates: [127, 36],
     zoom: 1,
@@ -95,53 +90,62 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
             return (
               <Marker
                 key={uni.university_name}
-                coordinates={[uni.location[1], uni.location[0]]}
-                onMouseEnter={e => {
-                  console.log(e);
-                  setHoveredMarker({
-                    univ: uni,
-                    coordinate: {x: e.clientX, y: e.clientY},
-                  });
+                coordinates={uni.location}
+                onMouseEnter={() => {
+                  setHoveredMarker(uni.university_id);
                 }}
                 onMouseLeave={() => setHoveredMarker(null)}
                 onClick={() => {
                   router.push(`/community/${uni.university_name}`);
                 }}
               >
-                <circle
-                  cx={0}
-                  cy={0}
-                  r={size}
-                  fill={color}
-                  className="filter 
-                   bg-opacity-70   shadow-green-300 animate-pulse
-                 transition-all duration-500 ease-in-out"
-                />
+                <svg
+                  width="100"
+                  height="100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="-20 -20 140 140"
+                >
+                  <circle
+                    r={size}
+                    fill={color}
+                    className="animate-custom-scale filter blur-sm"
+                  />
+
+                  <circle
+                    r={size}
+                    fill={color}
+                    className="cursor-pointer animate-custom-scale opacity-100 hover:opacity-80"
+                  />
+                </svg>
+
+                {hoveredMarker === uni.university_id && (
+                  <foreignObject
+                    width={200}
+                    height={100}
+                    x={17}
+                    y={17}
+                    style={{
+                      transform: `scale(${0.8 / position.zoom})`,
+                    }}
+                  >
+                    <div className="bg-gray-800 text-white p-3 rounded-lg shadow-lg">
+                      <h2 className="font-semibold">{uni.university_name}</h2>
+                      <p className="text-grey3 text-sm mt-1">
+                        {uni.participant_count}명 참여중
+                      </p>
+                      <p className="text-sm text-grey5 mt-2">
+                        주간
+                        <span className="font-bold">{uni.ranking}위</span>/
+                        차지율 <span className="font-bold">{uni.rate}%</span>
+                      </p>
+                    </div>
+                  </foreignObject>
+                )}
               </Marker>
             );
           })}
         </ZoomableGroup>
       </ComposableMap>
-
-      {hoveredMarker && (
-        <div
-          className="bg-gray-800 text-white p-6 rounded-lg shadow-lg w-[20.5vw] absolute"
-          style={{
-            left: hoveredMarker.coordinate.x,
-            top: hoveredMarker.coordinate.y,
-          }}
-        >
-          <h2 className="text-[1.6vw] font-semibold">
-            {hoveredMarker.univ.university_name}
-          </h2>
-          <p className="text-grey3 text-[1vw] mt-1">10명 참여중</p>
-          <p className="text-[1.14vw] text-grey5 mt-3">
-            주간
-            <span className="font-bold">{hoveredMarker.univ.ranking}위</span>/
-            차지율 <span className="font-bold">{hoveredMarker.univ.rate}%</span>
-          </p>
-        </div>
-      )}
 
       {/* 줌 버튼 */}
       <div
