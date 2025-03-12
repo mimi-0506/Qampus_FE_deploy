@@ -14,7 +14,7 @@ type univDetailType = {
   question_cnt: number;
   answer_cnt: number;
   choice_cnt: number;
-  ranking: number;
+  rank: number;
 };
 
 type univActivityType = {
@@ -71,7 +71,7 @@ export default function Page() {
           </div>
 
           <div className="relative z-10 top-[-2vw]">
-            <MainCircle image={'univ_0'} />
+            <MainCircle image={data?.university_id} />
           </div>
         </div>
 
@@ -81,7 +81,7 @@ export default function Page() {
           </h1>
           <div className="flex text-grey3 text-[0.8vw] gap-[0.6vw] mb-[2.5vw]">
             <div className="w-[5.36vw] aspect-[103/33] flex justify-center items-center bg-[url('/images/community/tag1.png')] bg-cover bg-center">
-              주간 {data?.ranking}위
+              주간 {data?.rank}위
             </div>
             <div className="w-[6.66vw] aspect-[128/33] flex justify-center items-center bg-[url('/images/community/tag2.png')] bg-cover bg-center">
               차지율 {data?.rate}%
