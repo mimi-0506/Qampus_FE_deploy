@@ -4,10 +4,11 @@ import type {NextRequest} from 'next/server';
 export function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
   const accessToken = request.cookies.get('accessToken');
+  const info = request.cookies.get('accessToken');
 
   if (pathname === '/')
     return NextResponse.redirect(
-      new URL(accessToken ? '/userMain' : '/guestMain', request.url),
+      new URL(info ? '/userMain' : '/guestMain', request.url),
     );
 
   if (pathname === '/login') {
