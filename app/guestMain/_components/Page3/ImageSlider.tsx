@@ -3,9 +3,9 @@ import RightArrow from '../../../../public/svg/right_arrow.svg';
 import {AnimatePresence, motion} from 'motion/react';
 import Image from 'next/image';
 const items = [
+  '모르는 내용을 자유롭게 질문하고 답변해요',
   '인기 질문과 답변을 둘러봐요',
   '학교 별 랭킹을 확인하고 순위 상승에 도전해요',
-  '모르는 내용을 자유롭게 질문하고 답변해요',
 ];
 
 export default function ImageSlider({
