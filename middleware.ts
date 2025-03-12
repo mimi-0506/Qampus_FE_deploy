@@ -12,7 +12,9 @@ export function middleware(request: NextRequest) {
 
   if (pathname === '/login') {
     const response = NextResponse.next();
-    response.cookies.delete('accessToken');
+    response.cookies.getAll().forEach(({name}) => {
+      response.cookies.delete(name);
+    });
     return response;
   }
 

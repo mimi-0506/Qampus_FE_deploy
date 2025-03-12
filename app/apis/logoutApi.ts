@@ -9,9 +9,7 @@ export const postLogout = async () => {
     });
 
     if (response.status === 200) toast.success('로그아웃 성공');
-    else toast.error(`로그아웃 실패: ${response.status}`);
   } catch (error) {
     console.error('❌ 로그아웃 요청 중 오류 발생:', error);
-    toast.error('서버 오류로 로그아웃 실패');
   }
 };
