@@ -10,7 +10,6 @@ import {useEffect, useState} from 'react';
 import {getAnswerListByCategory} from '@/app/apis/answerApi';
 import {PAGE_SIZE} from '@/constants/constants';
 import {PreviewCardProps} from '@/type';
-import {convertCreatedDate} from '@/utils/dateUtils';
 
 export default function AnswerMainPage() {
   const [selectedField, setSelectedField] = useState<number>(0);
@@ -41,7 +40,7 @@ export default function AnswerMainPage() {
       title: question.title,
       content: question.content,
       answerCount: question.answerCount,
-      createdDate: convertCreatedDate(question.createdDate),
+      createdDate: question.createdDate,
     }));
 
     setQuestions(mappedQuestions);
