@@ -14,18 +14,17 @@ const NAV_ITEMS = [
 const Header = () => {
   const pathname = usePathname();
   const [isCommunity, setIsCommunity] = useState(false);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     setIsCommunity(pathname === '/community' || pathname === '/login');
+    if (pathname === '/login') setIsLogin(false);
+    else {
+      const cookies = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('isLogin='));
 
-    // accessToken 확인
-    const cookies = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('accessToken='));
-
-    if (cookies) {
-      setAccessToken(cookies.split('=')[1]);
+      if (cookies) setIsLogin(true);
     }
   }, [pathname]);
 
@@ -68,7 +67,7 @@ const Header = () => {
 
         {/* 로그인/마이페이지 */}
         <div className="ml-16">
-          {accessToken ? (
+          {isLogin ? (
             // 로그인한 경우 (마이페이지 아이콘 표시)
             <Link href="/mypage">
               <Image
