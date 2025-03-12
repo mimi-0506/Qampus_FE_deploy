@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import {fetchWithAuth as clientFetchWithAuth} from './clientFetch';
 
-export const postLogout = () => {
+export const postLogout = async () => {
   return async () => {
     try {
       const response = await clientFetchWithAuth({
