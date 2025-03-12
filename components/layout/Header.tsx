@@ -22,7 +22,7 @@ const Header = () => {
     else {
       const cookies = document.cookie
         .split('; ')
-        .find(row => row.startsWith('isLogin='));
+        .find(row => row.startsWith('accessToken='));
 
       if (cookies) setIsLogin(true);
     }
