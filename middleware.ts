@@ -1,7 +1,8 @@
 import {NextResponse} from 'next/server';
 import type {NextRequest} from 'next/server';
+import {cookies} from 'next/headers';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
   const accessToken = request.cookies.get('accessToken');
   const info = request.cookies.get('accessToken');
@@ -12,11 +13,11 @@ export function middleware(request: NextRequest) {
     );
 
   if (pathname === '/login') {
-    const response = NextResponse.next();
-    response.cookies.getAll().forEach(({name}) => {
-      response.cookies.delete(name);
+    const cookieStore = await cookies();
+    cookieStore.getAll().forEach(({name}) => {
+      cookieStore.set(name, '', {expires: new Date(0)});
     });
-    return response;
+    return NextResponse.next();
   }
 
   if (!accessToken && pathname !== '/guestMain')
