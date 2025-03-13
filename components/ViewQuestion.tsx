@@ -3,7 +3,7 @@
 
 import {deleteCurious, setCurious} from '@/app/apis/curiousApi';
 import {questionDetailType} from '@/type';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BsQuestionLg} from 'react-icons/bs';
 import {IoIosClose} from 'react-icons/io';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
@@ -19,6 +19,11 @@ export default function ViewQuestion({
   const [imCurious, setImCurious] = useState(question.curious);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (question.title.toLocaleLowerCase() === 'bad request')
+      throw new Error('Bad Reqeust');
+  }, [question]);
 
   const createdDate = Array.isArray(question.createdDate)
     ? convertCreatedDate(question.createdDate)
