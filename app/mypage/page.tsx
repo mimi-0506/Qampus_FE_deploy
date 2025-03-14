@@ -88,7 +88,7 @@ export default function MyPage() {
           question_id: question.questionId,
           title: question.title,
           content: question.content,
-          answerCount: question.answerCnt,
+          answerCount: question.unreadAnswerCnt,
           createdDate: question.createdDate,
         }),
       );
