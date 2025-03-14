@@ -52,7 +52,7 @@ export default function Page() {
 
       <div className="w-[70%] flex justify-between">
         <p className="text-black font-[600] py-8">
-          질문 {questions?.length}개가 있어요
+          {query} 관련 질문 {questions?.length}개가 있어요
         </p>
         <SortSelector />
       </div>
