@@ -10,7 +10,7 @@ export const setQuestion = async ({
   categoryId: number;
   content: string;
   title: string;
-  images?: File[];
+  images?: (string | File)[];
 }) => {
   const formData = new FormData();
   const requestDto = JSON.stringify({
@@ -44,25 +44,55 @@ export const editQuestion = async ({
   title,
   content,
   categoryId,
+  images,
 }: {
   questionId: number;
   title: string;
   content: string;
-  categoryId: number; //카테고리 ID - 1:전체 2:자연계 3:인문계 4:예체능 5:실무
+  categoryId: number;
+  images?: (string | File)[];
 }) => {
+  console.log('📌 전달된 데이터:', {title, content, categoryId, images});
+
+  const formData = new FormData();
+
+  const requestDto = JSON.stringify({
+    title,
+    content,
+    category_id: categoryId,
+  });
+
+  formData.append(
+    'requestDto',
+    new Blob([requestDto], {type: 'application/json'}),
+  );
+
+  if (images && images.length > 0) {
+    images.forEach(image => {
+      if (image instanceof File) {
+        console.log(`📌 이미지 추가:`, image);
+        formData.append('images', image);
+      }
+    });
+  }
+
+  console.log('📌 최종 FormData:', formData);
+
   const data = await fetchWithAuth({
     method: 'PUT',
     url: `/questions/${questionId}`,
-    body: {
-      title: title,
-      content: content,
-      category_id: categoryId,
-    },
+    body: formData,
   });
-  if (data?.success) toast.success('질문을 수정했습니다');
-  else toast.error(data.message);
 
-  return data?.success;
+  console.log('📌 editQuestion 응답:', data);
+
+  if (data?.success) {
+    toast.success('질문을 수정했습니다');
+    return data;
+  } else {
+    toast.error(data.message);
+    return null;
+  }
 };
 
 export const deleteQuestion = async (questionId: string | number) => {
