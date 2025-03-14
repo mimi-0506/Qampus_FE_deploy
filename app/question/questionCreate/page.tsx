@@ -15,7 +15,7 @@ export default function QuestionCreatePage() {
   const [selectedStep, setSelectedStep] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<(string | File)[]>([]);
   const [questionSubmit, setQuestionSubmit] = useState(false);
 
   const searchParams = useSearchParams();
@@ -27,12 +27,16 @@ export default function QuestionCreatePage() {
 
   const setEdit = async (edit: number) => {
     const response = await getAnswerDetail(edit);
-    console.log(response);
+    console.log('📌 API 응답:', response);
 
     setTitle(response.title);
-    setImages(response.images);
     setContent(response.content);
     setSelectedField(response.categoryId - 1);
+
+    const imageList = Array.isArray(response.imageUrls)
+      ? response.imageUrls
+      : [];
+    setImages(imageList);
   };
 
   const handleSubmit = async () => {
@@ -54,6 +58,7 @@ export default function QuestionCreatePage() {
             categoryId: selectedField,
             title,
             content,
+            images,
           })
         : await setQuestion({
             categoryId: selectedField,

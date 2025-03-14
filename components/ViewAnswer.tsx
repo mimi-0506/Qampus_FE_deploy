@@ -14,7 +14,7 @@ export default function ViewAnswer({
   questionId: number;
 }) {
   const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(
-    answers?.find(answer => answer.isChosen)?.answerId ?? null,
+    answers?.find(answer => answer.is_chosen)?.answerId ?? null,
   );
 
   const [centeredAnswerIds, setCenteredAnswerIds] = useState<number[]>([]);
@@ -59,26 +59,32 @@ export default function ViewAnswer({
   const handleSelectAnswer = async (answerId: number) => {
     if (!questionId) return;
 
-    //1. 현재 채택된 답변이 있다면 해당 답변은 채택 취소
-    if (chooseAnswerId) {
-      await setAnswerChoice({
-        answerId: chooseAnswerId,
-        questionId,
-        isChosen: false,
-      });
-    }
+    const isCancelling = chooseAnswerId === answerId;
+    setChooseAnswerId(isCancelling ? null : answerId);
 
-    //2. 선택된 답변이 채택했었던 답변과 다르다면 채택
-    if (chooseAnswerId !== answerId) {
-      await setAnswerChoice({
-        answerId,
-        questionId,
-        isChosen: true,
-      });
-    }
+    try {
+      // 기존에 선택된 답변이 있으면 취소
+      if (chooseAnswerId) {
+        await setAnswerChoice({
+          answerId: chooseAnswerId,
+          questionId,
+          isChosen: false,
+        });
+      }
 
-    //3.클라이언트측 채택된 답변 수정(낙관적 업데이트)
-    setChooseAnswerId(answerId);
+      // 새로운 답변을 선택 (취소하는 경우 건너뛰기)
+      if (!isCancelling) {
+        await setAnswerChoice({
+          answerId,
+          questionId,
+          isChosen: true,
+        });
+      }
+    } catch (error) {
+      console.error('답변 채택 처리 실패:', error);
+      // 오류 발생 시 원래 상태로 롤백
+      setChooseAnswerId(chooseAnswerId);
+    }
   };
 
   return (

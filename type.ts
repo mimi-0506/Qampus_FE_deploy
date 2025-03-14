@@ -23,7 +23,7 @@ export type answerDetailType = {
   content: string;
   createdDate: string | number[];
   like_count: number;
-  isChosen: boolean;
+  is_chosen: boolean;
   imageUrls?: string[];
   universityName: string;
 };
@@ -80,9 +80,11 @@ export type PreviewCardProps = {
   id?: number;
   title: string;
   content: string;
-  answerCount: number;
+  unreadAnswerCnt: number;
+  answerCnt: number;
   createdDate: string;
   question_id: number;
+  isMyPage?: boolean;
 };
 
 export type universityType = {
