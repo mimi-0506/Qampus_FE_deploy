@@ -9,7 +9,6 @@ import {useSearchParams} from 'next/navigation';
 import {getAnswerSearch} from '../apis/answerApi';
 import Pagination from '@/components/Pagination';
 import {PreviewCardProps} from '@/type';
-import {convertCreatedDate} from '@/utils/dateUtils';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -37,8 +36,8 @@ export default function Page() {
       question_id: question.questionId,
       title: question.title,
       content: question.content,
-      answerCount: question.answerCnt,
-      createdDate: convertCreatedDate(question.createdDate),
+      answerCount: question.answerCnt || 0,
+      createdDate: question.createdDate,
     }));
 
     setQuestions(mappedQuestions);
