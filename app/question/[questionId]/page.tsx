@@ -12,7 +12,6 @@ import {getCookie} from '@/utils/cookie';
 
 export default function QuestionDetailPage() {
   const {questionId} = useParams<{questionId: string}>();
-
   const [datas, setDatas] = useState<ViewQuestionProps>();
   const [isMyQuestion, setIsMyQuestion] = useState<boolean>(false);
   const [answering, setAnswering] = useState<boolean>(false);

@@ -7,13 +7,11 @@ import {deleteThumbsUP, setThumbsUP} from '@/app/apis/thumbsUPApi';
 import {answerDetailType} from '@/type';
 import {convertCreatedDate, getKSTTimeAgo} from '@/utils/dateUtils';
 import {IoIosClose} from 'react-icons/io';
-
 const Answer = forwardRef(function Answer(
   {
     answer,
     isMyQuestion,
     onSelect,
-    chooseAnswerId,
     isCentered,
   }: {
     answer?: answerDetailType;
@@ -27,6 +25,7 @@ const Answer = forwardRef(function Answer(
   const [thumbsUp, setThumbsUp] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [timeAgo, setTimeAgo] = useState<string>('등록일 없음');
+  const [isChosen, setIsChosen] = useState(answer?.is_chosen || false);
 
   useEffect(() => {
     if (!answer?.createdDate) {
@@ -54,8 +53,6 @@ const Answer = forwardRef(function Answer(
     );
   }
 
-  const iChosed = chooseAnswerId === answer?.answerId;
-
   const handleThumbsUP = async () => {
     setThumbsUp(prev => !prev);
     if (thumbsUp) await deleteThumbsUP(answer?.answerId);
@@ -70,6 +67,17 @@ const Answer = forwardRef(function Answer(
     setSelectedImage(null);
   };
 
+  const handleChooseClick = async () => {
+    if (!answer) return;
+
+    try {
+      await onSelect(answer.answerId);
+      setIsChosen(prev => !prev);
+    } catch (error) {
+      console.error('채택 처리 실패:', error);
+    }
+  };
+
   return (
     <div
       ref={ref}
@@ -80,7 +88,7 @@ const Answer = forwardRef(function Answer(
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-8 w-[87%]">
-          {iChosed ? (
+          {isChosen ? (
             <div className="absolute top-0 left-6 transition-transform duration-300 ease-in-out transform scale-100">
               <img
                 src="/images/question/adopt.png"
@@ -141,14 +149,16 @@ const Answer = forwardRef(function Answer(
         </button>
 
         {isMyQuestion ? (
-          !iChosed && (
-            <button
-              className="bg-[#7BA1FF] text-white text-sm font-semibold px-4 py-2 rounded-xl transition hover:bg-[#5a82e6]"
-              onClick={() => onSelect(answer?.answerId)}
-            >
-              채택하기
-            </button>
-          )
+          <button
+            className={`text-white text-sm font-semibold px-4 py-2 rounded-xl transition ${
+              isChosen
+                ? 'bg-red-500 hover:bg-red-600'
+                : 'bg-[#7BA1FF] hover:bg-[#5a82e6]'
+            }`}
+            onClick={handleChooseClick}
+          >
+            {isChosen ? '채택 취소' : '채택하기'}
+          </button>
         ) : (
           <p className="text-xs md:text-sm text-[#606060]">{timeAgo}</p>
         )}
