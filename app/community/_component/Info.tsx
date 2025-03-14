@@ -8,12 +8,14 @@ import RankBox from '@/components/ranking/RankBox';
 import Slider from '@/components/ranking/Slider';
 import {rankType, universityType} from '@/type';
 import Image from 'next/image';
+import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
 
 export default function Info() {
   const [rankStandard, setRankStandard] = useState<rankType>('weekly');
   const [data, setData] = useState<universityType[] | []>([]);
   const {ref, isVisible} = useScrollAnimation();
+  const router = useRouter();
 
   useEffect(() => {
     getData();
@@ -22,6 +24,15 @@ export default function Info() {
   const getData = async () => {
     const data = await getRank(rankStandard);
     setData(data);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && e.currentTarget.value) {
+      const keyword = e.currentTarget.value.trim();
+      router.push(
+        `/community/${encodeURIComponent(keyword.replace('학교', ''))}`,
+      );
+    }
   };
 
   return (
@@ -46,7 +57,11 @@ export default function Info() {
           </p>
 
           <div className="mt-[2.8vw] w-[43vw] aspect-[837/67] relative text-[1vw] text-white border border-communityGrey rounded-[3vw] flex justify-center items-center">
-            학교 이름을 검색해보세요
+            <input
+              className="w-full bg-inherit border-none text-center placeholder:text-white outline-none"
+              placeholder="학교 이름을 검색해보세요"
+              onKeyDown={handleKeyDown}
+            />
             <div className="absolute w-[1.2vw] aspect-[1/1] right-[1vw]">
               <Image fill src="/svg/search.svg" alt={'search'} />
             </div>
