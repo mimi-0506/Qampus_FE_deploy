@@ -2,15 +2,15 @@
 
 import {FiUpload, FiX} from 'react-icons/fi';
 import Image from 'next/image';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 interface WriteQuestionProps {
   title: string;
   setTitle: (title: string) => void;
   content: string;
   setContent: (content: string) => void;
-  images: File[];
-  setImages: (images: File[]) => void;
+  images: (string | File)[];
+  setImages: (images: (string | File)[]) => void;
 }
 
 export default function WriteQuestion({
@@ -22,6 +22,14 @@ export default function WriteQuestion({
   setImages,
 }: WriteQuestionProps) {
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+
+  // 🔹 기존 `imageUrls`(문자열 URL)도 preview에 추가
+  useEffect(() => {
+    const previews = images.map(image =>
+      typeof image === 'string' ? image : URL.createObjectURL(image),
+    );
+    setPreviewImages(previews);
+  }, [images]);
 
   // 이미지 업로드 핸들러
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +45,9 @@ export default function WriteQuestion({
   // 이미지 삭제 핸들러
   const handleRemoveImage = (index: number) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    const updatedPreviews = previewImages.filter((_, i) => i !== index);
-
     setImages(updatedImages);
+
+    const updatedPreviews = previewImages.filter((_, i) => i !== index);
     setPreviewImages(updatedPreviews);
   };
 
@@ -47,7 +55,7 @@ export default function WriteQuestion({
     <div className="w-full flex flex-col">
       <div className="w-full flex flex-col items-center overflow-hidden rounded-[1.6vw] bg-[url('/images/question/write_question_bg.png')] bg-cover bg-center">
         <div className="flex justify-between items-center w-full pt-[1.3vw] px-[1.1vw]">
-          <label className="cursor-pointer font-semibold ">
+          <label className="cursor-pointer font-semibold">
             <div className="w-[130px] h-[40px] bg-white text-[#4F7DEE] flex items-center justify-center gap-2 rounded-xl">
               <FiUpload className="text-md" />
               <span className="font-[600] text-sm">이미지 삽입</span>

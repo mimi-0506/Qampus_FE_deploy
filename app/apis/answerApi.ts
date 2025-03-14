@@ -105,14 +105,16 @@ export const getAnswerListByCategory = async ({
   categoryId,
   size,
   page,
+  sort = 'latest',
 }: {
   categoryId: number;
   size: number;
   page: number;
+  sort?: string;
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers?category_id=${categoryId}&page=${page - 1}&size=${size}&sort=latest`,
+    url: `/answers?category_id=${categoryId}&page=${page - 1}&size=${size}&sort=${sort}`,
   });
 
   return data;
@@ -122,14 +124,16 @@ export const getAnswerSearch = async ({
   search,
   size,
   page,
+  sort = 'latest',
 }: {
   search: string;
   size: number;
   page?: number;
+  sort?: string;
 }) => {
   const data = await clientFetchWithAuth({
     method: 'GET',
-    url: `/answers/search?value=${search}&page=${page !== undefined ? page - 1 : page}&size=${size}`,
+    url: `/answers/search?value=${search}&page=${page !== undefined ? page - 1 : page}&size=${size}&sort=${sort}`,
   });
 
   return data;
