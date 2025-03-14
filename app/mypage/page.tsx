@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
@@ -136,6 +137,7 @@ export default function MyPage() {
               content={question.content}
               answerCount={question.answerCount}
               createdDate={question.createdDate}
+              isMyPage={true}
             />
           ))}
         </div>

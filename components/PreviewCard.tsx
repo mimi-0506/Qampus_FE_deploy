@@ -11,6 +11,7 @@ export default function PreviewCard({
   answerCount,
   createdDate,
   question_id,
+  isMyPage = false,
 }: PreviewCardProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +37,7 @@ export default function PreviewCard({
 
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
-        {answerCount > 0 && (
+        {isMyPage && answerCount > 0 && (
           <div
             className="px-5 py-1 rounded-[44px] text-xs font-[300] text-white"
             style={{

@@ -83,6 +83,7 @@ export type PreviewCardProps = {
   answerCount: number;
   createdDate: string;
   question_id: number;
+  isMyPage?: boolean;
 };
 
 export type universityType = {
