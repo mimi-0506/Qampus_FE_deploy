@@ -18,10 +18,11 @@ export default function AnswerMainPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState(false);
+  const [sort, setSort] = useState<string>('latest');
 
   useEffect(() => {
     getData(1);
-  }, [selectedField]);
+  }, [selectedField, sort]);
 
   useEffect(() => {
     if (currentPage !== 0) getData(currentPage);
@@ -33,6 +34,7 @@ export default function AnswerMainPage() {
       categoryId: selectedField + 1,
       page,
       size: PAGE_SIZE,
+      sort,
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -70,7 +72,7 @@ export default function AnswerMainPage() {
         <p className="text-black font-[600] py-8">
           답변 가능한 질문 {questions?.length?.toLocaleString()}개가 있어요
         </p>
-        <SortSelector />
+        <SortSelector onSortChange={setSort} />
       </div>
 
       <div className="w-[70%] flex flex-col">

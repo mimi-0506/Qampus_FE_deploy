@@ -69,10 +69,11 @@ export default function MyPage() {
   const [info, setInfo] = useState<UserInfo | undefined>(undefined);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
+  const [sort, setSort] = useState<string>('latest');
 
   useEffect(() => {
     setData(selectedField, currentPage);
-  }, [selectedField, currentPage]);
+  }, [selectedField, currentPage, sort]);
 
   const setData = async (selectedField: number, page: number) => {
     setLoading(true);
@@ -81,6 +82,7 @@ export default function MyPage() {
         categoryId: selectedField + 1,
         page,
         pageSize: PAGE_SIZE,
+        sort,
       });
 
       const {questions, ...nowInfo} = response;
@@ -120,7 +122,7 @@ export default function MyPage() {
             ? `${CATEGORIES[selectedField]} 분야의 등록된 질문은 ${questionList.length}개가 있어요`
             : `지금까지 총 ${questionList.length}개의 질문을 작성했어요`}
         </p>
-        <SortSelector />
+        <SortSelector onSortChange={setSort} />
       </div>
 
       {loading ? (

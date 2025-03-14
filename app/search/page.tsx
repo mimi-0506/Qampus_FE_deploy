@@ -18,10 +18,11 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
+  const [sort, setSort] = useState<string>('latest');
 
   useEffect(() => {
     getData(query);
-  }, [query, currentPage]);
+  }, [query, currentPage, sort]);
 
   const getData = async (query: string) => {
     setLoading(true);
@@ -29,6 +30,7 @@ export default function Page() {
       search: query,
       page: currentPage,
       size: PAGE_SIZE,
+      sort,
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,7 +55,7 @@ export default function Page() {
         <p className="text-black font-[600] py-8">
           {query} 관련 질문 {questions?.length}개가 있어요
         </p>
-        <SortSelector />
+        <SortSelector onSortChange={setSort} />
       </div>
 
       <div className="w-[70%] flex flex-col">
