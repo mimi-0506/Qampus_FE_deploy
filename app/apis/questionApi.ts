@@ -56,6 +56,7 @@ export const editQuestion = async ({
 
   const formData = new FormData();
 
+  // JSON 데이터를 Blob으로 변환하여 `requestDto` 추가
   const requestDto = JSON.stringify({
     title,
     content,
@@ -67,21 +68,28 @@ export const editQuestion = async ({
     new Blob([requestDto], {type: 'application/json'}),
   );
 
+  // 이미지 처리 (파일만 추가)
   if (images && images.length > 0) {
     images.forEach(image => {
       if (image instanceof File) {
-        console.log(`📌 이미지 추가:`, image);
+        console.log(`📌 새 이미지 추가:`, image.name);
         formData.append('images', image);
       }
     });
+  } else {
+    console.log('📌 requestDto만 전송');
   }
 
-  console.log('📌 최종 FormData:', formData);
+  console.log('📌 최종 FormData:');
+  for (const [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
 
   const data = await fetchWithAuth({
     method: 'PUT',
     url: `/questions/${questionId}`,
     body: formData,
+    isFormData: true,
   });
 
   console.log('📌 editQuestion 응답:', data);
