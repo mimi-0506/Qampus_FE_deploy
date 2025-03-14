@@ -14,7 +14,7 @@ export default function ViewAnswer({
   questionId: number;
 }) {
   const [chooseAnswerId, setChooseAnswerId] = useState<number | null>(
-    answers?.find(answer => answer.isChosen)?.answerId ?? null,
+    answers?.find(answer => answer.is_chosen)?.answerId ?? null,
   );
 
   const [centeredAnswerIds, setCenteredAnswerIds] = useState<number[]>([]);
