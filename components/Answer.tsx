@@ -71,17 +71,13 @@ const Answer = forwardRef(function Answer(
     if (!answer) return;
 
     try {
-      if (isChosen === answer.is_chosen) {
-        console.warn('이미 동일한 상태로 요청을 보낼 수 없습니다.');
-        return;
-      }
-
       await onSelect(answer.answerId);
       setIsChosen(prev => !prev);
     } catch (error) {
       console.error('채택 처리 실패:', error);
     }
   };
+
   return (
     <div
       ref={ref}
