@@ -91,7 +91,8 @@ export default function MyPage() {
           question_id: question.questionId,
           title: question.title,
           content: question.content,
-          answerCount: question.unreadAnswerCnt,
+          unreadAnswerCnt: question.unreadAnswerCnt,
+          answerCnt: question.answerCnt,
           createdDate: question.createdDate,
         }),
       );
@@ -137,7 +138,8 @@ export default function MyPage() {
               question_id={question.question_id}
               title={question.title}
               content={question.content}
-              answerCount={question.answerCount}
+              unreadAnswerCnt={question.unreadAnswerCnt}
+              answerCnt={question.answerCnt}
               createdDate={question.createdDate}
               isMyPage={true}
             />

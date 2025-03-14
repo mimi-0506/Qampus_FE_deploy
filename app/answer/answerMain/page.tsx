@@ -30,25 +30,38 @@ export default function AnswerMainPage() {
 
   const getData = async (page: number) => {
     setLoading(true);
-    const response = await getAnswerListByCategory({
-      categoryId: selectedField + 1,
-      page,
-      size: PAGE_SIZE,
-      sort,
-    });
+    try {
+      const response = await getAnswerListByCategory({
+        categoryId: selectedField + 1,
+        page,
+        size: PAGE_SIZE,
+        sort,
+      });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mappedQuestions = response.content.map((question: any) => ({
-      question_id: question.question_id,
-      title: question.title,
-      content: question.content,
-      answerCount: question.answerCount,
-      createdDate: question.createdDate,
-    }));
+      if (!response || !response.content) {
+        console.error('Invalid API response:', response);
+        setQuestions([]);
+        setLoading(false);
+        return;
+      }
 
-    setQuestions(mappedQuestions);
-    setTotalPages(response.totalPages);
-    setLoading(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const mappedQuestions = response.content.map((question: any) => ({
+        question_id: question.question_id,
+        title: question.title,
+        content: question.content,
+        unreadAnswerCnt: 0,
+        answerCnt: question.answerCount ?? 0,
+        createdDate: question.createdDate,
+      }));
+
+      setQuestions(mappedQuestions);
+      setTotalPages(response.totalPages);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,7 +96,8 @@ export default function AnswerMainPage() {
               question_id={question.question_id}
               title={question.title}
               content={question.content}
-              answerCount={question.answerCount}
+              unreadAnswerCnt={0}
+              answerCnt={question.answerCnt}
               createdDate={question.createdDate}
             />
           ))}

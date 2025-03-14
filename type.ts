@@ -80,7 +80,8 @@ export type PreviewCardProps = {
   id?: number;
   title: string;
   content: string;
-  answerCount: number;
+  unreadAnswerCnt: number;
+  answerCnt: number;
   createdDate: string;
   question_id: number;
   isMyPage?: boolean;

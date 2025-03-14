@@ -8,7 +8,8 @@ import {getKSTTimeAgo, convertCreatedDate} from '@/utils/dateUtils';
 export default function PreviewCard({
   title,
   content,
-  answerCount,
+  unreadAnswerCnt,
+  answerCnt,
   createdDate,
   question_id,
   isMyPage = false,
@@ -37,7 +38,7 @@ export default function PreviewCard({
 
       <div className="flex justify-between items-center">
         <h2 className="text-md font-[600] text-black">{title}</h2>
-        {isMyPage && answerCount > 0 && (
+        {isMyPage && unreadAnswerCnt > 0 && (
           <div
             className="px-5 py-1 rounded-[44px] text-xs font-[300] text-white"
             style={{
@@ -45,14 +46,14 @@ export default function PreviewCard({
                 'linear-gradient(280deg, #A7C0FF 2.25%, #3765D6 100%)',
             }}
           >
-            +{answerCount}개의 미확인 답변이 있어요
+            +{unreadAnswerCnt}개의 미확인 답변이 있어요
           </div>
         )}
       </div>
 
       <p className="text-[13px] text-[#606060] mt-5 line-clamp-2">{content}</p>
       <div className="mt-4 text-xs text-[#606060] font-[0] flex justify-end space-x-2">
-        <p>답변 {answerCount}개 ·</p>
+        <p>답변 {answerCnt}개 ·</p>
         <p>{timeAgo}</p>
       </div>
     </div>
