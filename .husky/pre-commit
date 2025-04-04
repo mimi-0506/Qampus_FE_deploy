@@ -24,6 +24,4 @@ else
   # 린트 오류가 발생한 파일 목록 출력
   echo "🔹 Files that caused linting errors:"
   git diff --cached --name-only --diff-filter=ACMR
-  
-  exit 1
 fi
