@@ -16,6 +16,7 @@ export default function MainCircle({image}: {image: number | undefined}) {
           <Image
             src={`/images/univ/${image}.png`}
             alt="univ logo"
+            sizes="13vw"
             fill
             onLoadingComplete={() => setLoading(false)}
           />

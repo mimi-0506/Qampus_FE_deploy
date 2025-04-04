@@ -209,6 +209,7 @@ export default function UnivMapArea() {
               src="/images/characters/wink.png"
               alt="character"
               fill
+              sizes="6vw"
               className="object-contain w-[21vw] aspect-[402/406] transform scale-x-[-1]"
             />
           </div>

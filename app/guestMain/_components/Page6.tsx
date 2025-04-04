@@ -76,6 +76,7 @@ export default function Page6() {
                 <Image
                   src={`/images/main/medal_${MEDAL[index]}.png`}
                   fill
+                  sizes="5vw"
                   alt="medal"
                 />
               </div>

@@ -103,6 +103,7 @@ export default function CircularCarousel({
                         src={`/images/univ/${univ?.university_id}.png`}
                         alt="univ logo"
                         fill
+                        sizes="11vw"
                         className="rounded-full"
                       />
                     </div>
@@ -115,6 +116,7 @@ export default function CircularCarousel({
                       src={`/images/univ/${univ?.university_id}.png`}
                       alt="univ logo"
                       fill
+                      sizes="11vw"
                       className="rounded-full"
                     />
                   </div>
