@@ -1,6 +1,6 @@
 'use client';
 
-import {getRank} from '@/app/apis/rankApi';
+// import {getRank} from '@/app/apis/rankApi';
 import useScrollAnimation from '@/app/guestMain/_components/useScrollAnimation';
 import LeftBox1 from '@/components/ranking/LeftBox1';
 import LeftBox2 from '@/components/ranking/LeftBox2';
@@ -22,8 +22,52 @@ export default function Info() {
   }, [rankStandard]);
 
   const getData = async () => {
-    const data = await getRank(rankStandard);
-    setData(data);
+    // const data = await getRank(rankStandard);
+    // setData(data);
+    //현재 서버 닫혔으므로 더미데이터로 교체
+
+    setData([
+      {
+        choice_cnt: 9,
+        participant_count: 6,
+        ranking: 1,
+        rate: 10,
+        university_id: 56,
+        university_name: '서울대학교',
+      },
+      {
+        choice_cnt: 16,
+        participant_count: 17,
+        ranking: 2,
+        rate: 10,
+        university_id: 57,
+        university_name: '연세대학교',
+      },
+      {
+        choice_cnt: 15,
+        participant_count: 20,
+        ranking: 3,
+        rate: 10,
+        university_id: 59,
+        university_name: '국민대학교',
+      },
+      {
+        choice_cnt: 17,
+        participant_count: 6,
+        ranking: 4,
+        rate: 10,
+        university_id: 52,
+        university_name: '부산대학교',
+      },
+      {
+        choice_cnt: 10,
+        participant_count: 6,
+        ranking: 5,
+        rate: 10,
+        university_id: 702,
+        university_name: '성균관대학교',
+      },
+    ]);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

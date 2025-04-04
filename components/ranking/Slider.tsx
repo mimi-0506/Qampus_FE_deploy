@@ -16,10 +16,10 @@ export default function CircularCarousel({
   const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
 
   useEffect(() => {
-    if (data.length > 0) setData();
+    if (data.length > 0) setData(data);
   }, [data]);
 
-  const setData = async () => {
+  const setData = async (data: universityType[]) => {
     setCircles([
       {...data[3], button: '4th'},
       {...data[1], button: '2nd'},
