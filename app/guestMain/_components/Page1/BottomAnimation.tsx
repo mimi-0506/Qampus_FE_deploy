@@ -15,6 +15,7 @@ export default function BottomAnimation() {
           alt="logo"
           sizes="8vw"
           fill
+          priority
         />
       </div>
 
@@ -24,6 +25,7 @@ export default function BottomAnimation() {
           sizes="6vw"
           alt="arrow"
           fill
+          priority
         />
       </div>
       {COMMENTS.map((comment, index) => {

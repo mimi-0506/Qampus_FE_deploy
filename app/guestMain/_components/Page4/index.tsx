@@ -15,11 +15,11 @@ export default function Page4() {
       </div>
 
       <div className="flex w-screen items-center absolute top-[20.88vw] justify-around">
-        <div className="w-[14vw] aspect-[275/204]">
+        <div className="relative w-[14vw] aspect-[275/204]">
           <Image
             src="/images/main/bubbles.png"
-            width={275}
-            height={204}
+            fill
+            sizes="14vw"
             alt="bubble"
           />
         </div>
