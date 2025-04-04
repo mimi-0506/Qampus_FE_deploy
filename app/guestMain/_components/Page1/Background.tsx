@@ -9,6 +9,8 @@ export default function Background() {
           alt="bg text"
           width={2518}
           height={454}
+          priority
+          fetchPriority="high"
           className="w-full h-auto"
         />
       </div>
@@ -19,6 +21,8 @@ export default function Background() {
           alt="bg text"
           width={2518}
           height={454}
+          priority
+          fetchPriority="high"
           className="w-full h-auto"
         />
       </div>
@@ -30,7 +34,9 @@ export default function Background() {
           width={1700}
           height={751}
           priority
+          fetchPriority="high"
           quality={1}
+          className="gpu-hint"
         />
       </div>
     </div>

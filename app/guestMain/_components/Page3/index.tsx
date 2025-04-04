@@ -11,6 +11,7 @@ export default function Page3() {
             fill
             sizes="100vw"
             alt="bg gradient"
+            className="gpu-hint"
             quality={50}
           />
         </div>
