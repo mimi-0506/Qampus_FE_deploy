@@ -71,7 +71,7 @@ export default function Page5() {
     <div className="flex flex-col relative w-screen items-center bg-black">
       {/* background */}
       <div className="relative w-full h-auto aspect-[1920/1498] z-0 top-0">
-        <Image src="/images/main/bg_page5.png" fill alt="bg" />
+        <Image src="/images/main/bg_page5.webp" fill alt="bg" />
       </div>
 
       <div className="absolute top-[46vw] left-0">
@@ -80,7 +80,7 @@ export default function Page5() {
 
       <div className="absolute top-[25vw] left-[6.5vw] z-10">
         <div className="relative w-[87.5vw] aspect-[1680/830]">
-          <Image src="/images/main/overlay_page5.png" alt="bg" fill />
+          <Image src="/images/main/overlay_page5.webp" alt="bg" fill />
         </div>
       </div>
 
@@ -91,13 +91,13 @@ export default function Page5() {
         <div className="text-white text-[1.46vw] mt-[1.35vw]">학교 별 순위</div>
       </div>
 
-      <div className="absolute top-[40vw] w-screen flex justify-center items-center] z-30">
-        <div className="absolute left-[6.25vw] flex flex-col gap-[3.28vw]">
+      <div className="w-full flex justify-between items-center absolute top-[40vw] z-30">
+        <div className="ml-[6.25vw] flex flex-col gap-[3.28vw]">
           <LeftBox1 isVisible={isVisible} />
           <LeftBox2 isVisible={isVisible} />
         </div>
 
-        <RankBox universities={data} isVisible={isVisible} />
+        <RankBox isVisible={isVisible} universities={data} />
       </div>
 
       <div ref={ref} className="w-full bg-white absolute bottom-[20vw]" />

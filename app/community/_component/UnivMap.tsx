@@ -136,13 +136,17 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
       >
         <button
           onClick={handleZoomIn}
-          className="w-[4vw] h-[5vw] rounded-full "
-        />
+          className="w-[4vw] h-[5vw] rounded-full font-[0]"
+        >
+          +
+        </button>
 
         <button
           onClick={handleZoomOut}
-          className="w-[4vw] h-[5vw] rounded-full"
-        />
+          className="w-[4vw] h-[5vw] rounded-full font-[0]"
+        >
+          -
+        </button>
       </div>
     </div>
   );

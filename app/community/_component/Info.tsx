@@ -83,9 +83,12 @@ export default function Info() {
     <div className="w-screen relative bg-black overflow-hidden">
       <div className="relative w-screen aspect-[1954/1524]">
         <Image
-          src="/images/main/bg_page5.png"
+          src="/images/main/bg_page5.webp"
           fill
+          sizes="100vw"
           alt="bg"
+          priority
+          fetchPriority="high"
           className="absolute z-0 top-[-17vw]"
         />
       </div>
@@ -113,8 +116,8 @@ export default function Info() {
         </div>
       </div>
 
-      <div className="w-screen flex justify-center items-center] absolute top-[40vw] z-30">
-        <div className="absolute left-[6.25vw] flex flex-col gap-[3.28vw]">
+      <div className="w-full flex justify-between items-center absolute top-[40vw] z-30">
+        <div className="ml-[6.25vw] flex flex-col gap-[3.28vw]">
           <LeftBox1 isVisible={isVisible} />
           <LeftBox2 isVisible={isVisible} />
         </div>
@@ -132,7 +135,13 @@ export default function Info() {
 
       <div className="absolute top-[25vw] left-[6.5vw] z-10">
         <div className="relative w-[87.5vw] aspect-[1680/830]">
-          <Image src="/images/main/overlay_page5.png" alt="bg" fill />
+          <Image
+            src="/images/main/overlay_page5.webp"
+            priority
+            fetchPriority="high"
+            alt="bg"
+            fill
+          />
         </div>
       </div>
 

@@ -6,9 +6,10 @@ import localFont from 'next/font/local';
 import dynamic from 'next/dynamic';
 import {Toaster} from 'react-hot-toast';
 
-const Footer = dynamic(() => import('@/components/layout/Footer'), {
-  ssr: true,
-});
+const Footer = dynamic(
+  () => import(/* webpackPrefetch: false */ '@/components/layout/Footer'),
+  {ssr: true},
+);
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',

@@ -1,6 +1,11 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import Info from './_component/Info';
 
-import UnivMap from './_component/UnivMapArea';
+const UnivMap = dynamic(() => import('./_component/UnivMapArea'), {
+  ssr: false,
+});
 
 export default function CommunityPage() {
   return (
