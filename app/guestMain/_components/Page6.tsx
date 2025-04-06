@@ -68,13 +68,13 @@ export default function Page6() {
             <div
               key={index}
               className={`relative box-border flex h-[10.83vw] w-[65.38vw] items-center gap-[2.29vw] p-[0.78vw]
-                ${index === 0 ? "bg-[url('/images/main/box1_page6.png')]" : "bg-[url('/images/main/box2_page6.png')]"}
+                ${index === 0 ? "bg-[url('/images/main/box1_page6.webp')]" : "bg-[url('/images/main/box2_page6.webp')]"}
                 ${index === 0 ? ' left-[12.3vw]' : index === 1 ? 'left-[22.5vw]' : 'left-[15vw]'}
                 bg-cover bg-center`}
             >
               <div className="relative aspect-[1/1.15] w-[5vw]">
                 <Image
-                  src={`/images/main/medal_${MEDAL[index]}.png`}
+                  src={`/images/main/medal_${MEDAL[index]}.webp`}
                   fill
                   sizes="5vw"
                   alt="medal"

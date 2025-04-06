@@ -17,7 +17,7 @@ export default function Page4() {
       <div className="flex w-screen items-center absolute top-[20.88vw] justify-around">
         <div className="relative w-[14vw] aspect-[275/204]">
           <Image
-            src="/images/main/bubbles.png"
+            src="/images/main/bubbles.webp"
             fill
             sizes="14vw"
             alt="bubble"

@@ -21,7 +21,7 @@ export default function BottomAnimation() {
 
       <div className="w-[6vw] h-[1vw] bottom-[0.4vw] relative flex justify-center items-center">
         <Image
-          src="/images/main/bottom_arrow.png"
+          src="/images/main/bottom_arrow.webp"
           sizes="6vw"
           alt="arrow"
           fill

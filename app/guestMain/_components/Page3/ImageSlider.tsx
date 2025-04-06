@@ -49,7 +49,7 @@ export default function ImageSlider({
           <div className="relative w-[61vw] aspect-[1168/757]">
             <Image
               priority={true}
-              src={`/images/main/introduce${selectedItem + 1}.png`}
+              src={`/images/main/introduce${selectedItem + 1}.webp`}
               fill
               sizes="90vw"
               alt="introduce image"

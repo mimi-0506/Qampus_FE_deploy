@@ -6,7 +6,7 @@ export default function LeftBox2({isVisible}: {isVisible: boolean}) {
       <div
         className={`box-border flex h-[11.5vw] w-[21.8vw] flex-col gap-3 p-[1.77vw]
       opacity-0 ${isVisible ? 'animate-fadeIn' : ''}
-    bg-[url('/images/main/box2_page5.png')] bg-contain bg-no-repeat`}
+    bg-[url('/images/main/box2_page5.webp')] bg-contain bg-no-repeat`}
       >
         <h2 className="text-[0.9vw] text-white">팀 대전</h2>
         <p className="text-grey3 text-[0.78vw]">
