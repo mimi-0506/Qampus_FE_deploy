@@ -9,7 +9,12 @@ export default function Page1() {
       <Background />
 
       <div className="relative w-[20vw] mt-[16.8vw] aspect-[402/405]">
-        <Image src="/images/characters/wink.png" alt="character" fill />
+        <Image
+          src="/images/characters/wink.png"
+          alt="character"
+          fill
+          sizes="20vw"
+        />
       </div>
 
       <Link

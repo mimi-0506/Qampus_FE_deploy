@@ -28,6 +28,7 @@ export default async function Header() {
             alt="logo icon"
             fill
             priority
+            sizes="7.65vw"
             className={`${isCommunity ? 'invert' : ''}`}
           />
         </Link>
@@ -72,16 +73,18 @@ export default async function Header() {
               >
                 로그인
               </span>
-              <Image
-                src={
-                  isCommunity
-                    ? '/svg/right-arrow-white.svg'
-                    : '/svg/right-arrow-black.svg'
-                }
-                alt="arrow"
-                width={7}
-                height={7}
-              />
+              <div className="relative w-[7px] aspect-square">
+                <Image
+                  src={
+                    isCommunity
+                      ? '/svg/right-arrow-white.svg'
+                      : '/svg/right-arrow-black.svg'
+                  }
+                  alt="arrow"
+                  fill
+                  sizes="7px"
+                />
+              </div>
             </Link>
           )}
         </div>

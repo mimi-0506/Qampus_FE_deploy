@@ -1,10 +1,15 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import {Toaster} from 'react-hot-toast';
+
 import localFont from 'next/font/local';
-import {InfoStoreProvider} from '@/providers/store-provider';
+import dynamic from 'next/dynamic';
+import {Toaster} from 'react-hot-toast';
+
+const Footer = dynamic(
+  () => import(/* webpackPrefetch: false */ '@/components/layout/Footer'),
+  {ssr: true},
+);
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -26,12 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable} font-pretendard`}>
-        <InfoStoreProvider>
-          <Header />
-          <main className="flex-grow pt-[80px]">{children}</main>
-          <Footer />
-          <Toaster />
-        </InfoStoreProvider>
+        <Header />
+        <main className="flex-grow pt-[80px]">{children}</main>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import useScrollAnimation from './useScrollAnimation';
 import {useEffect, useState} from 'react';
 import {questionType} from '@/type';
-import {fetchWithoutAuth} from '@/app/apis/clientFetch';
+// import {fetchWithoutAuth} from '@/app/apis/clientFetch';
 
 export default function Page6() {
   const {ref, isVisible} = useScrollAnimation();
@@ -16,9 +16,39 @@ export default function Page6() {
   }, []);
 
   const getDatas = async () => {
-    const response = await fetchWithoutAuth({method: 'GET', url: '/home'});
-    console.log(response);
-    setDatas(response.weeklyQuestions);
+    // const response = await fetchWithoutAuth({method: 'GET', url: '/home'});
+    // setDatas(response.weeklyQuestions);
+    //서버 닫혔으므로 더미데이터
+    const dummy: questionType[] = [
+      {
+        question_id: 1,
+        title: 'CS 지식은 어떻게 공부하는 게 좋을까요?',
+        university_name: '서울대학교',
+        major: '컴퓨터공학과',
+        curious_count: 87,
+        view_count: 1234,
+        total_score: 98,
+      },
+      {
+        question_id: 2,
+        title: '심리학 전공자는 상담사가 꼭 되어야 하나요?',
+        university_name: '연세대학교',
+        major: '심리학과',
+        curious_count: 45,
+        view_count: 980,
+        total_score: 85,
+      },
+      {
+        question_id: 3,
+        title: '마케팅 직무에 필요한 포트폴리오는?',
+        university_name: '고려대학교',
+        major: '경영학과',
+        curious_count: 30,
+        view_count: 765,
+        total_score: 77,
+      },
+    ];
+    setDatas(dummy);
   };
 
   return (
@@ -38,14 +68,15 @@ export default function Page6() {
             <div
               key={index}
               className={`relative box-border flex h-[10.83vw] w-[65.38vw] items-center gap-[2.29vw] p-[0.78vw]
-                ${index === 0 ? "bg-[url('/images/main/box1_page6.png')]" : "bg-[url('/images/main/box2_page6.png')]"}
+                ${index === 0 ? "bg-[url('/images/main/box1_page6.webp')]" : "bg-[url('/images/main/box2_page6.webp')]"}
                 ${index === 0 ? ' left-[12.3vw]' : index === 1 ? 'left-[22.5vw]' : 'left-[15vw]'}
                 bg-cover bg-center`}
             >
               <div className="relative aspect-[1/1.15] w-[5vw]">
                 <Image
-                  src={`/images/main/medal_${MEDAL[index]}.png`}
+                  src={`/images/main/medal_${MEDAL[index]}.webp`}
                   fill
+                  sizes="5vw"
                   alt="medal"
                 />
               </div>

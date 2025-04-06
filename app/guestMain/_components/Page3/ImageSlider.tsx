@@ -46,12 +46,12 @@ export default function ImageSlider({
           <p className="text-[1.67vw] mb-[1.8vw] font-semibold">
             {items[selectedItem]}
           </p>
-          <div className="w-[61vw] aspect-[1168/757]">
+          <div className="relative w-[61vw] aspect-[1168/757]">
             <Image
               priority={true}
-              src={`/images/main/introduce${selectedItem + 1}.png`}
-              width={1168}
-              height={757}
+              src={`/images/main/introduce${selectedItem + 1}.webp`}
+              fill
+              sizes="90vw"
               alt="introduce image"
             />
           </div>

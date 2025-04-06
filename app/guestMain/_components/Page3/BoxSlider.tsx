@@ -31,7 +31,7 @@ export default function BoxSlider({
               <div className="text-[1vw] whitespace-pre-line text-grey2 ">
                 {item.image && (
                   <div className="relative w-[3.3vw] aspect-[65/14] inline-block align-middle">
-                    <Image src={item.image} alt="logo" fill />
+                    <Image src={item.image} alt="logo" sizes="3.3vw" fill />
                   </div>
                 )}
                 {item.description}
