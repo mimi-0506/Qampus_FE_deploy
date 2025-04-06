@@ -19,7 +19,6 @@ export default function RankBox({
 }) {
   return (
     <>
-      {/* absolute  */}
       <div
         className={`pt-[1.875vw]  mr-[8.85vw] px-[1.2vw] box-border h-[23.1vw] w-[17.2vw] text-white 
   bg-[url('/images/main/box3_page5.webp')] 
