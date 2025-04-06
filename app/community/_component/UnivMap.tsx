@@ -82,24 +82,17 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
                   }}
                 >
                   <g>
-                    <svg
-                      width="100"
-                      height="100"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="-20 -20 140 140"
-                    >
-                      <circle
-                        r={size}
-                        fill={color}
-                        className="animate-custom-scale filter blur-sm"
-                      />
+                    <circle
+                      r={size}
+                      fill={color}
+                      className="animate-custom-scale filter blur-sm"
+                    />
 
-                      <circle
-                        r={size}
-                        fill={color}
-                        className="cursor-pointer animate-custom-scale opacity-100 hover:opacity-80"
-                      />
-                    </svg>
+                    <circle
+                      r={size}
+                      fill={color}
+                      className="cursor-pointer animate-custom-scale opacity-100 hover:opacity-80"
+                    />
                   </g>
 
                   {hoveredMarker === uni.university_id && (
@@ -123,7 +116,7 @@ export default function UnivMap({data}: {data: communityUnivType[] | []}) {
                           <p className="text-sm text-grey5 mt-2">
                             주간
                             <span className="font-bold">{uni.ranking}위</span>/
-                            차지율{' '}
+                            차지율
                             <span className="font-bold">{uni.rate}%</span>
                           </p>
                         </div>

@@ -98,13 +98,13 @@ export default function CircularCarousel({
               {position === 0 ? (
                 <div className="w-full aspect-[1/1] rounded-full overflow-hidden bg-gradient-to-b from-white to-blue-600 flex items-center justify-center border-[0.6vw] border-blue-800">
                   <div className="w-[83%] overflow-hidden aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
-                    <div className="w-[82%] overflow-hidden aspect-[1/1] rounded-full bg-white relative">
+                    <div className="w-[82%] aspect-[1/1] relative bg-white rounded-full overflow-hidden">
                       <Image
                         src={`/images/univ/${univ?.university_id}.png`}
                         alt="univ logo"
                         fill
                         sizes="11vw"
-                        className="rounded-full"
+                        className="rounded-full object-cover"
                       />
                     </div>
                   </div>
