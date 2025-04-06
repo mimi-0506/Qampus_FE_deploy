@@ -1,6 +1,6 @@
 export const metadata = {
-  title: '게스트 메인 | MyApp',
-  description: '로그인하지 않은 사용자를 위한 메인 페이지입니다.',
+  title: 'Guest Main',
+  description: 'Qampus Guest Main Page',
 };
 export default function GuestMainLayout({
   children,
