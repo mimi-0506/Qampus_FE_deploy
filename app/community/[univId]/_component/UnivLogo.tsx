@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Image from 'next/image';
 
-export default function MainCircle({image}: {image: number | undefined}) {
+export default function UnivLogo({image}: {image: number}) {
   const [loading, setLoading] = useState(true);
 
   return (

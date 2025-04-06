@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Slider from '../../../../components/ranking/Slider';
+
 import LeftBox1 from '../../../../components/ranking/LeftBox1';
 import LeftBox2 from '../../../../components/ranking/LeftBox2';
 import RankBox from '../../../../components/ranking/RankBox';
@@ -9,6 +9,7 @@ import {useEffect, useState} from 'react';
 // import {getRank} from '@/app/apis/rankApi';
 import {universityType} from '@/type';
 import useScrollAnimation from '../useScrollAnimation';
+import Slider from '@/components/ranking/Slider';
 
 export default function Page5() {
   const {ref, isVisible} = useScrollAnimation();

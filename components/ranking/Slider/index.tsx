@@ -1,25 +1,35 @@
 'use client';
 import {useEffect, useState} from 'react';
 import {motion} from 'motion/react';
-import Image from 'next/image';
 import {universityType} from '@/type';
+import MainCircle from './MainCircle';
+import SideCircle from './SideCircle';
 
-export default function CircularCarousel({
+type Position = -2 | -1 | 0 | 1 | 2;
+const positionConfig = {
+  [-2]: {size: 3.91, xOffset: -15, zIndex: 1},
+  [-1]: {size: 6.61, xOffset: -9, zIndex: 2},
+  [0]: {size: 10.94, xOffset: 0, zIndex: 3},
+  [1]: {size: 6.61, xOffset: 9, zIndex: 2},
+  [2]: {size: 3.91, xOffset: 15, zIndex: 1},
+};
+const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
+
+export default function Slider({
   top,
   data,
 }: {
   top?: string;
   data: universityType[] | [];
 }) {
-  const [circles, setCircles] = useState<universityType[] | []>([]);
+  const [circles, setCircles] = useState<universityType[]>(data);
   const [nowCenter, setNowCenter] = useState(circles[2]);
-  const BUTTONS = ['4th', '2nd', '1st', '3rd', '5th'];
 
   useEffect(() => {
-    if (data.length > 0) setData(data);
+    if (data.length > 0) setButtonData(data);
   }, [data]);
 
-  const setData = async (data: universityType[]) => {
+  const setButtonData = async (data: universityType[]) => {
     setCircles([
       {...data[3], button: '4th'},
       {...data[1], button: '2nd'},
@@ -52,38 +62,18 @@ export default function CircularCarousel({
         주간 {nowCenter?.ranking}위
       </div>
 
-      <div className="flex gap-[1vw] relative z-10 w-screen h-[12vw] items-center justify-center overflow-hidden ">
+      <div className="flex gap-[1vw] relative z-10 w-screen h-[12vw] items-center justify-center ">
         {circles.map((univ, index) => {
-          const position = index - 2;
-          const size =
-            position === 0
-              ? 10.94
-              : position === 1 || position === -1
-                ? 6.61
-                : 3.91;
-
-          const xOffset =
-            position === -2
-              ? -15
-              : position === -1
-                ? -9
-                : position === 0
-                  ? 0
-                  : position === 1
-                    ? 9
-                    : 15;
+          if (!univ?.university_id) return <div key={index} />;
+          const position = (index - 2) as Position;
+          const {size, xOffset, zIndex} = positionConfig[position];
 
           return (
             <motion.div
-              key={`univ${univ?.university_id}`}
+              key={`univ${univ.university_id}`}
               className={`absolute`}
               style={{
-                zIndex:
-                  Math.abs(position) === 2
-                    ? 1
-                    : Math.abs(position) === 1
-                      ? 2
-                      : 3,
+                zIndex: zIndex,
               }}
               animate={{
                 x: `${xOffset}vw`,
@@ -96,31 +86,9 @@ export default function CircularCarousel({
               }}
             >
               {position === 0 ? (
-                <div className="w-full aspect-[1/1] rounded-full overflow-hidden bg-gradient-to-b from-white to-blue-600 flex items-center justify-center border-[0.6vw] border-blue-800">
-                  <div className="w-[83%] overflow-hidden aspect-[1/1] bg-page5roundbg border border-white rounded-full flex items-center justify-center">
-                    <div className="w-[82%] aspect-[1/1] relative bg-white rounded-full overflow-hidden">
-                      <Image
-                        src={`/images/univ/${univ?.university_id}.png`}
-                        alt="univ logo"
-                        fill
-                        sizes="11vw"
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <MainCircle id={univ.university_id} />
               ) : (
-                <div className="w-full h-full overflow-hidden rounded-full bg-gradient-to-b from-white to-main flex items-center justify-center">
-                  <div className="w-[80%] overflow-hidden aspect-[1/1] relative">
-                    <Image
-                      src={`/images/univ/${univ?.university_id}.png`}
-                      alt="univ logo"
-                      fill
-                      sizes="11vw"
-                      className="rounded-full"
-                    />
-                  </div>
-                </div>
+                <SideCircle id={univ.university_id} />
               )}
             </motion.div>
           );

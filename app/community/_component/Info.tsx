@@ -13,7 +13,7 @@ import {useEffect, useState} from 'react';
 
 export default function Info() {
   const [rankStandard, setRankStandard] = useState<rankType>('weekly');
-  const [data, setData] = useState<universityType[] | []>([]);
+  const [data, setData] = useState<universityType[]>([]);
   const {ref, isVisible} = useScrollAnimation();
   const router = useRouter();
 
@@ -142,7 +142,7 @@ export default function Info() {
         </div>
       </div>
 
-      <div ref={ref} className="w-full  bg-white absolute bottom-[20vw]" />
+      <div ref={ref} className="w-full bg-white absolute bottom-[20vw]" />
     </div>
   );
 }
