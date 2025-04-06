@@ -1,8 +1,8 @@
 import type {Config} from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -68,5 +68,17 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({addUtilities}) {
+      addUtilities(
+        {
+          '.gpu-hint': {
+            transform: 'translateZ(0)',
+            willChange: 'transform',
+          },
+        },
+        {respectPrefix: false, respectImportant: false},
+      );
+    }),
+  ],
 } satisfies Config;

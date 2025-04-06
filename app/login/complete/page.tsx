@@ -4,7 +4,12 @@ export default function page() {
   return (
     <div className="text-white text-[1.1vw] flex flex-col justify-center items-center">
       <div className="relative aspect-[194/196] w-[10vw] mt-[4.58vw]">
-        <Image src="/images/characters/wink.png" fill alt="character" />
+        <Image
+          src="/images/characters/wink.png"
+          sizes="10vw"
+          fill
+          alt="character"
+        />
       </div>
       <p className="mt-[1.87vw] h-[2.5vw]">로그인 완료!</p>
       <div className="flex w-full justify-center items-center">

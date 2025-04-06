@@ -19,9 +19,9 @@ export default function Page2() {
       <div className="relative w-[18.5vw] aspect-[357/360] mr-[20.4vw]">
         <Image
           src="/images/characters/smile.png"
-          width={357}
-          height={360}
-          alt=""
+          fill
+          sizes="18.5vw"
+          alt="smile chararcter"
         />
       </div>
     </div>

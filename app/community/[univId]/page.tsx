@@ -2,9 +2,9 @@
 
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
-import MainCircle from '@/components/ranking/MainCircle';
 import {useParams} from 'next/navigation';
 import {getUnivActivity, getUnivDetail} from '@/app/apis/rankApi';
+import UnivLogo from './_component/UnivLogo';
 
 type univDetailType = {
   university_id: number;
@@ -71,7 +71,7 @@ export default function Page() {
           </div>
 
           <div className="relative z-10 top-[-2vw]">
-            <MainCircle image={data?.university_id} />
+            {data?.university_id && <UnivLogo image={data?.university_id} />}
           </div>
         </div>
 
